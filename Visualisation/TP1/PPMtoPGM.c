@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
     FILE* ifp;
 	char* map;
     int ich1, ich2, rows, cols, maxval, pgmraw ;
-	// pgmraw = 0 : P2           1 : P5
+	// P3 vers P2
 
 
     /* Test des arguments */
@@ -26,12 +26,8 @@ int main(int argc, char* argv[])
     ich2 = getc( ifp );
     if ( ich2 == EOF )
         pm_erreur( "EOF / read error reading magic number" );
-    if(ich2 != '2' && ich2 != '5')
+    if(ich2 != '3')
       pm_erreur(" wrong ifp format ");
-    else
-      if(ich2 == '5')
-	pgmraw = 1;
-      else pm_erreur(" wrong format ");
     
      /* Lecture des dimensions */
     cols = pm_getint( ifp );
@@ -44,39 +40,27 @@ int main(int argc, char* argv[])
 	for(i=0; i < rows; i++){
 		for(j=0; j < cols ; j++){
 			unsigned char val;
-			// P5 (BINAIRE)
-			if(pgmraw){
-				val = pm_getrawbyte(ifp);
+			int val2;
+			int valR = pm_getint(ifp);
+			int valG = pm_getint(ifp);
+			int valB = pm_getint(ifp);
+			val2 = (valR<<16) + (valG<<8) + valB;
+			if( val2 > maxval ){
+				maxval = val2;
 			}
-			// P2 (ASCII)
-			else{
-				int val2 = pm_getint(ifp);
-				if( val2 > maxval ){
-					maxval = val2;
-				}
-				val = itoa(val2);
-			}
+			val = itoa(val2);
 		//mise dans la map
 		map[i * cols + j] = val;
 		}
 	}
 
     /* Ecriture */
-    if(pgmraw) { //sortie en ascii
-		printf("P2\n");
-		printf("%d %d \n", cols, rows);
-		printf("%d\n",maxval);
-		for(i=0; i < rows; i++)
-			for(j=0; j < cols ; j++)
-				//printf("%u ",map[i * cols + j] );
-    }
-    else{ //sortie en binaire
-		printf("P5\n");
-		printf("%d %d \n", cols, rows);
-		for(i=0; i < rows; i++)
-			for(j=0; j < cols ; j++)
-				printf("%u ",map[i * cols + j] );
-	}
+	printf("P2\n");
+	printf("%d %d \n", cols, rows);
+	printf("%d\n",maxval);
+	for(i=0; i < rows; i++)
+		for(j=0; j < cols ; j++)
+			printf("%u ",map[i * cols + j] );
 
       /* fermeture */
       fclose(ifp);
