@@ -150,12 +150,15 @@ image( lenaRedu20 )
 lenaRedu40 <- reduction(lenaI, 40)
 image( lenaRedu40 )
 
-distance(lenaI, lenaRedu5)
-distance(lenaI, lenaRedu20)
-distance(lenaI, lenaRedu40)
 
-lenaSvd <- svdp(lenaI, 20)
+lenaSvd5 <- svdp(lenaI, 5)
+lenaSvd20 <- svdp(lenaI, 20)
+lenaSvd40 <- svdp(lenaI, 40)
 image(lenaSvd)
+
+distance(lenaI, lenaSvd5)
+distance(lenaI, lenaSvd20)
+distance(lenaI, lenaSvd40)
 
 lenaMoyen <- moyenneur(lenaI,3)
 image(lenaMoyen)
