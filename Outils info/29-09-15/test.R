@@ -1,25 +1,76 @@
 rm(list=ls())
 
-rotation_opti90 <- function(pic) {
-  matrix <- as.matrix(pic)
-  return ( apply(t(matrix), 2, rev) )
+library(biwavelet)
+
+#rotation avec boucle
+rotation <- function (image, rot = 90) {
+  if (is.matrix(image) && ((rot==90)||(rot==180)||(rot==270)) ){
+    #rotation
+    dimension <- dim(image)
+    if( rot == 90){
+      res <- matrix(0, dimension[2], dimension[1])
+      for (i in 1:dimension[2]) {
+        res[i,]<-rev(image[,i]);
+      }
+    }
+    else if( rot == 180){
+      res <- rotation(image, 90)
+      res <- rotation(res, 90);
+    } 
+    else{
+      res <- rotation(image, 90)
+      res <- rotation(res, 90)
+      res <- rotation(res, 90);
+    }
+    return ( res );
+  }
+  else{
+    #echec car mauvais format ou mauvais angle
+    return ( image );
+  }
 }
 
-rotation_opti180 <- function(pic) {
-  matrix <- rotation_opti90(pic)
-  matrix <- rotation_opti90(matrix)
-  return ( matrix )
+#rotation sans boucle
+rotation2 <- function (image, rot = 90) {
+  if (is.matrix(image) && ((rot==90)||(rot==180)||(rot==270)) ){
+    #rotation
+    dimension <- dim(image)
+    if( rot == 90){
+      res <- rotation2(image, 180)
+      res <- rotation2(res, 270);
+    }
+    else if( rot == 180){
+      res <- rotation2(image, 270)
+      res <- rotation2(res, 270);
+    } 
+    else{
+      res <- apply(t(image),2,rev)
+    }
+    return ( res );
+  }
+  else{
+    #echec car mauvais format ou mauvais angle
+    return ( image );
+  }
 }
 
-rotation_opti270 <- function(pic) {
-  matrix <- rotation_opti90(pic)
-  matrix <- rotation_opti90(matrix)
-  matrix <- rotation_opti90(matrix)
-  return ( matrix )
+#quantification
+quantification <- function (image, k) {
+  if( (k<1) || (k>8) ){
+    image( image );
+  }
+  else{
+    image(image, col=gray.colors(2^k));
+  }
 }
 
-quantize <- function(pic, k=1) {
-  image(as.matrix(pic), col = gray.colors(2^k))
+#reduction sans boucle
+reduction <- function (image, k) {
+  dimension <- dim(image)
+  ligne <- seq(1,dimension[1],k)
+  colonne <- seq(1,dimension[2],k)
+  res <- image[ligne, colonne]
+  return( res );
 }
 
 reduction_opti <- function(pic, m) {
@@ -29,7 +80,6 @@ reduction_opti <- function(pic, m) {
   seq_column <- seq(1, dim[2], m)
   return ( matrix[seq_line, seq_column] )
 }
-
 
 compression <- function(pic, k=1) {
   matrix <- as.matrix(pic)
@@ -50,34 +100,64 @@ distance <- function(matrix1, matrix2) {
   }
 }
 
+#svd
+svdp <- function (image, i) {
+  image.svd <- svd(image,i)
+  
+  d <- image.svd$d
+  u <- image.svd$u
+  v <- image.svd$v
+  
+  image.compressed <- u[,1:i] %*% diag(d[1:i]) %*% t(v[,1:i])
+  
+  return( image.compressed )
+}
 
-################################################
-pic <- read.csv(file="Documents/M2/M2-S1/Outils info/29-09-15/lena.csv", head=TRUE, sep=",")
-image(as.matrix(pic), col = gray.colors(256))
+#moyenneur
+moyenneur <- function (image, taille) {
+  noyaux <- matrix( 1/(taille*taille), 1, taille)
+  res <- convolve2D(image, noyaux,type="open")
+  res <- rotation2(res, 90)
+  res <- convolve2D(res, noyaux,type="open")
+  return( res );
+}
 
-res <- rotation_opti90(pic)
-image(res)
+########################################### CODE ###########################################
 
-res <- rotation_opti180(pic)
-image(res)
+#lena <- read.csv(file="Documents/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
+lena <- read.csv(file="Documents/M2/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
+mode(lena)
+lenaI <- as.matrix(lena)
+dim(lena)
+image(lenaI)
 
-res <- rotation_opti270(pic)
-image(res)
+image(lenaI, col=gray.colors(255))
 
-#res <- quantize(pic, 3)
+lenaRot <- rotation2(lenaI, 90)
+image(lenaRot)
+lenaRot <- rotation2(lenaI, 180)
+image(lenaRot)
+lenaRot <- rotation2(lenaI, 270)
+image(lenaRot)
 
-#res <- reduction_opti(pic, 2)
-#image(res)
+quantification(lenaI, 1)
+quantification(lenaI, 4)
 
-m <- as.matrix(pic)
-res1 <- compression(pic, 2)
-res2 <- compression(pic, 10)
-res3 <- compression(pic, 15)
-res4 <- compression(pic, 30)
+lenaRedu5 <- reduction(lenaI, 5)
+image( lenaRedu5 )
+lenaRedu20 <- reduction(lenaI, 20)
+image( lenaRedu20 )
+lenaRedu40 <- reduction(lenaI, 40)
+image( lenaRedu40 )
 
-distance(m, res1)
-distance(m, res2)
-distance(m, res3)
-distance(m, res4)
+distance(lenaI, lenaRedu5)
+distance(lenaI, lenaRedu20)
+distance(lenaI, lenaRedu40)
 
-image(res4)
+lenaSvd <- svdp(lenaI, 20)
+image(lenaSvd)
+
+lenaMoyen <- moyenneur(lenaI,3)
+image(lenaMoyen)
+
+############################################################################################
