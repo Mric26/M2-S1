@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = TP_Visu
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     convolution.cpp

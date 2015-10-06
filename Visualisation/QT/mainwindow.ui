@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>688</width>
+    <height>552</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Shotophop 1</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/Logo 01.png</normaloff>:/res/Logo 01.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <property name="topMargin">
+       <number>40</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>40</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="enregistrer">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QPushButton" name="refaire">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="0">
+       <widget class="QPushButton" name="flou">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="20" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="8" column="0">
+       <widget class="QPushButton" name="selection">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="9" column="0">
+       <widget class="QPushButton" name="couper">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="12" column="0">
+       <widget class="QPushButton" name="pipette">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <spacer name="verticalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="ouvrir">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="18" column="0">
+       <widget class="QPushButton" name="histogramme">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QPushButton" name="rogner">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0">
+       <widget class="QPushButton" name="gris">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="annuler">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="0">
+       <widget class="QPushButton" name="fusion">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="MyGraphicsView" name="graphicsView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>688</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionOuvrir_2"/>
+    <addaction name="actionEnregistrer"/>
+    <addaction name="actionEnregistrer_sous"/>
+    <addaction name="actionFermer"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menu_dition">
+    <property name="title">
+     <string>Edition</string>
+    </property>
+    <widget class="QMenu" name="menuFiltres">
+     <property name="title">
+      <string>Filtres</string>
+     </property>
+     <widget class="QMenu" name="menuFlou_2">
+      <property name="title">
+       <string>Flou</string>
+      </property>
+      <widget class="QMenu" name="menuGaussien">
+       <property name="title">
+        <string>Gaussien</string>
+       </property>
+       <addaction name="actionFlouGaussLeger"/>
+       <addaction name="actionFlouGaussMoyen"/>
+       <addaction name="actionFlouGaussFort"/>
+      </widget>
+      <widget class="QMenu" name="menuMoyenneur">
+       <property name="title">
+        <string>Moyenneur</string>
+       </property>
+       <addaction name="actionFlouMoyLeger"/>
+       <addaction name="actionFlouMoyMoyen"/>
+       <addaction name="actionFlouMoyFort"/>
+      </widget>
+      <addaction name="menuGaussien"/>
+      <addaction name="menuMoyenneur"/>
+     </widget>
+     <widget class="QMenu" name="menuGradients">
+      <property name="title">
+       <string>Gradients</string>
+      </property>
+      <addaction name="actionGradientX"/>
+      <addaction name="actionGradientY"/>
+      <addaction name="actionDetectionContours"/>
+     </widget>
+     <addaction name="actionPasse_haut"/>
+     <addaction name="actionRehaussement"/>
+     <addaction name="menuFlou_2"/>
+     <addaction name="menuGradients"/>
+     <addaction name="actionMedian"/>
+     <addaction name="actionPersonnaliser"/>
+    </widget>
+    <widget class="QMenu" name="menuPipette">
+     <property name="title">
+      <string>Pipette</string>
+     </property>
+     <addaction name="actionEspace_RGB"/>
+     <addaction name="actionEspace_YUV"/>
+    </widget>
+    <addaction name="actionAnnuler"/>
+    <addaction name="actionRefaire_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionNiveau_de_gris"/>
+    <addaction name="menuPipette"/>
+    <addaction name="menuFiltres"/>
+    <addaction name="actionFusion"/>
+    <addaction name="separator"/>
+    <addaction name="actionHistogramme"/>
+    <addaction name="actionEtalement"/>
+    <addaction name="actionEgalisation"/>
+    <addaction name="separator"/>
+    <addaction name="actionRedimensionner"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCalques">
+    <property name="title">
+     <string>Calques</string>
+    </property>
+    <addaction name="actionFusionner"/>
+   </widget>
+   <widget class="QMenu" name="menuTP1bis">
+    <property name="title">
+     <string>TP1bis</string>
+    </property>
+    <addaction name="actionFiltre_adaptatif"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menu_dition"/>
+   <addaction name="menuCalques"/>
+   <addaction name="menuAbout"/>
+   <addaction name="menuTP1bis"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionEnregistrer">
+   <property name="text">
+    <string>enregistrer</string>
+   </property>
+  </action>
+  <action name="actionFermer">
+   <property name="text">
+    <string>fermer</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_sous">
+   <property name="text">
+    <string>enregistrer sous</string>
+   </property>
+  </action>
+  <action name="actionOuvrir_2">
+   <property name="text">
+    <string>ouvrir</string>
+   </property>
+  </action>
+  <action name="actionHistogramme">
+   <property name="text">
+    <string>Histogramme</string>
+   </property>
+  </action>
+  <action name="actionNiveau_de_gris">
+   <property name="text">
+    <string>Niveau de gris</string>
+   </property>
+  </action>
+  <action name="actionFusion">
+   <property name="text">
+    <string>Fusion</string>
+   </property>
+  </action>
+  <action name="actionFlouGaussLeger">
+   <property name="text">
+    <string>Léger</string>
+   </property>
+  </action>
+  <action name="actionFlouGaussMoyen">
+   <property name="text">
+    <string>moyen</string>
+   </property>
+  </action>
+  <action name="actionFlouGaussFort">
+   <property name="text">
+    <string>Fort</string>
+   </property>
+  </action>
+  <action name="actionPasse_haut">
+   <property name="text">
+    <string>Passe haut</string>
+   </property>
+  </action>
+  <action name="actionFlouMoyLeger">
+   <property name="text">
+    <string>Léger</string>
+   </property>
+  </action>
+  <action name="actionFlouMoyMoyen">
+   <property name="text">
+    <string>Moyen</string>
+   </property>
+  </action>
+  <action name="actionFlouMoyFort">
+   <property name="text">
+    <string>Fort</string>
+   </property>
+  </action>
+  <action name="actionRehaussement">
+   <property name="text">
+    <string>Réhaussement</string>
+   </property>
+  </action>
+  <action name="actionGradientX">
+   <property name="text">
+    <string>X</string>
+   </property>
+  </action>
+  <action name="actionGradientY">
+   <property name="text">
+    <string>Y</string>
+   </property>
+  </action>
+  <action name="actionDetectionContours">
+   <property name="text">
+    <string>Détection de contours</string>
+   </property>
+  </action>
+  <action name="actionMedian">
+   <property name="text">
+    <string>Médian</string>
+   </property>
+  </action>
+  <action name="actionEtalement">
+   <property name="text">
+    <string>Etalement</string>
+   </property>
+  </action>
+  <action name="actionEgalisation">
+   <property name="text">
+    <string>Egalisation</string>
+   </property>
+  </action>
+  <action name="actionAnnuler">
+   <property name="text">
+    <string>Annuler</string>
+   </property>
+  </action>
+  <action name="actionRefaire_2">
+   <property name="text">
+    <string>Refaire</string>
+   </property>
+  </action>
+  <action name="actionPersonnaliser">
+   <property name="text">
+    <string>Personnaliser...</string>
+   </property>
+  </action>
+  <action name="actionEspace_RGB">
+   <property name="text">
+    <string>Espace RGB</string>
+   </property>
+  </action>
+  <action name="actionEspace_YUV">
+   <property name="text">
+    <string>Espace YUV</string>
+   </property>
+  </action>
+  <action name="actionRedimensionner">
+   <property name="text">
+    <string>Redimensionner</string>
+   </property>
+  </action>
+  <action name="actionFusionner">
+   <property name="text">
+    <string>Fusionner</string>
+   </property>
+  </action>
+  <action name="actionFiltre_adaptatif">
+   <property name="text">
+    <string>Filtre adaptatif</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>mygraphicsview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
