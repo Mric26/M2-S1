@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QFileDialog>
+#include <QObject>
+#include <QWidget>
 
 #include "convolution.h"
 
@@ -22,8 +24,15 @@ public:
 public slots:
     bool open();
     void close();
-    void gaussien();
     void median();
+    void flouGaussLeger();
+    void flouGaussMoyen();
+    void flouGaussFort();
+    void passeHaut();
+    void rehaussement();
+    void gradientX();
+    void gradientY();
+    void detectionContours();
 
 private:
     // Attributs

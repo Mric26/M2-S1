@@ -88,6 +88,40 @@
      <height>27</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuFlou">
+    <property name="title">
+     <string>Filtres</string>
+    </property>
+    <widget class="QMenu" name="menuGaussien">
+     <property name="title">
+      <string>Gaussien</string>
+     </property>
+     <addaction name="actionLeger"/>
+     <addaction name="actionMoyen"/>
+     <addaction name="actionFort"/>
+    </widget>
+    <widget class="QMenu" name="menuGradient">
+     <property name="title">
+      <string>Gradient</string>
+     </property>
+     <addaction name="actionX"/>
+     <addaction name="actionY"/>
+    </widget>
+    <addaction name="menuGaussien"/>
+    <addaction name="actionMedian"/>
+    <addaction name="actionPasse_Haut"/>
+    <addaction name="actionRehaussment_Contours"/>
+    <addaction name="menuGradient"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuFlou"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -98,6 +132,56 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionMedian">
+   <property name="text">
+    <string>Median</string>
+   </property>
+  </action>
+  <action name="actionLeger">
+   <property name="text">
+    <string>Leger</string>
+   </property>
+  </action>
+  <action name="actionMoyen">
+   <property name="text">
+    <string>Moyen</string>
+   </property>
+  </action>
+  <action name="actionFort">
+   <property name="text">
+    <string>Fort</string>
+   </property>
+  </action>
+  <action name="actionPasse_Haut">
+   <property name="text">
+    <string>Passe Haut</string>
+   </property>
+  </action>
+  <action name="actionRehaussment_Contours">
+   <property name="text">
+    <string>Rehaussement Contours</string>
+   </property>
+  </action>
+  <action name="actionX">
+   <property name="text">
+    <string>X</string>
+   </property>
+  </action>
+  <action name="actionY">
+   <property name="text">
+    <string>Y</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
