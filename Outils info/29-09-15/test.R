@@ -124,8 +124,8 @@ moyenneur <- function (image, taille) {
 
 ########################################### CODE ###########################################
 
-lena <- read.csv(file="Documents/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
-#lena <- read.csv(file="Documents/M2/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
+#lena <- read.csv(file="Documents/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
+lena <- read.csv(file="Documents/M2/M2-S1/Outils info/29-09-15/lena.csv",head=TRUE,sep=",")
 mode(lena)
 lenaI <- as.matrix(lena)
 dim(lena)
