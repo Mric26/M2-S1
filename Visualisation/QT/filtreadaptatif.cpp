@@ -76,17 +76,82 @@ QImage *filtreAdaptatif::filtreAda( QImage *image ){
     return nouvelleImage;
 }
 
-QImage *filtreAdaptatif::filtreAda2(QImage *image){
+QImage *filtreAdaptatif::filtreAda2(QImage *image, int taille){
     int imWidth = image->width();
     int imHeight = image->height();
 
     QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
 
-    for (int i = 0; i < imWidth; ++i) {
-        for (int j = 0; j < imHeight; ++j) {
+    //zone critique bord
+    int bord = 0;
+    if( taille%2 == 1){
+        bord = (taille - 1) / 2;
+    }
+    else{
+        bord = taille / 2;
+    }
 
+    //calcul
+    float kernel[taille][taille];
+    for (int i = 0; i < imWidth; ++i) {
+        for (int j = 0; j < imHeight; ++j){
+            //variables
+            double v;
+            int VR, VG, VB;
+            double somme = 0.0;
+            int centreR = qRed(image->pixel(i,j));
+            int centreG = qGreen(image->pixel(i,j));
+            int centreB = qBlue(image->pixel(i,j));
+            //calcul noyau
+            for (int k = -bord; k < bord+1; ++k) {
+                for (int l = -bord; l < bord+1; ++l) {
+                    if( (i+k<0) || (i+k>=imWidth) || (j+l<0) || (j+l>=imHeight) ){
+                        v = 0.0;
+                    }
+                    else{
+                        VR = qRed(image->pixel(i+k,j+l));
+                        VG = qGreen(image->pixel(i+k,j+l));
+                        VB = qBlue(image->pixel(i+k,j+l));
+                        if( (centreR == VR) && (centreG == VG) && (centreB == VB) ){
+                            v = 5.0;
+                        }
+                        else{
+                            v = (centreR-VR + centreG-VG + centreB-VB)/3.0;
+                        }
+                    }
+                    somme = somme + v;
+                    kernel[k+bord][l+bord] = v;
+                }
+            }
+            //calcul nouveau pixel
+            int resR = 0;
+            int resG = 0;
+            int resB = 0;
+            for (int k = -bord; k < bord+1; ++k) {
+                for (int l = -bord; l < bord+1; ++l) {
+                    if( (i+k<0) || (i+k>=imWidth) || (j+l<0) || (j+l>=imHeight) ){
+                        v = 0;
+                    }
+                    else{
+                        VR = qRed(image->pixel(i+k,j+l)) * kernel[k+bord][l+bord];
+                        VG = qGreen(image->pixel(i+k,j+l)) * kernel[k+bord][l+bord];
+                        VB = qBlue(image->pixel(i+k,j+l)) * kernel[k+bord][l+bord];
+                    }
+                resR = resR + VR;
+                resG = resG + VG;
+                resB = resB + VB;
+                }
+            }
+            //division et nouveau pixel
+            resR = resR / somme;
+            resG = resG / somme;
+            resB = resB / somme;
+            nouvelleImage->setPixel(i, j, qRgb(resR,resG,resB) );
         }
     }
+
+    //resultat
+    return nouvelleImage;
 }
 
 int filtreAdaptatif::val(QRgb pt1, QRgb pt2){

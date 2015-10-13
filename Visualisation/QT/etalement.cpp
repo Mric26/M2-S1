@@ -18,7 +18,6 @@ QImage * Etalement::etaler( QImage * im ){
     QRgb * pix;
     double valR, valB, valV;
 
-    //v0 et v1 correspondent au debut et a la fin de la zone non nulle
     for (int i = 0; i<lignes; ++i){
         for( int j = 0; j<colonnes; ++j){
             pix = new QRgb( image->pixel(i,j) );

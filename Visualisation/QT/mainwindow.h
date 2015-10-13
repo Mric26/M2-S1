@@ -114,6 +114,7 @@ public slots:
     void minimiser();
     //TP1 bis
     void filtreAdaptatiff();
+    void inverserH();
 
 private:
     Ui::MainWindow *ui;

@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     QObject::connect( ui->actionFiltre_adaptatif, SIGNAL(triggered()), this, SLOT(filtreAdaptatiff()) );
+    QObject::connect( ui->actionInversion_Histo, SIGNAL(triggered()), this, SLOT(inverserH()) );
 
     ui->annuler->setIcon(QIcon(":res/Annuler.png"));
     QObject::connect( ui->annuler, SIGNAL(clicked()), this, SLOT(annuler()) );
@@ -332,7 +333,27 @@ void MainWindow::showHisto(){
 void MainWindow::filtreAdaptatiff(){
     if( cheminImage != NULL ){
        filtreAdaptatif f;
+//       this->setImage( f.filtreAda2(image, 3), cheminImage );
        this->setImage( f.filtreAda(image), cheminImage );
+    }
+}
+
+void MainWindow::inverserH(){
+    if( cheminImage != NULL ){
+        int imWidth = image->width();
+        int imHeight = image->height();
+
+        QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
+
+        for (int i = 0; i < imWidth; ++i) {
+            for (int j = 0; j < imHeight; ++j) {
+                int VR = qRed(image->pixel(i,j));
+                int VG = qGreen(image->pixel(i,j));
+                int VB = qBlue(image->pixel(i,j));
+                nouvelleImage->setPixel(i, j, qRgb(255-VR,255-VG,255-VB) );
+            }
+        }
+        this->setImage( nouvelleImage, cheminImage );
     }
 }
 

@@ -59,6 +59,7 @@ public:
     QAction *actionRedimensionner;
     QAction *actionFusionner;
     QAction *actionFiltre_adaptatif;
+    QAction *actionInversion_Histo;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QGridLayout *gridLayout_2;
@@ -161,6 +162,8 @@ public:
         actionFusionner->setObjectName(QString::fromUtf8("actionFusionner"));
         actionFiltre_adaptatif = new QAction(MainWindow);
         actionFiltre_adaptatif->setObjectName(QString::fromUtf8("actionFiltre_adaptatif"));
+        actionInversion_Histo = new QAction(MainWindow);
+        actionInversion_Histo->setObjectName(QString::fromUtf8("actionInversion_Histo"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -379,6 +382,7 @@ public:
         menuPipette->addAction(actionEspace_YUV);
         menuCalques->addAction(actionFusionner);
         menuTP1bis->addAction(actionFiltre_adaptatif);
+        menuTP1bis->addAction(actionInversion_Histo);
 
         retranslateUi(MainWindow);
 
@@ -417,6 +421,7 @@ public:
         actionRedimensionner->setText(QApplication::translate("MainWindow", "Redimensionner", 0, QApplication::UnicodeUTF8));
         actionFusionner->setText(QApplication::translate("MainWindow", "Fusionner", 0, QApplication::UnicodeUTF8));
         actionFiltre_adaptatif->setText(QApplication::translate("MainWindow", "Filtre adaptatif", 0, QApplication::UnicodeUTF8));
+        actionInversion_Histo->setText(QApplication::translate("MainWindow", "Inversion Histo", 0, QApplication::UnicodeUTF8));
         enregistrer->setText(QString());
         refaire->setText(QString());
         flou->setText(QString());
