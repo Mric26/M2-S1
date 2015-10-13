@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     redimensionnement.cpp \
     copier.cpp \
     fusioncalques.cpp \
-    filtreadaptatif.cpp
+    filtreadaptatif.cpp \
+    pointsdinterets.cpp
 
 HEADERS  += mainwindow.h \
     open.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     redimensionnement.h \
     copier.h \
     fusioncalques.h \
-    filtreadaptatif.h
+    filtreadaptatif.h \
+    pointsdinterets.h
 
 FORMS    += mainwindow.ui \
     diagramcolorwindow.ui \

@@ -7,8 +7,8 @@ QImage *filtreAdaptatif::filtreAda( QImage *image ){
 
     QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
 
-    for (int i = 0; i < imWidth; ++i) {
-        for (int j = 0; j < imHeight; ++j) {
+    for (int i = 0; i < imWidth-1; ++i) {
+        for (int j = 0; j < imHeight-1; ++j) {
             //recup des 9 points
             QRgb p1, p2, p3, p4, p5, p6, p7, p8, p9;
             p5 = image->pixel(i,j);
@@ -103,7 +103,7 @@ QImage *filtreAdaptatif::filtreAda2(QImage *image, int taille){
             int centreG = qGreen(image->pixel(i,j));
             int centreB = qBlue(image->pixel(i,j));
             //calcul noyau
-            for (int k = -bord; k < bord+1; ++k) {
+            for (int k = -bord; k < bord+1; k++) {
                 for (int l = -bord; l < bord+1; ++l) {
                     if( (i+k<0) || (i+k>=imWidth) || (j+l<0) || (j+l>=imHeight) ){
                         v = 0.0;
@@ -116,7 +116,7 @@ QImage *filtreAdaptatif::filtreAda2(QImage *image, int taille){
                             v = 5.0;
                         }
                         else{
-                            v = (centreR-VR + centreG-VG + centreB-VB)/3.0;
+                            v = 1.0/((valAbsolue(centreR-VR + centreG-VG + centreB-VB))/3.0);
                         }
                     }
                     somme = somme + v;

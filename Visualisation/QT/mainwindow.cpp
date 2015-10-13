@@ -333,8 +333,8 @@ void MainWindow::showHisto(){
 void MainWindow::filtreAdaptatiff(){
     if( cheminImage != NULL ){
        filtreAdaptatif f;
-//       this->setImage( f.filtreAda2(image, 3), cheminImage );
-       this->setImage( f.filtreAda(image), cheminImage );
+       this->setImage( f.filtreAda2(image, 3), cheminImage );
+//       this->setImage( f.filtreAda(image), cheminImage );
     }
 }
 
