@@ -113,7 +113,7 @@ QImage *filtreAdaptatif::filtreAda2(QImage *image, int taille){
                         VG = qGreen(image->pixel(i+k,j+l));
                         VB = qBlue(image->pixel(i+k,j+l));
                         if( (centreR == VR) && (centreG == VG) && (centreB == VB) ){
-                            v = 5.0;
+                            v = 1.0/5.0;
                         }
                         else{
                             v = 1.0/((valAbsolue(centreR-VR + centreG-VG + centreB-VB))/3.0);
@@ -124,9 +124,9 @@ QImage *filtreAdaptatif::filtreAda2(QImage *image, int taille){
                 }
             }
             //calcul nouveau pixel
-            int resR = 0;
-            int resG = 0;
-            int resB = 0;
+            double resR = 0.0;
+            double resG = 0.0;
+            double resB = 0.0;
             for (int k = -bord; k < bord+1; ++k) {
                 for (int l = -bord; l < bord+1; ++l) {
                     if( (i+k<0) || (i+k>=imWidth) || (j+l<0) || (j+l>=imHeight) ){

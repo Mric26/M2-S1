@@ -8,7 +8,7 @@
 class pointsDinterets{
 
 public:
-    QImage *calculpointsDinterets(QImage *image);
+    QImage *calculpointsDinterets(QImage *image, double alpha);
 
 };
 

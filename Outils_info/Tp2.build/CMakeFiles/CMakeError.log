@@ -1,0 +1,261 @@
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wshorten64to32 failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3490237533/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3490237533.dir/build.make CMakeFiles/cmTryCompileExec3490237533.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3490237533.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wshorten64to32 -Werror   -Wshorten-64-to-32 -o CMakeFiles/cmTryCompileExec3490237533.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wshorten-64-to-32'
+make[1]: *** [CMakeFiles/cmTryCompileExec3490237533.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3490237533/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wenumconversion failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec836931004/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec836931004.dir/build.make CMakeFiles/cmTryCompileExec836931004.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec836931004.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wenumconversion -Werror   -Wenum-conversion -o CMakeFiles/cmTryCompileExec836931004.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wenum-conversion'
+make[1]: *** [CMakeFiles/cmTryCompileExec836931004.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec836931004/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wcpp11extensions failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1781809372/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1781809372.dir/build.make CMakeFiles/cmTryCompileExec1781809372.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1781809372.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wcpp11extensions -Werror   -Wc++11-extensions -o CMakeFiles/cmTryCompileExec1781809372.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wc++11-extensions'
+make[1]: *** [CMakeFiles/cmTryCompileExec1781809372.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1781809372/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd981 failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3184434014/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3184434014.dir/build.make CMakeFiles/cmTryCompileExec3184434014.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3184434014.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd981 -Werror   -wd981 -o CMakeFiles/cmTryCompileExec3184434014.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd981'
+make[1]: *** [CMakeFiles/cmTryCompileExec3184434014.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3184434014/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd2304 failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1987745953/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1987745953.dir/build.make CMakeFiles/cmTryCompileExec1987745953.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1987745953.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd2304 -Werror   -wd2304 -o CMakeFiles/cmTryCompileExec1987745953.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd2304'
+make[1]: *** [CMakeFiles/cmTryCompileExec1987745953.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1987745953/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_STRICTANSI failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2525198729/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2525198729.dir/build.make CMakeFiles/cmTryCompileExec2525198729.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2525198729.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_STRICTANSI -Werror   -strict-ansi -o CMakeFiles/cmTryCompileExec2525198729.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-strict-ansi'
+make[1]: *** [CMakeFiles/cmTryCompileExec2525198729.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec2525198729/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Qunusedarguments failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec66728091/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec66728091.dir/build.make CMakeFiles/cmTryCompileExec66728091.dir/build
+make[1]: Entering directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec66728091.dir/src.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_Qunusedarguments -Werror   -Qunused-arguments -o CMakeFiles/cmTryCompileExec66728091.dir/src.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Qunused-arguments'
+make[1]: *** [CMakeFiles/cmTryCompileExec66728091.dir/src.cxx.o] Error 1
+make[1]: Leaving directory `/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec66728091/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1226239125/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1226239125.dir/build.make CMakeFiles/cmTryCompileExec1226239125.dir/build
+make[1]: entrant dans le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1226239125.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -ansi -O1 -g1  -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec1226239125.dir/CheckSymbolExists.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^
+make[1]: *** [CMakeFiles/cmTryCompileExec1226239125.dir/CheckSymbolExists.cxx.o] Erreur 1
+make[1]: quittant le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec1226239125/fast] Erreur 2
+
+File /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec341667156/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec341667156.dir/build.make CMakeFiles/cmTryCompileExec341667156.dir/build
+make[1]: entrant dans le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec341667156.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -ansi -O1 -g1  -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec341667156.dir/CheckSymbolExists.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^
+make[1]: *** [CMakeFiles/cmTryCompileExec341667156.dir/CheckSymbolExists.cxx.o] Erreur 1
+make[1]: quittant le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec341667156/fast] Erreur 2
+
+File /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2575980008/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2575980008.dir/build.make CMakeFiles/cmTryCompileExec2575980008.dir/build
+make[1]: entrant dans le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2575980008.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -ansi -O1 -g1  -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec2575980008.dir/CheckSymbolExists.cxx.o -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^
+make[1]: *** [CMakeFiles/cmTryCompileExec2575980008.dir/CheckSymbolExists.cxx.o] Erreur 1
+make[1]: quittant le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec2575980008/fast] Erreur 2
+
+File /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec658047783/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec658047783.dir/build.make CMakeFiles/cmTryCompileExec658047783.dir/build
+make[1]: entrant dans le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec658047783.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec658047783.dir/CheckSymbolExists.c.o   -c /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec658047783
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec658047783.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec658047783.dir/CheckSymbolExists.c.o  -o cmTryCompileExec658047783 -rdynamic 
+CMakeFiles/cmTryCompileExec658047783.dir/CheckSymbolExists.c.o: dans la fonction « main »:
+CheckSymbolExists.c:(.text+0x16): référence indéfinie vers « pthread_create »
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec658047783] Erreur 1
+make[1]: quittant le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec658047783/fast] Erreur 2
+
+File /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec666778090/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec666778090.dir/build.make CMakeFiles/cmTryCompileExec666778090.dir/build
+make[1]: entrant dans le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec666778090.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec666778090.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec666778090
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec666778090.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec666778090.dir/CheckFunctionExists.c.o  -o cmTryCompileExec666778090 -rdynamic -lpthreads 
+/usr/bin/ld: ne peut trouver -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec666778090] Erreur 1
+make[1]: quittant le répertoire « /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec666778090/fast] Erreur 2
+
+

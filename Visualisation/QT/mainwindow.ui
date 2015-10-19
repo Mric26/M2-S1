@@ -424,11 +424,17 @@
     <addaction name="actionFiltre_adaptatif"/>
     <addaction name="actionInversion_Histo"/>
    </widget>
+   <widget class="QMenu" name="menuTP3">
+    <property name="title">
+     <string>TP3</string>
+    </property>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menu_dition"/>
    <addaction name="menuCalques"/>
    <addaction name="menuAbout"/>
    <addaction name="menuTP1bis"/>
+   <addaction name="menuTP3"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionEnregistrer">

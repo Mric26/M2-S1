@@ -1,0 +1,7 @@
+-I/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/eigen
+-I/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/eigen
+-I/usr/include/qt4
+-DNDEBUG
+-o
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/eigen/demos/mandelbrot/mandelbrot.moc
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/eigen/demos/mandelbrot/mandelbrot.h

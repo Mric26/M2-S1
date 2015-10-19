@@ -1,0 +1,13 @@
+-I/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/eigen
+-I/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/eigen
+-I/usr/include/qt4
+-I/usr/include/qt4/QtOpenGL
+-I/usr/include/qt4/QtGui
+-I/usr/include/qt4/QtCore
+-I/usr/include/qt4
+-DQT_OPENGL_LIB
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-o
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/eigen/demos/opengl/quaternion_demo.moc
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/eigen/demos/opengl/quaternion_demo.h
