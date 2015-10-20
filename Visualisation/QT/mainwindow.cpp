@@ -674,10 +674,9 @@ void MainWindow::bords(){
 }
 
 void MainWindow::negatifslot(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        negatif n;
-//        this->setImage( n.neg(image), cheminImage);
+        negatif n;
+        this->setImage( n.neg(image), cheminImage);
     }
 }
 
