@@ -428,13 +428,31 @@
     <property name="title">
      <string>TP3</string>
     </property>
+    <addaction name="actionPoint_d_interets"/>
+   </widget>
+   <widget class="QMenu" name="menuTP2">
+    <property name="title">
+     <string>TP2</string>
+    </property>
+    <addaction name="actionModule_gradient"/>
+   </widget>
+   <widget class="QMenu" name="menuTP4">
+    <property name="title">
+     <string>TP4</string>
+    </property>
+    <addaction name="actionSeuillage"/>
+    <addaction name="actionNegatif"/>
+    <addaction name="actionComposante_connexe"/>
+    <addaction name="actionBord_objets"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menu_dition"/>
    <addaction name="menuCalques"/>
    <addaction name="menuAbout"/>
    <addaction name="menuTP1bis"/>
+   <addaction name="menuTP2"/>
    <addaction name="menuTP3"/>
+   <addaction name="menuTP4"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionEnregistrer">
@@ -585,6 +603,36 @@
   <action name="actionInversion_Histo">
    <property name="text">
     <string>Inversion Histo</string>
+   </property>
+  </action>
+  <action name="actionComposante_connexe">
+   <property name="text">
+    <string>Composante connexe</string>
+   </property>
+  </action>
+  <action name="actionBord_objets">
+   <property name="text">
+    <string>Bord objets</string>
+   </property>
+  </action>
+  <action name="actionModule_gradient">
+   <property name="text">
+    <string>Module gradient</string>
+   </property>
+  </action>
+  <action name="actionPoint_d_interets">
+   <property name="text">
+    <string>Point d'interets</string>
+   </property>
+  </action>
+  <action name="actionSeuillage">
+   <property name="text">
+    <string>Seuillage</string>
+   </property>
+  </action>
+  <action name="actionNegatif">
+   <property name="text">
+    <string>Negatif</string>
    </property>
   </action>
  </widget>

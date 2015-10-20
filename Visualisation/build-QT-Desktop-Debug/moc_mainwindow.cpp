@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      43,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,6 +69,10 @@ static const uint qt_meta_data_MainWindow[] = {
      506,   11,   11,   11, 0x0a,
      518,   11,   11,   11, 0x0a,
      537,   11,   11,   11, 0x0a,
+     549,   11,   11,   11, 0x0a,
+     566,   11,   11,   11, 0x0a,
+     584,   11,   11,   11, 0x0a,
+     599,   11,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -89,7 +93,9 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "createFusion()\0median()\0redimensionner()\0"
     "fusionnerCalques()\0quit()\0pleinEcran()\0"
     "minimiser()\0filtreAdaptatiff()\0"
-    "inverserH()\0"
+    "inverserH()\0moduleGradient()\0"
+    "pointDinteretsf()\0compoConnexe()\0"
+    "bords()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -137,6 +143,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 36: _t->minimiser(); break;
         case 37: _t->filtreAdaptatiff(); break;
         case 38: _t->inverserH(); break;
+        case 39: _t->moduleGradient(); break;
+        case 40: _t->pointDinteretsf(); break;
+        case 41: _t->compoConnexe(); break;
+        case 42: _t->bords(); break;
         default: ;
         }
     }
@@ -174,9 +184,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 43;
     }
     return _id;
 }

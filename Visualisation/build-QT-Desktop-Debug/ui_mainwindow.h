@@ -60,6 +60,12 @@ public:
     QAction *actionFusionner;
     QAction *actionFiltre_adaptatif;
     QAction *actionInversion_Histo;
+    QAction *actionComposante_connexe;
+    QAction *actionBord_objets;
+    QAction *actionModule_gradient;
+    QAction *actionPoint_d_interets;
+    QAction *actionSeuillage;
+    QAction *actionNegatif;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QGridLayout *gridLayout_2;
@@ -94,6 +100,9 @@ public:
     QMenu *menuAbout;
     QMenu *menuCalques;
     QMenu *menuTP1bis;
+    QMenu *menuTP3;
+    QMenu *menuTP2;
+    QMenu *menuTP4;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -164,6 +173,18 @@ public:
         actionFiltre_adaptatif->setObjectName(QString::fromUtf8("actionFiltre_adaptatif"));
         actionInversion_Histo = new QAction(MainWindow);
         actionInversion_Histo->setObjectName(QString::fromUtf8("actionInversion_Histo"));
+        actionComposante_connexe = new QAction(MainWindow);
+        actionComposante_connexe->setObjectName(QString::fromUtf8("actionComposante_connexe"));
+        actionBord_objets = new QAction(MainWindow);
+        actionBord_objets->setObjectName(QString::fromUtf8("actionBord_objets"));
+        actionModule_gradient = new QAction(MainWindow);
+        actionModule_gradient->setObjectName(QString::fromUtf8("actionModule_gradient"));
+        actionPoint_d_interets = new QAction(MainWindow);
+        actionPoint_d_interets->setObjectName(QString::fromUtf8("actionPoint_d_interets"));
+        actionSeuillage = new QAction(MainWindow);
+        actionSeuillage->setObjectName(QString::fromUtf8("actionSeuillage"));
+        actionNegatif = new QAction(MainWindow);
+        actionNegatif->setObjectName(QString::fromUtf8("actionNegatif"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -333,6 +354,12 @@ public:
         menuCalques->setObjectName(QString::fromUtf8("menuCalques"));
         menuTP1bis = new QMenu(menuBar);
         menuTP1bis->setObjectName(QString::fromUtf8("menuTP1bis"));
+        menuTP3 = new QMenu(menuBar);
+        menuTP3->setObjectName(QString::fromUtf8("menuTP3"));
+        menuTP2 = new QMenu(menuBar);
+        menuTP2->setObjectName(QString::fromUtf8("menuTP2"));
+        menuTP4 = new QMenu(menuBar);
+        menuTP4->setObjectName(QString::fromUtf8("menuTP4"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -343,6 +370,9 @@ public:
         menuBar->addAction(menuCalques->menuAction());
         menuBar->addAction(menuAbout->menuAction());
         menuBar->addAction(menuTP1bis->menuAction());
+        menuBar->addAction(menuTP2->menuAction());
+        menuBar->addAction(menuTP3->menuAction());
+        menuBar->addAction(menuTP4->menuAction());
         menuFichier->addAction(actionOuvrir_2);
         menuFichier->addAction(actionEnregistrer);
         menuFichier->addAction(actionEnregistrer_sous);
@@ -383,6 +413,12 @@ public:
         menuCalques->addAction(actionFusionner);
         menuTP1bis->addAction(actionFiltre_adaptatif);
         menuTP1bis->addAction(actionInversion_Histo);
+        menuTP3->addAction(actionPoint_d_interets);
+        menuTP2->addAction(actionModule_gradient);
+        menuTP4->addAction(actionSeuillage);
+        menuTP4->addAction(actionNegatif);
+        menuTP4->addAction(actionComposante_connexe);
+        menuTP4->addAction(actionBord_objets);
 
         retranslateUi(MainWindow);
 
@@ -422,6 +458,12 @@ public:
         actionFusionner->setText(QApplication::translate("MainWindow", "Fusionner", 0, QApplication::UnicodeUTF8));
         actionFiltre_adaptatif->setText(QApplication::translate("MainWindow", "Filtre adaptatif", 0, QApplication::UnicodeUTF8));
         actionInversion_Histo->setText(QApplication::translate("MainWindow", "Inversion Histo", 0, QApplication::UnicodeUTF8));
+        actionComposante_connexe->setText(QApplication::translate("MainWindow", "Composante connexe", 0, QApplication::UnicodeUTF8));
+        actionBord_objets->setText(QApplication::translate("MainWindow", "Bord objets", 0, QApplication::UnicodeUTF8));
+        actionModule_gradient->setText(QApplication::translate("MainWindow", "Module gradient", 0, QApplication::UnicodeUTF8));
+        actionPoint_d_interets->setText(QApplication::translate("MainWindow", "Point d'interets", 0, QApplication::UnicodeUTF8));
+        actionSeuillage->setText(QApplication::translate("MainWindow", "Seuillage", 0, QApplication::UnicodeUTF8));
+        actionNegatif->setText(QApplication::translate("MainWindow", "Negatif", 0, QApplication::UnicodeUTF8));
         enregistrer->setText(QString());
         refaire->setText(QString());
         flou->setText(QString());
@@ -446,6 +488,9 @@ public:
         menuAbout->setTitle(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         menuCalques->setTitle(QApplication::translate("MainWindow", "Calques", 0, QApplication::UnicodeUTF8));
         menuTP1bis->setTitle(QApplication::translate("MainWindow", "TP1bis", 0, QApplication::UnicodeUTF8));
+        menuTP3->setTitle(QApplication::translate("MainWindow", "TP3", 0, QApplication::UnicodeUTF8));
+        menuTP2->setTitle(QApplication::translate("MainWindow", "TP2", 0, QApplication::UnicodeUTF8));
+        menuTP4->setTitle(QApplication::translate("MainWindow", "TP4", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

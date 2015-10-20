@@ -30,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect( ui->actionFiltre_adaptatif, SIGNAL(triggered()), this, SLOT(filtreAdaptatiff()) );
     QObject::connect( ui->actionInversion_Histo, SIGNAL(triggered()), this, SLOT(inverserH()) );
+    QObject::connect( ui->actionModule_gradient, SIGNAL(triggered()), this, SLOT(moduleGradient()) );
+    QObject::connect( ui->actionPoint_d_interets, SIGNAL(triggered()), this, SLOT(pointDinteretsf()) );
+
+    QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
+    QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
 
     ui->annuler->setIcon(QIcon(":res/Annuler.png"));
     QObject::connect( ui->annuler, SIGNAL(clicked()), this, SLOT(annuler()) );
@@ -330,33 +335,6 @@ void MainWindow::showHisto(){
     }
 }
 
-void MainWindow::filtreAdaptatiff(){
-    if( cheminImage != NULL ){
-       filtreAdaptatif f;
-       this->setImage( f.filtreAda2(image, 5), cheminImage );
-//       this->setImage( f.filtreAda(image), cheminImage );
-    }
-}
-
-void MainWindow::inverserH(){
-    if( cheminImage != NULL ){
-        int imWidth = image->width();
-        int imHeight = image->height();
-
-        QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
-
-        for (int i = 0; i < imWidth; ++i) {
-            for (int j = 0; j < imHeight; ++j) {
-                int VR = qRed(image->pixel(i,j));
-                int VG = qGreen(image->pixel(i,j));
-                int VB = qBlue(image->pixel(i,j));
-                nouvelleImage->setPixel(i, j, qRgb(255-VR,255-VG,255-VB) );
-            }
-        }
-        this->setImage( nouvelleImage, cheminImage );
-    }
-}
-
 void MainWindow::etaler(){
     if( cheminImage != NULL ){
         Etalement et;
@@ -634,3 +612,65 @@ void MainWindow::setScene(QGraphicsScene *value){
     scene = value;
 }
 
+void MainWindow::filtreAdaptatiff(){
+    if( cheminImage != NULL ){
+       filtreAdaptatif f;
+       this->setImage( f.filtreAda2(image, 5), cheminImage );
+//       this->setImage( f.filtreAda(image), cheminImage );
+    }
+}
+
+void MainWindow::inverserH(){
+    if( cheminImage != NULL ){
+        int imWidth = image->width();
+        int imHeight = image->height();
+
+        QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
+
+        for (int i = 0; i < imWidth; ++i) {
+            for (int j = 0; j < imHeight; ++j) {
+                int VR = qRed(image->pixel(i,j));
+                int VG = qGreen(image->pixel(i,j));
+                int VB = qBlue(image->pixel(i,j));
+                nouvelleImage->setPixel(i, j, qRgb(255-VR,255-VG,255-VB) );
+            }
+        }
+        this->setImage( nouvelleImage, cheminImage );
+    }
+}
+
+void MainWindow::moduleGradient(){
+    AfficherMessageNonFini();
+    if( cheminImage != NULL ){
+    }
+}
+
+void MainWindow::pointDinteretsf(){
+    AfficherMessageNonFini();
+    if( cheminImage != NULL ){
+        pointsDinterets p;
+//        this->setImage( p.calculpointsDinterets(image, 12), cheminImage);
+    }
+}
+
+void MainWindow::compoConnexe(){
+    AfficherMessageNonFini();
+    if( cheminImage != NULL ){
+        composantesConnexes cp;
+//        this->setImage( cp.composantesConn(image), cheminImage);
+    }
+}
+
+void MainWindow::bords(){
+    AfficherMessageNonFini();
+    if( cheminImage != NULL ){
+        bordsObjets b;
+//        this->setImage( b.bordsO(image), cheminImage);
+    }
+}
+
+void MainWindow::AfficherMessageNonFini(){
+   QMessageBox BoiteMessage;
+   BoiteMessage.setText("Fonction non implementee ou non terminee !!!!");
+   BoiteMessage.exec();
+}
