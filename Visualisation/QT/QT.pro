@@ -33,7 +33,7 @@ SOURCES += main.cpp\
     filtreadaptatif.cpp \
     pointsdinterets.cpp \
     composantesconnexes.cpp \
-    bordsobjets.cpp
+    bordsobjets.cpp \
     imagegradient.cpp
 
 HEADERS  += mainwindow.h \
@@ -57,7 +57,7 @@ HEADERS  += mainwindow.h \
     filtreadaptatif.h \
     pointsdinterets.h \
     composantesconnexes.h \
-    bordsobjets.h
+    bordsobjets.h \
     imagegradient.h
 
 FORMS    += mainwindow.ui \
