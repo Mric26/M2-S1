@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,6 +34,7 @@ SOURCES += main.cpp\
     pointsdinterets.cpp \
     composantesconnexes.cpp \
     bordsobjets.cpp
+    imagegradient.cpp
 
 HEADERS  += mainwindow.h \
     open.h \
@@ -57,6 +58,7 @@ HEADERS  += mainwindow.h \
     pointsdinterets.h \
     composantesconnexes.h \
     bordsobjets.h
+    imagegradient.h
 
 FORMS    += mainwindow.ui \
     diagramcolorwindow.ui \

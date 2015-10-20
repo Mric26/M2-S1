@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
     QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
 
+
     ui->annuler->setIcon(QIcon(":res/Annuler.png"));
     QObject::connect( ui->annuler, SIGNAL(clicked()), this, SLOT(annuler()) );
     new QShortcut( QKeySequence("Ctrl+Z"), this, SLOT(annuler()) );
@@ -640,8 +641,9 @@ void MainWindow::inverserH(){
 }
 
 void MainWindow::moduleGradient(){
-    AfficherMessageNonFini();
-    if( cheminImage != NULL ){
+    if (cheminImage != NULL) {
+        imagegradient imgG;
+        this->setImage(imgG.filtreGradient(image), cheminImage);
     }
 }
 

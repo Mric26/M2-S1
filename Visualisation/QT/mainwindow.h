@@ -26,6 +26,7 @@
 #include "pointsdinterets.h"
 #include "composantesconnexes.h"
 #include "bordsobjets.h"
+#include "imagegradient.h"
 
 namespace Ui {
 class MainWindow;
@@ -124,7 +125,6 @@ public slots:
     void pointDinteretsf();
     void compoConnexe();
     void bords();
-
 
 private:
     Ui::MainWindow *ui;
