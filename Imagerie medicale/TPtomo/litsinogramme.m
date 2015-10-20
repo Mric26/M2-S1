@@ -12,7 +12,7 @@ function sino = litsinogramme(filename,dimphi,dims);
 sino=zeros(dimphi,dims);
 %disp(filename);
 sinofile = load(filename);
-taille = size(sinofile)
+taille = size(sinofile);
 for k=1:dimphi
    for l=1:dims
       sino(k,l)=sinofile(1,(k-1)*dims+l);
