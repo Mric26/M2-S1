@@ -15,6 +15,7 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <QVector>
+#include <QMessageBox>
 
 #include "convolution.h"
 #include "etalement.h"
