@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'contraste.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,18 +10,18 @@
 #define UI_CONTRASTE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QSlider>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -47,19 +47,19 @@ public:
     void setupUi(QDialog *Contraste)
     {
         if (Contraste->objectName().isEmpty())
-            Contraste->setObjectName(QString::fromUtf8("Contraste"));
+            Contraste->setObjectName(QStringLiteral("Contraste"));
         Contraste->resize(250, 278);
         verticalLayout = new QVBoxLayout(Contraste);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(Contraste);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         horizontalSlider = new QSlider(Contraste);
-        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
         horizontalSlider->setMaximum(100);
         horizontalSlider->setValue(50);
         horizontalSlider->setOrientation(Qt::Horizontal);
@@ -78,13 +78,13 @@ public:
         verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_5);
 
         valtransparence = new QLabel(Contraste);
-        valtransparence->setObjectName(QString::fromUtf8("valtransparence"));
+        valtransparence->setObjectName(QStringLiteral("valtransparence"));
 
         horizontalLayout_2->addWidget(valtransparence);
 
@@ -96,18 +96,18 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         ok = new QPushButton(Contraste);
-        ok->setObjectName(QString::fromUtf8("ok"));
+        ok->setObjectName(QStringLiteral("ok"));
 
         horizontalLayout->addWidget(ok);
 
         cancel = new QPushButton(Contraste);
-        cancel->setObjectName(QString::fromUtf8("cancel"));
+        cancel->setObjectName(QStringLiteral("cancel"));
 
         horizontalLayout->addWidget(cancel);
 
@@ -127,11 +127,11 @@ public:
 
     void retranslateUi(QDialog *Contraste)
     {
-        Contraste->setWindowTitle(QApplication::translate("Contraste", "Reglement du contraste", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("Contraste", "Veuillez choisir le niveau de transparence", 0, QApplication::UnicodeUTF8));
+        Contraste->setWindowTitle(QApplication::translate("Contraste", "Reglement du contraste", 0));
+        label->setText(QApplication::translate("Contraste", "Veuillez choisir le niveau de transparence", 0));
         valtransparence->setText(QString());
-        ok->setText(QApplication::translate("Contraste", "ok", 0, QApplication::UnicodeUTF8));
-        cancel->setText(QApplication::translate("Contraste", "cancel", 0, QApplication::UnicodeUTF8));
+        ok->setText(QApplication::translate("Contraste", "ok", 0));
+        cancel->setText(QApplication::translate("Contraste", "cancel", 0));
     } // retranslateUi
 
 };

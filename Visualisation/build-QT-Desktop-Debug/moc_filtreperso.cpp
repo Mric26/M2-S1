@@ -1,25 +1,52 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'filtreperso.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.6)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.2.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "../QT/filtreperso.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'filtreperso.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.6. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.2.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_FiltrePerso_t {
+    QByteArrayData data[8];
+    char stringdata[75];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    offsetof(qt_meta_stringdata_FiltrePerso_t, stringdata) + ofs \
+        - idx * sizeof(QByteArrayData) \
+    )
+static const qt_meta_stringdata_FiltrePerso_t qt_meta_stringdata_FiltrePerso = {
+    {
+QT_MOC_LITERAL(0, 0, 11),
+QT_MOC_LITERAL(1, 12, 14),
+QT_MOC_LITERAL(2, 27, 0),
+QT_MOC_LITERAL(3, 28, 7),
+QT_MOC_LITERAL(4, 36, 9),
+QT_MOC_LITERAL(5, 46, 9),
+QT_MOC_LITERAL(6, 56, 9),
+QT_MOC_LITERAL(7, 66, 7)
+    },
+    "FiltrePerso\0envoyerMatrice\0\0float**\0"
+    "select3x3\0select5x5\0select7x7\0valider\0"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_FiltrePerso[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        5,   14, // methods
@@ -29,28 +56,30 @@ static const uint qt_meta_data_FiltrePerso[] = {
        0,       // flags
        1,       // signalCount
 
- // signals: signature, parameters, type, tag, flags
-      15,   13,   12,   12, 0x05,
+ // signals: name, argc, parameters, tag, flags
+       1,    2,   39,    2, 0x06,
 
- // slots: signature, parameters, type, tag, flags
-      43,   12,   12,   12, 0x0a,
-      55,   12,   12,   12, 0x0a,
-      67,   12,   12,   12, 0x0a,
-      79,   12,   12,   12, 0x0a,
+ // slots: name, argc, parameters, tag, flags
+       4,    0,   44,    2, 0x0a,
+       5,    0,   45,    2, 0x0a,
+       6,    0,   46,    2, 0x0a,
+       7,    0,   47,    2, 0x0a,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    2,    2,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
-};
-
-static const char qt_meta_stringdata_FiltrePerso[] = {
-    "FiltrePerso\0\0,\0envoyerMatrice(float**,int)\0"
-    "select3x3()\0select5x5()\0select7x7()\0"
-    "valider()\0"
 };
 
 void FiltrePerso::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
         FiltrePerso *_t = static_cast<FiltrePerso *>(_o);
         switch (_id) {
         case 0: _t->envoyerMatrice((*reinterpret_cast< float**(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
@@ -60,31 +89,33 @@ void FiltrePerso::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 4: _t->valider(); break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (FiltrePerso::*_t)(float * * , int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&FiltrePerso::envoyerMatrice)) {
+                *result = 0;
+            }
+        }
     }
 }
 
-const QMetaObjectExtraData FiltrePerso::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject FiltrePerso::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_FiltrePerso,
-      qt_meta_data_FiltrePerso, &staticMetaObjectExtraData }
+    { &QDialog::staticMetaObject, qt_meta_stringdata_FiltrePerso.data,
+      qt_meta_data_FiltrePerso,  qt_static_metacall, 0, 0}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &FiltrePerso::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *FiltrePerso::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *FiltrePerso::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_FiltrePerso))
+    if (!strcmp(_clname, qt_meta_stringdata_FiltrePerso.stringdata))
         return static_cast<void*>(const_cast< FiltrePerso*>(this));
     return QDialog::qt_metacast(_clname);
 }
@@ -97,6 +128,10 @@ int FiltrePerso::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
+        _id -= 5;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 5)
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 5;
     }
     return _id;

@@ -1,25 +1,57 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'diagramcolorwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.6)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.2.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include "../QT/diagramcolorwindow.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'diagramcolorwindow.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 63
-#error "This file was generated using the moc from 4.8.6. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.2.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_DiagramColorWindow_t {
+    QByteArrayData data[10];
+    char stringdata[178];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    offsetof(qt_meta_stringdata_DiagramColorWindow_t, stringdata) + ofs \
+        - idx * sizeof(QByteArrayData) \
+    )
+static const qt_meta_stringdata_DiagramColorWindow_t qt_meta_stringdata_DiagramColorWindow = {
+    {
+QT_MOC_LITERAL(0, 0, 18),
+QT_MOC_LITERAL(1, 19, 20),
+QT_MOC_LITERAL(2, 40, 0),
+QT_MOC_LITERAL(3, 41, 20),
+QT_MOC_LITERAL(4, 62, 20),
+QT_MOC_LITERAL(5, 83, 20),
+QT_MOC_LITERAL(6, 104, 21),
+QT_MOC_LITERAL(7, 126, 21),
+QT_MOC_LITERAL(8, 148, 23),
+QT_MOC_LITERAL(9, 172, 4)
+    },
+    "DiagramColorWindow\0on_checkBoxR_clicked\0"
+    "\0on_checkBoxG_clicked\0on_checkBoxB_clicked\0"
+    "on_checkBoxY_clicked\0on_checkBoxCb_clicked\0"
+    "on_checkBoxCr_clicked\0on_checkBoxCumu_clicked\0"
+    "ferm\0"
+};
+#undef QT_MOC_LITERAL
+
 static const uint qt_meta_data_DiagramColorWindow[] = {
 
  // content:
-       6,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        8,   14, // methods
@@ -29,31 +61,32 @@ static const uint qt_meta_data_DiagramColorWindow[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: signature, parameters, type, tag, flags
-      20,   19,   19,   19, 0x08,
-      43,   19,   19,   19, 0x08,
-      66,   19,   19,   19, 0x08,
-      89,   19,   19,   19, 0x08,
-     112,   19,   19,   19, 0x08,
-     136,   19,   19,   19, 0x08,
-     160,   19,   19,   19, 0x08,
-     186,   19,   19,   19, 0x0a,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   54,    2, 0x08,
+       3,    0,   55,    2, 0x08,
+       4,    0,   56,    2, 0x08,
+       5,    0,   57,    2, 0x08,
+       6,    0,   58,    2, 0x08,
+       7,    0,   59,    2, 0x08,
+       8,    0,   60,    2, 0x08,
+       9,    0,   61,    2, 0x0a,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
-};
-
-static const char qt_meta_stringdata_DiagramColorWindow[] = {
-    "DiagramColorWindow\0\0on_checkBoxR_clicked()\0"
-    "on_checkBoxG_clicked()\0on_checkBoxB_clicked()\0"
-    "on_checkBoxY_clicked()\0on_checkBoxCb_clicked()\0"
-    "on_checkBoxCr_clicked()\0"
-    "on_checkBoxCumu_clicked()\0ferm()\0"
 };
 
 void DiagramColorWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Q_ASSERT(staticMetaObject.cast(_o));
         DiagramColorWindow *_t = static_cast<DiagramColorWindow *>(_o);
         switch (_id) {
         case 0: _t->on_checkBoxR_clicked(); break;
@@ -70,28 +103,21 @@ void DiagramColorWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData DiagramColorWindow::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
-};
-
 const QMetaObject DiagramColorWindow::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_DiagramColorWindow,
-      qt_meta_data_DiagramColorWindow, &staticMetaObjectExtraData }
+    { &QDialog::staticMetaObject, qt_meta_stringdata_DiagramColorWindow.data,
+      qt_meta_data_DiagramColorWindow,  qt_static_metacall, 0, 0}
 };
 
-#ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &DiagramColorWindow::getStaticMetaObject() { return staticMetaObject; }
-#endif //Q_NO_DATA_RELOCATION
 
 const QMetaObject *DiagramColorWindow::metaObject() const
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
 void *DiagramColorWindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_DiagramColorWindow))
+    if (!strcmp(_clname, qt_meta_stringdata_DiagramColorWindow.stringdata))
         return static_cast<void*>(const_cast< DiagramColorWindow*>(this));
     return QDialog::qt_metacast(_clname);
 }
@@ -104,6 +130,10 @@ int DiagramColorWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
+        _id -= 8;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 8)
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 8;
     }
     return _id;
