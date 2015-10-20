@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'diagramcolorwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,18 +10,18 @@
 #define UI_DIAGRAMCOLORWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QDialog>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,16 +51,16 @@ public:
     void setupUi(QDialog *DiagramColorWindow)
     {
         if (DiagramColorWindow->objectName().isEmpty())
-            DiagramColorWindow->setObjectName(QString::fromUtf8("DiagramColorWindow"));
+            DiagramColorWindow->setObjectName(QStringLiteral("DiagramColorWindow"));
         DiagramColorWindow->resize(423, 251);
         gridLayout = new QGridLayout(DiagramColorWindow);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         histoGroupBox = new QGroupBox(DiagramColorWindow);
-        histoGroupBox->setObjectName(QString::fromUtf8("histoGroupBox"));
+        histoGroupBox->setObjectName(QStringLiteral("histoGroupBox"));
         gridLayout_2 = new QGridLayout(histoGroupBox);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         graphicsView = new QGraphicsView(histoGroupBox);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setFrameShadow(QFrame::Sunken);
         graphicsView->setLineWidth(0);
         graphicsView->setAlignment(Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing);
@@ -68,42 +68,42 @@ public:
         gridLayout_2->addWidget(graphicsView, 0, 0, 1, 1);
 
         checkBoxLayout = new QVBoxLayout();
-        checkBoxLayout->setObjectName(QString::fromUtf8("checkBoxLayout"));
+        checkBoxLayout->setObjectName(QStringLiteral("checkBoxLayout"));
         checkBoxR = new QCheckBox(histoGroupBox);
-        checkBoxR->setObjectName(QString::fromUtf8("checkBoxR"));
+        checkBoxR->setObjectName(QStringLiteral("checkBoxR"));
         checkBoxR->setChecked(true);
 
         checkBoxLayout->addWidget(checkBoxR);
 
         checkBoxG = new QCheckBox(histoGroupBox);
-        checkBoxG->setObjectName(QString::fromUtf8("checkBoxG"));
+        checkBoxG->setObjectName(QStringLiteral("checkBoxG"));
         checkBoxG->setChecked(true);
 
         checkBoxLayout->addWidget(checkBoxG);
 
         checkBoxB = new QCheckBox(histoGroupBox);
-        checkBoxB->setObjectName(QString::fromUtf8("checkBoxB"));
+        checkBoxB->setObjectName(QStringLiteral("checkBoxB"));
         checkBoxB->setChecked(true);
 
         checkBoxLayout->addWidget(checkBoxB);
 
         checkBoxY = new QCheckBox(histoGroupBox);
-        checkBoxY->setObjectName(QString::fromUtf8("checkBoxY"));
+        checkBoxY->setObjectName(QStringLiteral("checkBoxY"));
 
         checkBoxLayout->addWidget(checkBoxY);
 
         checkBoxCb = new QCheckBox(histoGroupBox);
-        checkBoxCb->setObjectName(QString::fromUtf8("checkBoxCb"));
+        checkBoxCb->setObjectName(QStringLiteral("checkBoxCb"));
 
         checkBoxLayout->addWidget(checkBoxCb);
 
         checkBoxCr = new QCheckBox(histoGroupBox);
-        checkBoxCr->setObjectName(QString::fromUtf8("checkBoxCr"));
+        checkBoxCr->setObjectName(QStringLiteral("checkBoxCr"));
 
         checkBoxLayout->addWidget(checkBoxCr);
 
         checkBoxCumu = new QCheckBox(histoGroupBox);
-        checkBoxCumu->setObjectName(QString::fromUtf8("checkBoxCumu"));
+        checkBoxCumu->setObjectName(QStringLiteral("checkBoxCumu"));
 
         checkBoxLayout->addWidget(checkBoxCumu);
 
@@ -114,13 +114,13 @@ public:
         gridLayout->addWidget(histoGroupBox, 0, 0, 1, 1);
 
         gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_3->addItem(horizontalSpacer_2, 0, 0, 1, 1);
 
         fermer = new QPushButton(DiagramColorWindow);
-        fermer->setObjectName(QString::fromUtf8("fermer"));
+        fermer->setObjectName(QStringLiteral("fermer"));
 
         gridLayout_3->addWidget(fermer, 0, 4, 1, 1);
 
@@ -151,16 +151,16 @@ public:
 
     void retranslateUi(QDialog *DiagramColorWindow)
     {
-        DiagramColorWindow->setWindowTitle(QApplication::translate("DiagramColorWindow", "Histogrammes", 0, QApplication::UnicodeUTF8));
-        histoGroupBox->setTitle(QApplication::translate("DiagramColorWindow", "Diagrammes des couleurs", 0, QApplication::UnicodeUTF8));
-        checkBoxR->setText(QApplication::translate("DiagramColorWindow", "R", 0, QApplication::UnicodeUTF8));
-        checkBoxG->setText(QApplication::translate("DiagramColorWindow", "G", 0, QApplication::UnicodeUTF8));
-        checkBoxB->setText(QApplication::translate("DiagramColorWindow", "B", 0, QApplication::UnicodeUTF8));
-        checkBoxY->setText(QApplication::translate("DiagramColorWindow", "Y", 0, QApplication::UnicodeUTF8));
-        checkBoxCb->setText(QApplication::translate("DiagramColorWindow", "Cb", 0, QApplication::UnicodeUTF8));
-        checkBoxCr->setText(QApplication::translate("DiagramColorWindow", "Cr", 0, QApplication::UnicodeUTF8));
-        checkBoxCumu->setText(QApplication::translate("DiagramColorWindow", "Cumu", 0, QApplication::UnicodeUTF8));
-        fermer->setText(QApplication::translate("DiagramColorWindow", "Fermer", 0, QApplication::UnicodeUTF8));
+        DiagramColorWindow->setWindowTitle(QApplication::translate("DiagramColorWindow", "Histogrammes", 0));
+        histoGroupBox->setTitle(QApplication::translate("DiagramColorWindow", "Diagrammes des couleurs", 0));
+        checkBoxR->setText(QApplication::translate("DiagramColorWindow", "R", 0));
+        checkBoxG->setText(QApplication::translate("DiagramColorWindow", "G", 0));
+        checkBoxB->setText(QApplication::translate("DiagramColorWindow", "B", 0));
+        checkBoxY->setText(QApplication::translate("DiagramColorWindow", "Y", 0));
+        checkBoxCb->setText(QApplication::translate("DiagramColorWindow", "Cb", 0));
+        checkBoxCr->setText(QApplication::translate("DiagramColorWindow", "Cr", 0));
+        checkBoxCumu->setText(QApplication::translate("DiagramColorWindow", "Cumu", 0));
+        fermer->setText(QApplication::translate("DiagramColorWindow", "Fermer", 0));
     } // retranslateUi
 
 };

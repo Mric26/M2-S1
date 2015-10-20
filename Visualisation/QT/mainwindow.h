@@ -23,6 +23,7 @@
 #include "filtreperso.h"
 #include "fusioncalques.h"
 #include "filtreadaptatif.h"
+#include "imagegradient.h"
 
 namespace Ui {
 class MainWindow;
@@ -115,6 +116,7 @@ public slots:
     //TP1 bis
     void filtreAdaptatiff();
     void inverserH();
+    void moduleGradient();
 
 private:
     Ui::MainWindow *ui;

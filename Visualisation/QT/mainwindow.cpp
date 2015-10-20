@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect( ui->actionFiltre_adaptatif, SIGNAL(triggered()), this, SLOT(filtreAdaptatiff()) );
     QObject::connect( ui->actionInversion_Histo, SIGNAL(triggered()), this, SLOT(inverserH()) );
+    QObject::connect( ui->actionModule_Gradient, SIGNAL(triggered()), this, SLOT(moduleGradient()) );
 
     ui->annuler->setIcon(QIcon(":res/Annuler.png"));
     QObject::connect( ui->annuler, SIGNAL(clicked()), this, SLOT(annuler()) );
@@ -354,6 +355,14 @@ void MainWindow::inverserH(){
             }
         }
         this->setImage( nouvelleImage, cheminImage );
+    }
+}
+
+void MainWindow::moduleGradient()
+{
+    if (cheminImage != NULL) {
+        imagegradient imgG;
+        this->setImage(imgG.filtreGradient(image), cheminImage);
     }
 }
 

@@ -423,6 +423,7 @@
     </property>
     <addaction name="actionFiltre_adaptatif"/>
     <addaction name="actionInversion_Histo"/>
+    <addaction name="actionModule_Gradient"/>
    </widget>
    <widget class="QMenu" name="menuTP3">
     <property name="title">
@@ -585,6 +586,11 @@
   <action name="actionInversion_Histo">
    <property name="text">
     <string>Inversion Histo</string>
+   </property>
+  </action>
+  <action name="actionModule_Gradient">
+   <property name="text">
+    <string>Module Gradient</string>
    </property>
   </action>
  </widget>
