@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
     QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
+    QObject::connect( ui->actionSeuillage, SIGNAL(triggered()), this, SLOT(seuillageSlot()) );
+    QObject::connect( ui->actionNegatif, SIGNAL(triggered()), this, SLOT(negatifslot()) );
 
 
     ui->annuler->setIcon(QIcon(":res/Annuler.png"));
@@ -650,7 +652,7 @@ void MainWindow::moduleGradient(){
 void MainWindow::pointDinteretsf(){
     AfficherMessageNonFini();
     if( cheminImage != NULL ){
-        pointsDinterets p;
+//        pointsDinterets p;
 //        this->setImage( p.calculpointsDinterets(image, 12), cheminImage);
     }
 }
@@ -658,7 +660,7 @@ void MainWindow::pointDinteretsf(){
 void MainWindow::compoConnexe(){
     AfficherMessageNonFini();
     if( cheminImage != NULL ){
-        composantesConnexes cp;
+//        composantesConnexes cp;
 //        this->setImage( cp.composantesConn(image), cheminImage);
     }
 }
@@ -666,8 +668,23 @@ void MainWindow::compoConnexe(){
 void MainWindow::bords(){
     AfficherMessageNonFini();
     if( cheminImage != NULL ){
-        bordsObjets b;
+//        bordsObjets b;
 //        this->setImage( b.bordsO(image), cheminImage);
+    }
+}
+
+void MainWindow::negatifslot(){
+    AfficherMessageNonFini();
+    if( cheminImage != NULL ){
+//        negatif n;
+//        this->setImage( n.neg(image), cheminImage);
+    }
+}
+
+void MainWindow::seuillageSlot(){
+    if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuil(image, 150), cheminImage);
     }
 }
 

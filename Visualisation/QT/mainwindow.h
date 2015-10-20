@@ -27,6 +27,8 @@
 #include "composantesconnexes.h"
 #include "bordsobjets.h"
 #include "imagegradient.h"
+#include "seuillage.h"
+#include "negatif.h"
 
 namespace Ui {
 class MainWindow;
@@ -124,7 +126,10 @@ public slots:
     void moduleGradient();
     void pointDinteretsf();
     void compoConnexe();
-    void bords();
+    void bords();  
+    void negatifslot();
+    void seuillageSlot();
+
 
 private:
     Ui::MainWindow *ui;

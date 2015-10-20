@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      43,   14, // methods
+      45,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -73,6 +73,8 @@ static const uint qt_meta_data_MainWindow[] = {
      566,   11,   11,   11, 0x0a,
      584,   11,   11,   11, 0x0a,
      599,   11,   11,   11, 0x0a,
+     607,   11,   11,   11, 0x0a,
+     621,   11,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -95,7 +97,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "minimiser()\0filtreAdaptatiff()\0"
     "inverserH()\0moduleGradient()\0"
     "pointDinteretsf()\0compoConnexe()\0"
-    "bords()\0"
+    "bords()\0negatifslot()\0seuillageSlot()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -147,6 +149,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 40: _t->pointDinteretsf(); break;
         case 41: _t->compoConnexe(); break;
         case 42: _t->bords(); break;
+        case 43: _t->negatifslot(); break;
+        case 44: _t->seuillageSlot(); break;
         default: ;
         }
     }
@@ -184,9 +188,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 43)
+        if (_id < 45)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 43;
+        _id -= 45;
     }
     return _id;
 }

@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     pointsdinterets.cpp \
     composantesconnexes.cpp \
     bordsobjets.cpp \
-    imagegradient.cpp
+    imagegradient.cpp \
+    seuillage.cpp \
+    negatif.cpp
 
 HEADERS  += mainwindow.h \
     open.h \
@@ -58,7 +60,9 @@ HEADERS  += mainwindow.h \
     pointsdinterets.h \
     composantesconnexes.h \
     bordsobjets.h \
-    imagegradient.h
+    imagegradient.h \
+    seuillage.h \
+    negatif.h
 
 FORMS    += mainwindow.ui \
     diagramcolorwindow.ui \
