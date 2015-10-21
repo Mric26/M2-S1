@@ -15,6 +15,7 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <QVector>
+#include <QMessageBox>
 
 #include "convolution.h"
 #include "etalement.h"
@@ -23,6 +24,12 @@
 #include "filtreperso.h"
 #include "fusioncalques.h"
 #include "filtreadaptatif.h"
+#include "pointsdinterets.h"
+#include "composantesconnexes.h"
+#include "bordsobjets.h"
+#include "imagegradient.h"
+#include "seuillage.h"
+#include "negatif.h"
 
 namespace Ui {
 class MainWindow;
@@ -61,6 +68,8 @@ public:
 
     QImage * getcopie() const;
     void setcopie(QImage * value);
+
+    void AfficherMessageNonFini();
 
 public slots:
     // ouv / fermeture / enregistrement
@@ -114,7 +123,14 @@ public slots:
     void minimiser();
     //TP1 bis
     void filtreAdaptatiff();
-    void inverserH();
+    void inverserH();   
+    void moduleGradient();
+    void pointDinteretsf();
+    void compoConnexe();
+    void bords();  
+    void negatifslot();
+    void seuillageSlot();
+
 
 private:
     Ui::MainWindow *ui;

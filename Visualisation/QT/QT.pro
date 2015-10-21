@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +31,12 @@ SOURCES += main.cpp\
     copier.cpp \
     fusioncalques.cpp \
     filtreadaptatif.cpp \
-    pointsdinterets.cpp
+    pointsdinterets.cpp \
+    composantesconnexes.cpp \
+    bordsobjets.cpp \
+    imagegradient.cpp \
+    seuillage.cpp \
+    negatif.cpp
 
 HEADERS  += mainwindow.h \
     open.h \
@@ -52,7 +57,12 @@ HEADERS  += mainwindow.h \
     copier.h \
     fusioncalques.h \
     filtreadaptatif.h \
-    pointsdinterets.h
+    pointsdinterets.h \
+    composantesconnexes.h \
+    bordsobjets.h \
+    imagegradient.h \
+    seuillage.h \
+    negatif.h
 
 FORMS    += mainwindow.ui \
     diagramcolorwindow.ui \
