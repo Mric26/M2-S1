@@ -12,10 +12,7 @@ close all, clear all
 % num_n : nombre de normales calcules (pour le calcul des isophotes)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-BezierSurf = load('surface1');  % read control points
-%BezierSurf = load('surface2'); % read control points
-%BezierSurf = load('surface3'); % read control points
-%BezierSurf = load('surface4'); % read control points
+BezierSurf = load('surface3');  % read control points
 %load('teapot'); %loading matrix B
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 num_p=20;                    % nombre de valeurs de parametre en direction u et v
@@ -36,7 +33,7 @@ for k=1:np
     end
   end
 end
-B
+B;
 
 % La matrice B stocke tous les points de controle de tous les patchs
 % B(:,:,:,k) sont tous les points de controle du patch k
@@ -70,10 +67,12 @@ end
 
 % ------------------------------------
 % Computing Isophotes
-c = -1;
+taille = 256;
+c = 1;
 e = 0.1;
+L = [0 0 1];
 for k=1:np
-    I(:,:,:,k)=isophotes(N(:,:,:,k),u,v,c,e);
+    I(:,:,:,k)=isophotesColor(N(:,:,:,k),u,v,L,taille);
 end
 
 
@@ -83,4 +82,4 @@ end
  % plotBezierSurface3D(B,S)		   % plot de tous les np patches
   
   plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k))
-  plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),I(:,:,:,k))
+  plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k),I(:,:,k))

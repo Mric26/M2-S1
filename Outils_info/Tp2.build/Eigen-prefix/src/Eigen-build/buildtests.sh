@@ -9,13 +9,11 @@ then
   exit 0
 fi
 
-TESTSLIST="rand
-meta
+TESTSLIST="meta
 sizeof
 dynalloc
 nomalloc
 first_aligned
-nullary
 mixingtypes
 packetmath
 unalignedassert
@@ -23,15 +21,13 @@ vectorization_logic
 basicstuff
 linearstructure
 integer_types
+cwiseop
 unalignedcount
 exceptions
 redux
 visitor
 block
 corners
-swap
-resize
-conservative_resize
 product_small
 product_large
 product_extra
@@ -49,7 +45,6 @@ array_for_matrix
 array_replicate
 array_reverse
 ref
-is_same_dense
 triangular
 selfadjoint
 product_selfadjoint
@@ -61,7 +56,6 @@ product_trsolve
 product_mmtr
 product_notemporary
 stable_norm
-permutationmatrices
 bandmatrix
 cholesky
 lu
@@ -81,49 +75,46 @@ real_qz
 eigensolver_generalized_real
 jacobi
 jacobisvd
-bdcsvd
-householder
 geo_orthomethods
+geo_homogeneous
 geo_quaternion
+geo_transformations
 geo_eulerangles
+geo_hyperplane
 geo_parametrizedline
 geo_alignedbox
-geo_hyperplane
-geo_transformations
-geo_homogeneous
 stdvector
 stdvector_overload
 stdlist
 stddeque
-sparse_basic
-sparse_block
+resize
 sparse_vector
+sparse_basic
 sparse_product
-sparse_ref
 sparse_solvers
-sparse_permutations
-simplicial_cholesky
-conjugate_gradient
-bicgstab
-lscg
-sparselu
-sparseqr
 umeyama
+householder
+swap
+conservative_resize
+permutationmatrices
+sparse_permutations
+nullary
 nesting_ops
 zerosized
 dontalign
-evaluators
 sizeoverflow
 prec_inverse_4x4
 vectorwiseop
 special_numbers
-rvalue_types
-dense_storage
-ctorleak
+simplicial_cholesky
+conjugate_gradient
+bicgstab
+sparselu
+sparseqr
 qtvector
+eigen2support
 NonLinearOptimization
 NumericalDiff
-autodiff_scalar
 autodiff
 BVH
 matrix_exponential
@@ -136,20 +127,20 @@ sparse_extra
 openglsupport
 polynomialsolver
 polynomialutils
+kronecker_product
 splines
-incomplete_cholesky
 gmres
 minres
 levenberg_marquardt
-kronecker_product
+bdcsvd
 "
 targets_to_make=`echo "$TESTSLIST" | egrep "$1" | xargs echo`
 
 if [ -n "${EIGEN_MAKE_ARGS:+x}" ]
 then
-  /usr/bin/make $targets_to_make ${EIGEN_MAKE_ARGS}
+  make $targets_to_make ${EIGEN_MAKE_ARGS}
 else
-  /usr/bin/make $targets_to_make 
+  make $targets_to_make
 fi
 exit $?
 

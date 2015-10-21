@@ -11,7 +11,7 @@ BuildDirectory: /home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/Eigen-pre
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: f202-04
+Site: f202-14
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: linux-3.16.0-48-generic-_-4.8.4-sse2-64bit
@@ -21,7 +21,7 @@ IsCDash: TRUE
 CDashVersion: 
 QueryCDashVersion: 
 DropSite: manao.inria.fr
-DropLocation: /CDash/submit.php?project=Eigen
+DropLocation: /CDash/submit.php?project=Eigen3.2
 DropSiteUser: 
 DropSitePassword: 
 DropSiteMode: 
@@ -34,7 +34,7 @@ NightlyStartTime: 00:00:00 UTC
 
 # Commands for the build/test/submit cycle
 ConfigureCommand: "/usr/bin/cmake" "/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/eigen"
-MakeCommand: /usr/bin/cmake --build . --target buildtests --config "${CTEST_CONFIGURATION_TYPE}" -- -i 
+MakeCommand: /usr/bin/make buildtests   -i
 DefaultCTestConfigurationType: Release
 
 # CVS options
