@@ -70,11 +70,10 @@ end
 
 % ------------------------------------
 % Computing Isophotes
-taille = 256;
 c = -1;
 e = 0.1;
 for k=1:np
-    I(:,:,:,k)=isophotesColor(N(:,:,:,k),u,v,c,e,taille);
+    I(:,:,:,k)=isophotes(N(:,:,:,k),u,v,c,e);
 end
 
 
@@ -84,4 +83,4 @@ end
  % plotBezierSurface3D(B,S)		   % plot de tous les np patches
   
   plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k))
-  plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k),I(:,:,k),taille)
+  plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),I(:,:,:,k))
