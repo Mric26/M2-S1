@@ -8,7 +8,9 @@
 class pointsDinterets{
 
 public:
-    QImage *calculpointsDinterets(QImage *image, double alpha);
+
+    QImage *calculpointsDinterets(QImage *image, double alpha);  
+    void tri_insertion(int tableau[], int longueur);
 
 };
 

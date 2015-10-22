@@ -12,7 +12,7 @@ close all, clear all
 % num_n : nombre de normales calcules (pour le calcul des isophotes)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-BezierSurf = load('surface3');  % read control points
+BezierSurf = load('surface2');  % read control points
 %load('teapot'); %loading matrix B
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 num_p=20;                    % nombre de valeurs de parametre en direction u et v
@@ -70,7 +70,7 @@ end
 taille = 256;
 c = 1;
 e = 0.1;
-L = [0 0 1];
+L = [1 1 0];
 for k=1:np
     I(:,:,:,k)=isophotesColor(N(:,:,:,k),u,v,L,taille);
 end
@@ -81,5 +81,5 @@ end
  % plotBezierPatch3D(B(:,:,:,k),S(:,:,:,k)) % plot d'un seul patch k
  % plotBezierSurface3D(B,S)		   % plot de tous les np patches
   
-  plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k))
+  %plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k))
   plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k),I(:,:,k))

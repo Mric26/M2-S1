@@ -650,10 +650,9 @@ void MainWindow::moduleGradient(){
 }
 
 void MainWindow::pointDinteretsf(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        pointsDinterets p;
-//        this->setImage( p.calculpointsDinterets(image, 12), cheminImage);
+        pointsDinterets p;
+        this->setImage( p.calculpointsDinterets(image, 0.04), cheminImage);
     }
 }
 
