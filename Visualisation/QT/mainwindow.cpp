@@ -659,8 +659,8 @@ void MainWindow::pointDinteretsf(){
 void MainWindow::compoConnexe(){
     AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        composantesConnexes cp;
-//        this->setImage( cp.composantesConn(image), cheminImage);
+        composantesConnexes cp;
+        this->setImage( cp.composantesConn(image), cheminImage);
     }
 }
 
