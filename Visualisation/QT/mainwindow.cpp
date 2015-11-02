@@ -664,10 +664,14 @@ void MainWindow::compoConnexe(){
 }
 
 void MainWindow::bords(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        bordsObjets b;
-//        this->setImage( b.bordsO(image), cheminImage);
+        bordsObjets b;
+        vector<int> *v = b.bords8(image);
+        //affichage
+        cout << "Freeman :" << endl;
+        for (int i = 0; i < v->size(); ++i) {
+            cout << v->at(i) << endl;
+        }
     }
 }
 
