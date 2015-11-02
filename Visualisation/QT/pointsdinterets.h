@@ -10,7 +10,18 @@ class pointsDinterets{
 public:
 
     QImage *calculpointsDinterets(QImage *image, double alpha);  
-    void tri_insertion(int tableau[], int longueur);
+
+    struct pointI{
+        int x;
+        int y;
+        QRgb couleur;
+    };
+
+private:
+
+    int partition(std::vector<pointI> &A, int p, int q);
+    void quickSort(std::vector<pointI> &A, int p, int q);   
+    QImage *croixRouge(pointI p, QImage *image);
 
 };
 

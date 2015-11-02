@@ -1,4 +1,7 @@
 #include "pointsdinterets.h"
+#include "seuillage.h"
+
+using namespace std;
 
 QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
@@ -39,22 +42,26 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
             v1 = qRed(ixc->pixel(i,j));
             v2 = qRed(ixy->pixel(i,j));
             v4 = qRed(iyc->pixel(i,j));
-            double CR = v1*v2 - v2*v4;
-            HR = CR - alpha*(v1*v4*v1*v4);
+            double DCR = v1*v4 - v2*v2;
+            HR = DCR - alpha*(v1*v4*v1*v4);
             v1 = qGreen(ixc->pixel(i,j));
             v2 = qGreen(ixy->pixel(i,j));
             v4 = qGreen(iyc->pixel(i,j));
-            double CG = v1*v2 - v2*v4;
-            HG = CG - alpha*(v1*v4*v1*v4);
+            double DCG = v1*v4 - v2*v2;
+            HG = DCG - alpha*(v1*v4*v1*v4);
             v1 = qBlue(ixc->pixel(i,j));
             v2 = qBlue(ixy->pixel(i,j));
             v4 = qBlue(iyc->pixel(i,j));
-            double CB = v1*v2 - v2*v4;
-            HB = CB - alpha*(v1*v4*v1*v4);
+            double DCB = v1*v4 - v2*v2;
+            HB = DCB - alpha*(v1+v4);
 
             nouvelleImage->setPixel(i, j, qRgb(HR,HG,HB) );
         }
     }
+
+//    seuillage s;
+//    nouvelleImage = s.seuil(nouvelleImage, 150);
+//    return nouvelleImage;
 
     //extraction des maxima locaux
     int R, G, B, Rt, Gt, Bt;
@@ -64,50 +71,113 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
             G = qGreen(nouvelleImage->pixel(i,j));
             B = qBlue(nouvelleImage->pixel(i,j));
             //negatif
-            if( (R<0) || (G<0) || (B<0) ){
-                nouvelleImage->setPixel(i, j, qRgb(255,255,255) );
+            if( (R<0) || (G<0) || (B<0) || (i==0) || (j==0) || (i==imWidth-1) || (j==imHeight-1) ){
+                nouvelleImage->setPixel(i, j, qRgb(0,0,0) );
             }
-            //maxima locaux
-            for (int k = -1; k < 1; k++) {
-                for (int l = -1; l < 1; ++l) {
-                    if( (i+k<0) || (i+k>imWidth) || (j+l<0) || (j+l>imHeight) ){
-                    }
-                    else{
-                        Rt = qRed(image->pixel(i+k,j+l));
-                        Gt = qGreen(image->pixel(i+k,j+l));
-                        Bt = qBlue(image->pixel(i+k,j+l));
-                        if( (R<Rt) || (G<Gt) || (B<Bt) ){
-                            nouvelleImage->setPixel(i, j, qRgb(255,255,255) );
+            else{
+                //maxima locaux
+                for (int k = -1; k < 1; k++) {
+                    for (int l = -1; l < 1; ++l) {
+                        if( (i+k<0) || (i+k>imWidth) || (j+l<0) || (j+l>imHeight) ){
+                        }
+                        else{
+                            Rt = qRed(image->pixel(i+k,j+l));
+                            Gt = qGreen(image->pixel(i+k,j+l));
+                            Bt = qBlue(image->pixel(i+k,j+l));
+                            if( (R<Rt) || (G<Gt) || (B<Bt) ){
+                                nouvelleImage->setPixel(i, j, qRgb(0,0,0) );
+                            }
                         }
                     }
                 }
             }
-            //extraction n meilleurs points
-
-            //affichage n points
-
         }
+    }
+
+    //extraction n meilleurs points
+    //mise en vector
+    QRgb couleur;
+    struct pointI p;
+    vector<struct pointI> * v = new vector<struct pointI>;
+    for (int i = 0; i < imWidth; ++i) {
+        for (int j = 0; j < imHeight; ++j) {
+            couleur = nouvelleImage->pixel(i,j);
+            R = qRed(couleur);
+            G = qGreen(couleur);
+            B = qBlue(couleur);
+            if( (R!=0) || (G!=0) || (B!=0) ){
+                p.x = i;
+                p.y = j;
+                p.couleur = couleur;
+                v->push_back(p);
+            }
+        }
+    }
+    //quicksort
+    quickSort(*v, 0, v->size());
+
+    //affichage n points
+    int nbAffichage = 100;
+    for (int q = 0; q < nbAffichage; ++q) {
+        pointI x = (*v)[q];
+        nouvelleImage = croixRouge(x, image);
     }
 
     return nouvelleImage;
 }
 
+QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
 
-void pointsDinterets::tri_insertion(int tableau[],int longueur){
-     int i, memory, compt, marqueur;
-     for(i=1;i<longueur;i++){
-        memory=tableau[i];
-        compt=i-1;
-        do{
-            marqueur=false;
-            if (tableau[compt]>memory){
-                tableau[compt+1]=tableau[compt];
-                compt--;
-                marqueur=true;
-            }
-            if (compt<0) marqueur=false;
-        }
-        while(marqueur);
-        tableau[compt+1]=memory;
+    int imWidth = image->width();
+    int imHeight = image->height();
+    int pos_x = p.x;
+    int pos_y = p.y;
+
+    QRgb color = qRgb(255, 0, 0);
+
+    image->setPixel(pos_x, pos_y, color);
+
+    if( pos_x>=1){
+        image->setPixel(pos_x-1, pos_y, color);
     }
+    if( pos_y>=1){
+        image->setPixel(pos_x, pos_y-1, color);
+    }
+    if( pos_x<imWidth-1){
+        image->setPixel(pos_x+1, pos_y, color);
+    }
+    if( pos_y<imHeight-1){
+        image->setPixel(pos_x, pos_y+1, color);
+    }
+
+    return image;
+
+}
+
+void pointsDinterets::quickSort(vector<struct pointI>& A, int p,int q){
+    int r;
+    if(p<q){
+        r = partition(A, p,q);
+        quickSort(A,p,r);
+        quickSort(A,r+1,q);
+    }
+}
+
+
+int pointsDinterets::partition(vector<struct pointI>& A, int p,int q){
+    int R, R2;
+    pointI x = A[p];
+    R = qRed(x.couleur);
+    int i = p;
+    int j;
+    for(j = p+1; j<q; j++){
+        pointI x2 = A[j];
+        R2 = qRed(x2.couleur);
+        if( R2 <= R){
+            i = i+1;
+            swap(A[i],A[j]);
+        }
+    }
+    swap(A[i],A[p]);
+    return i;
 }
