@@ -619,7 +619,6 @@ void MainWindow::filtreAdaptatiff(){
     if( cheminImage != NULL ){
        filtreAdaptatif f;
        this->setImage( f.filtreAda2(image, 5), cheminImage );
-//       this->setImage( f.filtreAda(image), cheminImage );
     }
 }
 
