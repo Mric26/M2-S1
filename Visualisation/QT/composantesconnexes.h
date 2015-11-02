@@ -5,6 +5,8 @@
 #include <iostream>
 #include <unistd.h>
 
+using namespace std;
+
 class composantesConnexes{
 
 public:
@@ -19,6 +21,7 @@ public:
     noeud& findParent(noeud &n);
     void unionNode(noeud &n1, noeud &n2);
     int compterVoisin(vector< vector<int> > &tab, int i, int j);
+    int mininmumVoisin(vector< vector<int> > &tab, int i, int j);
 
 private:
     int imgWidth;
