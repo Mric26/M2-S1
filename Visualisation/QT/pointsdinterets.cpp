@@ -43,17 +43,17 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
             v2 = qRed(ixy->pixel(i,j));
             v4 = qRed(iyc->pixel(i,j));
             double DCR = v1*v4 - v2*v2;
-            HR = DCR - alpha*(v1*v4*v1*v4);
+            HR = DCR - alpha*(v1+v4*v1+v4);
             v1 = qGreen(ixc->pixel(i,j));
             v2 = qGreen(ixy->pixel(i,j));
             v4 = qGreen(iyc->pixel(i,j));
             double DCG = v1*v4 - v2*v2;
-            HG = DCG - alpha*(v1*v4*v1*v4);
+            HG = DCG - alpha*(v1+v4*v1+v4);
             v1 = qBlue(ixc->pixel(i,j));
             v2 = qBlue(ixy->pixel(i,j));
             v4 = qBlue(iyc->pixel(i,j));
             double DCB = v1*v4 - v2*v2;
-            HB = DCB - alpha*(v1+v4);
+            HB = DCB - alpha*(v1+v4*v1+v4);
 
             nouvelleImage->setPixel(i, j, qRgb(HR,HG,HB) );
         }
@@ -61,7 +61,7 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
 //    seuillage s;
 //    nouvelleImage = s.seuil(nouvelleImage, 150);
-//    return nouvelleImage;
+    return nouvelleImage;
 
     //extraction des maxima locaux
     int R, G, B, Rt, Gt, Bt;
@@ -71,14 +71,15 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
             G = qGreen(nouvelleImage->pixel(i,j));
             B = qBlue(nouvelleImage->pixel(i,j));
             //negatif
-            if( (R<0) || (G<0) || (B<0) || (i==0) || (j==0) || (i==imWidth-1) || (j==imHeight-1) ){
+            if( (R<0) || (G<0) || (B<0) ){
                 nouvelleImage->setPixel(i, j, qRgb(0,0,0) );
             }
             else{
                 //maxima locaux
-                for (int k = -1; k < 1; k++) {
-                    for (int l = -1; l < 1; ++l) {
-                        if( (i+k<0) || (i+k>imWidth) || (j+l<0) || (j+l>imHeight) ){
+                for (int k = -1; k < 2; k++) {
+                    for (int l = -1; l < 2; ++l) {
+                        if( (i+k<0) || (i+k>imWidth-1) || (j+l<0) || (j+l>imHeight-1) ){
+                            //ne fait rien
                         }
                         else{
                             Rt = qRed(image->pixel(i+k,j+l));
