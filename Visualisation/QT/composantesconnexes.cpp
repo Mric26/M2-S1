@@ -1,14 +1,15 @@
 #include "composantesconnexes.h"
+#include <stdlib.h>
 
-
-int composantesConnexes::compterVoisin(vector< vector<int> > &tab, int i, int j) {
+// Compte le nombre de voisin du pixel (i, j)
+int composantesConnexes::compterVoisin(vector< vector<int> > &matrix, int i, int j) {
     int n = 0;
     // Parcours des 8 voisins du pixel
-    for (int k = -1; k <= 1; ++k) {
-        for (int l = -1; l <= 1; ++l) {
+    for (int l = -1; l <= 1; ++l) {
+        for (int k = -1; k <= 1; ++k) {
             if (k != 0 || l != 0) {
                 if (i+k >= 0 && i+k < imgWidth && j+l >= 0 && j+l < imgHeight) {
-                    n += (tab[i+k][j+l] != 0 ? 1 : 0);
+                    n += (matrix[i+k][j+l] != 0 ? 1 : 0);
                 }
             }
         }
@@ -16,15 +17,15 @@ int composantesConnexes::compterVoisin(vector< vector<int> > &tab, int i, int j)
     return n;
 }
 
-int composantesConnexes::mininmumVoisin(vector< vector<int> > &tab, int i, int j) {
-    int mini = 999999999;   // Il n'y aura pas plus de 1 milliard d'objets a compter, faut pas deconner ...
+int composantesConnexes::mininmumVoisin(vector< vector<int> > &matrix, int i, int j) {
+    int mini = 999999999;   // Hypothese : il n'y aura pas plus de 1 milliard d'objets a compter
     // Trouve l'etiquette la plus petite dans le voisinage
     for (int l = -1; l <= 1; ++l) {
         for (int k = -1; k <= 1; ++k) {
             if (k != 0 || l != 0) {
                 if (i+k >= 0 && i+k < imgWidth && j+l >= 0 && j+l < imgHeight) {
-                    if (tab[i+k][j+l] > 0 && tab[i+k][j+l] < mini) {
-                        mini = tab[i+k][j+l];
+                    if (matrix[i+k][j+l] > 0 && matrix[i+k][j+l] < mini) {
+                        mini = matrix[i+k][j+l];
                     }
                 }
             }
@@ -33,118 +34,173 @@ int composantesConnexes::mininmumVoisin(vector< vector<int> > &tab, int i, int j
     return mini;
 }
 
-composantesConnexes::noeud& composantesConnexes::findParent(noeud &nd) {
+
+// Retourne le parent du noeud nd
+composantesConnexes::Noeud& composantesConnexes::findParent(Noeud& nd) {
     if (nd.parent == NULL) {
         return nd;
     }
-    return findParent(*nd.parent);
+    return findParent(*(nd.parent));
 }
 
 // Rattache la composante connexe n2 a n1
-void composantesConnexes::unionNode(composantesConnexes::noeud &n1, composantesConnexes::noeud &n2) {
-    noeud &parent1 = findParent(n1);
-    noeud &parent2 = findParent(n2);
-    parent2.parent = &parent1;
+void composantesConnexes::unionNode(Noeud& n1, Noeud& n2) {
+    Noeud& parent2 = findParent(n2);
+    if (&parent2 == &n2) {
+        n2.parent = &n1;
+    } else {
+        parent2.parent = &n1;
+    }
 }
 
 
+void composantesConnexes::imprime(vector<Noeud> &arbre) {
+    Noeud* parent;
+    for (size_t i = 0; i < arbre.size(); ++i) {
+        parent = &findParent(arbre.at(i));
+        cout << "(" << arbre[i].elem << ")--> " << parent->elem << endl;
+    }
+}
 
-QImage *composantesConnexes::composantesConn( QImage *image ){
+int composantesConnexes::get(vector< vector<int> >& matrice, int x, int y) {
+    if (x >= 0 && x < imgWidth && y >= 0 && y < imgHeight) {
+        return matrice[x][y];
+    }
+    return 0;
+}
 
+QImage *composantesConnexes::composantesConnexe( QImage *image ){
     imgWidth = image->width();
     imgHeight = image->height();
     QImage *res = new QImage(imgWidth, imgHeight, image->format() );
 
-    vector< vector<int> > tab = vector< vector<int> >(imgHeight);
-    for (int j = 0; j < imgHeight; ++j) {
-        tab[j] = std::vector<int>(imgWidth);
+    vector< vector<int> > matrixCC = vector< vector<int> >(imgWidth);
+    for (int x = 0; x < imgWidth; ++x) {
+        matrixCC[x] = vector<int>(imgHeight);
+        for (int y = 0; y < imgHeight; ++y) {
+            matrixCC[x][y] = 0;
+        }
     }
 
-
-    vector<noeud> arbre = vector<noeud>(0);
-    noeud racine;
+    vector<Noeud> arbre = vector<Noeud>();
     int etiquetteConnexe = 0;
-    int n = 0;
-    int r = 0;
 
     // Premiere passe, etiquetage des composantes
-    for (int j = 0; j < imgHeight; ++j) {
-        for (int i = 0; i < imgWidth; ++i) {
+    for (int y = 0; y < imgHeight; ++y) {
+        for (int x = 0; x < imgWidth; ++x) {
 
-            r = qRed(image->pixel(i,j));
+            int r = qRed(image->pixel(x,y));
             // Si le pixel appartient a un objet
             if (r == 255) {
-                n = compterVoisin(tab, i, j);
+                int n = compterVoisin(matrixCC, x, y);
                 if (n == 0) {
                     // Nouvelle composante connexe trouvee
                     etiquetteConnexe++;
-                    tab[i][j] = etiquetteConnexe;
-                    racine.parent = NULL;
-                    racine.elem = tab[i][j];
-                    arbre.push_back(racine);
+                    matrixCC[x][y] = etiquetteConnexe;
+                    arbre.push_back(Noeud(NULL, etiquetteConnexe));
                 } else if (n > 0) {
                     // Etiquetage du pixel avec le voisin le plus petit
-                    tab[i][j] = mininmumVoisin(tab, i, j);
+                    matrixCC[x][y] = mininmumVoisin(matrixCC, x, y);
                     // Trouve les numeros des deux correspondances a faire correspondre
                     int voisin1 = -1;
                     int voisin2 = -1;
-                    for (int l = -1; l <= 1; ++l) {
-                        for (int k = -1; k <= 1; ++k) {
-                            if (k != 0 || l != 0) {
-                                if (i+k >= 0 && i+k < imgWidth && j+l >= 0 && j+l < imgHeight && tab[i+k][j+l] != 0) {
-                                    if (voisin1 == -1) {
-                                        voisin1 = tab[i+k][j+l];
-                                    }
-                                    if (voisin2 == -1 && tab[i+k][j+l] != voisin1) {
-                                        voisin2 = tab[i+k][j+l];
-                                    }
-                                }
-                            }
-                        }
+                    int tab[5];
+                    tab[0] = get(matrixCC,x-1,y-1);
+                    tab[1] = get(matrixCC,x,y-1);
+                    tab[2] = get(matrixCC,x+1,y-1);
+                    tab[3] = get(matrixCC,x-1,y);
+                    tab[4] = -1;
+                    int i = 0;
+                    while (tab[i] == 0) {
+                        i++;
                     }
-                    // Stocker la correspondance si besoin
-//                    cout << "(" << i << "," << j << ") --> " << voisin1 << " | " << voisin2 << endl;
-                    if (voisin1 != -1 && voisin2 != -1) {
+                    voisin1 = tab[i];
+                    i += (i < 4 ? 1 : 0);
+                    while (tab[i] == 0) {
+                        i++;
+                    }
+                    voisin2 = tab[i];
+                    if (x == 72 && y == 38) {
+                        cout << arbre.size() << " ---- " << voisin1 << " | " << voisin2 << endl;
+                    }
+//                    for (int dy = -1; dy <= 1; ++dy) {
+//                        for (int dx = -1; dx <= 1; ++dx) {
+//                            if (dx != 0 || dy != 0) {
+//                                if (x+dx >= 0 && x+dx < imgWidth && y+dy >= 0 && y+dy < imgHeight && matrixCC[x+dx][y+dy] != 0) {
+//                                    if (voisin1 == -1) {
+//                                        voisin1 = matrixCC[x+dx][y+dy];
+//                                    } else if (voisin2 == -1 && matrixCC[x+dx][y+dy] != voisin1) {
+//                                        voisin2 = matrixCC[x+dx][y+dy];
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+                    // Stocke la correspondance s'il y a 2 etiquettes differentes cote a cote
+                    if (voisin1 > 0 && voisin2 > 0) {
                         if (voisin1 > voisin2) {
                             int tmp = voisin1;
                             voisin1 = voisin2;
                             voisin2 = tmp;
                         }
-                        if (&findParent(arbre.at(voisin2-1)) != &findParent(arbre.at(voisin1-1))) {
+                        // Joint les 2 correspondances si elles ne le sont pas deja
+                        Noeud& a = findParent(arbre.at(voisin1-1));
+                        Noeud& b = findParent(arbre.at(voisin2-1));
+                        // Breakpoint
+                        if (a.elem != b.elem) {
                             unionNode(arbre.at(voisin1-1), arbre.at(voisin2-1));
                         }
                     }
+
                 }
             }
 
+            cout << "(" << x << ", " << y << ")" << endl;
         }
     }
 
-    // Seconde passe, re-etiquetage des equivalences (ne sert a rien ...)
-    for (int j = 0; j < imgHeight; ++j) {
-        for (int i = 0; i < imgWidth; ++i) {
-            if (tab[i][j] != 0) {
-//                cout << &arbre.at(tab[i][j]-1) << endl;
-                noeud parent = findParent(arbre.at(tab[i][j]-1));
-                tab[i][j] = parent.elem;
+    // Seconde passe, re-etiquetage des equivalences
+    for (int y = 0; y < imgHeight; ++y) {
+        for (int x = 0; x < imgWidth; ++x) {
+            if (matrixCC[x][y] != 0) {
+                Noeud& parent = findParent(arbre.at(matrixCC[x][y]-1));
+                matrixCC[x][y] = parent.elem;
             }
         }
     }
 
-//    for (int j = 0; j < imgHeight; ++j) {
-//        for (int i = 0; i < imgWidth; ++i) {
-//            cout << tab[i][j] << ", ";
+//    // Affichage
+//    for (unsigned int i = 0; i < arbre.size(); ++i) {
+//        cout << arbre.at(i).elem << endl;
+//    }
+//    cout << "Ma grosse bote" << endl;
+//    for (int y = 0; y < imgHeight; ++y) {
+//        for (int x = 0; x < imgWidth; ++x) {
+//            cout << matrixCC[x][y] << ", ";
 //        }
 //        cout << endl;
 //    }
 
-    for (int j = 0; j < imgHeight; ++j) {
-        for (int i = 0; i < imgWidth; ++i) {
-            if (tab[i][j] > 0) {
-                res->setPixel(i, j, qRgb( 255 * (arbre.at(tab[i][j]-1).elem/((double)etiquetteConnexe)), 0, 255 - 255 * (arbre.at(tab[i][j]-1).elem/((double)etiquetteConnexe))));
+    cout << "Calcul res" << endl;
+
+    for (int y = 0; y < imgHeight; ++y) {
+        for (int x = 0; x < imgWidth; ++x) {
+            if (matrixCC[x][y] != 0) {
+                srand(matrixCC[x][y]);
+                //res->setPixel(x, y, qRgb( 255 * (matrixCC[x][y]/((double)etiquetteConnexe)), 0, 0));
+                res->setPixel(x, y, qRgb(rand()%256, rand()%256, rand()%256 ));
+            } else {
+                res->setPixel(x, y, qRgb(0, 0, 0));
             }
         }
     }
+
     return res;
 }
 
+
+composantesConnexes::Noeud::Noeud(composantesConnexes::Noeud *parent, int elem)
+{
+    this->parent = parent;
+    this->elem = elem;
+}
