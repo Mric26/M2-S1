@@ -11,7 +11,7 @@ class composantesConnexes{
 
     class Noeud {
     public:
-        Noeud(Noeud* parent, int elem);
+        Noeud(int elem);
         Noeud *parent;
         int elem;
     };
@@ -28,8 +28,8 @@ public:
     void imprime(vector<Noeud> &arbre);
     Noeud& findParent(Noeud& n);
     void unionNode(Noeud& n1, Noeud& n2);
-    int compterVoisin(vector< vector<int> > &tab, int i, int j);
-    int mininmumVoisin(vector< vector<int> > &tab, int i, int j);
+    int compterVoisin(vector< vector<int> > &matrix, int x, int y);
+    int mininmumVoisin(vector< vector<int> > &matrix, int x, int y);
     int get(vector< vector<int> >& matrice, int x, int y);
 
 private:
