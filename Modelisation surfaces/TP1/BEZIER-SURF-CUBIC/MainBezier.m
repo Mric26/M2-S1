@@ -82,4 +82,10 @@ end
  % plotBezierSurface3D(B,S)		   % plot de tous les np patches
   
   %plotBezierSurfacePerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k))
-  plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k),I(:,:,k))
+  %plotBezierIsoPerso(B(:,:,:,k),S(:,:,:,k),N(:,:,:,k),I(:,:,k))
+  
+% ------------------------------------
+% Visualisation des courbures
+for k=1:np
+    plotCourbure(B(:,:,:,k))
+end  
