@@ -9,19 +9,28 @@ using namespace std;
 
 class composantesConnexes{
 
-public:
-
-    QImage *composantesConn(QImage *image);
-
-    struct noeud {
-        noeud *parent;
+    class Noeud {
+    public:
+        Noeud(Noeud* parent, int elem);
+        Noeud *parent;
         int elem;
     };
 
-    noeud& findParent(noeud &n);
-    void unionNode(noeud &n1, noeud &n2);
+public:
+
+    QImage *composantesConnexe(QImage *image);
+
+//    struct noeud {
+//        noeud *parent;
+//        int elem;
+//    };
+
+    void imprime(vector<Noeud> &arbre);
+    Noeud& findParent(Noeud& n);
+    void unionNode(Noeud& n1, Noeud& n2);
     int compterVoisin(vector< vector<int> > &tab, int i, int j);
     int mininmumVoisin(vector< vector<int> > &tab, int i, int j);
+    int get(vector< vector<int> >& matrice, int x, int y);
 
 private:
     int imgWidth;

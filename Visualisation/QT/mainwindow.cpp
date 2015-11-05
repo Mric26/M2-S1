@@ -658,7 +658,7 @@ void MainWindow::pointDinteretsf(){
 void MainWindow::compoConnexe(){
     if( cheminImage != NULL ){
         composantesConnexes cp;
-        this->setImage( cp.composantesConn(image), cheminImage);
+        this->setImage( cp.composantesConnexe(image), cheminImage);
     }
 }
 
