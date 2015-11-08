@@ -9,6 +9,7 @@ class kmoyenne
 public:
     kmoyenne();
     QImage* kMoyenne(QImage *image, unsigned int k);
+
 };
 
 #endif // KMOYENNE_H

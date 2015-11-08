@@ -28,19 +28,20 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
 
     // Generation pseudo-aleatoire des centres
     vector<QRgb> cluster = vector<QRgb>(nb);
-    for (int i = 0; i < 4; ++i) {
+    vector< vector<int> > newCluster = vector< vector<int> >(nb);
+    vector<int> nbCluster = vector<int>(nb);
+    for (int i = 0; i < nb; ++i) {
         srand(i+1);
         cluster[i] = qRgb(rand()%255, rand()%255, rand()%255);
+        newCluster[i] = vector<int>(3);
     }
-    vector<QRgb> newCluster = vector<QRgb>(nb);
-    vector<int> nbCluster = vector<int>(nb);
 
     //double epsi = 0.1;
     int d, mini;
     QRgb color;
 
     // 4 iterations seront faites
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 1; ++i) {
 
         // Attribution des clusters a chaque pixel
         for (int x = 0; x < imgWidth; ++x) {
@@ -57,6 +58,7 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
                     if (d < mini) {
                         mini = d;
                         matrixIndex[x][y] = k;
+                        //cout << k << endl;
                     }
                 }
 
@@ -64,34 +66,40 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
         }
 
         for (unsigned int k = 0; k < nb; ++k) {
-            newCluster[k] = qRgb(0,0,0);
+            newCluster[k][0] = 0;
+            newCluster[k][1] = 0;
+            newCluster[k][2] = 0;
             nbCluster[k] = 0;
         }
 
         // Calcul des nouveaux clusters
         for (int x = 0; x < imgWidth; ++x) {
             for (int y = 0; y < imgHeight; ++y) {
-                newCluster[matrixIndex[x][y]] += image->pixel(x,y);
+                newCluster[matrixIndex[x][y]][0] += qRed(image->pixel(x,y));
+                newCluster[matrixIndex[x][y]][1] += qGreen(image->pixel(x,y));
+                newCluster[matrixIndex[x][y]][2] += qBlue(image->pixel(x,y));
                 nbCluster[matrixIndex[x][y]]++;
             }
         }
 
         for (unsigned int k = 0; k < nb; ++k) {
-            int r = qRed(newCluster[k]) / nbCluster[k];
-            int g = qGreen(newCluster[k]) / nbCluster[k];
-            int b = qBlue(newCluster[k]) / nbCluster[k];
-            newCluster[k] = qRgb(r,g,b);
+            if (nbCluster[k] != 0) {
+                newCluster[k][0] /= nbCluster[k];
+                newCluster[k][1] /= nbCluster[k];
+                newCluster[k][2] /= nbCluster[k];
+            }
         }
 
         // Copie des nouveaux cluster
         for (unsigned int k = 0; k < nb; ++k) {
-            cluster[k] = newCluster[k];
+            cluster[k] = qRgb(newCluster[k][0], newCluster[k][1], newCluster[k][2]);
         }
     }
 
     // Calcul de l'image resultante
     for (int x = 0; x < imgWidth; ++x) {
         for (int y = 0; y < imgHeight; ++y) {
+            //cout << cluster[matrixIndex[x][y]] << endl;
             res->setPixel(x, y, cluster[matrixIndex[x][y]]);
         }
     }

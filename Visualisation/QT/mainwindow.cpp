@@ -677,8 +677,8 @@ void MainWindow::bords(){
 
 void MainWindow::kMoyenne(){
     if( cheminImage != NULL ){
-        kmoyenne kmean;
-        this->setImage( kmean.kMoyenne(image, 4), cheminImage);
+        kmoyenne filtre;
+        this->setImage( filtre.kMoyenne(image, 10), cheminImage);
     }
 }
 
