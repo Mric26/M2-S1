@@ -9,7 +9,7 @@ kmoyenne::kmoyenne(){
 }
 
 int distance(int r1, int g1, int b1, int r2, int g2, int b2) {
-    return (r1*r2 + g1*g2 + b1*b2);
+    return ((r1-r2)*(r1-r2) + (g1-g2)*(g1-g2) + (b1-b2)*(b1-b2));
 }
 
 QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
@@ -30,24 +30,29 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
     vector<QRgb> cluster = vector<QRgb>(nb);
     vector< vector<int> > newCluster = vector< vector<int> >(nb);
     vector<int> nbCluster = vector<int>(nb);
-    for (int i = 0; i < nb; ++i) {
-        srand(i+1);
+    srand(time(NULL));
+    for (unsigned int i = 0; i < nb; ++i) {
         cluster[i] = qRgb(rand()%255, rand()%255, rand()%255);
         newCluster[i] = vector<int>(3);
     }
+    // initialisation manuelle pour kmoyenne.png avec nb = 4
+//    cluster[0] = qRgb(19, 95, 164);
+//    cluster[1] = qRgb(67, 127, 183);
+//    cluster[2] = qRgb(185, 176, 136);
+//    cluster[3] = qRgb(85, 78, 54);
 
     //double epsi = 0.1;
     int d, mini;
     QRgb color;
 
     // 4 iterations seront faites
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < 4; ++i) {
 
         // Attribution des clusters a chaque pixel
-        for (int x = 0; x < imgWidth; ++x) {
-            for (int y = 0; y < imgHeight; ++y) {
+        for (int y = 0; y < imgHeight; ++y) {
+            for (int x = 0; x < imgWidth; ++x) {
 
-                color = image->pixel(x, y);
+                color = image->pixel(x,y);
                 int r = qRed(color);
                 int g = qGreen(color);
                 int b = qBlue(color);
@@ -58,7 +63,6 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
                     if (d < mini) {
                         mini = d;
                         matrixIndex[x][y] = k;
-                        //cout << k << endl;
                     }
                 }
 
