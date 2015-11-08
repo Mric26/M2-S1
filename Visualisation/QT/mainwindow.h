@@ -30,6 +30,7 @@
 #include "imagegradient.h"
 #include "seuillage.h"
 #include "negatif.h"
+#include "kmoyenne.h"
 
 namespace Ui {
 class MainWindow;
@@ -127,7 +128,8 @@ public slots:
     void moduleGradient();
     void pointDinteretsf();
     void compoConnexe();
-    void bords();  
+    void bords();
+    void kMoyenne();
     void negatifslot();
     void seuillageSlot();
 
