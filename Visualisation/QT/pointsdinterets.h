@@ -14,14 +14,15 @@ public:
     struct pointI{
         int x;
         int y;
-        QRgb couleur;
+        int val;
     };
 
 private:
 
     int partition(std::vector<pointI> &A, int p, int q);
     void quickSort(std::vector<pointI> &A, int p, int q);   
-    QImage *croixRouge(pointI p, QImage *image);
+    QImage *croixRouge(pointI p, QImage *image);   
+    int **ConstructionMatrice(int n, int p);
 
 };
 

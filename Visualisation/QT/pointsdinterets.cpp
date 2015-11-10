@@ -1,5 +1,6 @@
 #include "pointsdinterets.h"
 #include "seuillage.h"
+#include "boost/numeric/ublas/matrix.hpp"
 
 using namespace std;
 
@@ -8,71 +9,51 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
     int imWidth = image->width();
     int imHeight = image->height();
 
-    QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
+    boost::numeric::ublas::matrix<int> tabxc(imWidth,imHeight);
+    boost::numeric::ublas::matrix<int> tabyc(imWidth,imHeight);
+    boost::numeric::ublas::matrix<int> tabxy(imWidth,imHeight);
+    boost::numeric::ublas::matrix<int> harris(imWidth,imHeight);
+
+    //copie image
+    QImage *nouvelleImage = new QImage(*image);
 
     //calculs preliminaires des matrices
     Convolution c;
     QImage *ix = c.gradientX(image);
     QImage *iy = c.gradientY(image);
-    QImage *ixc = new QImage(imWidth, imHeight, image->format() );
-    QImage *iyc = new QImage(imWidth, imHeight, image->format() );
-    QImage *ixy = new QImage(imWidth, imHeight, image->format() );
-    int R1, R2, G1, G2, B1, B2;
+    int R1, R2;
 
     for (int i = 0; i < imWidth-1; ++i) {
         for (int j = 0; j < imHeight-1; ++j) {
             R1 = qRed(ix->pixel(i,j));
-            G1 = qGreen(ix->pixel(i,j));
-            B1 = qBlue(ix->pixel(i,j));
-            ixc->setPixel(i, j, qRgb(R1*R1,G1*G1,B1*B1) );
-
             R2 = qRed(iy->pixel(i,j));
-            G2 = qGreen(iy->pixel(i,j));
-            B2 = qBlue(iy->pixel(i,j));
-            iyc->setPixel(i, j, qRgb(R2*R2,G2*G2,B2*B2) );
 
-            ixy->setPixel(i, j, qRgb(R1*R2,G1*G2,B1*B2) );
+            tabxc(i,j) = R1 * R1;
+            tabyc(i,j) = R2 * R2;
+            tabxy(i,j) = R1 * R2;
         }
     }
 
     //fonction de harris
     for (int i = 0; i < imWidth-1; ++i) {
         for (int j = 0; j < imHeight-1; ++j) {
-            double v1, v2, v4, HR, HG, HB;
-            v1 = qRed(ixc->pixel(i,j));
-            v2 = qRed(ixy->pixel(i,j));
-            v4 = qRed(iyc->pixel(i,j));
-            double DCR = v1*v4 - v2*v2;
-            HR = DCR - alpha*(v1+v4*v1+v4);
-            v1 = qGreen(ixc->pixel(i,j));
-            v2 = qGreen(ixy->pixel(i,j));
-            v4 = qGreen(iyc->pixel(i,j));
-            double DCG = v1*v4 - v2*v2;
-            HG = DCG - alpha*(v1+v4*v1+v4);
-            v1 = qBlue(ixc->pixel(i,j));
-            v2 = qBlue(ixy->pixel(i,j));
-            v4 = qBlue(iyc->pixel(i,j));
-            double DCB = v1*v4 - v2*v2;
-            HB = DCB - alpha*(v1+v4*v1+v4);
-
-            nouvelleImage->setPixel(i, j, qRgb(HR,HG,HB) );
+            double v1, v2, v4, D;
+            v1 = tabxc(i,j);
+            v2 = tabxy(i,j);
+            v4 = tabyc(i,j);
+            D = v1*v2 - v4;
+            harris(i,j) = D*D - alpha*(v1+v2*v1+v2);
         }
     }
 
-//    seuillage s;
-//    nouvelleImage = s.seuil(nouvelleImage, 150);
-    return nouvelleImage;
-
     //extraction des maxima locaux
-    int R, G, B, Rt, Gt, Bt;
+    int V, Vt;
     for (int i = 0; i < imWidth; ++i) {
         for (int j = 0; j < imHeight; ++j) {
-            R = qRed(nouvelleImage->pixel(i,j));
-            G = qGreen(nouvelleImage->pixel(i,j));
-            B = qBlue(nouvelleImage->pixel(i,j));
+            V = harris(i,j);
             //negatif
-            if( (R<0) || (G<0) || (B<0) ){
-                nouvelleImage->setPixel(i, j, qRgb(0,0,0) );
+            if( V<0 ){
+                harris(i,j) = 0;
             }
             else{
                 //maxima locaux
@@ -82,11 +63,9 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
                             //ne fait rien
                         }
                         else{
-                            Rt = qRed(image->pixel(i+k,j+l));
-                            Gt = qGreen(image->pixel(i+k,j+l));
-                            Bt = qBlue(image->pixel(i+k,j+l));
-                            if( (R<Rt) || (G<Gt) || (B<Bt) ){
-                                nouvelleImage->setPixel(i, j, qRgb(0,0,0) );
+                            Vt = harris(i+k,j+l);
+                            if( V<Vt ){
+                                harris(i,j) = 0;
                             }
                         }
                     }
@@ -97,31 +76,35 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
     //extraction n meilleurs points
     //mise en vector
-    QRgb couleur;
+    int vh;
     struct pointI p;
     vector<struct pointI> * v = new vector<struct pointI>;
     for (int i = 0; i < imWidth; ++i) {
         for (int j = 0; j < imHeight; ++j) {
-            couleur = nouvelleImage->pixel(i,j);
-            R = qRed(couleur);
-            G = qGreen(couleur);
-            B = qBlue(couleur);
-            if( (R!=0) || (G!=0) || (B!=0) ){
+            vh = harris(i,j);
+            if( vh != 0 ){
                 p.x = i;
                 p.y = j;
-                p.couleur = couleur;
+                p.val = vh;
                 v->push_back(p);
             }
         }
     }
+
     //quicksort
     quickSort(*v, 0, v->size());
 
     //affichage n points
-    int nbAffichage = 100;
+    int nbAffichage;
+    if( v->size() > 50 ){
+        nbAffichage = 50;
+    }
+    else{
+        nbAffichage = v->size();
+    }
     for (int q = 0; q < nbAffichage; ++q) {
         pointI x = (*v)[q];
-        nouvelleImage = croixRouge(x, image);
+        nouvelleImage = croixRouge(x, nouvelleImage);
     }
 
     return nouvelleImage;
@@ -133,7 +116,7 @@ QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
     int imHeight = image->height();
     int pos_x = p.x;
     int pos_y = p.y;
-
+    cout << "( " << pos_x << " ; " << pos_y << " )" << endl;
     QRgb color = qRgb(255, 0, 0);
 
     image->setPixel(pos_x, pos_y, color);
@@ -166,15 +149,15 @@ void pointsDinterets::quickSort(vector<struct pointI>& A, int p,int q){
 
 
 int pointsDinterets::partition(vector<struct pointI>& A, int p,int q){
-    int R, R2;
+    int v, v2;
     pointI x = A[p];
-    R = qRed(x.couleur);
+    v = x.val;
     int i = p;
     int j;
     for(j = p+1; j<q; j++){
         pointI x2 = A[j];
-        R2 = qRed(x2.couleur);
-        if( R2 <= R){
+        v2 = x2.val;
+        if( v2 <= v){
             i = i+1;
             swap(A[i],A[j]);
         }

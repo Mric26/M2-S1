@@ -12,7 +12,7 @@ close all, clear all
 % num_n : nombre de normales calcules (pour le calcul des isophotes)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-BezierSurf = load('surface2');  % read control points
+BezierSurf = load('surface3');  % read control points
 %load('teapot'); %loading matrix B
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 num_p=20;                    % nombre de valeurs de parametre en direction u et v
@@ -87,5 +87,5 @@ end
 % ------------------------------------
 % Visualisation des courbures
 for k=1:np
-    plotCourbure(B(:,:,:,k))
+    plotCourbure(S(:,:,:,k))
 end  

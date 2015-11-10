@@ -176,15 +176,15 @@ QImage *Convolution::gradientX(QImage *image){
         sobelX[i] = new float[3];
     }
 
-    sobelX[0][0] = 1.0/4.0;
+    sobelX[0][0] = -1.0/4.0;
     sobelX[0][1] = 0.0/4.0;
-    sobelX[0][2] = -1.0/4.0;
-    sobelX[1][0] = 2.0/4.0;
+    sobelX[0][2] = 1.0/4.0;
+    sobelX[1][0] = -2.0/4.0;
     sobelX[1][1] = 0.0/4.0;
-    sobelX[1][2] = -2.0/4.0;
-    sobelX[2][0] = 1.0/4.0;
+    sobelX[1][2] = 2.0/4.0;
+    sobelX[2][0] = -1.0/4.0;
     sobelX[2][1] = 0.0/4.0;
-    sobelX[2][2] = -1.0/4.0;
+    sobelX[2][2] = 1.0/4.0;
 
     return conv(image,sobelX,3);
 }
