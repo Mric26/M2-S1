@@ -17,11 +17,16 @@ public:
     QImage *gradientY(QImage *image);
     QImage *filtreMedian(QImage *image,int tailleVoisinage);
 
-private:
     float **genererBinomial(float **matrice,  int tailleVoulue, int tailleActuelle);
     float **genererBinomial(int tailleVoulue);
     float **genererMoy(int tailleVoulue);
     float **appliquerFacteur(float **matrice, int taille);
+
+private:
+    QImage *gradientY1(QImage *image);
+    QImage *gradientY2(QImage *image);
+    QImage *gradientX1(QImage *image);
+    QImage *gradientX2(QImage *image);
 };
 
 #endif // CONVOLUTION_H

@@ -8,6 +8,7 @@ vector<int> *bordsObjets::bords8( QImage *image ){
     QPoint * origine = find_Origine(image);
     QPoint * second = new QPoint(0,0);
     QPoint * courant = origine;
+    QPoint * temp;
 
     int dir = 4;
     int maj[8] = {6,6,0,0,2,2,4,4};
@@ -16,23 +17,25 @@ vector<int> *bordsObjets::bords8( QImage *image ){
     bool second_vu = false;
 
     //parcours de la forme
-    while( !premier_vu && !second_vu ){
+    while( !premier_vu || !second_vu ){
 
         //recherche point suivant
-        courant = point_suivant( courant, dir );
-        while( pixel_bord(courant, image) == false ){
+        temp = point_suivant( courant, dir );
+        while( pixel_bord(temp, image) == false ){
             dir = (dir+1) % 8;
-            courant = point_suivant( courant, dir );
+            temp = point_suivant( courant, dir );
         }
+        courant = temp;
 
         //conditions d'arrêt
-        if( (second->x()==0) && (second->y()==0) ){
-            second = courant;
+        if( second->isNull() ){
+            second->setX(courant->x());
+            second->setY(courant->y());
         }
-        if( !premier_vu && (courant == origine) ){
+        if( !premier_vu && (courant->x() == origine->x()) && (courant->y() == origine->y()) ){
             premier_vu = true;
         }
-        if( premier_vu && (courant == second) ){
+        if( premier_vu && (courant->x() == second->x()) && (courant->y() == second->y()) ){
             second_vu = true;
         }
 
@@ -41,7 +44,6 @@ vector<int> *bordsObjets::bords8( QImage *image ){
             v->push_back(dir);
         }
         dir = maj[dir];
-
     }
 
     //resultat
@@ -49,12 +51,12 @@ vector<int> *bordsObjets::bords8( QImage *image ){
 }
 
 bool bordsObjets::pixel_bord( QPoint *p, QImage *image){
-    if( (qRed(image->pixel(p->x()+1,p->y()))== 0) || (qRed(image->pixel(p->x(),p->y()+1))== 0) || (qRed(image->pixel(p->x()-1,p->y()))== 0) || (qRed(image->pixel(p->x(),p->y()-1))== 0) ){
-        return true;
+    if( qRed(image->pixel(p->x(),p->y()))== 255 ){
+            if( (qRed(image->pixel(p->x()+1,p->y()))== 0) || (qRed(image->pixel(p->x(),p->y()+1))== 0) || (qRed(image->pixel(p->x()-1,p->y()))== 0) || (qRed(image->pixel(p->x(),p->y()-1))== 0) ){
+                return true;
+            }
     }
-    else{
-        return false;
-    }
+    return false;
 }
 
 QPoint * bordsObjets::point_suivant( QPoint *p, int dir ){
@@ -68,25 +70,25 @@ QPoint * bordsObjets::point_suivant( QPoint *p, int dir ){
         return new QPoint( p->x()+1, p->y() );
     }
     if( dir == 1){
-        return new QPoint( p->x()+1, p->y()+1 );
+        return new QPoint( p->x()+1, p->y()-1 );
     }
     if( dir == 2){
-        return new QPoint( p->x(), p->y()+1 );
+        return new QPoint( p->x(), p->y()-1 );
     }
     if( dir == 3){
-        return new QPoint( p->x()-1, p->y()+1 );
+        return new QPoint( p->x()-1, p->y()-1 );
     }
     if( dir == 4){
         return new QPoint( p->x()-1, p->y() );
     }
     if( dir == 5){
-        return new QPoint( p->x()-1, p->y()-1 );
+        return new QPoint( p->x()-1, p->y()+1 );
     }
     if( dir == 6){
-        return new QPoint( p->x(), p->y()-1 );
+        return new QPoint( p->x(), p->y()+1 );
     }
     if( dir == 7){
-        return new QPoint( p->x()+1, p->y()-1 );
+        return new QPoint( p->x()+1, p->y()+1 );
     }
 
 }

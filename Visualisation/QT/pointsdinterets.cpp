@@ -1,18 +1,19 @@
 #include "pointsdinterets.h"
 #include "seuillage.h"
-#include "boost/numeric/ublas/matrix.hpp"
+#include "convolution.h"
 
 using namespace std;
+using namespace boost::numeric::ublas;
 
 QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
     int imWidth = image->width();
     int imHeight = image->height();
 
-    boost::numeric::ublas::matrix<int> tabxc(imWidth,imHeight);
-    boost::numeric::ublas::matrix<int> tabyc(imWidth,imHeight);
-    boost::numeric::ublas::matrix<int> tabxy(imWidth,imHeight);
-    boost::numeric::ublas::matrix<int> harris(imWidth,imHeight);
+    matrix<double> tabxc(imWidth,imHeight);
+    matrix<double> tabyc(imWidth,imHeight);
+    matrix<double> tabxy(imWidth,imHeight);
+    matrix<double> harris(imWidth,imHeight);
 
     //copie image
     QImage *nouvelleImage = new QImage(*image);
@@ -21,7 +22,7 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
     Convolution c;
     QImage *ix = c.gradientX(image);
     QImage *iy = c.gradientY(image);
-    int R1, R2;
+    double R1, R2;
 
     for (int i = 0; i < imWidth-1; ++i) {
         for (int j = 0; j < imHeight-1; ++j) {
@@ -34,55 +35,64 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
         }
     }
 
+    //lissage
+//    tabxc = lissage(tabxc);
+//    tabyc = lissage(tabyc);
+//    tabxy = lissage(tabxy);
+
     //fonction de harris
     for (int i = 0; i < imWidth-1; ++i) {
         for (int j = 0; j < imHeight-1; ++j) {
-            double v1, v2, v4, D;
-            v1 = tabxc(i,j);
-            v2 = tabxy(i,j);
-            v4 = tabyc(i,j);
-            D = v1*v2 - v4;
-            harris(i,j) = D*D - alpha*(v1+v2*v1+v2);
+            double A, B, C, D;
+            A = tabxc(i,j);
+            B = tabyc(i,j);
+            C = tabxy(i,j);
+            D = (A*B) - C;
+            harris(i,j) = (D*D) - (alpha*((A+B)*(A+B)));
         }
     }
 
-    //extraction des maxima locaux
-    int V, Vt;
-    for (int i = 0; i < imWidth; ++i) {
-        for (int j = 0; j < imHeight; ++j) {
-            V = harris(i,j);
-            //negatif
-            if( V<0 ){
-                harris(i,j) = 0;
-            }
-            else{
-                //maxima locaux
-                for (int k = -1; k < 2; k++) {
-                    for (int l = -1; l < 2; ++l) {
-                        if( (i+k<0) || (i+k>imWidth-1) || (j+l<0) || (j+l>imHeight-1) ){
-                            //ne fait rien
-                        }
-                        else{
-                            Vt = harris(i+k,j+l);
-                            if( V<Vt ){
-                                harris(i,j) = 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    harris = seuillage(harris);
+
+//    return matrixToQimage(image, harris);
+
+//    //extraction des maxima locaux
+//    double V, Vt;
+//    for (int i = 0; i < imWidth; ++i) {
+//        for (int j = 0; j < imHeight; ++j) {
+//            V = harris(i,j);
+//            //negatif
+//            if( V<=0 ){
+//                harris(i,j) = 0;
+//            }
+//            else{
+//                //maxima locaux
+//                for (int k = -1; k < 2; k++) {
+//                    for (int l = -1; l < 2; ++l) {
+//                        if( (i+k<0) || (i+k>imWidth-1) || (j+l<0) || (j+l>imHeight-1) || ((k==0)&&(l==0)) ){
+//                            //ne fait rien
+//                        }
+//                        else{
+//                            Vt = harris(i+k,j+l);
+//                            if( V<Vt ){
+//                                harris(i,j) = 0;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     //extraction n meilleurs points
     //mise en vector
-    int vh;
-    struct pointI p;
-    vector<struct pointI> * v = new vector<struct pointI>;
+    double vh;
+    std::vector<struct pointI> * v = new std::vector<struct pointI>;
     for (int i = 0; i < imWidth; ++i) {
         for (int j = 0; j < imHeight; ++j) {
             vh = harris(i,j);
             if( vh != 0 ){
+                struct pointI p;
                 p.x = i;
                 p.y = j;
                 p.val = vh;
@@ -96,13 +106,13 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
     //affichage n points
     int nbAffichage;
-    if( v->size() > 50 ){
-        nbAffichage = 50;
+    if( v->size() > 250 ){
+        nbAffichage = 250;
     }
     else{
         nbAffichage = v->size();
     }
-    for (int q = 0; q < nbAffichage; ++q) {
+    for (int q = v->size(); q > v->size()-nbAffichage; --q) {
         pointI x = (*v)[q];
         nouvelleImage = croixRouge(x, nouvelleImage);
     }
@@ -116,7 +126,7 @@ QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
     int imHeight = image->height();
     int pos_x = p.x;
     int pos_y = p.y;
-    cout << "( " << pos_x << " ; " << pos_y << " )" << endl;
+//    cout << "( " << pos_x << " ; " << pos_y << " )" << endl;
     QRgb color = qRgb(255, 0, 0);
 
     image->setPixel(pos_x, pos_y, color);
@@ -135,10 +145,9 @@ QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
     }
 
     return image;
-
 }
 
-void pointsDinterets::quickSort(vector<struct pointI>& A, int p,int q){
+void pointsDinterets::quickSort(std::vector<struct pointI>& A, int p,int q){
     int r;
     if(p<q){
         r = partition(A, p,q);
@@ -148,8 +157,8 @@ void pointsDinterets::quickSort(vector<struct pointI>& A, int p,int q){
 }
 
 
-int pointsDinterets::partition(vector<struct pointI>& A, int p,int q){
-    int v, v2;
+int pointsDinterets::partition(std::vector<struct pointI>& A, int p,int q){
+    double v, v2;
     pointI x = A[p];
     v = x.val;
     int i = p;
@@ -164,4 +173,78 @@ int pointsDinterets::partition(vector<struct pointI>& A, int p,int q){
     }
     swap(A[i],A[p]);
     return i;
+}
+
+matrix<double> pointsDinterets::lissage( matrix<double> tab){
+    int largeur = tab.size1();
+    int hauteur = tab.size2();
+    matrix<double> res(largeur,hauteur);
+
+    int taille = 3;
+    Convolution conv;
+    float ** noyau = conv.genererBinomial(taille);
+    int l = (taille-1)/2;
+    int c = (taille-1)/2;
+
+    double val = 0;
+    double temp = 0;
+
+    for (int i = 0; i < largeur; ++i) {
+        for (int j = 0; j < hauteur; ++j) {
+                val = 0;
+                temp = 0;
+                for (int m = -l; m < l+1; ++m) {
+                    for (int n = -c; n < c+1; ++n) {
+                        if (i-m > -1 && j-n > -1 && i-m < largeur && j-n < hauteur) {
+                            temp = tab(i-m,j-n);
+                        }else {
+                            temp = tab(i,j);
+                        }
+                         val = val + noyau[m+c][n+l] * temp;
+                    }
+                }
+                res(i,j) = int(val+0.5);
+            }
+    }
+    return res;
+}
+
+matrix<double> pointsDinterets::seuillage( matrix<double> tab){
+    int largeur = tab.size1();
+    int hauteur = tab.size2();
+    matrix<double> res(largeur,hauteur);
+
+    for (int i = 0; i < largeur; ++i) {
+        for (int j = 0; j < hauteur; ++j) {
+            if( tab(i,j) > 1000000000 ){
+                res(i,j) = tab(i,j);
+            }
+            else{
+                res(i,j) = 0;
+            }
+        }
+    }
+
+    return res;
+}
+
+QImage * pointsDinterets::matrixToQimage(QImage* image, matrix<double> tab){
+    int imWidth = image->width();
+    int imHeight = image->height();
+
+    QImage *nouvelleImage = new QImage(imWidth, imHeight, image->format() );
+
+    for (int i = 0; i < imWidth-1; ++i) {
+        for (int j = 0; j < imHeight-1; ++j) {
+            double v = tab(i,j);
+            if( v > 255){
+                v = 255;
+            }
+            else if( v < 0 ){
+                v = 0;
+            }
+            nouvelleImage->setPixel(i, j, qRgb(v,v,v) );
+        }
+    }
+    return nouvelleImage;
 }
