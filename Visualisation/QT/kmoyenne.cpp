@@ -30,6 +30,7 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
     vector<QRgb> cluster = vector<QRgb>(nb);
     vector< vector<int> > newCluster = vector< vector<int> >(nb);
     vector<int> nbCluster = vector<int>(nb);
+
     srand(time(NULL));
     for (unsigned int i = 0; i < nb; ++i) {
         cluster[i] = qRgb(rand()%255, rand()%255, rand()%255);

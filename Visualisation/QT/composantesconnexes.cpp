@@ -2,6 +2,8 @@
 #include <limits.h>
 #include <stdlib.h>
 
+typedef vector< vector<int> > picture;
+
 // Compte le nombre de voisin du pixel (i, j)
 int composantesConnexes::compterVoisin(vector< vector<int> > &matrix, int i, int j) {
     int n = 0;
@@ -55,15 +57,9 @@ int composantesConnexes::get(vector< vector<int> >& matrice, int x, int y) {
     return 0;
 }
 
-QImage *composantesConnexes::composantesConnexe( QImage *image ){
-    imgWidth = image->width();
-    imgHeight = image->height();
-    QImage *res = new QImage(imgWidth, imgHeight, image->format() );
-
-    vector< vector<int> > matrixCC = vector< vector<int> >(imgWidth);
-    for (int x = 0; x < imgWidth; ++x) {
-        matrixCC[x] = vector<int>(imgHeight);
-        for (int y = 0; y < imgHeight; ++y) {
+void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matrixCC) {
+    for (unsigned int x = 0; x < matrixCC.size(); ++x) {
+        for (unsigned int y = 0; y < matrixCC[x].size(); ++y) {
             matrixCC[x][y] = 0;
         }
     }
@@ -140,6 +136,79 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
             }
         }
     }
+
+    // Extraction de chaque composante connexe
+    // Boundaries = indique le domaine de la composante n°i
+//    vector< frame* > boundaries = vector< frame* >(etiquetteConnexe-1);
+//    frame* b = NULL;
+//    for (unsigned int i = 0; i < boundaries.size(); ++i) {
+//        b = new frame;
+//        b->x1 = INT_MAX;
+//        b->y1 = INT_MAX;
+//        b->x2 = INT_MIN;
+//        b->y2 = INT_MIN;
+//        boundaries[i] = b;
+//    }
+
+//    // Trouve le rectangle englobant de chaque composante
+//    for (int y = 0; y < imgHeight; ++y) {
+//        for (int x = 0; x < imgWidth; ++x) {
+
+//            if (matrixCC[x][y] != 0) {
+//                b = boundaries[matrixCC[x][y]];
+//                if (x < b->x1) {
+//                    b->x1 = x;
+//                }
+//                if (y < b->y1) {
+//                    b->y1 = y;
+//                }
+//                if (x+1 > b->x2) {
+//                    b->x2 = x+1;
+//                }
+//                if (y+1 > b->y2) {
+//                    b->y2 = y+1;
+//                }
+//            }
+
+//        }
+//    }
+
+//    int x, y, elem;
+//    vector< picture > arrayPic = vector< picture >(etiquetteConnexe-1);
+
+//    for (unsigned int i = 0; i < arrayPic.size(); ++i) {
+//        b = boundaries[i];
+//        arrayPic[i] = vector< vector<int> >(b->x2 - b->x1);
+//        for (unsigned int k = 0; k < arrayPic.size(); ++k) {
+//            arrayPic[i][k] = vector<int>(b->y2 - b->y1);
+//        }
+
+//        for (unsigned int dx = 0; dx < (boundaries[i]->x2 - boundaries[i]->x1); ++dx) {
+//            for (unsigned int dy = 0; dy < (boundaries[i]->y2 - boundaries[i]->y1); ++dy) {
+//                x = boundaries[i]->x1 + dx;
+//                y = boundaries[i]->y1 + dy;
+//                elem = matrixCC[x][y];
+//                arrayPic[i][dx][dy] = elem;
+//            }
+//        }
+//    }
+}
+
+QImage *composantesConnexes::composantesConnexe( QImage *image ){
+    imgWidth = image->width();
+    imgHeight = image->height();
+    QImage *res = new QImage(imgWidth, imgHeight, image->format() );
+
+    vector< vector<int> > matrixCC = vector< vector<int> >(imgWidth);
+    for (int x = 0; x < imgWidth; ++x) {
+        matrixCC[x] = vector<int>(imgHeight);
+        for (int y = 0; y < imgHeight; ++y) {
+            matrixCC[x][y] = 0;
+        }
+    }
+
+    fillMatrix(image, matrixCC);
+
 
     // Creation de l'image resultante
     for (int y = 0; y < imgHeight; ++y) {
