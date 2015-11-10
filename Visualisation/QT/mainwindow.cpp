@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect( ui->actionFiltre_adaptatif, SIGNAL(triggered()), this, SLOT(filtreAdaptatiff()) );
     QObject::connect( ui->actionInversion_Histo, SIGNAL(triggered()), this, SLOT(inverserH()) );
+    QObject::connect( ui->actionK_Means, SIGNAL(triggered()), this, SLOT(kMoyenne()) );
     QObject::connect( ui->actionModule_gradient, SIGNAL(triggered()), this, SLOT(moduleGradient()) );
     QObject::connect( ui->actionPoint_d_interets, SIGNAL(triggered()), this, SLOT(pointDinteretsf()) );
 
@@ -668,9 +669,16 @@ void MainWindow::bords(){
         vector<int> *v = b.bords8(image);
         //affichage
         cout << "Freeman :" << endl;
-        for (int i = 0; i < v->size(); ++i) {
+        for (unsigned int i = 0; i < v->size(); ++i) {
             cout << v->at(i) << endl;
         }
+    }
+}
+
+void MainWindow::kMoyenne(){
+    if( cheminImage != NULL ){
+        kmoyenne filtre;
+        this->setImage( filtre.kMoyenne(image, 4), cheminImage);
     }
 }
 
