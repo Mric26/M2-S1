@@ -651,6 +651,9 @@ void MainWindow::moduleGradient(){
 
 void MainWindow::pointDinteretsf(){
     if( cheminImage != NULL ){
+        GrisConvers gc;
+        this->setImage( gc.versGris(this), this->getCheminImage() );
+
         pointsDinterets p;
         this->setImage( p.calculpointsDinterets(image, 0.04), cheminImage);
     }
