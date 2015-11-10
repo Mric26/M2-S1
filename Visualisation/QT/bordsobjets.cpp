@@ -6,6 +6,11 @@ vector<int> *bordsObjets::bords8( QImage *image ){
     vector<int> * v = new vector<int>();
 
     QPoint * origine = find_Origine(image);
+
+    if( (origine->x() == -1) && (origine->y() == -1) ){
+        return v;
+    }
+
     QPoint * second = new QPoint(0,0);
     QPoint * courant = origine;
     QPoint * temp;
@@ -67,30 +72,32 @@ QPoint * bordsObjets::point_suivant( QPoint *p, int dir ){
     */
 
     if( dir == 0){
-        return new QPoint( p->x()+1, p->y() );
+            return new QPoint( p->x()+1, p->y() );
     }
-    if( dir == 1){
+    else if( dir == 1){
         return new QPoint( p->x()+1, p->y()-1 );
     }
-    if( dir == 2){
+    else if( dir == 2){
         return new QPoint( p->x(), p->y()-1 );
     }
-    if( dir == 3){
+    else if( dir == 3){
         return new QPoint( p->x()-1, p->y()-1 );
     }
-    if( dir == 4){
+    else if( dir == 4){
         return new QPoint( p->x()-1, p->y() );
     }
-    if( dir == 5){
+    else if( dir == 5){
         return new QPoint( p->x()-1, p->y()+1 );
     }
-    if( dir == 6){
+    else if( dir == 6){
         return new QPoint( p->x(), p->y()+1 );
     }
-    if( dir == 7){
+    else if( dir == 7){
         return new QPoint( p->x()+1, p->y()+1 );
     }
-
+    else {
+        return p;
+    }
 }
 
 
@@ -100,22 +107,22 @@ QPoint *bordsObjets::find_Origine( QImage *image ){
 
     int i, j;
     bool origine_find = false;
-    QPoint * origine = new QPoint();
+    QPoint * origine = new QPoint(-1,-1);
     QRgb p;
 
-    i = 0;
-    while ( !origine_find && (i<imWidth) ) {
     j = 0;
-        while ( !origine_find && (j<imHeight) ) {
+    while ( !origine_find && (j<imHeight) ) {
+    i = 0;
+        while ( !origine_find && (i<imWidth) ) {
             p = image->pixel(i,j);
-            if( (qRed(p)!= 0) || (qGreen(p)!= 0) || (qBlue(p)!= 0) ){
+            if( qRed(p)== 255 ){
                 origine->setX(i);
                 origine->setY(j);
                 origine_find = true;
             }
-            j++;
+            i++;
         }
-    i++;
+    j++;
     }
 
     return origine;

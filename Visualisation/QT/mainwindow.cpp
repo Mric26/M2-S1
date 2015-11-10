@@ -651,6 +651,9 @@ void MainWindow::moduleGradient(){
 
 void MainWindow::pointDinteretsf(){
     if( cheminImage != NULL ){
+        GrisConvers gc;
+        this->setImage( gc.versGris(this), this->getCheminImage() );
+
         pointsDinterets p;
         this->setImage( p.calculpointsDinterets(image, 0.04), cheminImage);
     }
@@ -665,6 +668,9 @@ void MainWindow::compoConnexe(){
 
 void MainWindow::bords(){
     if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuil(image, 150), cheminImage);
+
         bordsObjets b;
         vector<int> *v = b.bords8(image);
         //affichage

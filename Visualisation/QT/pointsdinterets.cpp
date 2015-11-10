@@ -54,35 +54,33 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
     harris = seuillage(harris);
 
-//    return matrixToQimage(image, harris);
-
-//    //extraction des maxima locaux
-//    double V, Vt;
-//    for (int i = 0; i < imWidth; ++i) {
-//        for (int j = 0; j < imHeight; ++j) {
-//            V = harris(i,j);
-//            //negatif
-//            if( V<=0 ){
-//                harris(i,j) = 0;
-//            }
-//            else{
-//                //maxima locaux
-//                for (int k = -1; k < 2; k++) {
-//                    for (int l = -1; l < 2; ++l) {
-//                        if( (i+k<0) || (i+k>imWidth-1) || (j+l<0) || (j+l>imHeight-1) || ((k==0)&&(l==0)) ){
-//                            //ne fait rien
-//                        }
-//                        else{
-//                            Vt = harris(i+k,j+l);
-//                            if( V<Vt ){
-//                                harris(i,j) = 0;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //extraction des maxima locaux
+    double V, Vt;
+    for (int i = 0; i < imWidth; ++i) {
+        for (int j = 0; j < imHeight; ++j) {
+            V = harris(i,j);
+            //negatif
+            if( V<=0 ){
+                harris(i,j) = 0;
+            }
+            else{
+                //maxima locaux
+                for (int k = -1; k < 2; k++) {
+                    for (int l = -1; l < 2; ++l) {
+                        if( (i+k<0) || (i+k>imWidth-1) || (j+l<0) || (j+l>imHeight-1) || ((k==0)&&(l==0)) ){
+                            //ne fait rien
+                        }
+                        else{
+                            Vt = harris(i+k,j+l);
+                            if( V<Vt ){
+                                harris(i,j) = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     //extraction n meilleurs points
     //mise en vector
@@ -126,7 +124,6 @@ QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
     int imHeight = image->height();
     int pos_x = p.x;
     int pos_y = p.y;
-//    cout << "( " << pos_x << " ; " << pos_y << " )" << endl;
     QRgb color = qRgb(255, 0, 0);
 
     image->setPixel(pos_x, pos_y, color);
