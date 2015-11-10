@@ -665,6 +665,9 @@ void MainWindow::compoConnexe(){
 
 void MainWindow::bords(){
     if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuil(image, 150), cheminImage);
+
         bordsObjets b;
         vector<int> *v = b.bords8(image);
         //affichage
