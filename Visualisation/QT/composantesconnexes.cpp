@@ -66,6 +66,7 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
 
     vector<Noeud> arbre = vector<Noeud>();
     int etiquetteConnexe = 0;
+    unsigned int nbComposanteConnexe = 0;
     Noeud *nd = NULL;
 
     // Premiere passe, etiquetage des composantes
@@ -79,6 +80,7 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
                 if (n == 0) {
                     // Nouvelle composante connexe trouvee
                     etiquetteConnexe++;
+                    nbComposanteConnexe++;
                     matrixCC[x][y] = etiquetteConnexe;
                     nd = new Noeud(etiquetteConnexe);
                     nd->parent = nd;
@@ -118,6 +120,7 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
                         Noeud& b = findParent(arbre.at(voisin2-1));
                         if (a.elem != b.elem) {
                             unionNode(arbre.at(voisin1-1), arbre.at(voisin2-1));
+                            nbComposanteConnexe--;
                         }
                     }
 
@@ -137,61 +140,99 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
         }
     }
 
+
+    // Re-etiquetage des composantes entre 1 et nbComposanteConnexe
+    vector<int> indices = vector<int>(0);
+    int pos, elem;
+    for (int y = 0; y < imgHeight; ++y) {
+        for (int x = 0; x < imgWidth; ++x) {
+            if (matrixCC[x][y] != 0) {
+                elem = matrixCC[x][y];
+                pos = find(indices.begin(), indices.end(), elem) - indices.begin();
+                if (pos >= (int) indices.size()) {
+                    // elem non trouve dans le vector indices
+                    indices.push_back(elem);
+                }
+                matrixCC[x][y] = pos+1;
+            }
+        }
+    }
+
+    if (nbComposanteConnexe == 0) {
+        return;
+    }
+
+    frame* b = NULL;
+    vector< frame* > boundaries = vector< frame* >(nbComposanteConnexe);
+    vector< picture > arrayPic = vector< picture >(nbComposanteConnexe);
+
     // Extraction de chaque composante connexe
     // Boundaries = indique le domaine de la composante n°i
-//    vector< frame* > boundaries = vector< frame* >(etiquetteConnexe-1);
-//    frame* b = NULL;
-//    for (unsigned int i = 0; i < boundaries.size(); ++i) {
-//        b = new frame;
-//        b->x1 = INT_MAX;
-//        b->y1 = INT_MAX;
-//        b->x2 = INT_MIN;
-//        b->y2 = INT_MIN;
-//        boundaries[i] = b;
-//    }
 
-//    // Trouve le rectangle englobant de chaque composante
-//    for (int y = 0; y < imgHeight; ++y) {
-//        for (int x = 0; x < imgWidth; ++x) {
+    // Initialisation
+    for (unsigned int i = 0; i < boundaries.size(); ++i) {
+        b = new frame;
+        b->x1 = INT_MAX;
+        b->y1 = INT_MAX;
+        b->x2 = INT_MIN;
+        b->y2 = INT_MIN;
+        boundaries[i] = b;
+    }
 
-//            if (matrixCC[x][y] != 0) {
-//                b = boundaries[matrixCC[x][y]];
-//                if (x < b->x1) {
-//                    b->x1 = x;
-//                }
-//                if (y < b->y1) {
-//                    b->y1 = y;
-//                }
-//                if (x+1 > b->x2) {
-//                    b->x2 = x+1;
-//                }
-//                if (y+1 > b->y2) {
-//                    b->y2 = y+1;
-//                }
+    // Trouve le rectangle englobant de chaque composante
+    for (int y = 0; y < imgHeight; ++y) {
+        for (int x = 0; x < imgWidth; ++x) {
+
+            if (matrixCC[x][y] != 0) {
+                b = boundaries[matrixCC[x][y]-1];
+                if (x < b->x1) {
+                    b->x1 = x;
+                }
+                if (y < b->y1) {
+                    b->y1 = y;
+                }
+                if (x+1 > b->x2) {
+                    b->x2 = x+1;
+                }
+                if (y+1 > b->y2) {
+                    b->y2 = y+1;
+                }
+            }
+
+        }
+    }
+
+    // Extraction des composantes connexes
+    for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
+        b = boundaries[i];
+        arrayPic[i] = vector< vector<int> >(b->x2 - b->x1);
+        for (unsigned int k = 0; k < arrayPic[i].size(); ++k) {
+            arrayPic[i][k] = vector<int>(b->y2 - b->y1);
+        }
+
+        for (int dx = 0; dx < (boundaries[i]->x2 - boundaries[i]->x1); ++dx) {
+            for (int dy = 0; dy < (boundaries[i]->y2 - boundaries[i]->y1); ++dy) {
+                elem = matrixCC[b->x1 + dx][b->y1 + dy];
+                arrayPic[i][dx][dy] = elem;
+            }
+        }
+    }
+
+//    for (int i = 0; i < nbComposanteConnexe; ++i) {
+//        picture pic = arrayPic[i];
+//        // Negatif
+//        for (unsigned int x = 0; x < pic.size(); ++x) {
+//            for (unsigned int y = 0; y < pic[i].size(); ++y) {
+//                pic[x][y] = 255 - pic[x][y];
 //            }
-
 //        }
+
 //    }
 
-//    int x, y, elem;
-//    vector< picture > arrayPic = vector< picture >(etiquetteConnexe-1);
-
-//    for (unsigned int i = 0; i < arrayPic.size(); ++i) {
-//        b = boundaries[i];
-//        arrayPic[i] = vector< vector<int> >(b->x2 - b->x1);
-//        for (unsigned int k = 0; k < arrayPic.size(); ++k) {
-//            arrayPic[i][k] = vector<int>(b->y2 - b->y1);
-//        }
-
-//        for (unsigned int dx = 0; dx < (boundaries[i]->x2 - boundaries[i]->x1); ++dx) {
-//            for (unsigned int dy = 0; dy < (boundaries[i]->y2 - boundaries[i]->y1); ++dy) {
-//                x = boundaries[i]->x1 + dx;
-//                y = boundaries[i]->y1 + dy;
-//                elem = matrixCC[x][y];
-//                arrayPic[i][dx][dy] = elem;
-//            }
-//        }
-//    }
+    // Desallocation memoire
+    for (unsigned int i = 0; i < boundaries.size(); ++i) {
+        delete boundaries[i];
+    }
 }
 
 QImage *composantesConnexes::composantesConnexe( QImage *image ){
