@@ -19,7 +19,7 @@ class composantesConnexes{
 public:
 
     QImage *composantesConnexe(QImage *image);
-    void fillMatrix(QImage *image, vector< vector<int> > &matrixCC);
+    unsigned int fillMatrix(vector< vector<int> > &matrixImg, vector< vector<int> > &matrixCC);
 
     void imprime(vector<Noeud> &arbre);
     Noeud& findParent(Noeud& n);
