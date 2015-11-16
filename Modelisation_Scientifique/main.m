@@ -96,8 +96,8 @@ setId = m(:,1);
 indices = [];
 
 % Extraction des indices nécessaires
-for i=1:size(setId,1)
-    id = find(numer_sta == setId(i));
+for k=1:size(setId,1)
+    id = find(numer_sta == setId(k));
     if (id ~= 0)
         indices = [indices; id];
     end
@@ -129,11 +129,11 @@ maxY = max(m(:,4));
 
 interpoleShepard = zeros(N,N);
 
-for i=1:N
+for k=1:N
     for j=1:N
-        X = minX + u(i) * (maxX - minX);
+        X = minX + u(k) * (maxX - minX);
         Y = minY + v(j) * (maxY - minY);
-        x = [X Y];
+        i = [X Y];
         
         % Interpolation de la temperature
         eval = 0;
@@ -144,16 +144,41 @@ for i=1:N
             s = 0;
             for l=1:nb
                 xl = [m(l,3) m(l,4)];
-                s = s + (1/(distance(x, xl) ^ mu));
+                s = s + (1/(distance(i, xl) ^ mu));
             end
-            wk = (1 / (distance(x, xk) ^ mu)) * (1 / s);
+            wk = (1 / (distance(i, xk) ^ mu)) * (1 / s);
             
             eval = eval + (wk * t(k));
         end
         
-        interpoleShepard(i,j) = eval;
+        interpoleShepard(k,j) = eval;
     end
 end
 
+
+%% Calcul de la colormap
+
+mini = min(min(interpoleShepard));
+maxi = max(max(interpoleShepard));
+
+% Ensemble de valeurs des isocontours
+lambda = [];
+table = zeros(N-1,N-1);
+lambda(1) = 290.0;
+
+% Parcourt des rectangles pour determiner leur état
+for k=1:length(lambda)
+    elem = lambda(k);
+    for i=1:(N-1)
+        for j=1:(N-1)
+            v1 = (interpoleShepard(i,j) >= elem);
+            v2 = (interpoleShepard(i,j+1) >= elem);
+            v3 = (interpoleShepard(i+1,j+1) >= elem);
+            v4 = (interpoleShepard(i+1,j) >= elem);
+            bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
+            table(i,j) = bit;
+        end
+    end
+end
 
 
