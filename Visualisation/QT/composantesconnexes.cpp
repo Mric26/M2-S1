@@ -226,18 +226,20 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
         // Extraction des composantes connexes
         for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
             b = boundaries[i];
-            arrayPicImg[i] = vector< vector<int> >(b->x2 - b->x1);
-            arrayPicCC[i] = vector< vector<int> >(b->x2 - b->x1);
+            arrayPicImg[i] = vector< vector<int> >(b->x2 - b->x1 + 2);
+            arrayPicCC[i] = vector< vector<int> >(b->x2 - b->x1 + 2);
             for (unsigned int x = 0; x < arrayPicImg[i].size(); ++x) {
-                arrayPicImg[i][x] = vector<int>(b->y2 - b->y1);
-                arrayPicCC[i][x] = vector<int>(b->y2 - b->y1);
+                arrayPicImg[i][x] = vector<int>(b->y2 - b->y1 + 2);
+                arrayPicCC[i][x] = vector<int>(b->y2 - b->y1 + 2);
             }
 
-            for (int dx = 0; dx < (boundaries[i]->x2 - boundaries[i]->x1); ++dx) {
-                for (int dy = 0; dy < (boundaries[i]->y2 - boundaries[i]->y1); ++dy) {
+            for (int dx = 0; dx < (b->x2 - b->x1); ++dx) {
+                for (int dy = 0; dy < (b->y2 - b->y1); ++dy) {
                     elem = matrixCC[b->x1 + dx][b->y1 + dy];
-                    arrayPicImg[i][dx][dy] = elem;
-                    arrayPicCC[i][dx][dy] = 0;
+                    // Si c'est l'element que l'on recherche
+                    if (elem == (int)(i+1)) {
+                        arrayPicImg[i][1+dx][1+dy] = 255;
+                    }
                 }
             }
         }
@@ -257,7 +259,14 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
             imgWidth = arrayPicImg[i].size();
             imgHeight = arrayPicImg[i][0].size();
             int nbComposanteConnexe_i = fillMatrix(arrayPicImg[i], arrayPicCC[i]);
-            cout << "Composante Connexe n°" << i << " : " << nbComposanteConnexe_i << "trou(s)" << endl;
+            cout << "Composante Connexe n°" << i << " : " << nbComposanteConnexe_i-1 << "trou(s)" << endl;
+//            for (unsigned int dx = 0; dx < arrayPicCC[i].size(); ++dx) {
+//                cout << "\t";
+//                for (unsigned int dy = 0; dy < arrayPicCC[i][dx].size(); ++dy) {
+//                    cout << arrayPicCC[i][dx][dy] << ", ";
+//                }
+//                cout << endl;
+//            }
         }
 
         // Desallocation memoire
