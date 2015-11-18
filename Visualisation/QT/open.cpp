@@ -3,7 +3,7 @@
 int Open::ouvrir( MainWindow * w ) {
 
     //chemin
-    QString chemin = QFileDialog::getOpenFileName(w,"Ouvrir un fichier", QDir::currentPath() + "/../Images/partie2", "Image Files (*.png *.jpg *.pgm)");
+    QString chemin = QFileDialog::getOpenFileName(w,"Ouvrir un fichier", QDir::currentPath() + "/../Images", "Image Files (*.png *.jpg *.pgm)");
 
     //ouverture
     QImage * im = new QImage();
