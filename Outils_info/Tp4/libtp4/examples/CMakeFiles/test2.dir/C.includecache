@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/examples/test2.c
+tp4.h
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/examples/tp4.h
+stdio.h
+-
+stdlib.h
+-
+
+lib/tp4.h
+

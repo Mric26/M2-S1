@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/lib/tp4.h
+
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src/main_wrap.cxx
+stdio.h
+-
+errno.h
+-
+stdlib.h
+-
+stdarg.h
+-
+ctype.h
+-
+string.h
+-
+assert.h
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src/assert.h
+stdexcept
+-
+/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/lib/tp4.h
+-
+limits.h
+-
+
