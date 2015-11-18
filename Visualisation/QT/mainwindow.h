@@ -24,7 +24,6 @@
 #include "filtreperso.h"
 #include "fusioncalques.h"
 #include "filtreadaptatif.h"
-#include "pointsdinterets.h"
 #include "composantesconnexes.h"
 #include "bordsobjets.h"
 #include "imagegradient.h"
@@ -122,7 +121,7 @@ public slots:
     //autre
     void pleinEcran();
     void minimiser();
-    //TP1 bis
+    //TP M2
     void filtreAdaptatiff();
     void inverserH();   
     void moduleGradient();
@@ -132,7 +131,7 @@ public slots:
     void kMoyenne();
     void negatifslot();
     void seuillageSlot();
-
+    void CompaPI();
 
 private:
     Ui::MainWindow *ui;

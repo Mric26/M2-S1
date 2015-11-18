@@ -2,20 +2,27 @@
 #define POINTSDINTERETS_H
 
 #include <QImage>
+#include <QString>
+#include <QImage>
+#include <QFileDialog>
+
 #include "boost/numeric/ublas/matrix.hpp"
 #include "convolution.h"
+#include "mainwindow.h"
 
 class pointsDinterets{
 
 public:
-
-    QImage *calculpointsDinterets(QImage *image, double alpha);
 
     struct pointI{
         int x;
         int y;
         double val;
     };
+
+    QImage *affichageHarris(QImage *image, double alpha);
+    std::vector<pointI> *calculpointsDinterets(QImage *image, double alpha);   
+    QImage *comparaisonHarris(MainWindow *w);
 
 private:
 
