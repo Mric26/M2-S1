@@ -619,7 +619,7 @@ void MainWindow::setScene(QGraphicsScene *value){
 void MainWindow::filtreAdaptatiff(){
     if( cheminImage != NULL ){
        filtreAdaptatif f;
-       this->setImage( f.filtreAda2(image, 5), cheminImage );
+       this->setImage( f.filtreAda2(image, 9), cheminImage );
     }
 }
 
@@ -687,7 +687,7 @@ void MainWindow::bords(){
 void MainWindow::kMoyenne(){
     if( cheminImage != NULL ){
         kmoyenne filtre;
-        this->setImage( filtre.kMoyenne(image, 4), cheminImage);
+        this->setImage( filtre.kMoyenne(image, 3), cheminImage);
     }
 }
 
