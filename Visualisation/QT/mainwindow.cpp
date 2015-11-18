@@ -9,6 +9,7 @@
 #include "grisconvers.h"
 #include "fusion.h"
 #include "redimensionnement.h"
+#include "pointsdinterets.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect( ui->actionK_Means, SIGNAL(triggered()), this, SLOT(kMoyenne()) );
     QObject::connect( ui->actionModule_gradient, SIGNAL(triggered()), this, SLOT(moduleGradient()) );
     QObject::connect( ui->actionPoint_d_interets, SIGNAL(triggered()), this, SLOT(pointDinteretsf()) );
+    QObject::connect( ui->actionComparaisons_PI, SIGNAL(triggered()), this, SLOT(CompaPI()) );
 
     QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
     QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
@@ -457,7 +459,7 @@ void MainWindow::median()
 void MainWindow::gris(){
     if( cheminImage != NULL ){
         GrisConvers gc;
-        this->setImage( gc.versGris(this), this->getCheminImage() );
+        this->setImage( gc.versGris(image), cheminImage );
     }
 }
 
@@ -652,11 +654,16 @@ void MainWindow::moduleGradient(){
 void MainWindow::pointDinteretsf(){
     if( cheminImage != NULL ){
         GrisConvers gc;
-        this->setImage( gc.versGris(this), this->getCheminImage() );
+        this->setImage( gc.versGris(image), cheminImage );
 
         pointsDinterets p;
-        this->setImage( p.calculpointsDinterets(image, 0.04), cheminImage);
+        this->setImage( p.affichageHarris(image, 0.04), cheminImage);
     }
+}
+
+void MainWindow::CompaPI(){
+        pointsDinterets p;
+        this->setImage( p.comparaisonHarris(this), cheminImage);
 }
 
 void MainWindow::compoConnexe(){

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm square2.msh
-gmsh square2.geo -3
+rm squareRes.msh
+gmsh squareRes.geo -3
  
 exit 0

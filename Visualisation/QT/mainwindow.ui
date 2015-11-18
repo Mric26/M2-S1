@@ -326,7 +326,7 @@
      <x>0</x>
      <y>0</y>
      <width>688</width>
-     <height>20</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -430,6 +430,7 @@
      <string>TP3</string>
     </property>
     <addaction name="actionPoint_d_interets"/>
+    <addaction name="actionComparaisons_PI"/>
    </widget>
    <widget class="QMenu" name="menuTP2">
     <property name="title">
@@ -639,6 +640,11 @@
   <action name="actionK_Means">
    <property name="text">
     <string>K-Means</string>
+   </property>
+  </action>
+  <action name="actionComparaisons_PI">
+   <property name="text">
+    <string>Comparaisons PI</string>
    </property>
   </action>
  </widget>

@@ -1,11 +1,12 @@
 #include "pointsdinterets.h"
 #include "seuillage.h"
 #include "convolution.h"
+#include "grisconvers.h"
 
 using namespace std;
 using namespace boost::numeric::ublas;
 
-QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
+std::vector<pointsDinterets::pointI> * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
 
     int imWidth = image->width();
     int imHeight = image->height();
@@ -14,9 +15,6 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
     matrix<double> tabyc(imWidth,imHeight);
     matrix<double> tabxy(imWidth,imHeight);
     matrix<double> harris(imWidth,imHeight);
-
-    //copie image
-    QImage *nouvelleImage = new QImage(*image);
 
     //calculs preliminaires des matrices
     Convolution c;
@@ -102,6 +100,15 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
     //quicksort
     quickSort(*v, 0, v->size());
 
+    return v;
+}
+
+QImage * pointsDinterets::affichageHarris(QImage *image, double alpha){
+    QImage *nouvelleImage = new QImage(*image);
+
+    //calcul des points
+    std::vector<struct pointI> * v = calculpointsDinterets(image, alpha);
+
     //affichage n points
     int nbAffichage;
     if( v->size() > 250 ){
@@ -113,6 +120,70 @@ QImage * pointsDinterets::calculpointsDinterets(QImage *image, double alpha){
     for (int q = v->size(); q > v->size()-nbAffichage; --q) {
         pointI x = (*v)[q];
         nouvelleImage = croixRouge(x, nouvelleImage);
+    }
+
+    return nouvelleImage;
+}
+
+QImage * pointsDinterets::comparaisonHarris(MainWindow * w){
+    QImage *nouvelleImage;
+
+    //chargement des images
+    QString chemin1 = QFileDialog::getOpenFileName(w,"Ouvrir un fichier", QDir::currentPath() + "/../Images/Harris/graffiti", "Image Files (*.png *.jpg *.pgm)");
+    QImage * image1 = new QImage();
+    bool charge1 = image1->load(chemin1);
+
+    QString chemin2 = QFileDialog::getOpenFileName(w,"Ouvrir un fichier", QDir::currentPath() + "/../Images/Harris/graffiti", "Image Files (*.png *.jpg *.pgm)");
+    QImage * image2 = new QImage();
+    bool charge2 = image2->load(chemin2);
+
+    //si chargement réussi
+    if(charge1 && charge2){
+        //calculs des tailles
+        int imWidth1 = image1->width();
+        int imHeight1 = image1->height();
+
+        int imWidth2 = image2->width();
+        int imHeight2 = image2->height();
+
+        int resWidth = imWidth1 + imWidth2 + 5;
+        int resHeight = max(imHeight1, imHeight2);
+
+        //resultats
+        nouvelleImage = new QImage(resWidth, resHeight, QImage::Format_RGB32);
+
+        //calcul des harris
+        GrisConvers gc;
+        image1 = gc.versGris(image1);
+        image1 = affichageHarris(image1, 0.04);
+        image2 = gc.versGris(image2);
+        image2 = affichageHarris(image2, 0.04);
+
+        //affichages des images
+        int i, j;
+
+        for (i = 0; i < imWidth1; ++i) {
+            for (j = 0; j < imHeight1; ++j) {
+                nouvelleImage->setPixel( i, j, image1->pixel(i,j) );
+            }
+        }
+
+        QRgb color = qRgb(255, 0, 0);
+        for (i = imWidth1; i < imWidth1+5; ++i) {
+            for (j = 0; j < imHeight1; ++j) {
+                nouvelleImage->setPixel( i, j, color );
+            }
+        }
+
+        for (i = imWidth1+5; i < resWidth; ++i) {
+            for (j = 0; j < imHeight1; ++j) {
+                nouvelleImage->setPixel( i, j, image2->pixel(i-(imWidth1+5),j) );
+            }
+        }
+
+    }
+    else{
+        nouvelleImage = new QImage();
     }
 
     return nouvelleImage;
