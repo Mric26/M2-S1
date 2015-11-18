@@ -50,14 +50,14 @@ void composantesConnexes::unionNode(Noeud& n1, Noeud& n2) {
     parent2.parent = &findParent(n1);
 }
 
-int composantesConnexes::get(vector< vector<int> >& matrice, int x, int y) {
+int composantesConnexes::get(vector< vector<int> > &matrix, int x, int y) {
     if (x >= 0 && x < imgWidth && y >= 0 && y < imgHeight) {
-        return matrice[x][y];
+        return matrix[x][y];
     }
     return 0;
 }
 
-void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matrixCC) {
+unsigned int composantesConnexes::fillMatrix(vector< vector<int> > &matrixImg, vector< vector<int> > &matrixCC) {
     for (unsigned int x = 0; x < matrixCC.size(); ++x) {
         for (unsigned int y = 0; y < matrixCC[x].size(); ++y) {
             matrixCC[x][y] = 0;
@@ -73,9 +73,8 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
     for (int y = 0; y < imgHeight; ++y) {
         for (int x = 0; x < imgWidth; ++x) {
 
-            int r = qRed(image->pixel(x,y));
             // Si le pixel appartient a un objet
-            if (r == 255) {
+            if (matrixImg[x][y] == 255) {
                 int n = compterVoisin(matrixCC, x, y);
                 if (n == 0) {
                     // Nouvelle composante connexe trouvee
@@ -158,81 +157,7 @@ void composantesConnexes::fillMatrix(QImage *image, vector< vector<int> > &matri
         }
     }
 
-    if (nbComposanteConnexe == 0) {
-        return;
-    }
-
-    frame* b = NULL;
-    vector< frame* > boundaries = vector< frame* >(nbComposanteConnexe);
-    vector< picture > arrayPic = vector< picture >(nbComposanteConnexe);
-
-    // Extraction de chaque composante connexe
-    // Boundaries = indique le domaine de la composante n°i
-
-    // Initialisation
-    for (unsigned int i = 0; i < boundaries.size(); ++i) {
-        b = new frame;
-        b->x1 = INT_MAX;
-        b->y1 = INT_MAX;
-        b->x2 = INT_MIN;
-        b->y2 = INT_MIN;
-        boundaries[i] = b;
-    }
-
-    // Trouve le rectangle englobant de chaque composante
-    for (int y = 0; y < imgHeight; ++y) {
-        for (int x = 0; x < imgWidth; ++x) {
-
-            if (matrixCC[x][y] != 0) {
-                b = boundaries[matrixCC[x][y]-1];
-                if (x < b->x1) {
-                    b->x1 = x;
-                }
-                if (y < b->y1) {
-                    b->y1 = y;
-                }
-                if (x+1 > b->x2) {
-                    b->x2 = x+1;
-                }
-                if (y+1 > b->y2) {
-                    b->y2 = y+1;
-                }
-            }
-
-        }
-    }
-
-    // Extraction des composantes connexes
-    for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
-        b = boundaries[i];
-        arrayPic[i] = vector< vector<int> >(b->x2 - b->x1);
-        for (unsigned int k = 0; k < arrayPic[i].size(); ++k) {
-            arrayPic[i][k] = vector<int>(b->y2 - b->y1);
-        }
-
-        for (int dx = 0; dx < (boundaries[i]->x2 - boundaries[i]->x1); ++dx) {
-            for (int dy = 0; dy < (boundaries[i]->y2 - boundaries[i]->y1); ++dy) {
-                elem = matrixCC[b->x1 + dx][b->y1 + dy];
-                arrayPic[i][dx][dy] = elem;
-            }
-        }
-    }
-
-//    for (int i = 0; i < nbComposanteConnexe; ++i) {
-//        picture pic = arrayPic[i];
-//        // Negatif
-//        for (unsigned int x = 0; x < pic.size(); ++x) {
-//            for (unsigned int y = 0; y < pic[i].size(); ++y) {
-//                pic[x][y] = 255 - pic[x][y];
-//            }
-//        }
-
-//    }
-
-    // Desallocation memoire
-    for (unsigned int i = 0; i < boundaries.size(); ++i) {
-        delete boundaries[i];
-    }
+    return nbComposanteConnexe;
 }
 
 QImage *composantesConnexes::composantesConnexe( QImage *image ){
@@ -240,16 +165,118 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
     imgHeight = image->height();
     QImage *res = new QImage(imgWidth, imgHeight, image->format() );
 
+    vector< vector<int> > matrixImg = vector< vector<int> >(imgWidth);
     vector< vector<int> > matrixCC = vector< vector<int> >(imgWidth);
     for (int x = 0; x < imgWidth; ++x) {
+        matrixImg[x] = vector<int>(imgHeight);
         matrixCC[x] = vector<int>(imgHeight);
         for (int y = 0; y < imgHeight; ++y) {
+            matrixImg[x][y] = (qRed(image->pixel(x, y)) == 0 ? 0 : 255);
             matrixCC[x][y] = 0;
         }
     }
 
-    fillMatrix(image, matrixCC);
+    unsigned int nbComposanteConnexe = fillMatrix(matrixImg, matrixCC);
+    cout << nbComposanteConnexe << " composantes connexes présentent dans l'image" << endl;
 
+    // Comptage des trous dans chaques composante connexe
+    if (nbComposanteConnexe > 0) {
+        frame* b = NULL;
+        vector< frame* > boundaries = vector< frame* >(nbComposanteConnexe);
+        vector< picture > arrayPicImg = vector< picture >(nbComposanteConnexe);
+        vector< picture > arrayPicCC = vector< picture >(nbComposanteConnexe);
+        int elem;
+
+        // Extraction de chaque composante connexe
+        // Boundaries = indique le domaine de la composante n°i
+
+        // Initialisation
+        for (unsigned int i = 0; i < boundaries.size(); ++i) {
+            b = new frame;
+            b->x1 = INT_MAX;
+            b->y1 = INT_MAX;
+            b->x2 = INT_MIN;
+            b->y2 = INT_MIN;
+            boundaries[i] = b;
+        }
+
+        // Trouve le rectangle englobant de chaque composante
+        for (int y = 0; y < imgHeight; ++y) {
+            for (int x = 0; x < imgWidth; ++x) {
+
+                if (matrixCC[x][y] != 0) {
+                    b = boundaries[matrixCC[x][y]-1];
+                    if (x < b->x1) {
+                        b->x1 = x;
+                    }
+                    if (y < b->y1) {
+                        b->y1 = y;
+                    }
+                    if (x+1 > b->x2) {
+                        b->x2 = x+1;
+                    }
+                    if (y+1 > b->y2) {
+                        b->y2 = y+1;
+                    }
+                }
+
+            }
+        }
+
+        // Extraction des composantes connexes
+        for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
+            b = boundaries[i];
+            arrayPicImg[i] = vector< vector<int> >(b->x2 - b->x1 + 2);
+            arrayPicCC[i] = vector< vector<int> >(b->x2 - b->x1 + 2);
+            for (unsigned int x = 0; x < arrayPicImg[i].size(); ++x) {
+                arrayPicImg[i][x] = vector<int>(b->y2 - b->y1 + 2);
+                arrayPicCC[i][x] = vector<int>(b->y2 - b->y1 + 2);
+            }
+
+            for (int dx = 0; dx < (b->x2 - b->x1); ++dx) {
+                for (int dy = 0; dy < (b->y2 - b->y1); ++dy) {
+                    elem = matrixCC[b->x1 + dx][b->y1 + dy];
+                    // Si c'est l'element que l'on recherche
+                    if (elem == (int)(i+1)) {
+                        arrayPicImg[i][1+dx][1+dy] = 255;
+                    }
+                }
+            }
+        }
+
+        // Passage en negatif de chaque composante extraite
+        for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
+            picture &pic = arrayPicImg[i];
+            for (unsigned int x = 0; x < pic.size(); ++x) {
+                for (unsigned int y = 0; y < pic[x].size(); ++y) {
+                    pic[x][y] = 255 - pic[x][y];
+                }
+            }
+        }
+
+        // Affichage du nombre de trou dans chaque composante connexe
+        for (unsigned int i = 0; i < nbComposanteConnexe; ++i) {
+            imgWidth = arrayPicImg[i].size();
+            imgHeight = arrayPicImg[i][0].size();
+            int nbComposanteConnexe_i = fillMatrix(arrayPicImg[i], arrayPicCC[i]);
+            cout << "Composante Connexe n°" << i << " : " << nbComposanteConnexe_i-1 << "trou(s)" << endl;
+//            for (unsigned int dx = 0; dx < arrayPicCC[i].size(); ++dx) {
+//                cout << "\t";
+//                for (unsigned int dy = 0; dy < arrayPicCC[i][dx].size(); ++dy) {
+//                    cout << arrayPicCC[i][dx][dy] << ", ";
+//                }
+//                cout << endl;
+//            }
+        }
+
+        // Desallocation memoire
+        for (unsigned int i = 0; i < boundaries.size(); ++i) {
+            delete boundaries[i];
+        }
+    }
+
+    imgWidth = image->width();
+    imgHeight = image->height();
 
     // Creation de l'image resultante
     for (int y = 0; y < imgHeight; ++y) {

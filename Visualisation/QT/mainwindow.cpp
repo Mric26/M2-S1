@@ -662,7 +662,10 @@ void MainWindow::pointDinteretsf(){
 void MainWindow::compoConnexe(){
     if( cheminImage != NULL ){
         composantesConnexes cp;
-        this->setImage( cp.composantesConnexe(image), cheminImage);
+        seuillage s;
+        QImage* imageThreshold = s.seuil(image, 150);
+        this->setImage( cp.composantesConnexe(imageThreshold), cheminImage);
+        delete imageThreshold;
     }
 }
 

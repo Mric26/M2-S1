@@ -87,5 +87,98 @@ pres = cell2mat(raw(:, 3));
 clearvars filename delimiter formatSpec fileID dataArray ans raw col numericData rawData row regexstr result numbers invalidThousandsSeparator thousandsRegExp me R;
 
 
+%% Extraction des données pour lesquelle on a une coordonnée géographique
+
 % importation de la table de positions geographiques
 m = importFile(fullfile(pwd,'/postesSynop.csv'));
+
+setId = m(:,1);
+indices = [];
+
+% Extraction des indices nécessaires
+for k=1:size(setId,1)
+    id = find(numer_sta == setId(k));
+    if (id ~= 0)
+        indices = [indices; id];
+    end
+end
+
+numer_sta = numer_sta(indices);
+pres = pres(indices);
+t = t(indices);
+
+% latitude = m(indices,3);
+% longitude = m(indices,4);
+% altitude = m(indices,5);
+m = m(indices,:);
+
+
+%% Interpolation des données sur une grille régulière
+
+nb = size(indices,1);  % Nombre de donnees acquises
+N = 10;    % Echantillonnage de la grille
+mu = 2;     % Coefficient de l'interpolant
+
+u = linspace(0,1,N);
+v = linspace(0,1,N);
+
+minX = min(m(:,3));
+maxX = max(m(:,3));
+minY = min(m(:,4));
+maxY = max(m(:,4));
+
+interpoleShepard = zeros(N,N);
+
+for k=1:N
+    for j=1:N
+        X = minX + u(k) * (maxX - minX);
+        Y = minY + v(j) * (maxY - minY);
+        i = [X Y];
+        
+        % Interpolation de la temperature
+        eval = 0;
+        for k=1:nb
+            xk = [m(k,3) m(k,4)];
+            
+            % Calcul de wk
+            s = 0;
+            for l=1:nb
+                xl = [m(l,3) m(l,4)];
+                s = s + (1/(distance(i, xl) ^ mu));
+            end
+            wk = (1 / (distance(i, xk) ^ mu)) * (1 / s);
+            
+            eval = eval + (wk * t(k));
+        end
+        
+        interpoleShepard(k,j) = eval;
+    end
+end
+
+
+%% Calcul de la colormap
+
+mini = min(min(interpoleShepard));
+maxi = max(max(interpoleShepard));
+
+% Ensemble de valeurs des isocontours
+lambda = [];
+table = zeros(N-1,N-1);
+lambda(1) = 290.0;
+
+% Parcourt des rectangles pour determiner leur état
+for k=1:length(lambda)
+    elem = lambda(k);
+    for i=1:(N-1)
+        for j=1:(N-1)
+            v1 = (interpoleShepard(i,j) >= elem);
+            v2 = (interpoleShepard(i,j+1) >= elem);
+            v3 = (interpoleShepard(i+1,j+1) >= elem);
+            v4 = (interpoleShepard(i+1,j) >= elem);
+            bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
+            table(i,j) = bit;
+        end
+    end
+end
+
+
