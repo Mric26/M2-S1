@@ -42,6 +42,13 @@ QImage *kmoyenne::kMoyenne(QImage *image, unsigned int nb){
 //    cluster[2] = qRgb(185, 176, 136);
 //    cluster[3] = qRgb(85, 78, 54);
 
+    cluster[0] = qRgb(212, 194, 130);
+    cluster[1] = qRgb(214, 201, 159);
+
+    cluster[2] = qRgb(3, 89, 164);
+    cluster[3] = qRgb(12, 94, 168);
+
+
     //double epsi = 0.1;
     int d, mini;
     QRgb color;
