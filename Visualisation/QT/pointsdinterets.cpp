@@ -103,11 +103,8 @@ std::vector<pointsDinterets::pointI> * pointsDinterets::calculpointsDinterets(QI
     return v;
 }
 
-QImage * pointsDinterets::affichageHarris(QImage *image, double alpha){
+QImage * pointsDinterets::affichageHarris(QImage *image, std::vector<struct pointI> * v){
     QImage *nouvelleImage = new QImage(*image);
-
-    //calcul des points
-    std::vector<struct pointI> * v = calculpointsDinterets(image, alpha);
 
     //affichage n points
     int nbAffichage;
@@ -155,9 +152,35 @@ QImage * pointsDinterets::comparaisonHarris(MainWindow * w){
         //calcul des harris
         GrisConvers gc;
         image1 = gc.versGris(image1);
-        image1 = affichageHarris(image1, 0.04);
+        std::vector<struct pointI> * harris1 = calculpointsDinterets(image1, 0.04);
+        image1 = affichageHarris(image1, harris1);
+
         image2 = gc.versGris(image2);
-        image2 = affichageHarris(image2, 0.04);
+        std::vector<struct pointI> * harris2 = calculpointsDinterets(image2, 0.04);
+        image2 = affichageHarris(image2, harris2);
+
+        //comparaisons
+        struct pointI p, temp, m;
+        for (int var1 = 1; var1 < 2; ++var1) {
+            p = harris1->at(harris1->size()-var1);
+            temp = harris2->at(harris2->size()-1);
+            m = temp;
+            m.val = calculSSD(p, temp , 5, image1, image2);
+            double valtemp;
+            for (int var = harris2->size()-2; var >= 0; --var) {
+                temp = harris2->at(var);
+                valtemp = calculSSD(p, temp , 5, image1, image2);
+                if( valtemp < m.val ){
+                    m = temp;
+                    m.val = valtemp;
+                }
+            }
+
+            //croix verte
+//            image1 = croixRouge(p, image1);
+//            image2 = croixRouge(m, image2);
+
+        }
 
         //affichages des images
         int i, j;
@@ -168,7 +191,7 @@ QImage * pointsDinterets::comparaisonHarris(MainWindow * w){
             }
         }
 
-        QRgb color = qRgb(255, 0, 0);
+        QRgb color = qRgb(0, 0, 0);
         for (i = imWidth1; i < imWidth1+5; ++i) {
             for (j = 0; j < imHeight1; ++j) {
                 nouvelleImage->setPixel( i, j, color );
@@ -181,12 +204,65 @@ QImage * pointsDinterets::comparaisonHarris(MainWindow * w){
             }
         }
 
+        //affichage ligne de correspondance du meilleur points de la première image
+        nouvelleImage = correspondanceLigne(p, m, imWidth1, nouvelleImage);
+
     }
     else{
         nouvelleImage = new QImage();
     }
 
     return nouvelleImage;
+}
+
+QImage * pointsDinterets::correspondanceLigne(struct pointI p1, struct pointI p2, int imageWidht, QImage *imageres){
+    QImage *nouvelleImage = new QImage(*imageres);
+
+    QPoint pr1, pr2;
+    pr1.setX(p1.x);
+    pr1.setY(p1.y);
+    pr2.setX(p2.x+5+imageWidht);
+    pr2.setY(p2.y);
+
+    QPainter painter(nouvelleImage);
+    painter.setPen(QPen(QColor(255, 0, 0), 1, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
+    painter.drawLine(pr1,pr2);
+
+    return nouvelleImage;
+}
+
+double pointsDinterets::calculSSD( struct pointI p1, struct pointI p2, int longueur, QImage* image1, QImage* image2 ){
+    int largeur1 = image1->width();
+    int hauteur1 = image1->height();
+
+    int largeur2 = image2->width();
+    int hauteur2 = image2->height();
+
+    int ia = p1.x ;
+    int ja = p1.y;
+
+    int ib = p2.x ;
+    int jb = p2.y;
+    double distance = 0 ;
+
+    if ((ia + longueur > largeur1-2 || ia - longueur < 0 || ja + longueur > hauteur1-2 || ja - longueur < 0) || (ib + longueur > largeur2-2 || ib - longueur < 0 || jb + longueur > hauteur2-2 || jb - longueur < 0)){
+        distance = 9999999999;
+    }
+    else {
+        for(int i = 0;i<2*longueur + 1 + 1;i++){
+            for(int j = 0;j<2*longueur + 1 + 1;j++){
+
+                QRgb rgb1 = image1->pixel(ia -longueur +i ,ja - longueur +j);
+                QColor pixel1(rgb1);
+
+                QRgb rgb2 = image2->pixel(ib -longueur +i ,jb - longueur +j);
+                QColor pixel2(rgb2);
+
+                distance += pow((pixel1.red() - pixel2.red()),2);
+            }
+        }
+        return distance;
+    }
 }
 
 QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
@@ -196,6 +272,32 @@ QImage * pointsDinterets::croixRouge(struct pointI p, QImage *image){
     int pos_x = p.x;
     int pos_y = p.y;
     QRgb color = qRgb(255, 0, 0);
+
+    image->setPixel(pos_x, pos_y, color);
+
+    if( pos_x>=1){
+        image->setPixel(pos_x-1, pos_y, color);
+    }
+    if( pos_y>=1){
+        image->setPixel(pos_x, pos_y-1, color);
+    }
+    if( pos_x<imWidth-1){
+        image->setPixel(pos_x+1, pos_y, color);
+    }
+    if( pos_y<imHeight-1){
+        image->setPixel(pos_x, pos_y+1, color);
+    }
+
+    return image;
+}
+
+QImage * pointsDinterets::croixVerte(struct pointI p, QImage *image){
+
+    int imWidth = image->width();
+    int imHeight = image->height();
+    int pos_x = p.x;
+    int pos_y = p.y;
+    QRgb color = qRgb(0, 255, 0);
 
     image->setPixel(pos_x, pos_y, color);
 

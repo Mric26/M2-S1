@@ -36,9 +36,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect( ui->actionPoint_d_interets, SIGNAL(triggered()), this, SLOT(pointDinteretsf()) );
     QObject::connect( ui->actionComparaisons_PI, SIGNAL(triggered()), this, SLOT(CompaPI()) );
 
+    QObject::connect( ui->actionSeuillageRiz, SIGNAL(triggered()), this, SLOT(seuillageRiz()) );
+    QObject::connect( ui->actionTraitementRiz, SIGNAL(triggered()), this, SLOT(traitementRiz()) );
+
     QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
     QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
     QObject::connect( ui->actionSeuillage, SIGNAL(triggered()), this, SLOT(seuillageSlot()) );
+    QObject::connect( ui->actionSeuillageMoyenne, SIGNAL(triggered()), this, SLOT(seuillageMoyenneSlot()) );
+    QObject::connect( ui->actionSeuillageMediane, SIGNAL(triggered()), this, SLOT(seuillageMedianeSlot()) );
     QObject::connect( ui->actionNegatif, SIGNAL(triggered()), this, SLOT(negatifslot()) );
 
 
@@ -657,7 +662,7 @@ void MainWindow::pointDinteretsf(){
         this->setImage( gc.versGris(image), cheminImage );
 
         pointsDinterets p;
-        this->setImage( p.affichageHarris(image, 0.04), cheminImage);
+        this->setImage( p.affichageHarris(image, p.calculpointsDinterets(image, 0.04)), cheminImage);
     }
 }
 
@@ -694,7 +699,7 @@ void MainWindow::bords(){
 void MainWindow::kMoyenne(){
     if( cheminImage != NULL ){
         kmoyenne filtre;
-        this->setImage( filtre.kMoyenne(image, 3), cheminImage);
+        this->setImage( filtre.kMoyenne(image, 2), cheminImage);
     }
 }
 
@@ -709,6 +714,47 @@ void MainWindow::seuillageSlot(){
     if( cheminImage != NULL ){
         seuillage s;
         this->setImage( s.seuil(image, 150), cheminImage);
+    }
+}
+
+void MainWindow::seuillageMoyenneSlot(){
+    if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuilMoyenne(image), cheminImage);
+    }
+}
+
+void MainWindow::seuillageMedianeSlot(){
+    if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuilMedianne(image), cheminImage);
+    }
+}
+
+void MainWindow::seuillageRiz(){
+    if( cheminImage != NULL ){
+        SeuillageDecoupe sc;
+        this->setImage( sc.SeuillageDecoupeFonction(image, 5), cheminImage);
+    }
+}
+
+void MainWindow::traitementRiz(){
+    if( cheminImage != NULL ){
+        QImage *res = new QImage( *image );
+
+        Etalement et;
+        res = et.etaler(res);
+
+        Convolution c;
+        res = c.detectionContours(res);
+
+        seuillage s;
+        res = s.seuilMedianne(res);
+
+//        res = c.filtreMedian(res, 1);
+
+        dilaEro de;
+        this->setImage( de.erosion(res, 5), cheminImage);
     }
 }
 

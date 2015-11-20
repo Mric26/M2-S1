@@ -30,6 +30,8 @@
 #include "seuillage.h"
 #include "negatif.h"
 #include "kmoyenne.h"
+#include "seuillagedecoupe.h"
+#include "dilaero.h"
 
 namespace Ui {
 class MainWindow;
@@ -131,7 +133,11 @@ public slots:
     void kMoyenne();
     void negatifslot();
     void seuillageSlot();
-    void CompaPI();
+    void seuillageMoyenneSlot();
+    void seuillageMedianeSlot();
+    void CompaPI();        
+    void seuillageRiz();
+    void traitementRiz();
 
 private:
     Ui::MainWindow *ui;

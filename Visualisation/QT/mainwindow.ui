@@ -443,9 +443,14 @@
      <string>TP4</string>
     </property>
     <addaction name="actionSeuillage"/>
+    <addaction name="actionSeuillageMoyenne"/>
+    <addaction name="actionSeuillageMediane"/>
     <addaction name="actionNegatif"/>
     <addaction name="actionComposante_connexe"/>
     <addaction name="actionBord_objets"/>
+    <addaction name="separator"/>
+    <addaction name="actionSeuillageRiz"/>
+    <addaction name="actionTraitementRiz"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menu_dition"/>
@@ -645,6 +650,26 @@
   <action name="actionComparaisons_PI">
    <property name="text">
     <string>Comparaisons PI</string>
+   </property>
+  </action>
+  <action name="actionSeuillageMoyenne">
+   <property name="text">
+    <string>SeuillageMoyenne</string>
+   </property>
+  </action>
+  <action name="actionSeuillageMediane">
+   <property name="text">
+    <string>SeuillageMediane</string>
+   </property>
+  </action>
+  <action name="actionSeuillageRiz">
+   <property name="text">
+    <string>SeuillageRiz</string>
+   </property>
+  </action>
+  <action name="actionTraitementRiz">
+   <property name="text">
+    <string>TraitementRiz</string>
    </property>
   </action>
  </widget>
