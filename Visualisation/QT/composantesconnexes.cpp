@@ -177,7 +177,7 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
     }
 
     unsigned int nbComposanteConnexe = fillMatrix(matrixImg, matrixCC);
-    cout << nbComposanteConnexe << " composantes connexes présentent dans l'image" << endl;
+    QString string = QString::number(nbComposanteConnexe) + " composantes connexes présentent dans l'image\n";
 
     // Comptage des trous dans chaques composante connexe
     if (nbComposanteConnexe > 0) {
@@ -259,14 +259,7 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
             imgWidth = arrayPicImg[i].size();
             imgHeight = arrayPicImg[i][0].size();
             int nbComposanteConnexe_i = fillMatrix(arrayPicImg[i], arrayPicCC[i]);
-            cout << "Composante Connexe n°" << i << " : " << nbComposanteConnexe_i-1 << "trou(s)" << endl;
-//            for (unsigned int dx = 0; dx < arrayPicCC[i].size(); ++dx) {
-//                cout << "\t";
-//                for (unsigned int dy = 0; dy < arrayPicCC[i][dx].size(); ++dy) {
-//                    cout << arrayPicCC[i][dx][dy] << ", ";
-//                }
-//                cout << endl;
-//            }
+            string += "Composante Connexe n°" + QString::number(i+1) + " : " + QString::number(nbComposanteConnexe_i-1) + "trou(s)\n";
         }
 
         // Desallocation memoire
@@ -289,6 +282,8 @@ QImage *composantesConnexes::composantesConnexe( QImage *image ){
             }
         }
     }
+
+    QMessageBox::information(NULL, "Comptage des trous", string);
 
     return res;
 }
