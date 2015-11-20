@@ -5,6 +5,8 @@
 #include <iostream>
 #include <unistd.h>
 
+#include <QMessageBox>
+
 using namespace std;
 
 class composantesConnexes{
