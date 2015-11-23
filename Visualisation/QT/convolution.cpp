@@ -168,28 +168,33 @@ QImage *Convolution::detectionContours(QImage *image)
     return res;
 }
 
-QImage *Convolution::gradientX(QImage *image){
-    float **sobelX;
-    sobelX = new float *[3];
+QImage *Convolution::gradientY(QImage *image){
+    int imWidth = image->width();
+    int imHeight = image->height();
 
-    for (int i = 0; i < 3; ++i) {
-        sobelX[i] = new float[3];
+    QImage *res = new QImage(imWidth, imHeight, image->format() );
+
+    QImage *res1 = gradientY1(image);
+    QImage *res2 = gradientY2(image);
+
+    int v1, v2;
+    for (int i = 0; i < imWidth; ++i) {
+        for (int j = 0; j < imHeight; ++j) {
+            v1 = qRed(res1->pixel(i,j));
+            v2 = qRed(res2->pixel(i,j));
+            if( v1 >= v2){
+                res->setPixel(i, j, res1->pixel(i,j) );
+            }
+            else{
+                res->setPixel(i, j, res2->pixel(i,j) );
+            }
+        }
     }
 
-    sobelX[0][0] = 1.0/4.0;
-    sobelX[0][1] = 0.0/4.0;
-    sobelX[0][2] = -1.0/4.0;
-    sobelX[1][0] = 2.0/4.0;
-    sobelX[1][1] = 0.0/4.0;
-    sobelX[1][2] = -2.0/4.0;
-    sobelX[2][0] = 1.0/4.0;
-    sobelX[2][1] = 0.0/4.0;
-    sobelX[2][2] = -1.0/4.0;
-
-    return conv(image,sobelX,3);
+    return res;
 }
 
-QImage *Convolution::gradientY(QImage *image){
+QImage *Convolution::gradientY1(QImage *image){
     float **sobelY;
     sobelY = new float *[3];
 
@@ -197,20 +202,109 @@ QImage *Convolution::gradientY(QImage *image){
         sobelY[i] = new float[3];
     }
 
-    sobelY[0][0] = 1.0/4.0 ;
-    sobelY[0][1] = 2.0/4.0 ;
-    sobelY[0][2] = 1.0/4.0 ;
-    sobelY[1][0] = 0.0/4.0 ;
-    sobelY[1][1] = 0.0/4.0 ;
-    sobelY[1][2] = 0.0/4.0 ;
-    sobelY[2][0] = -1.0/4.0 ;
-    sobelY[2][1] = -2.0/4.0 ;
-    sobelY[2][2] = -1.0/4.0 ;
+    sobelY[0][0] = -1.0/4.0;
+    sobelY[0][1] = 0.0/4.0;
+    sobelY[0][2] = 1.0/4.0;
+    sobelY[1][0] = -2.0/4.0;
+    sobelY[1][1] = 0.0/4.0;
+    sobelY[1][2] = 2.0/4.0;
+    sobelY[2][0] = -1.0/4.0;
+    sobelY[2][1] = 0.0/4.0;
+    sobelY[2][2] = 1.0/4.0;
 
     return conv(image,sobelY,3);
 }
 
-QImage *Convolution::filtreMedian(QImage *image, int tailleVoisinage){  
+QImage *Convolution::gradientY2(QImage *image){
+    float **sobelY;
+    sobelY = new float *[3];
+
+    for (int i = 0; i < 3; ++i) {
+        sobelY[i] = new float[3];
+    }
+
+    sobelY[0][0] = 1.0/4.0;
+    sobelY[0][1] = 0.0/4.0;
+    sobelY[0][2] = -1.0/4.0;
+    sobelY[1][0] = 2.0/4.0;
+    sobelY[1][1] = 0.0/4.0;
+    sobelY[1][2] = -2.0/4.0;
+    sobelY[2][0] = 1.0/4.0;
+    sobelY[2][1] = 0.0/4.0;
+    sobelY[2][2] = -1.0/4.0;
+
+    return conv(image,sobelY,3);
+}
+
+QImage *Convolution::gradientX(QImage *image){
+    int imWidth = image->width();
+    int imHeight = image->height();
+
+    QImage *res = new QImage(imWidth, imHeight, image->format() );
+
+    QImage *res1 = gradientX1(image);
+    QImage *res2 = gradientX2(image);
+
+    int v1, v2;
+    for (int i = 0; i < imWidth; ++i) {
+        for (int j = 0; j < imHeight; ++j) {
+            v1 = qRed(res1->pixel(i,j));
+            v2 = qRed(res2->pixel(i,j));
+            if( v1 >= v2){
+                res->setPixel(i, j, res1->pixel(i,j) );
+            }
+            else{
+                res->setPixel(i, j, res2->pixel(i,j) );
+            }
+        }
+    }
+
+    return res;
+}
+
+QImage *Convolution::gradientX1(QImage *image){
+    float **sobelX;
+    sobelX = new float *[3];
+
+    for (int i = 0; i < 3; ++i) {
+        sobelX[i] = new float[3];
+    }
+
+    sobelX[0][0] = 1.0/4.0 ;
+    sobelX[0][1] = 2.0/4.0 ;
+    sobelX[0][2] = 1.0/4.0 ;
+    sobelX[1][0] = 0.0/4.0 ;
+    sobelX[1][1] = 0.0/4.0 ;
+    sobelX[1][2] = 0.0/4.0 ;
+    sobelX[2][0] = -1.0/4.0 ;
+    sobelX[2][1] = -2.0/4.0 ;
+    sobelX[2][2] = -1.0/4.0 ;
+
+    return conv(image,sobelX,3);
+}
+
+QImage *Convolution::gradientX2(QImage *image){
+    float **sobelX;
+    sobelX = new float *[3];
+
+    for (int i = 0; i < 3; ++i) {
+        sobelX[i] = new float[3];
+    }
+
+    sobelX[0][0] = -1.0/4.0 ;
+    sobelX[0][1] = -2.0/4.0 ;
+    sobelX[0][2] = -1.0/4.0 ;
+    sobelX[1][0] = 0.0/4.0 ;
+    sobelX[1][1] = 0.0/4.0 ;
+    sobelX[1][2] = 0.0/4.0 ;
+    sobelX[2][0] = 1.0/4.0 ;
+    sobelX[2][1] = 2.0/4.0 ;
+    sobelX[2][2] = 1.0/4.0 ;
+
+    return conv(image,sobelX,3);
+}
+
+QImage *Convolution::filtreMedian(QImage *image, int tailleVoisinage){
     int nv = (2*tailleVoisinage +1)*(2*tailleVoisinage +1);
     QImage *resultat = new QImage(image->width(),image->height(),image->format());
     int l = (2*tailleVoisinage +1 -1)/2;

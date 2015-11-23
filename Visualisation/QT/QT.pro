@@ -36,7 +36,10 @@ SOURCES += main.cpp\
     bordsobjets.cpp \
     imagegradient.cpp \
     seuillage.cpp \
-    negatif.cpp
+    negatif.cpp \
+    kmoyenne.cpp \
+    seuillagedecoupe.cpp \
+    dilaero.cpp
 
 HEADERS  += mainwindow.h \
     open.h \
@@ -62,7 +65,10 @@ HEADERS  += mainwindow.h \
     bordsobjets.h \
     imagegradient.h \
     seuillage.h \
-    negatif.h
+    negatif.h \
+    kmoyenne.h \
+    seuillagedecoupe.h \
+    dilaero.h
 
 FORMS    += mainwindow.ui \
     diagramcolorwindow.ui \

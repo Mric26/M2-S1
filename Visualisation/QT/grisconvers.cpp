@@ -2,18 +2,18 @@
 
 using namespace std;
 
-QImage * GrisConvers::versGris( MainWindow * w ){
+QImage * GrisConvers::versGris(QImage *image ){
 
-    QImage * i = w->getImage();
-    float rouge;
-    float vert;
-    float bleu;
-    float gris;
-    QImage * ret = new QImage( i->width(), i->height(), i->format());
-    for(int j=0; j<i->width(); j++){
-        for(int k=0; k<i->height(); k++){
+    int imWidth = image->width();
+    int imHeight = image->height();
 
-            QRgb * pix = new QRgb( i->pixel(j,k) );
+    float rouge, vert, bleu, gris;
+    QImage * res = new QImage( imWidth, imHeight, image->format());
+
+    for(int j=0; j<imWidth; j++){
+        for(int k=0; k<imHeight; k++){
+
+            QRgb * pix = new QRgb( image->pixel(j,k) );
             QColor c( *pix );
             rouge = c.red();
             vert = c.green();
@@ -21,8 +21,9 @@ QImage * GrisConvers::versGris( MainWindow * w ){
 
             gris = 0.299*rouge + 0.587*vert + 0.114*bleu;
 
-            ret->setPixel( QPoint(j,k), qRgb(gris,gris,gris) );
+            res->setPixel( QPoint(j,k), qRgb(gris,gris,gris) );
         }
     }
-    return ret;
+
+    return res;
 }

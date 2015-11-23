@@ -24,12 +24,14 @@
 #include "filtreperso.h"
 #include "fusioncalques.h"
 #include "filtreadaptatif.h"
-#include "pointsdinterets.h"
 #include "composantesconnexes.h"
 #include "bordsobjets.h"
 #include "imagegradient.h"
 #include "seuillage.h"
 #include "negatif.h"
+#include "kmoyenne.h"
+#include "seuillagedecoupe.h"
+#include "dilaero.h"
 
 namespace Ui {
 class MainWindow;
@@ -121,16 +123,21 @@ public slots:
     //autre
     void pleinEcran();
     void minimiser();
-    //TP1 bis
+    //TP M2
     void filtreAdaptatiff();
     void inverserH();   
     void moduleGradient();
     void pointDinteretsf();
     void compoConnexe();
-    void bords();  
+    void bords();
+    void kMoyenne();
     void negatifslot();
     void seuillageSlot();
-
+    void seuillageMoyenneSlot();
+    void seuillageMedianeSlot();
+    void CompaPI();        
+    void seuillageRiz();
+    void traitementRiz();
 
 private:
     Ui::MainWindow *ui;

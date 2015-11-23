@@ -9,6 +9,7 @@
 #include "grisconvers.h"
 #include "fusion.h"
 #include "redimensionnement.h"
+#include "pointsdinterets.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,12 +31,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect( ui->actionFiltre_adaptatif, SIGNAL(triggered()), this, SLOT(filtreAdaptatiff()) );
     QObject::connect( ui->actionInversion_Histo, SIGNAL(triggered()), this, SLOT(inverserH()) );
+    QObject::connect( ui->actionK_Means, SIGNAL(triggered()), this, SLOT(kMoyenne()) );
     QObject::connect( ui->actionModule_gradient, SIGNAL(triggered()), this, SLOT(moduleGradient()) );
     QObject::connect( ui->actionPoint_d_interets, SIGNAL(triggered()), this, SLOT(pointDinteretsf()) );
+    QObject::connect( ui->actionComparaisons_PI, SIGNAL(triggered()), this, SLOT(CompaPI()) );
+
+    QObject::connect( ui->actionSeuillageRiz, SIGNAL(triggered()), this, SLOT(seuillageRiz()) );
+    QObject::connect( ui->actionTraitementRiz, SIGNAL(triggered()), this, SLOT(traitementRiz()) );
 
     QObject::connect( ui->actionComposante_connexe, SIGNAL(triggered()), this, SLOT(compoConnexe()) );
     QObject::connect( ui->actionBord_objets, SIGNAL(triggered()), this, SLOT(bords()) );
     QObject::connect( ui->actionSeuillage, SIGNAL(triggered()), this, SLOT(seuillageSlot()) );
+    QObject::connect( ui->actionSeuillageMoyenne, SIGNAL(triggered()), this, SLOT(seuillageMoyenneSlot()) );
+    QObject::connect( ui->actionSeuillageMediane, SIGNAL(triggered()), this, SLOT(seuillageMedianeSlot()) );
     QObject::connect( ui->actionNegatif, SIGNAL(triggered()), this, SLOT(negatifslot()) );
 
 
@@ -456,7 +464,7 @@ void MainWindow::median()
 void MainWindow::gris(){
     if( cheminImage != NULL ){
         GrisConvers gc;
-        this->setImage( gc.versGris(this), this->getCheminImage() );
+        this->setImage( gc.versGris(image), cheminImage );
     }
 }
 
@@ -618,8 +626,7 @@ void MainWindow::setScene(QGraphicsScene *value){
 void MainWindow::filtreAdaptatiff(){
     if( cheminImage != NULL ){
        filtreAdaptatif f;
-       this->setImage( f.filtreAda2(image, 5), cheminImage );
-//       this->setImage( f.filtreAda(image), cheminImage );
+       this->setImage( f.filtreAda2(image, 15), cheminImage );
     }
 }
 
@@ -650,26 +657,49 @@ void MainWindow::moduleGradient(){
 }
 
 void MainWindow::pointDinteretsf(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        pointsDinterets p;
-//        this->setImage( p.calculpointsDinterets(image, 12), cheminImage);
+        GrisConvers gc;
+        this->setImage( gc.versGris(image), cheminImage );
+
+        pointsDinterets p;
+        this->setImage( p.affichageHarris(image, p.calculpointsDinterets(image, 0.04)), cheminImage);
     }
 }
 
+void MainWindow::CompaPI(){
+        pointsDinterets p;
+        this->setImage( p.comparaisonHarris(this), cheminImage);
+}
+
 void MainWindow::compoConnexe(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        composantesConnexes cp;
-//        this->setImage( cp.composantesConn(image), cheminImage);
+        composantesConnexes cp;
+        seuillage s;
+        QImage* imageThreshold = s.seuil(image, 150);
+        this->setImage( cp.composantesConnexe(imageThreshold), cheminImage);
+        delete imageThreshold;
     }
 }
 
 void MainWindow::bords(){
-    AfficherMessageNonFini();
     if( cheminImage != NULL ){
-//        bordsObjets b;
-//        this->setImage( b.bordsO(image), cheminImage);
+        seuillage s;
+        this->setImage( s.seuil(image, 150), cheminImage);
+
+        bordsObjets b;
+        vector<int> *v = b.bords8(image);
+        //affichage
+        cout << "Freeman :" << endl;
+        for (unsigned int i = 0; i < v->size(); ++i) {
+            cout << v->at(i) << endl;
+        }
+    }
+}
+
+void MainWindow::kMoyenne(){
+    if( cheminImage != NULL ){
+        kmoyenne filtre;
+        this->setImage( filtre.kMoyenne(image, 4), cheminImage);
     }
 }
 
@@ -684,6 +714,47 @@ void MainWindow::seuillageSlot(){
     if( cheminImage != NULL ){
         seuillage s;
         this->setImage( s.seuil(image, 150), cheminImage);
+    }
+}
+
+void MainWindow::seuillageMoyenneSlot(){
+    if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuilMoyenne(image), cheminImage);
+    }
+}
+
+void MainWindow::seuillageMedianeSlot(){
+    if( cheminImage != NULL ){
+        seuillage s;
+        this->setImage( s.seuilMedianne(image), cheminImage);
+    }
+}
+
+void MainWindow::seuillageRiz(){
+    if( cheminImage != NULL ){
+        SeuillageDecoupe sc;
+        this->setImage( sc.SeuillageDecoupeFonction(image, 5), cheminImage);
+    }
+}
+
+void MainWindow::traitementRiz(){
+    if( cheminImage != NULL ){
+        QImage *res = new QImage( *image );
+
+        Etalement et;
+        res = et.etaler(res);
+
+        Convolution c;
+        res = c.detectionContours(res);
+
+        seuillage s;
+        res = s.seuilMedianne(res);
+
+//        res = c.filtreMedian(res, 1);
+
+        dilaEro de;
+        this->setImage( de.erosion(res, 5), cheminImage);
     }
 }
 

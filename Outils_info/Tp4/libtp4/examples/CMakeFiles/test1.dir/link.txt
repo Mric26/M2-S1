@@ -1,0 +1,1 @@
+/usr/bin/cc  -g -Wall    CMakeFiles/test1.dir/test1.c.o  -o test1  -L/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/lib -rdynamic ../lib/libtp4.so.1.3.4 -Wl,-rpath,/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/libtp4/lib 
