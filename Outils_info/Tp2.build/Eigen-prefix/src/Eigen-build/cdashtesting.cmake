@@ -3,7 +3,7 @@ set(CTEST_SOURCE_DIRECTORY  "/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/ei
 set(CTEST_BINARY_DIRECTORY  "/home/s/segureta/Documents/M2-S1/Outils_info/Tp2.build/Eigen-prefix/src/Eigen-build")
 set(CTEST_CMAKE_GENERATOR   "Unix Makefiles")
 set(CTEST_BUILD_NAME        "linux-3.16.0-48-generic-_-4.8.4-sse2-64bit")
-set(CTEST_SITE              "f202-04")
+set(CTEST_SITE              "f202-14")
 
 set(MODEL Experimental)
 if(${CTEST_SCRIPT_ARG} MATCHES Nightly)

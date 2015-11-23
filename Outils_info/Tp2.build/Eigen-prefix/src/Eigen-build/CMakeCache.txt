@@ -32,6 +32,9 @@ CHOLMOD_INCLUDES:PATH=CHOLMOD_INCLUDES-NOTFOUND
 //Path to a library.
 CHOLMOD_LIBRARIES:FILEPATH=CHOLMOD_LIBRARIES-NOTFOUND
 
+//Path to a program.
+CMAKE_AR:FILEPATH=/usr/bin/ar
+
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
 CMAKE_BUILD_TYPE:STRING=
@@ -121,6 +124,9 @@ CMAKE_Fortran_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //Path to a program.
+CMAKE_LINKER:FILEPATH=/usr/bin/ld
+
+//Path to a program.
 CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
 
 //Flags used by the linker during the creation of modules.
@@ -149,6 +155,9 @@ CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=Eigen
+
+//Path to a program.
+CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
 
 //Flags used by the linker during the creation of dll's.
 CMAKE_SHARED_LINKER_FLAGS:STRING=' '
@@ -230,9 +239,6 @@ EIGEN_BUILD_BTL:BOOL=OFF
 //Build pkg-config .pc file for Eigen
 EIGEN_BUILD_PKGCONFIG:BOOL=ON
 
-//The directory where the CMake files are installed
-EIGEN_CONFIG_CMAKE_PATH:PATH=lib/cmake/eigen3
-
 //Enable/disable gcov
 EIGEN_COVERAGE_TESTING:BOOL=OFF
 
@@ -251,9 +257,6 @@ EIGEN_FAILTEST:BOOL=OFF
 //The directory where we install the header files (optional)
 EIGEN_INCLUDE_INSTALL_DIR:PATH=
 
-//Build internal documentation
-EIGEN_INTERNAL_DOCUMENTATION:BOOL=OFF
-
 //Disable checking of assertions using exceptions
 EIGEN_NO_ASSERTION_CHECKING:BOOL=OFF
 
@@ -266,14 +269,14 @@ EIGEN_TEST_32BIT:BOOL=OFF
 //Enable/Disable AltiVec in tests/examples
 EIGEN_TEST_ALTIVEC:BOOL=OFF
 
-//Enable/Disable AVX in tests/examples
-EIGEN_TEST_AVX:BOOL=OFF
-
 //Test building the doxygen documentation
 EIGEN_TEST_BUILD_DOCUMENTATION:BOOL=OFF
 
 //Options passed to the build command of unit tests
-EIGEN_TEST_BUILD_FLAGS:STRING=
+EIGEN_TEST_BUILD_FLAGS:STRING=' '
+
+//Enables all C++0x features.
+EIGEN_TEST_C++0x:BOOL=OFF
 
 //Additional compiler flags when compiling unit tests.
 EIGEN_TEST_CUSTOM_CXX_FLAGS:STRING=
@@ -281,14 +284,8 @@ EIGEN_TEST_CUSTOM_CXX_FLAGS:STRING=
 //Additional linker flags when linking unit tests.
 EIGEN_TEST_CUSTOM_LINKER_FLAGS:STRING=
 
-//Enable testing with C++11 and C++11 features (e.g. Tensor module).
-EIGEN_TEST_CXX11:BOOL=OFF
-
 //Run whole Eigen2 test suite against EIGEN2_SUPPORT
 EIGEN_TEST_EIGEN2:BOOL=OFF
-
-//Enable/Disable FMA in tests/examples
-EIGEN_TEST_FMA:BOOL=OFF
 
 //Enable testing of realword sparse matrices contained in the specified
 // path
@@ -300,14 +297,8 @@ EIGEN_TEST_MAX_SIZE:STRING=320
 //Enable/Disable Neon in tests/examples
 EIGEN_TEST_NEON:BOOL=OFF
 
-//Enable/Disable Neon in tests/examples
-EIGEN_TEST_NEON64:BOOL=OFF
-
 //Disable Qt support in unit tests
 EIGEN_TEST_NOQT:BOOL=OFF
-
-//Disables C++ exceptions
-EIGEN_TEST_NO_EXCEPTIONS:BOOL=OFF
 
 //Disable explicit alignment (hence vectorization) in tests/examples
 EIGEN_TEST_NO_EXPLICIT_ALIGNMENT:BOOL=OFF
@@ -317,9 +308,6 @@ EIGEN_TEST_NO_EXPLICIT_VECTORIZATION:BOOL=OFF
 
 //Disable OpenGL support in unit tests
 EIGEN_TEST_NO_OPENGL:BOOL=OFF
-
-//Enable NVCC support in unit tests
-EIGEN_TEST_NVCC:BOOL=OFF
 
 //Enable/Disable OpenMP in tests/examples
 EIGEN_TEST_OPENMP:BOOL=OFF
@@ -338,9 +326,6 @@ EIGEN_TEST_SSE4_2:BOOL=OFF
 
 //Enable/Disable SSSE3 in tests/examples
 EIGEN_TEST_SSSE3:BOOL=OFF
-
-//Enable/Disable VSX in tests/examples
-EIGEN_TEST_VSX:BOOL=OFF
 
 //Force using X87 instructions. Implies no vectorization.
 EIGEN_TEST_X87:BOOL=OFF
@@ -421,7 +406,7 @@ GOOGLEHASH_INCLUDES:PATH=GOOGLEHASH_INCLUDES-NOTFOUND
 HGCOMMAND:FILEPATH=/usr/bin/hg
 
 //Command to build the project
-MAKECOMMAND:STRING=/usr/bin/make -i
+MAKECOMMAND:STRING=@EIGEN_MAKECOMMAND_PLACEHOLDER@ -i
 
 //Path to the memory checking command, used for memory error detection.
 MEMORYCHECK_COMMAND:FILEPATH=/usr/bin/valgrind
@@ -1076,7 +1061,7 @@ SCOTCH_LIBRARIES:FILEPATH=SCOTCH_LIBRARIES-NOTFOUND
 SCPCOMMAND:FILEPATH=/usr/bin/scp
 
 //Name of the computer/site where compile is being run
-SITE:STRING=f202-04
+SITE:STRING=f202-14
 
 //Path to the SLURM sbatch executable
 SLURM_SBATCH_COMMAND:FILEPATH=SLURM_SBATCH_COMMAND-NOTFOUND
@@ -1318,6 +1303,8 @@ BZRCOMMAND-ADVANCED:INTERNAL=1
 CHOLMOD_INCLUDES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CHOLMOD_LIBRARIES
 CHOLMOD_LIBRARIES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_AR
+CMAKE_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_BUILD_TOOL
 CMAKE_BUILD_TOOL-ADVANCED:INTERNAL=1
 //What is the target build tool cmake is generating for.
@@ -1340,6 +1327,8 @@ CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 CMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
+//ADVANCED property for variable: CMAKE_CXX_COMPILER
+CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS
 CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
@@ -1350,6 +1339,8 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER
+CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS
 CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
@@ -1396,14 +1387,6 @@ CMAKE_GENERATOR_TOOLSET:INTERNAL=
 CMAKE_HAVE_CONNECT:INTERNAL=1
 //Have function gethostbyname
 CMAKE_HAVE_GETHOSTBYNAME:INTERNAL=1
-//Have symbol pthread_create
-CMAKE_HAVE_LIBC_CREATE:INTERNAL=
-//Have library pthreads
-CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
-//Have library pthread
-CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
-//Have include pthread.h
-CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Have function remove
 CMAKE_HAVE_REMOVE:INTERNAL=1
 //Have function shmat
@@ -1415,6 +1398,8 @@ CMAKE_HOME_DIRECTORY:INTERNAL=/home/s/segureta/Documents/M2-S1/Outils_info/Tp2/e
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //Have library ICE
 CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER:INTERNAL=1
+//ADVANCED property for variable: CMAKE_LINKER
+CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
 CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -1430,11 +1415,13 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=81
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=73
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
 CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_RANLIB
+CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //Path to CMake installation.
 CMAKE_ROOT:INTERNAL=/usr/share/cmake-2.8
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
@@ -1463,6 +1450,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
+//uname command
+CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_USE_RELATIVE_PATHS
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
@@ -1481,10 +1470,6 @@ COMPILER_SUPPORT_Wall:INTERNAL=1
 COMPILER_SUPPORT_Wcastalign:INTERNAL=1
 //Test COMPILER_SUPPORT_Wcharsubscripts
 COMPILER_SUPPORT_Wcharsubscripts:INTERNAL=1
-//Test COMPILER_SUPPORT_Wcpp11extensions
-COMPILER_SUPPORT_Wcpp11extensions:INTERNAL=
-//Test COMPILER_SUPPORT_Wenumconversion
-COMPILER_SUPPORT_Wenumconversion:INTERNAL=
 //Test COMPILER_SUPPORT_Wextra
 COMPILER_SUPPORT_Wextra:INTERNAL=1
 //Test COMPILER_SUPPORT_Wformatsecurity
@@ -1499,8 +1484,6 @@ COMPILER_SUPPORT_Wnopsabi:INTERNAL=1
 COMPILER_SUPPORT_Wnovariadicmacros:INTERNAL=1
 //Test COMPILER_SUPPORT_Wpointerarith
 COMPILER_SUPPORT_Wpointerarith:INTERNAL=1
-//Test COMPILER_SUPPORT_Wshorten64to32
-COMPILER_SUPPORT_Wshorten64to32:INTERNAL=
 //Test COMPILER_SUPPORT_Wundef
 COMPILER_SUPPORT_Wundef:INTERNAL=1
 //Test COMPILER_SUPPORT_Wunusedlocaltypedefs
@@ -1535,10 +1518,6 @@ CVSCOMMAND-ADVANCED:INTERNAL=1
 CVS_UPDATE_OPTIONS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DART_TESTING_TIMEOUT
 DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
-//Test EIGEN_COMPILER_SUPPORT_CPP11
-EIGEN_COMPILER_SUPPORT_CPP11:INTERNAL=1
-//Test EIGEN_COMPILER_SUPPORT_CXX11
-EIGEN_COMPILER_SUPPORT_CXX11:INTERNAL=1
 //ADVANCED property for variable: EIGEN_TEST_EIGEN2
 EIGEN_TEST_EIGEN2-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: FFTWF_LIB
@@ -1559,8 +1538,6 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libGL.so
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding Qt4
 FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/usr/bin/qmake-qt4][/usr/lib/x86_64-linux-gnu/qt4/bin/moc][/usr/lib/x86_64-linux-gnu/qt4/bin/rcc][/usr/lib/x86_64-linux-gnu/qt4/bin/uic][/usr/include/qt4][/usr/lib/x86_64-linux-gnu][optimized;/usr/lib/x86_64-linux-gnu/libQtCore.so;debug;/usr/lib/x86_64-linux-gnu/libQtCore.so][v4.8.6()]
-//Details about finding Threads
-FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding X11
 FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/lib/x86_64-linux-gnu/libX11.so][/usr/include]
 //ADVANCED property for variable: GITCOMMAND
