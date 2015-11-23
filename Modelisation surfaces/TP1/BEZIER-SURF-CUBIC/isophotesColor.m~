@@ -1,7 +1,15 @@
+<<<<<<< HEAD
+function I = isophotesColor(N,u,v,c,e,taille)
+
+I = zeros(length(u),length(v));
+Iso = zeros(length(u),length(v));
+L = [0 0 1];
+=======
 function I = isophotesColor(N,u,v,L,taille)
 
 I = zeros(length(u),length(v));
 Iso = zeros(length(u),length(v));
+>>>>>>> 3e894ed2df1ecf527ebe437aa434e54dbe34761a
 
 for i = 1:length(u)-1
 	for j = 1:length(v)-1
