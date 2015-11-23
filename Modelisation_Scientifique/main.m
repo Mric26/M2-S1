@@ -87,7 +87,7 @@ pres = cell2mat(raw(:, 3));
 clearvars filename delimiter formatSpec fileID dataArray ans raw col numericData rawData row regexstr result numbers invalidThousandsSeparator thousandsRegExp me R;
 
 
-%% Extraction des données pour lesquelle on a une coordonnée géographique
+%% Extraction des donnï¿½es pour lesquelle on a une coordonnï¿½e gï¿½ographique
 
 % importation de la table de positions geographiques
 m = importFile(fullfile(pwd,'/postesSynop.csv'));
@@ -95,7 +95,7 @@ m = importFile(fullfile(pwd,'/postesSynop.csv'));
 setId = m(:,1);
 indices = [];
 
-% Extraction des indices nécessaires
+% Extraction des indices nï¿½cessaires
 for k=1:size(setId,1)
     id = find(numer_sta == setId(k));
     if (id ~= 0)
@@ -113,7 +113,7 @@ t = t(indices);
 m = m(indices,:);
 
 
-%% Interpolation des données sur une grille régulière
+%% Interpolation des donnï¿½es sur une grille rï¿½guliï¿½re
 
 nb = size(indices,1);  % Nombre de donnees acquises
 N = 10;    % Echantillonnage de la grille
@@ -129,11 +129,11 @@ maxY = max(m(:,4));
 
 interpoleShepard = zeros(N,N);
 
-for k=1:N
+for i=1:N
     for j=1:N
-        X = minX + u(k) * (maxX - minX);
+        X = minX + u(i) * (maxX - minX);
         Y = minY + v(j) * (maxY - minY);
-        i = [X Y];
+        iii = [X Y];
         
         % Interpolation de la temperature
         eval = 0;
@@ -144,19 +144,20 @@ for k=1:N
             s = 0;
             for l=1:nb
                 xl = [m(l,3) m(l,4)];
-                s = s + (1/(distance(i, xl) ^ mu));
+                s = s + (1/(distance(iii, xl) ^ mu));
             end
-            wk = (1 / (distance(i, xk) ^ mu)) * (1 / s);
+            wk = (1 / (distance(iii, xk) ^ mu)) * (1 / s);
             
             eval = eval + (wk * t(k));
         end
         
-        interpoleShepard(k,j) = eval;
+        interpoleShepard(i,j) = eval;
     end
 end
 
+clear X Y iii eval xk wk xl s i j k l;
 
-%% Calcul de la colormap
+% Calcul de la colormap
 
 mini = min(min(interpoleShepard));
 maxi = max(max(interpoleShepard));
@@ -166,7 +167,7 @@ lambda = [];
 table = zeros(N-1,N-1);
 lambda(1) = 290.0;
 
-% Parcourt des rectangles pour determiner leur état
+% Parcourt des rectangles pour determiner leur etat
 for k=1:length(lambda)
     elem = lambda(k);
     for i=1:(N-1)
@@ -181,4 +182,57 @@ for k=1:length(lambda)
     end
 end
 
+
+% Tableau des segments presents dans chaque case de la grille
+%   premier entier : nombre de segments
+%   ensemble de 4 entiers : un segment
+segTable = zeros(N-1,N-1,9);
+
+% Remplissage de la segTable
+for k=1:length(lambda)
+    for i=1:(N-1)
+        for j=1:(N-1)
+            switch table(i,j)
+                case 1
+                    % haut gauche
+                    segTable(i,j,0) = 1;
+                    alpha1 = (lambda(k) - table(i,j)) / (table(i,j+1) - table(i,j));
+                    alpha2 = (lambda(k) - table(i,j)) / (table(i+1,j) - table(i,j));
+                case 2
+                    % haut droite
+                    segTable(i,j,0) = 1;
+                case 3
+                    % horizontal
+                case 4
+                    % bas droite
+                    segTable(i,j,0) = 1;
+                case 5
+                    % cas casse co...ille
+                case 6
+                    % vertical
+                case 7
+                    % bas gauche
+                    segTable(i,j,0) = 1;
+                case 8
+                    % bas gauche
+                    segTable(i,j,0) = 1;
+                case 9
+                    %vertical
+                case 10
+                    % cas casse co...ille
+                case 11
+                    % bas droite
+                    segTable(i,j,0) = 1;
+                case 12
+                    %horizontal
+                case 13
+                    % haut droite
+                    segTable(i,j,0) = 1;
+                case 14
+                    % haut gauche
+                    segTable(i,j,0) = 1;
+            end
+        end
+    end
+end
 

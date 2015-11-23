@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 function plotBezierIsoPerso(B,S,N,I,taille)
+
+cm = colormap(hsv(taille));
+=======
+function plotBezierIsoPerso(B,S,N,I)
+>>>>>>> 3e894ed2df1ecf527ebe437aa434e54dbe34761a
 
 str1='\bf Control Point';
 str2='\bf Control Polygon';
@@ -6,7 +12,10 @@ str3='\bf Patch (bi-directional Bezier curve)';
 
 % % Plot de Patch de Bezier
 figure, hold on
+<<<<<<< HEAD
+=======
 colormap hsv
+>>>>>>> 3e894ed2df1ecf527ebe437aa434e54dbe34761a
 surface(S(:,:,1),S(:,:,2),S(:,:,3),I)
 
 title('\bf Surface de Bezier');
