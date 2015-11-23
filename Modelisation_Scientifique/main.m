@@ -155,30 +155,84 @@ for i=1:N
     end
 end
 
+clear X Y iii eval xk wk xl s i j k l;
 
-%% Calcul de la colormap
-% 
-% mini = min(min(interpoleShepard));
-% maxi = max(max(interpoleShepard));
-% 
-% % Ensemble de valeurs des isocontours
-% lambda = [];
-% table = zeros(N-1,N-1);
-% lambda(1) = 290.0;
-% 
-% % Parcourt des rectangles pour determiner leur etat
-% for k=1:length(lambda)
-%     elem = lambda(k);
-%     for i=1:(N-1)
-%         for j=1:(N-1)
-%             v1 = (interpoleShepard(i,j) >= elem);
-%             v2 = (interpoleShepard(i,j+1) >= elem);
-%             v3 = (interpoleShepard(i+1,j+1) >= elem);
-%             v4 = (interpoleShepard(i+1,j) >= elem);
-%             bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
-%             table(i,j) = bit;
-%         end
-%     end
-% end
+% Calcul de la colormap
 
+mini = min(min(interpoleShepard));
+maxi = max(max(interpoleShepard));
+
+% Ensemble de valeurs des isocontours
+lambda = [];
+table = zeros(N-1,N-1);
+lambda(1) = 290.0;
+
+% Parcourt des rectangles pour determiner leur etat
+for k=1:length(lambda)
+    elem = lambda(k);
+    for i=1:(N-1)
+        for j=1:(N-1)
+            v1 = (interpoleShepard(i,j) >= elem);
+            v2 = (interpoleShepard(i,j+1) >= elem);
+            v3 = (interpoleShepard(i+1,j+1) >= elem);
+            v4 = (interpoleShepard(i+1,j) >= elem);
+            bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
+            table(i,j) = bit;
+        end
+    end
+end
+
+
+% Tableau des segments presents dans chaque case de la grille
+%   premier entier : nombre de segments
+%   ensemble de 4 entiers : un segment
+segTable = zeros(N-1,N-1,9);
+
+% Remplissage de la segTable
+for k=1:length(lambda)
+    for i=1:(N-1)
+        for j=1:(N-1)
+            switch table(i,j)
+                case 1
+                    % haut gauche
+                    segTable(i,j,0) = 1;
+                    alpha1 = (lambda(k) - table(i,j)) / (table(i,j+1) - table(i,j));
+                    alpha2 = (lambda(k) - table(i,j)) / (table(i+1,j) - table(i,j));
+                case 2
+                    % haut droite
+                    segTable(i,j,0) = 1;
+                case 3
+                    % horizontal
+                case 4
+                    % bas droite
+                    segTable(i,j,0) = 1;
+                case 5
+                    % cas casse co...ille
+                case 6
+                    % vertical
+                case 7
+                    % bas gauche
+                    segTable(i,j,0) = 1;
+                case 8
+                    % bas gauche
+                    segTable(i,j,0) = 1;
+                case 9
+                    %vertical
+                case 10
+                    % cas casse co...ille
+                case 11
+                    % bas droite
+                    segTable(i,j,0) = 1;
+                case 12
+                    %horizontal
+                case 13
+                    % haut droite
+                    segTable(i,j,0) = 1;
+                case 14
+                    % haut gauche
+                    segTable(i,j,0) = 1;
+            end
+        end
+    end
+end
 
