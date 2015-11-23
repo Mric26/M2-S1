@@ -144,14 +144,14 @@ for i=1:N
             s = 0;
             for l=1:nb
                 xl = [m(l,3) m(l,4)];
-                s = s + (1/(distance(iii, xl) ^ mu));
+                s = s + (1/(distance(i, xl) ^ mu));
             end
-            wk = (1 / (distance(iii, xk) ^ mu)) * (1 / s);
+            wk = (1 / (distance(i, xk) ^ mu)) * (1 / s);
             
             eval = eval + (wk * t(k));
         end
         
-        interpoleShepard(i,j) = eval;
+        interpoleShepard(k,j) = eval;
     end
 end
 
