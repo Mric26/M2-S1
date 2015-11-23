@@ -7,7 +7,9 @@ class seuillage{
 
 public:
 
-    QImage *seuil(QImage *image, int seuil);
+    QImage *seuil(QImage *image, int seuil);   
+    QImage *seuilMoyenne(QImage *image);
+    QImage *seuilMedianne(QImage *image);
 
 };
 
