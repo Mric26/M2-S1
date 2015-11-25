@@ -2,14 +2,14 @@
 																							|
 1- What the differences between declarations in part A and those in part B ?				|
 																							|
-- Part A : déclaratin des headers															|
-- Part B : déclaration des variables et fonctions.											|
+- Part A : déclaratin des headers	(indique ou chercher)									|
+- Part B : déclaration des variables et fonctions.		(indique quoi chercher)				|
 ____________________________________________________________________________________________|
 																							|
 En ligne de commande :																		|
 ----------------------																		|
 swig -python main.i																			|
-gcc -fpic -c main_wrap.c -I /usr/include/python2.7										|
+gcc -fpic -c main_wrap.c -I /usr/include/python2.7											|
 gcc -shared main_wrap.o ../libtp4/lib/tp4.o -o _mymodule.so									|
 ____________________________________________________________________________________________|
 
