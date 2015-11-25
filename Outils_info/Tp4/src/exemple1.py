@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import mymodule
 
 def print_part1():
@@ -7,7 +9,7 @@ def print_part1():
   print("PI+5="+str(mymodule.add_pi(5)))
   return
 
-########### MAIN ############"
+########### MAIN ############
 mymodule.stats()
 print_part1()
 mymodule.set_log(1);
