@@ -4,5 +4,5 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS = -fPIC -I/usr/include/python2.7 -I/usr/include/tcl -I/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src   
 
-CXX_DEFINES = -D_main_EXPORTS
+CXX_DEFINES = -D_myModuleCmake_EXPORTS
 

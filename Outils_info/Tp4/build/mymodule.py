@@ -69,6 +69,7 @@ except AttributeError:
     _newclass = 0
 
 
+VERSION = _mymodule.VERSION
 
 def pi():
   return _mymodule.pi()
@@ -85,6 +86,26 @@ set_log = _mymodule.set_log
 def stats():
   return _mymodule.stats()
 stats = _mymodule.stats
+
+def Vecteur_create(*args):
+  return _mymodule.Vecteur_create(*args)
+Vecteur_create = _mymodule.Vecteur_create
+
+def Vecteur_add(*args):
+  return _mymodule.Vecteur_add(*args)
+Vecteur_add = _mymodule.Vecteur_add
+
+def Vecteur_elem(*args):
+  return _mymodule.Vecteur_elem(*args)
+Vecteur_elem = _mymodule.Vecteur_elem
+
+def Vecteur_str(*args):
+  return _mymodule.Vecteur_str(*args)
+Vecteur_str = _mymodule.Vecteur_str
+
+def Vecteur_destroy(*args):
+  return _mymodule.Vecteur_destroy(*args)
+Vecteur_destroy = _mymodule.Vecteur_destroy
 # This file is compatible with both classic and new-style classes.
 
 cvar = _mymodule.cvar

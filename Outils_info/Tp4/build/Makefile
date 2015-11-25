@@ -102,24 +102,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named _main
+# Target rules for targets named _myModuleCmake
 
 # Build rule for target.
-_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _main
-.PHONY : _main
+_myModuleCmake: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _myModuleCmake
+.PHONY : _myModuleCmake
 
 # fast build rule for target.
-_main/fast:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/build
-.PHONY : _main/fast
+_myModuleCmake/fast:
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/build
+.PHONY : _myModuleCmake/fast
 
 mainPYTHON_wrap.o: mainPYTHON_wrap.cxx.o
 .PHONY : mainPYTHON_wrap.o
 
 # target to build an object file
 mainPYTHON_wrap.cxx.o:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/mainPYTHON_wrap.cxx.o
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/mainPYTHON_wrap.cxx.o
 .PHONY : mainPYTHON_wrap.cxx.o
 
 mainPYTHON_wrap.i: mainPYTHON_wrap.cxx.i
@@ -127,7 +127,7 @@ mainPYTHON_wrap.i: mainPYTHON_wrap.cxx.i
 
 # target to preprocess a source file
 mainPYTHON_wrap.cxx.i:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/mainPYTHON_wrap.cxx.i
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/mainPYTHON_wrap.cxx.i
 .PHONY : mainPYTHON_wrap.cxx.i
 
 mainPYTHON_wrap.s: mainPYTHON_wrap.cxx.s
@@ -135,7 +135,7 @@ mainPYTHON_wrap.s: mainPYTHON_wrap.cxx.s
 
 # target to generate assembly for a file
 mainPYTHON_wrap.cxx.s:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/mainPYTHON_wrap.cxx.s
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/mainPYTHON_wrap.cxx.s
 .PHONY : mainPYTHON_wrap.cxx.s
 
 main_wrap.o: main_wrap.cxx.o
@@ -143,7 +143,7 @@ main_wrap.o: main_wrap.cxx.o
 
 # target to build an object file
 main_wrap.cxx.o:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/main_wrap.cxx.o
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/main_wrap.cxx.o
 .PHONY : main_wrap.cxx.o
 
 main_wrap.i: main_wrap.cxx.i
@@ -151,7 +151,7 @@ main_wrap.i: main_wrap.cxx.i
 
 # target to preprocess a source file
 main_wrap.cxx.i:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/main_wrap.cxx.i
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/main_wrap.cxx.i
 .PHONY : main_wrap.cxx.i
 
 main_wrap.s: main_wrap.cxx.s
@@ -159,7 +159,7 @@ main_wrap.s: main_wrap.cxx.s
 
 # target to generate assembly for a file
 main_wrap.cxx.s:
-	$(MAKE) -f CMakeFiles/_main.dir/build.make CMakeFiles/_main.dir/main_wrap.cxx.s
+	$(MAKE) -f CMakeFiles/_myModuleCmake.dir/build.make CMakeFiles/_myModuleCmake.dir/main_wrap.cxx.s
 .PHONY : main_wrap.cxx.s
 
 # Help Target
@@ -168,7 +168,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... _main"
+	@echo "... _myModuleCmake"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... mainPYTHON_wrap.o"

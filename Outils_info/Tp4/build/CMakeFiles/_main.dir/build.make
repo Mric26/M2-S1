@@ -56,7 +56,7 @@ mainPYTHON_wrap.cxx: /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src/main.i
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Swig source"
 	/usr/bin/cmake -E make_directory /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build
-	/usr/bin/swig2.0 -python -includeall -outdir /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build -c++ -I/usr/include/python2.7 -I/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src -o /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build/mainPYTHON_wrap.cxx /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src/main.i
+	/usr/bin/swig2.0 -python -includeall -outdir /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build -c++ -I/usr/include/python2.7 -I/usr/include/tcl -I/home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src -o /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/build/mainPYTHON_wrap.cxx /home/s/segureta/Documents/M2-S1/Outils_info/Tp4/src/main.i
 
 main.py: mainPYTHON_wrap.cxx
 

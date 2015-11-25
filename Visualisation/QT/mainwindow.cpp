@@ -751,8 +751,6 @@ void MainWindow::traitementRiz(){
         seuillage s;
         res = s.seuilMedianne(res);
 
-//        res = c.filtreMedian(res, 1);
-
         dilaEro de;
         this->setImage( de.erosion(res, 5), cheminImage);
     }
