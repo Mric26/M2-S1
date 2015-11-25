@@ -1,8 +1,0 @@
-
-function [output_args] = filtered(phi, s)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-
-
-end
-
