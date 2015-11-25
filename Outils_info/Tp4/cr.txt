@@ -9,7 +9,7 @@ ________________________________________________________________________________
 En ligne de commande :																		|
 ----------------------																		|
 swig -python main.i																			|
-gcc -fpic -c main_wrap.c -I /usr/include/python2.7										|
+gcc -fpic -c main_wrap.c -I /usr/include/python2.7											|
 gcc -shared main_wrap.o ../libtp4/lib/tp4.o -o _mymodule.so									|
 ____________________________________________________________________________________________|
 
