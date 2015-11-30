@@ -1,0 +1,2 @@
+/usr/bin/ar cr libOCL-Utilities.a  CMakeFiles/OCL-Utilities.dir/openCLUtilities.cpp.o CMakeFiles/OCL-Utilities.dir/openCLGLUtilities.cpp.o CMakeFiles/OCL-Utilities.dir/histogram-pyramids.cpp.o
+/usr/bin/ranlib libOCL-Utilities.a
