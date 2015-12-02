@@ -36,7 +36,7 @@ void MainWindow::quit(){
 
 void MainWindow::load(){
     //selection fichier
-    chemin = QFileDialog::getOpenFileName(this,"Ouvrir un fichier", QDir::currentPath() + "/../src", "Files (*.py *.c)");
+    chemin = QFileDialog::getOpenFileName(this,"Ouvrir un fichier", QDir::currentPath() + "/../src", "Files (*.py *.c *.txt)");
 
     //affichage message terminal
     QString texte = "Chargement de " + chemin;
@@ -65,7 +65,10 @@ void MainWindow::run(){
     if( chemin.endsWith(".c") ){
 
     }
-
+    if( chemin.endsWith(".txt") ){
+        QString texte = "Mais t'es pas fou ?!? Executer un .txt mais on aura tout vu !!!!";
+        ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() +  "\n" + texte +  "\n" );
+    }
 }
 
 void MainWindow::execPython(){
