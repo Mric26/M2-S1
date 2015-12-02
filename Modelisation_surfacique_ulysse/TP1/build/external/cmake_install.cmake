@@ -1,4 +1,4 @@
-# Install script for directory: /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/external
+# Install script for directory: /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/external
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

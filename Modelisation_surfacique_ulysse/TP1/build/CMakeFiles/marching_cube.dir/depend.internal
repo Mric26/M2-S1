@@ -70,8 +70,8 @@ CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
 CMakeFiles/marching_cube.dir/src/Mesh.cpp.o
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
  ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
@@ -143,7 +143,79 @@ CMakeFiles/marching_cube.dir/src/Mesh.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
  ../src/ImplicitFunction.h
  ../src/Mesh.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Mesh.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Mesh.cpp
+CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o
+ ../external/glm-0.9.4.0/glm/./core/_detail.hpp
+ ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
+ ../external/glm-0.9.4.0/glm/./core/_swizzle.hpp
+ ../external/glm-0.9.4.0/glm/./core/_swizzle_func.hpp
+ ../external/glm-0.9.4.0/glm/./core/_vectorize.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_common.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_common.inl
+ ../external/glm-0.9.4.0/glm/./core/func_exponential.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_exponential.inl
+ ../external/glm-0.9.4.0/glm/./core/func_geometric.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_geometric.inl
+ ../external/glm-0.9.4.0/glm/./core/func_integer.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_integer.inl
+ ../external/glm-0.9.4.0/glm/./core/func_matrix.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_matrix.inl
+ ../external/glm-0.9.4.0/glm/./core/func_noise.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_noise.inl
+ ../external/glm-0.9.4.0/glm/./core/func_packing.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_packing.inl
+ ../external/glm-0.9.4.0/glm/./core/func_trigonometric.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_trigonometric.inl
+ ../external/glm-0.9.4.0/glm/./core/func_vector_relational.hpp
+ ../external/glm-0.9.4.0/glm/./core/func_vector_relational.inl
+ ../external/glm-0.9.4.0/glm/./core/setup.hpp
+ ../external/glm-0.9.4.0/glm/./core/type.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_float.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_gentype.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_half.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_half.inl
+ ../external/glm-0.9.4.0/glm/./core/type_int.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x2.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x2.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x3.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x3.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x4.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat2x4.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x2.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x2.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x3.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x3.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x4.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat3x4.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x2.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x2.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x3.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x3.inl
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x4.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_mat4x4.inl
+ ../external/glm-0.9.4.0/glm/./core/type_size.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec1.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec1.inl
+ ../external/glm-0.9.4.0/glm/./core/type_vec2.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec2.inl
+ ../external/glm-0.9.4.0/glm/./core/type_vec3.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec3.inl
+ ../external/glm-0.9.4.0/glm/./core/type_vec4.hpp
+ ../external/glm-0.9.4.0/glm/./core/type_vec4.inl
+ ../external/glm-0.9.4.0/glm/core/_fixes.hpp
+ ../external/glm-0.9.4.0/glm/core/setup.hpp
+ ../external/glm-0.9.4.0/glm/glm.hpp
+ ../external/glm-0.9.4.0/glm/gtc/half_float.hpp
+ ../external/glm-0.9.4.0/glm/gtc/half_float.inl
+ ../external/glm-0.9.4.0/glm/gtc/quaternion.hpp
+ ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
+ ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
+ ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.h
 CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
  ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
@@ -213,9 +285,9 @@ CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitCylindre.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitCylindre.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitCylindre.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitCylindre.h
 CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
  ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
@@ -285,9 +357,9 @@ CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitSphere.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitSphere.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSphere.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSphere.h
 CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
  ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
@@ -357,9 +429,9 @@ CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitTore.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitTore.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.h
 CMakeFiles/marching_cube.dir/src/Object.cpp.o
  ../external/glew-1.9.0/include/GL/glew.h
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
@@ -573,10 +645,10 @@ CMakeFiles/marching_cube.dir/src/Object.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_ptr.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_ptr.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Mesh.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Object.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Object.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/shader.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Mesh.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Object.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Object.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/shader.h
 CMakeFiles/marching_cube.dir/src/Perlin.cpp.o
  ../external/glm-0.9.4.0/glm/./core/_detail.hpp
  ../external/glm-0.9.4.0/glm/./core/_fixes.hpp
@@ -646,8 +718,8 @@ CMakeFiles/marching_cube.dir/src/Perlin.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/quaternion.inl
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Perlin.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Perlin.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Perlin.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Perlin.h
 CMakeFiles/marching_cube.dir/src/main.cpp.o
  ../external/glew-1.9.0/include/GL/glew.h
  ../external/glfw-2.7.6/include/GL/glfw.h
@@ -862,16 +934,17 @@ CMakeFiles/marching_cube.dir/src/main.cpp.o
  ../external/glm-0.9.4.0/glm/gtc/type_precision.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_ptr.hpp
  ../external/glm-0.9.4.0/glm/gtc/type_ptr.inl
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/GLFW_define.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/ImplicitFunction.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Mesh.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitCylindre.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitSphere.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/MyImplicitTore.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/Object.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/main.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/shader.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/GLFW_define.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Mesh.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitCylindre.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSphere.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Object.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/main.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/shader.h
 CMakeFiles/marching_cube.dir/src/shader.cpp.o
  ../external/glew-1.9.0/include/GL/glew.h
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/shader.cpp
- /home/s/segureta/Documents/M2-S1/Modelisation surfacique (ulysse)/TP1/src/shader.h
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/shader.cpp
+ /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/shader.h

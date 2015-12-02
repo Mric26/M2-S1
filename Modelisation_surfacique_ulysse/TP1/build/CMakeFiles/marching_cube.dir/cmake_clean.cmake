@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o"
   "CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o"
   "CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o"
+  "CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o"
   "marching_cube.pdb"
   "marching_cube"
 )

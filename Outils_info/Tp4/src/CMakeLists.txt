@@ -22,8 +22,8 @@ INCLUDE_DIRECTORIES(${TCL_INCLUDE_PATH} ${TP4_INCLUDE_PATH})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 #compilation des .c
-add_executable(test1 test1.c)
-add_executable(test2 test2.c)
+add_executable(test1 ${TP4_SOURCE_DIR}/test1.c)
+add_executable(test2 ${TP4_SOURCE_DIR}/test2.c)
 
 #commande perso pour creer le wrapper
 add_custom_command(OUTPUT main_wrap.c COMMAND ${SWIG_EXECUTABLE} ARGS -python ${PROJECT_SOURCE_DIR}/main.i)

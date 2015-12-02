@@ -26,6 +26,7 @@
 #include "MyImplicitSphere.h"
 #include "MyImplicitCylindre.h"
 #include "MyImplicitTore.h"
+#include "MyImplicitAddition.h"
 
 // Window size :
 #define WIDTH 1000.0f
@@ -127,8 +128,9 @@ int main()
     //MyImplicitFunction f;
     MyImplicitSphere s;
     MyImplicitCylindre c;
-    //MyImplicitTore t;
-
+    MyImplicitTore t;
+    //MyImplicitAddition a;
+    
     //**********************************************************************************
     //
     // TODO : call the marching tetrahedra algorithm on your implicit function
@@ -139,8 +141,7 @@ int main()
     //Mesh::CreateCube(m);        // This is a place holder, comment it
 
     //Mesh::CreateIsoSurface(m, f, 0.5);
-    //Mesh::CreateIsoSurface(m, s, 0.5);
-    Mesh::CreateIsoSurface(m, c, 0.5);
+    Mesh::CreateIsoSurface(m, t, 0.0);
 
     //**********************************************************************************
 

@@ -45,9 +45,9 @@ class Mesh
 
   // marching tetrahedra
   static void CreateIsoSurface(Mesh& mesh, const ImplicitFunction& function, const float isoValue = 0.5
-          , const float minX = -1.0, const float maxX = 1.0
-          , const float minY = -1.0, const float maxY = 1.0
-          , const float minZ = -1.0, const float maxZ = 1.0
+          , const float minX = -2.0, const float maxX = 2.0
+          , const float minY = -2.0, const float maxY = 2.0
+          , const float minZ = -2.0, const float maxZ = 2.0
           , const unsigned int resX = 100
           , const unsigned int resY = 100
           , const unsigned int resZ = 100);

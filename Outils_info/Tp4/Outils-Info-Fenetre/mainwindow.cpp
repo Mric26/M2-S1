@@ -21,13 +21,11 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::BaseEditor(){
-    QString texte = "Mric : ";
     ui->TexteAffichage->setText( "Mric : ");
 }
 
 void MainWindow::MajEditor(){
-    QString texte = "Mric : ";
-    ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() + "\n" + texte);
+    ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() + "\n Mric : ");
 }
 
 void MainWindow::quit(){
@@ -40,8 +38,8 @@ void MainWindow::load(){
     chem = chemin.toStdString().c_str();
 
     //affichage message terminal
-    QString texte = "Chargement de " + chemin;
-    ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() +  "\n" + texte +  "\n" );
+    QString texte = "Mric : \n Chargement de " + chemin;
+    ui->TexteAffichage->setText( texte +  "\n" );
 
     //affichage contenus
     file = new QFile(chemin);
@@ -61,7 +59,7 @@ void MainWindow::load(){
 void MainWindow::run(){
 
     if( chemin.endsWith(".py") ){
-        execPython();
+        execPython2();
     }
     else{
         QString texte = "On ne peut que les fichiers au format python.";
@@ -105,3 +103,17 @@ sys.stderr = catchOutErr\n\
     Py_Finalize();
 }
 
+void MainWindow::execPython2(){
+    QStringList arguments ;
+
+    QProcess* myProcess = new QProcess(this);
+    myProcess->setProcessChannelMode(QProcess::MergedChannels);
+    myProcess->start(chemin,arguments);
+    myProcess->waitForFinished();
+
+    QByteArray sortieALL =  myProcess->readAllStandardOutput();
+    QString result = QString (sortieALL.data());
+
+    ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() +  "\n" + result );
+    MajEditor();
+}

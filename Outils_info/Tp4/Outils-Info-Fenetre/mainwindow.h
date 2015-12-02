@@ -9,8 +9,7 @@
 #include <python2.7/Python.h>
 #include <string>
 #include <iostream>
-#include <cstdio>
-#include <memory>
+#include <QProcess>
 
 namespace Ui {
 class MainWindow;
@@ -37,7 +36,8 @@ private:
 
     void BaseEditor();
     void MajEditor();
-    void execPython();
+    void execPython();  
+    void execPython2();
 
 };
 

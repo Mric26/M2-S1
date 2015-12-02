@@ -12,7 +12,7 @@ class MyImplicitTore : public  ImplicitFunction
 {
 public:
 
-    MyImplicitTore(float Rp):ImplicitFunction() { R = Rp; }
+    MyImplicitTore():ImplicitFunction() {}
     ~MyImplicitTore() {}
 
     virtual float Eval(glm::vec3 p) const;
