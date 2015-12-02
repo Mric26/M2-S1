@@ -37,6 +37,7 @@ void MainWindow::quit(){
 void MainWindow::load(){
     //selection fichier
     chemin = QFileDialog::getOpenFileName(this,"Ouvrir un fichier", QDir::currentPath() + "/../src", "Files (*.py *.c *.txt)");
+    chem = chemin.toStdString().c_str();
 
     //affichage message terminal
     QString texte = "Chargement de " + chemin;
@@ -62,12 +63,10 @@ void MainWindow::run(){
     if( chemin.endsWith(".py") ){
         execPython();
     }
-    if( chemin.endsWith(".c") ){
-
-    }
-    if( chemin.endsWith(".txt") ){
-        QString texte = "Mais t'es pas fou ?!? Executer un .txt mais on aura tout vu !!!!";
+    else{
+        QString texte = "On ne peut que les fichiers au format python.";
         ui->TexteAffichage->setText( ui->TexteAffichage->toPlainText() +  "\n" + texte +  "\n" );
+        MajEditor();
     }
 }
 
@@ -75,8 +74,6 @@ void MainWindow::execPython(){
     //passage en paramètre correct pour appel
     int fileHandle = file->handle();
     FILE* fh = fdopen(fileHandle, "rb");
-    const char* chem = chemin.toStdString().c_str();
-
 
     /////////////////////////// PYTHON ////////////////////
     std::string stdOutErr =
@@ -95,7 +92,7 @@ sys.stderr = catchOutErr\n\
     PyObject *pModule = PyImport_AddModule("__main__");                             //create main module
     PyRun_SimpleString(stdOutErr.c_str());                                          //invoke code to redirect
     PyRun_SimpleString("print(1+1)");                                               //this is ok stdout
-    PyRun_SimpleFile(fh, chem);
+    PyRun_SimpleFile(fh, chem);                                                     //run the function
     PyObject *catcher = PyObject_GetAttrString(pModule,"catchOutErr");              //get our catchOutErr created above
     PyErr_Print();                                                                  //make python print any errors
 

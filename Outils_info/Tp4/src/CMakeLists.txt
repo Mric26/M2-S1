@@ -21,7 +21,11 @@ INCLUDE_DIRECTORIES(${TCL_INCLUDE_PATH} ${TP4_INCLUDE_PATH})
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
-#commande perso pour creer le wrapper (en théorie)
+#compilation des .c
+add_executable(test1 test1.c)
+add_executable(test2 test2.c)
+
+#commande perso pour creer le wrapper
 add_custom_command(OUTPUT main_wrap.c COMMAND ${SWIG_EXECUTABLE} ARGS -python ${PROJECT_SOURCE_DIR}/main.i)
 
 #commande pour la creation du .so à partir du wrapper et des librairies
@@ -29,6 +33,3 @@ SET_SOURCE_FILES_PROPERTIES(main.i PROPERTIES CC ON)
 SET_SOURCE_FILES_PROPERTIES(main.i PROPERTIES SWIG_FLAGS "-includeall")
 SWIG_ADD_MODULE(myModuleCmake python  ../src/main_wrap.c)
 SWIG_LINK_LIBRARIES(myModuleCmake ${PYTHON_LIBRARIES})
-
-
-

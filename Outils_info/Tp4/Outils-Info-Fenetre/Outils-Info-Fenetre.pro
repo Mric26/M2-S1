@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_CXXFLAGS += -std=gnu++11\
+
 TARGET = Outils-Info-Fenetre
 TEMPLATE = app
 

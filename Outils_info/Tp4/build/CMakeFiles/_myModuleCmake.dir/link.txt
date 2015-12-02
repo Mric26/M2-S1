@@ -1,1 +1,0 @@
-/usr/bin/cc  -fPIC    -shared -Wl,-soname,_myModuleCmake.so -o _myModuleCmake.so CMakeFiles/_myModuleCmake.dir/main_wrap.c.o -lpython2.7 

@@ -9,6 +9,8 @@
 #include <python2.7/Python.h>
 #include <string>
 #include <iostream>
+#include <cstdio>
+#include <memory>
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +32,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QString chemin;
+    const char* chem;
     QFile * file;
 
     void BaseEditor();
