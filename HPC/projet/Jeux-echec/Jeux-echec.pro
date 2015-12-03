@@ -14,6 +14,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+    ia_alphabeta.cpp \
     pieces.cpp \
     plateau.cpp \
     caseplateau.cpp \
@@ -25,6 +26,7 @@ SOURCES += main.cpp\
     pion.cpp
 
 HEADERS  += mainwindow.h \
+    ia_alphabeta.h \
     pieces.h \
     plateau.h \
     caseplateau.h \
