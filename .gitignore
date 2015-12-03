@@ -1,3 +1,6 @@
 Visualisation/QT/*.pro.user
 Visualisation/QT/*.pro.user.*
 Visualisation/build-QT-Desktop-Debug/*
+HPC/projet/Jeux-echec/*.pro.user
+HPC/projet/Jeux-echec/*.pro.user.*
+HPC/projet/build-Jeux-echec-Desktop-Debug/*
