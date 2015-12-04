@@ -75,9 +75,32 @@ CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o.provides: CMakeFiles/m
 
 CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o.provides.build: CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o
 
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o: CMakeFiles/marching_cube.dir/flags.make
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o: ../src/MyImplicitIntersection.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitIntersection.cpp
+
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitIntersection.cpp > CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.i
+
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitIntersection.cpp -o CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.s
+
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.requires:
+.PHONY : CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.requires
+
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.provides: CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.provides.build
+.PHONY : CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.provides
+
+CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.provides.build: CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o
+
 CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o: ../src/ImplicitFunction.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.cpp
 
@@ -100,7 +123,7 @@ CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/marching_cube.dir/src/shader.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/shader.cpp.o: ../src/shader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/shader.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/shader.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/shader.cpp
 
@@ -123,7 +146,7 @@ CMakeFiles/marching_cube.dir/src/shader.cpp.o.provides.build: CMakeFiles/marchin
 
 CMakeFiles/marching_cube.dir/src/main.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/main.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/main.cpp
 
@@ -146,7 +169,7 @@ CMakeFiles/marching_cube.dir/src/main.cpp.o.provides.build: CMakeFiles/marching_
 
 CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o: ../src/MyImplicitTore.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.cpp
 
@@ -169,7 +192,7 @@ CMakeFiles/marching_cube.dir/src/MyImplicitTore.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o: ../src/MyImplicitCylindre.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitCylindre.cpp
 
@@ -192,7 +215,7 @@ CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o.provides.build: CMakeF
 
 CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o: ../src/MyImplicitSphere.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSphere.cpp
 
@@ -215,7 +238,7 @@ CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/marching_cube.dir/src/Perlin.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/Perlin.cpp.o: ../src/Perlin.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/Perlin.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/Perlin.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Perlin.cpp
 
@@ -238,7 +261,7 @@ CMakeFiles/marching_cube.dir/src/Perlin.cpp.o.provides.build: CMakeFiles/marchin
 
 CMakeFiles/marching_cube.dir/src/Object.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/Object.cpp.o: ../src/Object.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/Object.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/Object.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Object.cpp
 
@@ -259,9 +282,32 @@ CMakeFiles/marching_cube.dir/src/Object.cpp.o.provides: CMakeFiles/marching_cube
 
 CMakeFiles/marching_cube.dir/src/Object.cpp.o.provides.build: CMakeFiles/marching_cube.dir/src/Object.cpp.o
 
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o: CMakeFiles/marching_cube.dir/flags.make
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o: ../src/MyImplicitSoustraction.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSoustraction.cpp
+
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSoustraction.cpp > CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.i
+
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitSoustraction.cpp -o CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.s
+
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.requires:
+.PHONY : CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.requires
+
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.provides: CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.provides.build
+.PHONY : CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.provides
+
+CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.provides.build: CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o
+
 CMakeFiles/marching_cube.dir/src/Mesh.cpp.o: CMakeFiles/marching_cube.dir/flags.make
 CMakeFiles/marching_cube.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/marching_cube.dir/src/Mesh.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/marching_cube.dir/src/Mesh.cpp.o -c /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/Mesh.cpp
 
@@ -285,6 +331,7 @@ CMakeFiles/marching_cube.dir/src/Mesh.cpp.o.provides.build: CMakeFiles/marching_
 # Object files for target marching_cube
 marching_cube_OBJECTS = \
 "CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o" \
+"CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/shader.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/main.cpp.o" \
@@ -293,12 +340,14 @@ marching_cube_OBJECTS = \
 "CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/Perlin.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/Object.cpp.o" \
+"CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o" \
 "CMakeFiles/marching_cube.dir/src/Mesh.cpp.o"
 
 # External object files for target marching_cube
 marching_cube_EXTERNAL_OBJECTS =
 
 marching_cube: CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o
+marching_cube: CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/shader.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/main.cpp.o
@@ -307,6 +356,7 @@ marching_cube: CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/Perlin.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/Object.cpp.o
+marching_cube: CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/src/Mesh.cpp.o
 marching_cube: CMakeFiles/marching_cube.dir/build.make
 marching_cube: external/libGLFW_276.a
@@ -326,6 +376,7 @@ CMakeFiles/marching_cube.dir/build: marching_cube
 .PHONY : CMakeFiles/marching_cube.dir/build
 
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/MyImplicitAddition.cpp.o.requires
+CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/ImplicitFunction.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/shader.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/main.cpp.o.requires
@@ -334,6 +385,7 @@ CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/MyImplic
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/MyImplicitSphere.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/Perlin.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/Object.cpp.o.requires
+CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o.requires
 CMakeFiles/marching_cube.dir/requires: CMakeFiles/marching_cube.dir/src/Mesh.cpp.o.requires
 .PHONY : CMakeFiles/marching_cube.dir/requires
 

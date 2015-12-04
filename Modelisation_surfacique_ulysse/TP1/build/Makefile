@@ -236,6 +236,54 @@ src/MyImplicitCylindre.cpp.s:
 	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitCylindre.cpp.s
 .PHONY : src/MyImplicitCylindre.cpp.s
 
+src/MyImplicitIntersection.o: src/MyImplicitIntersection.cpp.o
+.PHONY : src/MyImplicitIntersection.o
+
+# target to build an object file
+src/MyImplicitIntersection.cpp.o:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.o
+.PHONY : src/MyImplicitIntersection.cpp.o
+
+src/MyImplicitIntersection.i: src/MyImplicitIntersection.cpp.i
+.PHONY : src/MyImplicitIntersection.i
+
+# target to preprocess a source file
+src/MyImplicitIntersection.cpp.i:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.i
+.PHONY : src/MyImplicitIntersection.cpp.i
+
+src/MyImplicitIntersection.s: src/MyImplicitIntersection.cpp.s
+.PHONY : src/MyImplicitIntersection.s
+
+# target to generate assembly for a file
+src/MyImplicitIntersection.cpp.s:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitIntersection.cpp.s
+.PHONY : src/MyImplicitIntersection.cpp.s
+
+src/MyImplicitSoustraction.o: src/MyImplicitSoustraction.cpp.o
+.PHONY : src/MyImplicitSoustraction.o
+
+# target to build an object file
+src/MyImplicitSoustraction.cpp.o:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.o
+.PHONY : src/MyImplicitSoustraction.cpp.o
+
+src/MyImplicitSoustraction.i: src/MyImplicitSoustraction.cpp.i
+.PHONY : src/MyImplicitSoustraction.i
+
+# target to preprocess a source file
+src/MyImplicitSoustraction.cpp.i:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.i
+.PHONY : src/MyImplicitSoustraction.cpp.i
+
+src/MyImplicitSoustraction.s: src/MyImplicitSoustraction.cpp.s
+.PHONY : src/MyImplicitSoustraction.s
+
+# target to generate assembly for a file
+src/MyImplicitSoustraction.cpp.s:
+	$(MAKE) -f CMakeFiles/marching_cube.dir/build.make CMakeFiles/marching_cube.dir/src/MyImplicitSoustraction.cpp.s
+.PHONY : src/MyImplicitSoustraction.cpp.s
+
 src/MyImplicitSphere.o: src/MyImplicitSphere.cpp.o
 .PHONY : src/MyImplicitSphere.o
 
@@ -403,6 +451,12 @@ help:
 	@echo "... src/MyImplicitCylindre.o"
 	@echo "... src/MyImplicitCylindre.i"
 	@echo "... src/MyImplicitCylindre.s"
+	@echo "... src/MyImplicitIntersection.o"
+	@echo "... src/MyImplicitIntersection.i"
+	@echo "... src/MyImplicitIntersection.s"
+	@echo "... src/MyImplicitSoustraction.o"
+	@echo "... src/MyImplicitSoustraction.i"
+	@echo "... src/MyImplicitSoustraction.s"
 	@echo "... src/MyImplicitSphere.o"
 	@echo "... src/MyImplicitSphere.i"
 	@echo "... src/MyImplicitSphere.s"
