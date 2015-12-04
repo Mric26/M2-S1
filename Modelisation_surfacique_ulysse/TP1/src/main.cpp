@@ -125,11 +125,11 @@ int main()
     //
     //**********************************************************************************
 
-    //MyImplicitFunction f;
+    MyImplicitFunction f;
     MyImplicitSphere s;
     MyImplicitCylindre c;
     MyImplicitTore t;
-    //MyImplicitAddition a;
+    MyImplicitAddition *a = new MyImplicitAddition(&t, &c);
     
     //**********************************************************************************
     //
@@ -140,9 +140,8 @@ int main()
     Mesh m;
     //Mesh::CreateCube(m);        // This is a place holder, comment it
 
-    //Mesh::CreateIsoSurface(m, f, 0.5);
-    Mesh::CreateIsoSurface(m, t, 0.0);
-
+    Mesh::CreateIsoSurface(m, *a, 0.5);
+    
     //**********************************************************************************
 
     cout << "Created mesh with " << m.vertices.size() << " vertices and " << m.faces.size() << " faces." << endl;

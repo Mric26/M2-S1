@@ -398,7 +398,7 @@ type_precision.inl
 
 ../external/glm-0.9.4.0/glm/gtc/type_precision.inl
 
-/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
 glm/glm.hpp
 -
 glm/gtc/type_precision.hpp
@@ -408,15 +408,15 @@ vector
 string
 -
 
-/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.cpp
-MyImplicitTore.h
-/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.h
+/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.cpp
+MyImplicitAddition.h
+/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.h
 iostream
 -
 math.h
 -
 
-/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitTore.h
+/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/MyImplicitAddition.h
 glm/glm.hpp
 -
 glm/gtc/type_precision.hpp
@@ -426,5 +426,5 @@ vector
 string
 -
 ImplicitFunction.h
-/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
+/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/src/ImplicitFunction.h
 
