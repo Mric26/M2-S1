@@ -10,8 +10,11 @@ using namespace std;
 
 class pieces
 {
+    Q_ENUMS(name)
+
 public:
-    pieces();
+    enum name { Roi, Reine, Fou, Cavalier, Tour, Pion };
+    pieces(QString n, QColor c);
     vector<casePlateau> deplacementPossible();
 
 private:

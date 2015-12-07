@@ -7,7 +7,7 @@ class casePlateau
 {
 public:
     casePlateau(int l, int c);
-    casePlateau(int l, int c, pieces p);
+    casePlateau(int l, int c, pieces p, QColor c);
 
     pieces getPiece() const;
     void setPiece(const pieces &value);
@@ -24,6 +24,7 @@ private:
     int column;
     pieces piece;
     bool selected;
+    QColor couleur;
 
 };
 

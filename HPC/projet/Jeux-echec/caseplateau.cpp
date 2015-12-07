@@ -7,11 +7,12 @@ casePlateau::casePlateau(int l, int c){
     selected = false;
 }
 
-casePlateau::casePlateau(int l, int c, pieces p){
+casePlateau::casePlateau(int l, int c, pieces p, QColor c){
     line = l;
     column = c;
     piece = p;
     selected = false;
+    couleur = c;
 }
 pieces casePlateau::getPiece(){
     return piece;

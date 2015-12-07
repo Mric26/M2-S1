@@ -4,7 +4,12 @@ plateau::plateau(){
     tab(8, 8);
     for (int line = 0; line < 8; line++) {
         for (int column = 0; column < 8; column++) {
-            tab(line, column) = new casePlateau(line, column);
+            if( (line+column)%2 == 0 ){
+                tab(line, column) = new casePlateau(line, column, NULL, false, QColor::blue());
+            }
+            else{
+                tab(line, column) = new casePlateau(line, column, NULL, false, QColor::black());
+            }
         }
     }
     newGame();
