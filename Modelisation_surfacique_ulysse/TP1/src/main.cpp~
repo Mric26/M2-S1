@@ -27,6 +27,8 @@
 #include "MyImplicitCylindre.h"
 #include "MyImplicitTore.h"
 #include "MyImplicitAddition.h"
+#include "MyImplicitSoustraction.h"
+#include "MyImplicitIntersection.h"
 
 // Window size :
 #define WIDTH 1000.0f
@@ -129,7 +131,9 @@ int main()
     MyImplicitSphere s;
     MyImplicitCylindre c;
     MyImplicitTore t;
-    MyImplicitAddition *a = new MyImplicitAddition(&s, &c);
+    MyImplicitAddition *a = new MyImplicitAddition(&t, &c);
+    //MyImplicitSoustraction *b = new MyImplicitSoustraction(&t, &c);
+    MyImplicitIntersection *i = new MyImplicitIntersection(&t, &c);
     
     //**********************************************************************************
     //
@@ -138,9 +142,9 @@ int main()
     //**********************************************************************************
 
     Mesh m;
-    //Mesh::CreateCube(m);        // This is a place holder, comment it
+    Mesh::CreateCube(m);        // This is a place holder, comment it
 
-    Mesh::CreateIsoSurface(m, *a, 0.5);
+    Mesh::CreateIsoSurface(m, *c, 0.5);
     
     //**********************************************************************************
 

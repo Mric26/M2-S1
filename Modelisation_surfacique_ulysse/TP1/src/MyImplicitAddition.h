@@ -1,5 +1,5 @@
 #ifndef IMPLICIT_ADDITION_H
-#define IMPLICIT_TADDITION_H
+#define IMPLICIT_ADDITION_H
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp> //i32vec3

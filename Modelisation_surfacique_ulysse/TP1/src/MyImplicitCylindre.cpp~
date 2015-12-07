@@ -16,10 +16,10 @@ float MyImplicitCylindre::Eval(glm::vec3 p) const{
 
 glm::vec3 MyImplicitCylindre::EvalDev(glm::vec3 p) const{ 
   vec3 res;
-  res.x = -p.x;
-  res.y = -p.y;
+  res.x = p.x;
+  res.y = p.y;
   res.z = 0;
-  return res;
+  return -res;
 }
 
 
