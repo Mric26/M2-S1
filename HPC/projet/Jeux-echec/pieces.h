@@ -21,6 +21,8 @@ public:
 
     QPixmap *getRep();
     void setRep(QPixmap *value);
+    casePlateau *casePiece;
+    void setCase(casePlateau *casePiece);
 
 private:
     QString name;

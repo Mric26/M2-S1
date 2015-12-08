@@ -43,6 +43,14 @@ void plateau::setListeJoueurNoir(std::vector<pieces*> *value){
     listeJoueurNoir = value;
 }
 
+void plateau::jouerCoup(coup *c){
+
+}
+
+void plateau::getBack(coup *c){
+
+}
+
 void plateau::newGame(){
 //    casePlateau c;
 //    c = tab(0,0);

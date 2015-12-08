@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <casePlateau.h>
+#include <coup.h>
 #include <pieces.h>
 
 using namespace boost::numeric::ublas;
@@ -23,6 +24,9 @@ public:
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;
     void setListeJoueurNoir(std::vector<pieces*> *value);
+
+    void jouerCoup(coup *c);
+    void getBack(coup*c);
 
 private:
     matrix<casePlateau *> tab;
