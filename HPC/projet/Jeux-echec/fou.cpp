@@ -1,5 +1,4 @@
 #include "fou.h"
 
-fou::fou()
-{
+fou::fou(int color):pieces(QString("fou"), color){
 }

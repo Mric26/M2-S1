@@ -4,19 +4,23 @@
 #include <QString>
 #include <vector>
 #include <QColor>
-#include <caseplateau.h>
+#include <casePlateau.h>
 
+class casePlateau;
 using namespace std;
 
 class pieces
 {
+    Q_ENUMS(name)
+
 public:
-    pieces();
+    enum name { Roi, Reine, Fou, Cavalier, Tour, Pion };
+    pieces(QString n, int c);
     vector<casePlateau> deplacementPossible();
 
 private:
     QString name;
-    QColor couleur;
+    int couleur;
 };
 
 #endif // PIECES_H

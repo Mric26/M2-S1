@@ -1,3 +1,0 @@
-/home/l/lefevreh/Documents/M2/M2-S1/Modelisation_surfacique_ulysse/TP1/build/external/CMakeFiles/GLEW_190.dir
-/home/l/lefevreh/Documents/M2/M2-S1/Modelisation_surfacique_ulysse/TP1/build/external/CMakeFiles/GLFW_276.dir
-/home/l/lefevreh/Documents/M2/M2-S1/Modelisation_surfacique_ulysse/TP1/build/CMakeFiles/marching_cube.dir

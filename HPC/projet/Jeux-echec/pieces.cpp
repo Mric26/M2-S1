@@ -1,9 +1,9 @@
 #include "pieces.h"
 
-pieces::pieces(){
-
+pieces::pieces( QString n, int c){
+    name = n;
+    couleur = c;
 }
 
 vector<casePlateau> pieces::deplacementPossible(){
-
 }
