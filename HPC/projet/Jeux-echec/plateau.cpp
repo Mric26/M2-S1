@@ -23,6 +23,10 @@ void plateau::setJoueur1(bool value){
     joueur1 = value;
 }
 
+casePlateau *plateau::getCasePlateau(int column, int line) {
+    return tab(line, column);
+}
+
 std::vector<pieces *> *plateau::getListeJoueurBlanc() const{
     return listeJoueurBlanc;
 }

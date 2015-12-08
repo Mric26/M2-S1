@@ -18,6 +18,7 @@ public:
     plateau();
     bool getJoueur1() const;
     void setJoueur1(bool value);
+    casePlateau* getCasePlateau(int column, int line);
     std::vector<pieces*> *getListeJoueurBlanc() const;
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;

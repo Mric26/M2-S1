@@ -18,9 +18,13 @@ public:
     pieces(QString n, int c);
     vector<casePlateau> deplacementPossible();
 
+    QPixmap *getRep();
+    void setRep(QPixmap *value);
+
 private:
     QString name;
     int couleur;
+    QPixmap *rep;
 };
 
 #endif // PIECES_H

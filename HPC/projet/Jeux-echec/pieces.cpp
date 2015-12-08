@@ -7,3 +7,12 @@ pieces::pieces( QString n, int c){
 
 vector<casePlateau> pieces::deplacementPossible(){
 }
+
+QPixmap *pieces::getRep(){
+    return rep;
+}
+
+void pieces::setRep(QPixmap *value){
+    rep = value;
+}
+

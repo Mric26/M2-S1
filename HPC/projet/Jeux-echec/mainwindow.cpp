@@ -8,11 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     scene = new QGraphicsScene();
-    QImage* image = new QImage("/home/s/segureta/Documents/M2-S1/HPC/projet/images/plateau.png");
-    QPixmap *imagePix = new QPixmap();
-    imagePix->convertFromImage(*image);
+    QPixmap *imagePix = new QPixmap(":images/plateau.png");
     scene->addPixmap(*imagePix);
-    scene->setSceneRect(0,0,image->width(),image->height());
+    scene->setSceneRect(0,0,imagePix->width(),imagePix->height());
     ui->Affichage->setScene(scene);
     ui->Affichage->show();
 
