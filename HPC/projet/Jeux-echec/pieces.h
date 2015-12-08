@@ -5,6 +5,7 @@
 #include <vector>
 #include <QColor>
 #include <casePlateau.h>
+#include <QPixmap>
 
 class casePlateau;
 using namespace std;
