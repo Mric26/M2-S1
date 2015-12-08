@@ -31,8 +31,6 @@ public:
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;
     void setListeJoueurNoir(std::vector<pieces*> *value);
-    QPainter *getPainter();
-    void setPainter(QPainter *value);
 
     QPixmap* affichagePlateau();
     void changementJoueur();
@@ -46,7 +44,6 @@ private:
     bool joueur1;
     std::vector<pieces*> *listeJoueurBlanc;
     std::vector<pieces*> *listeJoueurNoir;
-    QPainter * painter;
 
 };
 

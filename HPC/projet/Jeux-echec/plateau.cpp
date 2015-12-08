@@ -12,6 +12,9 @@ plateau::plateau(){
             }
         }
     }
+    listeJoueurBlanc = new std::vector<pieces*>;
+    listeJoueurNoir = new std::vector<pieces*>;
+
     newGame();
 }
 
@@ -94,14 +97,6 @@ void plateau::getBack(coup *c){
 //    }
 }
 
-QPainter *plateau::getPainter(){
-    return painter;
-}
-
-void plateau::setPainter(QPainter *value){
-    painter = value;
-}
-
 QPixmap *plateau::affichagePlateau(){
     QPixmap *res = new QPixmap(":images/plateau.png");
     return res;
@@ -109,18 +104,18 @@ QPixmap *plateau::affichagePlateau(){
 
 void plateau::newGame(){
 
-//    casePlateau * c = tab->at_element(0,0);
-//    tour * tb = new tour(0);
-//    tb->setCase(c);
-//    listeJoueurBlanc->push_back(tb);
-//    c->setPiece( tb );
+    casePlateau * c = tab->at_element(0,0);
+    tour * tb = new tour(0);
+    tb->setCase(c);
+    listeJoueurBlanc->push_back(tb);
+    c->setPiece( tb );
 
-//    setJoueur1(true);
+    setJoueur1(true);
 }
 
 void plateau::affichagePieces(){
-//    foreach (pieces* p, *listeJoueurBlanc) {
+    foreach (pieces* p, *listeJoueurBlanc) {
 
-//    }
+    }
 }
 
