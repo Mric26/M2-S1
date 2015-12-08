@@ -12,6 +12,7 @@ public:
 
     void setDepth(unsigned int depth);
     void jouerAlphaBeta();
+    void jouerBetaAlpha();
 
 private:
     // Features
