@@ -1,6 +1,6 @@
 #include "pieces.h"
 
-pieces::pieces( QString n, QColor c){
+pieces::pieces( QString n, int c){
     name = n;
     couleur = c;
 }

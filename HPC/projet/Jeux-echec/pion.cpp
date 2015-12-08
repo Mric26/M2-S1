@@ -1,5 +1,4 @@
 #include "pion.h"
 
-pion::pion()
-{
+pion::pion(int color):pieces(QString("pion"), color){
 }

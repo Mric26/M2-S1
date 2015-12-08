@@ -4,28 +4,30 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <vector>
 
-#include <caseplateau.h>
+#include <casePlateau.h>
 #include <pieces.h>
 
 using namespace boost::numeric::ublas;
 using namespace std;
 
+class pieces;
+class casePlateau;
 class plateau
 {
 public:
     plateau();
     bool getJoueur1() const;
     void setJoueur1(bool value);
-    vector *getListeJoueurBlanc() const;
-    void setListeJoueurBlanc(const vector *value);
-    vector *getListeJoueurNoir() const;
-    void setListeJoueurNoir(const vector *value);
+    std::vector<pieces*> *getListeJoueurBlanc() const;
+    void setListeJoueurBlanc(std::vector<pieces *> *value);
+    std::vector<pieces*> *getListeJoueurNoir() const;
+    void setListeJoueurNoir(std::vector<pieces*> *value);
 
 private:
-    matrix<casePlateau> tab;
+    matrix<casePlateau *> tab;
     bool joueur1;
-    vector *listeJoueurBlanc;
-    vector *listeJoueurNoir;
+    std::vector<pieces*> *listeJoueurBlanc;
+    std::vector<pieces*> *listeJoueurNoir;
     void newGame();
 
 };

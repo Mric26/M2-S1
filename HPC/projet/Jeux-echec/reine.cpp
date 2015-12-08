@@ -1,5 +1,4 @@
 #include "reine.h"
 
-reine::reine()
-{
+reine::reine(int color):pieces(QString("reine"), color){
 }

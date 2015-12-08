@@ -1,4 +1,4 @@
-#include "caseplateau.h"
+#include "casePlateau.h"
 
 casePlateau::casePlateau(int l, int c){
     line = l;
@@ -7,22 +7,23 @@ casePlateau::casePlateau(int l, int c){
     selected = false;
 }
 
-casePlateau::casePlateau(int l, int c, pieces p, QColor c){
+casePlateau::casePlateau(int l, int c, pieces *p, bool s, int co){
     line = l;
     column = c;
     piece = p;
-    selected = false;
-    couleur = c;
+    selected = s;
+    couleur = co;
 }
-pieces casePlateau::getPiece(){
+
+pieces* casePlateau::getPiece(){
     return piece;
 }
 
-void casePlateau::setPiece(pieces p){
+void casePlateau::setPiece(pieces* p){
     piece = p;
 }
 
-bool casePlateau::getSelected() const{
+bool casePlateau::getSelected(){
     return selected;
 }
 
@@ -30,7 +31,7 @@ void casePlateau::setSelected(bool value){
     selected = value;
 }
 
-int casePlateau::getLine() const{
+int casePlateau::getLine(){
     return line;
 }
 
@@ -38,7 +39,7 @@ void casePlateau::setLine(int value){
     line = value;
 }
 
-int casePlateau::getColumn() const{
+int casePlateau::getColumn(){
     return column;
 }
 

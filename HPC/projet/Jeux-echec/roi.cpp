@@ -1,4 +1,4 @@
 #include "roi.h"
 
-roi::roi(){
+roi::roi(int color):pieces(QString("roi"), color){
 }

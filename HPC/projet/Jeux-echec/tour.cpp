@@ -1,5 +1,4 @@
 #include "tour.h"
 
-tour::tour()
-{
+tour::tour(int color):pieces(QString("tour"), color){
 }

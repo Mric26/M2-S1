@@ -5,10 +5,10 @@ plateau::plateau(){
     for (int line = 0; line < 8; line++) {
         for (int column = 0; column < 8; column++) {
             if( (line+column)%2 == 0 ){
-                tab(line, column) = new casePlateau(line, column, NULL, false, QColor::blue());
+                tab(line, column) = new casePlateau(line, column, NULL, false, 0);
             }
             else{
-                tab(line, column) = new casePlateau(line, column, NULL, false, QColor::black());
+                tab(line, column) = new casePlateau(line, column, NULL, false, 1);
             }
         }
     }
@@ -23,24 +23,24 @@ void plateau::setJoueur1(bool value){
     joueur1 = value;
 }
 
-vector *plateau::getListeJoueurBlanc() const{
-    return listeJoeurBlanc;
+std::vector<pieces *> *plateau::getListeJoueurBlanc() const{
+    return listeJoueurBlanc;
 }
 
-void plateau::setListeJoueurBlanc(const vector *value){
-    listeJoeurBlanc = value;
+void plateau::setListeJoueurBlanc(std::vector<pieces*> *value){
+    listeJoueurBlanc = value;
 }
 
-vector *plateau::getListeJoueurNoir() const{
-    return listeJoeurNoir;
+std::vector<pieces*> *plateau::getListeJoueurNoir() const{
+    return listeJoueurNoir;
 }
 
-void plateau::setListeJoueurNoir(const vector *value){
-    listeJoeurNoir = value;
+void plateau::setListeJoueurNoir(std::vector<pieces*> *value){
+    listeJoueurNoir = value;
 }
 
 void plateau::newGame(){
-    casePlateau c;
+//    casePlateau c;
 //    c = tab(0,0);
 //    c.setPiece();
     setJoueur1(true);
