@@ -43,12 +43,55 @@ void plateau::setListeJoueurNoir(std::vector<pieces*> *value){
     listeJoueurNoir = value;
 }
 
-void plateau::jouerCoup(coup *c){
+void plateau::changementJoueur(){
+    if (getJoueur1()) {
+        setJoueur1(false);
+    } else {
+        setJoueur1(true);
+    }
+}
 
+void plateau::jouerCoup(coup *c){
+    // Deplace les pieces sur le plateau
+    c->jouerCoup();
+    // Mise a jour des listes de piece du joueur
+//    pieces *piece = c->getPrise();
+//    if (piece != NULL) {
+//        int pos = -1;
+//        if (piece->getCouleur() == 0) {
+//            for (unsigned int i = 0; i < listeJoueurBlanc->size() && pos == -1; ++i) {
+//                if (piece == listeJoueurBlanc->at(i)) {
+//                    pos = i;
+//                }
+//            }
+//            listeJoueurBlanc->erase(listeJoueurBlanc->begin() + pos);
+//        } else {
+//            for (unsigned int i = 0; i < listeJoueurNoir->size() && pos == -1; ++i) {
+//                if (piece == listeJoueurNoir->at(i)) {
+//                    pos = i;
+//                }
+//            }
+//            listeJoueurNoir->erase(listeJoueurNoir->begin() + pos);
+//        }
+//    }
+    // Changement de joueur
+    changementJoueur();
 }
 
 void plateau::getBack(coup *c){
-
+    // Changement de joueur
+    changementJoueur();
+    // Replace les pieces sur le plateau
+    c->getBack();
+    // Mise a jour des pieces du joueur
+//    pieces *piece = c->getPrise();
+//    if (piece != NULL) {
+//        if (piece->getCouleur() == 0) {
+//            listeJoueurBlanc->push_back(piece);
+//        } else {
+//            listeJoueurNoir->push_back(piece);
+//        }
+//    }
 }
 
 QPainter *plateau::getPainter(){

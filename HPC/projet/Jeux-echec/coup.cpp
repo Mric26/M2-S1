@@ -6,6 +6,10 @@ coup::coup(casePlateau *caseDep, casePlateau *caseArr){
     this->caseArr = caseArr;
 }
 
+pieces *coup::getPrise(){
+    return piecePrise;
+}
+
 void coup::jouerCoup(){
     if (piecePrise != NULL) {
         piecePrise->setCase(NULL);

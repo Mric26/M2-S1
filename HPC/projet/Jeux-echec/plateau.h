@@ -35,6 +35,7 @@ public:
     void setPainter(QPainter *value);
 
     QPixmap* affichagePlateau();
+    void changementJoueur();
     void jouerCoup(coup *c);
     void getBack(coup*c);
     void newGame();
