@@ -8,6 +8,13 @@
 #include <coup.h>
 #include <pieces.h>
 
+#include <roi.h>
+#include <reine.h>
+#include <fou.h>
+#include <cavalier.h>
+#include <tour.h>
+#include <pion.h>
+
 using namespace boost::numeric::ublas;
 using namespace std;
 
@@ -24,16 +31,21 @@ public:
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;
     void setListeJoueurNoir(std::vector<pieces*> *value);
+    QPainter *getPainter();
+    void setPainter(QPainter *value);
 
+    QPixmap* affichagePlateau();
     void jouerCoup(coup *c);
     void getBack(coup*c);
+    void newGame();
+    void affichagePieces();
 
 private:
-    matrix<casePlateau *> tab;
+    matrix<casePlateau *> * tab;
     bool joueur1;
     std::vector<pieces*> *listeJoueurBlanc;
     std::vector<pieces*> *listeJoueurNoir;
-    void newGame();
+    QPainter * painter;
 
 };
 

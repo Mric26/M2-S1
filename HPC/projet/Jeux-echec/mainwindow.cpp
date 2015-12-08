@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     scene = new QGraphicsScene();
-    QPixmap *imagePix = new QPixmap(":images/plateau.png");
+    plateau *p = new plateau();
+    QPixmap *imagePix = p->affichagePlateau();
     scene->addPixmap(*imagePix);
     scene->setSceneRect(0,0,imagePix->width(),imagePix->height());
     ui->Affichage->setScene(scene);

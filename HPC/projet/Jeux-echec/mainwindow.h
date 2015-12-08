@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <plateau.h>
 
 namespace Ui {
 class MainWindow;
