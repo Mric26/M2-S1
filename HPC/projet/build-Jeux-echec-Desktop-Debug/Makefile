@@ -333,19 +333,19 @@ compiler_rcc_make_all: qrc_ressources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_ressources.cpp
 qrc_ressources.cpp: ../Jeux-echec/ressources.qrc \
+		../Jeux-echec/images/b2.png \
+		../Jeux-echec/images/n4.png \
+		../Jeux-echec/images/b6.png \
 		../Jeux-echec/images/b1.png \
 		../Jeux-echec/images/n3.png \
+		../Jeux-echec/images/plateau.png \
 		../Jeux-echec/images/b5.png \
 		../Jeux-echec/images/n2.png \
 		../Jeux-echec/images/b4.png \
 		../Jeux-echec/images/n6.png \
 		../Jeux-echec/images/n1.png \
-		../Jeux-echec/images/plateau.png \
 		../Jeux-echec/images/b3.png \
-		../Jeux-echec/images/n5.png \
-		../Jeux-echec/images/b2.png \
-		../Jeux-echec/images/n4.png \
-		../Jeux-echec/images/b6.png
+		../Jeux-echec/images/n5.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name ressources ../Jeux-echec/ressources.qrc -o qrc_ressources.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp
@@ -725,8 +725,7 @@ mainwindow.o: ../Jeux-echec/mainwindow.cpp ../Jeux-echec/mainwindow.h \
 		/usr/include/qt5/QtWidgets/QGraphicsScene \
 		/usr/include/qt5/QtWidgets/qgraphicsscene.h \
 		/usr/include/qt5/QtGui/qpen.h \
-		ui_mainwindow.h \
-		/usr/include/qt5/QtCore/QVariant
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Jeux-echec/mainwindow.cpp
 
 ia_alphabeta.o: ../Jeux-echec/ia_alphabeta.cpp ../Jeux-echec/ia_alphabeta.h \

@@ -25,6 +25,7 @@ public:
     std::vector<pieces*> *getListeJoueurNoir() const;
     void setListeJoueurNoir(std::vector<pieces*> *value);
 
+    void changementJoueur();
     void jouerCoup(coup *c);
     void getBack(coup*c);
 

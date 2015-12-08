@@ -8,6 +8,7 @@ class coup
 {
 public:
     coup(casePlateau *caseDep, casePlateau *caseArr);
+    pieces* getPrise();
     void jouerCoup();
     void getBack();
 
