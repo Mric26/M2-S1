@@ -16,3 +16,7 @@ void pieces::setRep(QPixmap *value){
     rep = value;
 }
 
+void pieces::setCase(casePlateau *casePiece){
+    this->casePiece = casePiece;
+}
+
