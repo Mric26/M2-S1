@@ -25,7 +25,7 @@ ndetecteurs2 = 41;
 nprojections2 = 128;
 r2 = 3;
 
-%%%%%%%%%%%%%%%%%% Lecture des donnée & Affichage %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Lecture des données & Affichage %%%%%%%%%%%%%%%%%
 fbsino1 = litfbsinogramme(filename1, nprojections1, ndetecteurs1);
 figure('Name',' Sinograme 1 ', 'position', [400, 400, 550, 400])
 colormap(gray);
@@ -41,27 +41,23 @@ xlabel('Pan Axis    or   Detector Axis')
 ylabel('Projection   or   Source Position Number')
 
 %%%%%%%%%%%%%%%%%%%%% Ponderation des donnees %%%%%%%%%%%%%%%%%%%%%
-demifanangle1 = asin(1./r1);
-halpha1 = 2 * demifanangle1 / (ndetecteurs1 - 1);
-hpsi1 = halpha1;
-psi1 = -demifanangle1:hpsi1:demifanangle1+hpsi1/100;
+dfa1 = asin(1./r1);
+hpsi1 = 2 * dfa1 / (ndetecteurs1 - 1);
+psi1 = -dfa1:hpsi1:dfa1+hpsi1/100;
 cospsi1 = r1 * cos(psi1);
 hphi1 = (2*pi / (nprojections1-1));
 phi1 = 0:hphi1:2*pi;
 cosphi1 = cos(phi1);
 sinphi1 = sin(phi1);
-dfa1 = asin(1 / r1);
 
-demifanangle2 = asin(1./r2);
-halpha2 = 2 * demifanangle2 / (ndetecteurs2 - 1);
-hpsi2 = halpha2;
-psi2 = -demifanangle2:hpsi2:demifanangle2+hpsi1/100;
+dfa2 = asin(1./r2);
+hpsi2 = 2 * dfa2 / (ndetecteurs2 - 1);
+psi2 = -dfa2:hpsi2:dfa2+hpsi1/100;
 cospsi2 = r2 * cos(psi2);
 hphi2 = (2*pi / (nprojections2-1));
 phi2 = 0:hphi2:2*pi;
 cosphi2 = cos(phi2);
 sinphi2 = sin(phi2);
-dfa2 = asin(1 / r2);
 
 %%%%%%%%%%%%%%%% Ponderation sur chaque projection %%%%%%%%%%%%%%%%
 WFBsino1 = zeros(nprojections1, ndetecteurs1);
@@ -82,11 +78,11 @@ imagesc(WFBsino2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Filtrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 freqcutoff1 = (1+r1) * nprojections1 * 0.5;
-fbSLfilter1 = fbshepploganfilter(ndetecteurs1, halpha1, freqcutoff1);
+fbSLfilter1 = fbshepploganfilter(ndetecteurs1, hpsi1, freqcutoff1);
 figure('Name',' Filtre 1 ', 'position', [400, 400, 550, 400])
 xalpha1 = -ndetecteurs1 * hpsi1:hpsi1:ndetecteurs1*hpsi1;
 fftFbSLfilter1 = fft(fbSLfilter1);
-plot(xalpha1, fftFbSLfilter1)
+plot(xalpha1, real(fftFbSLfilter1))
 
 zpwdata1 = zeros(nprojections1, 2*ndetecteurs1+1);
 zpwdata1(:,1:ndetecteurs1) = WFBsino1;
@@ -106,7 +102,7 @@ imagesc(filteredwdata1)
 
 %%donnée2%%
 freqcutoff2 = (1+r2) * nprojections2 * 0.5;
-fbSLfilter2 = fbshepploganfilter(ndetecteurs2, halpha2, freqcutoff2);
+fbSLfilter2 = fbshepploganfilter(ndetecteurs2, hpsi2, freqcutoff2);
 figure('Name',' Filtre 2 ', 'position', [1200, 400, 550, 400])
 xalpha2 = -ndetecteurs2 * hpsi2:hpsi2:ndetecteurs2*hpsi2;
 fftFbSLfilter2 = fft(fbSLfilter2);
@@ -145,13 +141,10 @@ for x=1:Reso
                 
                 
                 radian1 = acos((xTeta1+r1) / dist_xy1);   % radian compris entre [0 dfa]
-                %radian = min(dfa, radian);        % correction d'une erreur eventuelle
-                %radian = max(radian, 0);
-                if (yZeta1 < 0)
+                if (yZeta1 < 0)               % ajustement du signe en fonction de l'orientation par rapport à zeta
                     radian1 = -radian1;       % radian compris entre [-dfa dfa]
                 end
                 
-                %L = 1 + floor( ((radian - (-dfa)) / (2*dfa)) * (ndet-1) );
                 L = 1 + floor( (radian1 + dfa1) / hpsi1 );
                 if (L == ndetecteurs1)
                     L = ndetecteurs1-1;
@@ -189,13 +182,10 @@ for x=1:Reso
                 
                 
                 radian2 = acos((xTeta2+r2) / dist_xy2);   % radian compris entre [0 dfa]
-                %radian = min(dfa, radian);        % correction d'une erreur eventuelle
-                %radian = max(radian, 0);
-                if (yZeta2 < 0)
+                if (yZeta2 < 0)               % ajustement du signe en fonction de l'orientation par rapport à zeta
                     radian2 = -radian2;       % radian compris entre [-dfa dfa]
                 end
                 
-                %L = 1 + floor( ((radian - (-dfa)) / (2*dfa)) * (ndet-1) );
                 L = 1 + floor( (radian2 + dfa2) / hpsi2 );
                 if (L == ndetecteurs2)
                     L = ndetecteurs2-1;

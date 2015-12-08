@@ -1,4 +1,4 @@
-# Install script for directory: /user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_surfacique_ulysse/TP1/external
+# Install script for directory: /home/l/lefevreh/Documents/M2/M2-S1/Modelisation_surfacique_ulysse/TP1/external
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,6 +29,6 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 # Install shared libraries without execute permission?
 IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  SET(CMAKE_INSTALL_SO_NO_EXE "0")
+  SET(CMAKE_INSTALL_SO_NO_EXE "1")
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 

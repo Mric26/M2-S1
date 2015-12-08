@@ -10,7 +10,8 @@ float MyImplicitTore::Eval(glm::vec3 p) const{
   // f(x,y,z) = (x² + y² + z² + R² - r²)² - 4 R² (x² + z²)
   float R = 1.30;
   float r = 0.50;
-  float res = (p.x * p.x + p.y * p.y + p.z * p.z + R * R - r * r)*(p.x * p.x + p.y * p.y + p.z * p.z + R * R - r * r) - 4*R*R*(p.x * p.x + p.z * p.z) ;
+  float k = (p.x * p.x + p.y * p.y + p.z * p.z + R * R - r * r);
+  float res = k*k - 4*R*R*(p.x * p.x + p.z * p.z) ;
   
   return res;
 }
