@@ -1,6 +1,6 @@
 #include "plateau.h"
 
-plateau::plateau(){
+plateau::plateau(QPainter* p){
     tab = new matrix<casePlateau *>(8, 8);
     for (int line = 0; line < 8; line++) {
         for (int column = 0; column < 8; column++) {
@@ -14,6 +14,7 @@ plateau::plateau(){
     }
     listeJoueurBlanc = new std::vector<pieces*>;
     listeJoueurNoir = new std::vector<pieces*>;
+    painter = p;
 
     newGame();
 }
@@ -149,7 +150,6 @@ void plateau::newGame(){
 
 void plateau::affichagePieces(){
     foreach (pieces* p, *listeJoueurBlanc) {
-
     }
 }
 

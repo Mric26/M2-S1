@@ -18,6 +18,7 @@ public:
     ~MainWindow();
 
     QGraphicsScene * scene;
+    QPainter* painter;
 
 private:
     Ui::MainWindow *ui;

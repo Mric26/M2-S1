@@ -23,7 +23,7 @@ class casePlateau;
 class plateau
 {
 public:
-    plateau();
+    plateau(QPainter *p);
     bool getJoueur1() const;
     void setJoueur1(bool value);
     casePlateau* getCasePlateau(int column, int line);
@@ -49,6 +49,7 @@ private:
     bool joueur1;
     std::vector<pieces*> *listeJoueurBlanc;
     std::vector<pieces*> *listeJoueurNoir;
+    QPainter * painter;
 
 };
 
