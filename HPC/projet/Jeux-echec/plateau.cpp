@@ -30,6 +30,19 @@ casePlateau *plateau::getCasePlateau(int column, int line) {
     return tab->at_element(line, column);
 }
 
+casePlateau *plateau::getCaseKing(bool joueur1){
+    std::vector< pieces* > *listPieces = getListeJoueurBlanc();
+    if (!joueur1) {
+        listPieces = getListeJoueurNoir();
+    }
+    for (pieces *piece : *listPieces) {
+        if (piece->getName().compare("roi")) {
+            return piece->getCasePiece();
+        }
+    }
+    return NULL;
+}
+
 std::vector<pieces *> *plateau::getListeJoueurBlanc() const{
     return listeJoueurBlanc;
 }
@@ -46,12 +59,33 @@ void plateau::setListeJoueurNoir(std::vector<pieces*> *value){
     listeJoueurNoir = value;
 }
 
-void plateau::changementJoueur(){
-    if (getJoueur1()) {
-        setJoueur1(false);
-    } else {
-        setJoueur1(true);
+bool plateau::caseUnderAttackFromPlayer(bool joueur1, casePlateau *c){
+    std::vector< pieces* > *listPieces = getListeJoueurBlanc();
+    if (!joueur1) {
+        listPieces = getListeJoueurNoir();
     }
+    for (pieces *piece : *listPieces) {
+        if (piece->caseAttaquee(c)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool plateau::checkKing(bool joueur1){
+    return caseUnderAttackFromPlayer(!joueur1, getCaseKing(joueur1));
+}
+
+bool plateau::checkMateKing(bool joueur1){
+}
+
+void plateau::changementJoueur(){
+    setJoueur1(!getJoueur1());
+//    if (getJoueur1()) {
+//        setJoueur1(false);
+//    } else {
+//        setJoueur1(true);
+//    }
 }
 
 void plateau::jouerCoup(coup *c){

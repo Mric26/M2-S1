@@ -25,8 +25,11 @@ public:
     void setCasePiece(casePlateau *value);
     int getCouleur();
     void setCouleur(int value);
+    QString getName();
+    void setName(QString &value);
 
     vector<casePlateau> deplacementPossible();
+    bool caseAttaquee(casePlateau *c);
 
 private:
     QString name;

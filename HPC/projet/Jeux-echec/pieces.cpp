@@ -8,6 +8,19 @@ pieces::pieces( QString n, int c){
 vector<casePlateau> pieces::deplacementPossible(){
 }
 
+bool pieces::caseAttaquee(casePlateau *c){
+    return false;
+}
+
+QString pieces::getName(){
+    return name;
+}
+
+void pieces::setName(QString &value){
+    name = value;
+}
+
+
 int pieces::getCouleur(){
     return couleur;
 }
