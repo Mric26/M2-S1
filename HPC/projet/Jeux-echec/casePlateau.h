@@ -1,10 +1,8 @@
 #ifndef CASEPLATEAU_H
 #define CASEPLATEAU_H
 
-#include <pieces.h>
-#include <QColor>
-
 class pieces;
+
 class casePlateau
 {
 public:
@@ -13,13 +11,15 @@ public:
 
     pieces* getPiece();
     void setPiece(pieces* value);
-    bool caseVide();
     bool getSelected();
     void setSelected(bool value);
     int getLine();
     void setLine(int value);
     int getColumn();
     void setColumn(int value);
+
+    bool caseVide();
+    bool equals(casePlateau *c);
 
 private:
     int line;

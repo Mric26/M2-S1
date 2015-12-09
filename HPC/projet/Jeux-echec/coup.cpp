@@ -1,5 +1,7 @@
 #include "coup.h"
 
+#include "casePlateau.h"
+
 coup::coup(casePlateau *caseDep, casePlateau *caseArr){
     this->caseDep = caseDep;
     this->piecePrise = caseArr->getPiece();
@@ -12,19 +14,19 @@ pieces *coup::getPrise(){
 
 void coup::jouerCoup(){
     if (piecePrise != NULL) {
-        piecePrise->setCase(NULL);
+        piecePrise->setCasePiece(NULL);
     }
     caseArr->setPiece(caseDep->getPiece());
     caseDep->setPiece(NULL);
-    caseArr->getPiece()->setCase(caseArr);
+    caseArr->getPiece()->setCasePiece(caseArr);
 }
 
 void coup::getBack(){
     if (piecePrise != NULL) {
-        piecePrise->setCase(caseArr);
+        piecePrise->setCasePiece(caseArr);
     }
     caseDep->setPiece(caseArr->getPiece());
     caseArr->setPiece(piecePrise);
-    caseDep->getPiece()->setCase(caseDep);
+    caseDep->getPiece()->setCasePiece(caseDep);
 }
 

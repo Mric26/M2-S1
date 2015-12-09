@@ -1,8 +1,8 @@
 #ifndef IA_ALPHABETA_H
 #define IA_ALPHABETA_H
 
-#include "plateau.h"
-#include "coup.h"
+class coup;
+class plateau;
 
 class IA_AlphaBeta
 {

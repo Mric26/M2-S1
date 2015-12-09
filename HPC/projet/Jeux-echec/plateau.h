@@ -20,14 +20,17 @@ using namespace std;
 
 class pieces;
 class casePlateau;
+
 class plateau
 {
 public:
     plateau();
+
     bool getJoueur1() const;
     void setJoueur1(bool value);
-    casePlateau* getCasePlateau(int column, int line);
-    casePlateau* getCaseKing(bool joueur1);
+    bool valid(int column, int line);
+    casePlateau *getCase(int column, int line);
+    casePlateau *getCaseKing(bool joueur1);
     std::vector<pieces*> *getListeJoueurBlanc() const;
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;
@@ -36,6 +39,8 @@ public:
     bool caseUnderAttackFromPlayer(bool joueur1, casePlateau *c);
     bool checkKing(bool joueur1);
     bool checkMateKing(bool joueur1);   // A faire
+
+    int evaluation();
 
     QPixmap* affichagePlateau();
     void changementJoueur();

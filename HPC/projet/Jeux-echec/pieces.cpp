@@ -1,15 +1,26 @@
 #include "pieces.h"
 
-pieces::pieces( QString n, int c){
+#include "casePlateau.h"
+#include "plateau.h"
+
+pieces::pieces(plateau *plat, QString n, int c){
     name = n;
     couleur = c;
+    p = plat;
 }
 
-vector<casePlateau> pieces::deplacementPossible(){
+int pieces::getLine(){
+    if (casePiece == NULL) {
+        return -1;
+    }
+    return casePiece->getLine();
 }
 
-bool pieces::caseAttaquee(casePlateau *c){
-    return false;
+int pieces::getColumn(){
+    if (casePiece == NULL) {
+        return -1;
+    }
+    return casePiece->getColumn();
 }
 
 QString pieces::getName(){
@@ -20,7 +31,6 @@ void pieces::setName(QString &value){
     name = value;
 }
 
-
 int pieces::getCouleur(){
     return couleur;
 }
@@ -28,7 +38,6 @@ int pieces::getCouleur(){
 void pieces::setCouleur(int value){
     couleur = value;
 }
-
 
 casePlateau *pieces::getCasePiece(){
     return casePiece;
@@ -45,8 +54,3 @@ QPixmap *pieces::getRep(){
 void pieces::setRep(QPixmap *value){
     rep = value;
 }
-
-void pieces::setCase(casePlateau *casePiece){
-    this->casePiece = casePiece;
-}
-

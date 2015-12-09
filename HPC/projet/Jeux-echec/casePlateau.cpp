@@ -1,5 +1,7 @@
 #include "casePlateau.h"
 
+#include "pieces.h"
+
 casePlateau::casePlateau(int l, int c){
     line = l;
     column = c;
@@ -50,6 +52,10 @@ void casePlateau::setColumn(int value){
 /** Retourne vrai s'il n'y a pas de piece sur la case */
 bool casePlateau::caseVide() {
     return (getPiece() == NULL);
+}
+
+bool casePlateau::equals(casePlateau *c){
+    return (column == c->getColumn() && line == c->getLine());
 }
 
 

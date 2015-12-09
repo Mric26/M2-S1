@@ -26,7 +26,11 @@ void plateau::setJoueur1(bool value){
     joueur1 = value;
 }
 
-casePlateau *plateau::getCasePlateau(int column, int line) {
+bool plateau::valid(int column, int line){
+    return (line >= 0 && line <= 7 && column >= 0 && column <= 7);
+}
+
+casePlateau *plateau::getCase(int column, int line) {
     return tab->at_element(line, column);
 }
 
@@ -79,13 +83,12 @@ bool plateau::checkKing(bool joueur1){
 bool plateau::checkMateKing(bool joueur1){
 }
 
+int plateau::evaluation(){
+    return 0;
+}
+
 void plateau::changementJoueur(){
     setJoueur1(!getJoueur1());
-//    if (getJoueur1()) {
-//        setJoueur1(false);
-//    } else {
-//        setJoueur1(true);
-//    }
 }
 
 void plateau::jouerCoup(coup *c){
@@ -139,8 +142,8 @@ QPixmap *plateau::affichagePlateau(){
 void plateau::newGame(){
 
     casePlateau * c = tab->at_element(0,0);
-    tour * tb = new tour(0);
-    tb->setCase(c);
+    tour * tb = new tour(this, 0);
+    tb->setCasePiece(c);
     listeJoueurBlanc->push_back(tb);
     c->setPiece( tb );
 

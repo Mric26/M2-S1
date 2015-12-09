@@ -3,10 +3,15 @@
 
 #include <pieces.h>
 
+class plateau;
+
 class reine : public pieces
 {
 public:
-    reine(int color);
+    reine(plateau *plat, int color);
+
+    std::vector<casePlateau *> *deplacementPossible();
+    bool caseAttaquee(casePlateau *c);
 };
 
 #endif // REINE_H

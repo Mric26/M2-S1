@@ -1,8 +1,9 @@
 #ifndef COUP_H
 #define COUP_H
 
-#include "casePlateau.h"
 #include "pieces.h"
+
+class casePlateau;
 
 class coup
 {

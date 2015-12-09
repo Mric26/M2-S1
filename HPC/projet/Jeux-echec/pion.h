@@ -3,10 +3,15 @@
 
 #include <pieces.h>
 
+class plateau;
+
 class pion : public pieces
 {
 public:
-    pion(int color);
+    pion(plateau *plat, int color);
+
+    std::vector<casePlateau *> *deplacementPossible();
+    bool caseAttaquee(casePlateau *c);
 };
 
 #endif // PION_H
