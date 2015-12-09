@@ -27,10 +27,15 @@ public:
     bool getJoueur1() const;
     void setJoueur1(bool value);
     casePlateau* getCasePlateau(int column, int line);
+    casePlateau* getCaseKing(bool joueur1);
     std::vector<pieces*> *getListeJoueurBlanc() const;
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;
     void setListeJoueurNoir(std::vector<pieces*> *value);
+
+    bool caseUnderAttackFromPlayer(bool joueur1, casePlateau *c);
+    bool checkKing(bool joueur1);
+    bool checkMateKing(bool joueur1);   // A faire
 
     QPixmap* affichagePlateau();
     void changementJoueur();
