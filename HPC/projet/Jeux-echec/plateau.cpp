@@ -153,6 +153,7 @@ void plateau::newGame(){
 
 void plateau::affichagePieces(){
     foreach (pieces* p, *listeJoueurBlanc) {
+        painter->drawImage(0, 0, p->rep->toImage() );
     }
 }
 

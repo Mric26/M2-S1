@@ -1,7 +1,5 @@
 #include "pieces.h"
 
-#include <QPixmap>
-
 #include "casePlateau.h"
 #include "plateau.h"
 

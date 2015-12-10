@@ -3,11 +3,11 @@
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <vector>
+#include <QPainter>
 
 #include <casePlateau.h>
 #include <coup.h>
 #include <pieces.h>
-
 #include <roi.h>
 #include <reine.h>
 #include <fou.h>

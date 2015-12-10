@@ -2,12 +2,12 @@
 #define PIECES_H
 
 #include <vector>
-
+#include <QPixmap>
 #include <QString>
 
 using namespace std;
 
-class QPixmap;
+
 class casePlateau;
 class plateau;
 
