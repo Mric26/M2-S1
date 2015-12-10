@@ -20,13 +20,15 @@ void IA_AlphaBeta::setDepth(unsigned int depth) {
 void IA_AlphaBeta::jouerAlphaBeta() {
     int value;
     int value_min = INT_MAX;
+    coup *c;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    for (unsigned int i = 0; i < listCoup.size(); ++i) {
+        c = listCoup[i];
+        p->jouerCoup(c);
 
         value = ab_max_min(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value <= value_min) {
             value_min = value;
@@ -39,14 +41,15 @@ void IA_AlphaBeta::jouerAlphaBeta() {
 void IA_AlphaBeta::jouerBetaAlpha() {
     int value;
     int value_max = INT_MIN;
+    coup *c;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    for (unsigned int i = 0; i < listCoup.size(); ++i) {
+        c = listCoup[i];
+        p->jouerCoup(c);
 
         value = ab_min_max(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value >= value_max) {
             value_max = value;
@@ -65,10 +68,12 @@ int IA_AlphaBeta::ab_min_max(plateau *child, int alpha, int beta, unsigned int l
         return child->evaluation();
     }
 
+    coup *c;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
+    for (unsigned int i = 0; i < listCoup.size(); ++i) {
+        c = listCoup[i];
         child->jouerCoup(c);
 
         value = ab_max_min(p, alpha, beta, level-1);
@@ -96,10 +101,12 @@ int IA_AlphaBeta::ab_max_min(plateau *child, int alpha, int beta, unsigned int l
         return child->evaluation();
     }
 
+    coup *c;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
+    for (unsigned int i = 0; i < listCoup.size(); ++i) {
+        c = listCoup[i];
         child->jouerCoup(c);
 
         value = ab_min_max(p, alpha, beta, level-1);
