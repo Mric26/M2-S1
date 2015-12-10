@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     tour.cpp \
     pion.cpp \
     coup.cpp \
-    casePlateau.cpp
+    casePlateau.cpp \
+    sceneperso.cpp
 
 HEADERS  += mainwindow.h \
     ia_alphabeta.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     tour.h \
     pion.h \
     coup.h \
-    casePlateau.h
+    casePlateau.h \
+    sceneperso.h
 
 FORMS    += mainwindow.ui
 

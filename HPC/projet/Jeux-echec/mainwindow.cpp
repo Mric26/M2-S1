@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene = new QGraphicsScene();
+    scene = new scenePerso(this, this);
     itemVector = new std::vector<QGraphicsItem *>;
     plateau *p = new plateau( this );
 

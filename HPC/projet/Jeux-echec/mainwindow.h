@@ -2,9 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
 #include <plateau.h>
+#include <sceneperso.h>
 
+class scenePerso;
 namespace Ui {
 class MainWindow;
 }
@@ -17,7 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QGraphicsScene * scene;
+    scenePerso * scene;
     std::vector<QGraphicsItem *> * itemVector;
 
 private:

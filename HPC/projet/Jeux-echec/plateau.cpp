@@ -153,14 +153,50 @@ void plateau::affichagePlateau(){
 }
 
 void plateau::newGame(){
-
     casePlateau * c;
 
+    //piece blanche
     c = tab->at_element(0,7);
     tour * tb1 = new tour(this, 0);
     tb1->setCasePiece(c);
     listeJoueurBlanc->push_back(tb1);
     c->setPiece(tb1);
+
+    c = tab->at_element(1,7);
+    cavalier * cb1 = new cavalier(this, 0);
+    cb1->setCasePiece(c);
+    listeJoueurBlanc->push_back(cb1);
+    c->setPiece(cb1);
+
+    c = tab->at_element(2,7);
+    fou * fb1 = new fou(this, 0);
+    fb1->setCasePiece(c);
+    listeJoueurBlanc->push_back(fb1);
+    c->setPiece(fb1);
+
+    c = tab->at_element(3,7);
+    reine * rb = new reine(this, 0);
+    rb->setCasePiece(c);
+    listeJoueurBlanc->push_back(rb);
+    c->setPiece(rb);
+
+    c = tab->at_element(4,7);
+    roi * roib = new roi(this, 0);
+    roib->setCasePiece(c);
+    listeJoueurBlanc->push_back(roib);
+    c->setPiece(roib);
+
+    c = tab->at_element(5,7);
+    fou * fb2 = new fou(this, 0);
+    fb2->setCasePiece(c);
+    listeJoueurBlanc->push_back(fb2);
+    c->setPiece(fb2);
+
+    c = tab->at_element(6,7);
+    cavalier * cb2 = new cavalier(this, 0);
+    cb2->setCasePiece(c);
+    listeJoueurBlanc->push_back(cb2);
+    c->setPiece(cb2);
 
     c = tab->at_element(7,7);
     tour * tb2 = new tour(this, 0);
@@ -168,17 +204,71 @@ void plateau::newGame(){
     listeJoueurBlanc->push_back(tb2);
     c->setPiece(tb2);
 
+    for (int i = 0; i < 8; ++i) {
+        c = tab->at_element(i,6);
+        pion * pb = new pion(this, 0);
+        pb->setCasePiece(c);
+        listeJoueurBlanc->push_back(pb);
+        c->setPiece(pb);
+    }
+
+    //piece noir
     c = tab->at_element(0,0);
     tour * tn1 = new tour(this, 1);
     tn1->setCasePiece(c);
     listeJoueurNoir->push_back(tn1);
     c->setPiece(tn1);
 
+    c = tab->at_element(1,0);
+    cavalier * cn1 = new cavalier(this, 1);
+    cn1->setCasePiece(c);
+    listeJoueurNoir->push_back(cn1);
+    c->setPiece(cn1);
+
+    c = tab->at_element(2,0);
+    fou * fn1 = new fou(this, 1);
+    fn1->setCasePiece(c);
+    listeJoueurNoir->push_back(fn1);
+    c->setPiece(fn1);
+
+    c = tab->at_element(3,0);
+    reine * rn = new reine(this, 1);
+    rn->setCasePiece(c);
+    listeJoueurNoir->push_back(rn);
+    c->setPiece(rb);
+
+    c = tab->at_element(4,0);
+    roi * roin = new roi(this, 1);
+    roin->setCasePiece(c);
+    listeJoueurNoir->push_back(roin);
+    c->setPiece(roin);
+
+    c = tab->at_element(5,0);
+    fou * fn2 = new fou(this, 1);
+    fn2->setCasePiece(c);
+    listeJoueurNoir->push_back(fn2);
+    c->setPiece(fn2);
+
+    c = tab->at_element(6,0);
+    cavalier * cn2 = new cavalier(this, 1);
+    cn2->setCasePiece(c);
+    listeJoueurNoir->push_back(cn2);
+    c->setPiece(cn2);
+
     c = tab->at_element(7,0);
     tour * tn2 = new tour(this, 1);
     tn2->setCasePiece(c);
     listeJoueurNoir->push_back(tn2);
     c->setPiece(tn2);
+
+
+    for (int i = 0; i < 8; ++i) {
+        c = tab->at_element(i,1);
+        pion * pn = new pion(this, 1);
+        pn->setCasePiece(c);
+        listeJoueurBlanc->push_back(pn);
+        c->setPiece(pn);
+    }
 
     setJoueur1(true);
 }
