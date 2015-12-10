@@ -36,11 +36,13 @@ casePlateau *plateau::getCase(int column, int line) {
 }
 
 casePlateau *plateau::getCaseKing(bool joueur1){
+    pieces *piece;
     std::vector< pieces* > *listPieces = getListeJoueurBlanc();
     if (!joueur1) {
         listPieces = getListeJoueurNoir();
     }
-    for (pieces *piece : *listPieces) {
+    for (unsigned int i = 0; i < listPieces->size(); ++i) {
+        piece = listPieces->at(i);
         if (piece->getName().compare("roi")) {
             return piece->getCasePiece();
         }
@@ -65,11 +67,13 @@ void plateau::setListeJoueurNoir(std::vector<pieces*> *value){
 }
 
 bool plateau::caseUnderAttackFromPlayer(bool joueur1, casePlateau *c){
+    pieces *piece;
     std::vector< pieces* > *listPieces = getListeJoueurBlanc();
     if (!joueur1) {
         listPieces = getListeJoueurNoir();
     }
-    for (pieces *piece : *listPieces) {
+    for (unsigned int i = 0; i < listPieces->size(); ++i) {
+        piece = listPieces->at(i);
         if (piece->caseAttaquee(c)) {
             return true;
         }
@@ -82,6 +86,7 @@ bool plateau::checkKing(bool joueur1){
 }
 
 bool plateau::checkMateKing(bool joueur1){
+    return false;
 }
 
 int plateau::evaluation(){
