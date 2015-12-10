@@ -8,14 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     scene = new QGraphicsScene();
-    painter = new QPainter(this);
-    plateau *p = new plateau( painter );
-    QPixmap *imagePix = p->affichagePlateau();
-    scene->addPixmap(*imagePix);
-    scene->setSceneRect(0,0,imagePix->width(),imagePix->height());
+    itemVector = new std::vector<QGraphicsItem *>;
+    plateau *p = new plateau( this );
+
+    p->affichagePlateau();
     ui->Affichage->setScene(scene);
     ui->Affichage->show();
 
+    p->affichagePieces();
+    this->repaint();
 }
 
 MainWindow::~MainWindow(){

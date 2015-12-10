@@ -1,4 +1,103 @@
 #include "tour.h"
 
-tour::tour(int color):pieces(QString("tour"), color){
+#include "casePlateau.h"
+#include "plateau.h"
+
+tour::tour(plateau *plat, int color):pieces(plat, QString("tour"), color){
+    if (color == 0) {
+        setRep(new QPixmap(":images/b5"));
+    } else {
+        setRep(new QPixmap(":images/n5"));
+    }
 }
+
+std::vector<casePlateau *> *tour::deplacementPossible(){
+    std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
+
+    casePlateau *caseArr;
+    coup *c;
+    pieces *piece;
+    bool loop;
+    int i, j;
+
+    std::vector<int> step = std::vector<int>(0);
+    step.push_back(-1);
+    step.push_back(1);
+
+    foreach (int sign_x, step) {
+        i = 0;
+        j = 0;
+        do {
+            loop = false;
+            i += sign_x;
+            if (p->valid(getColumn()+i, getLine()+j)) {
+                caseArr = p->getCase(getColumn()+i, getLine()+j);
+                piece = caseArr->getPiece();
+                if (piece == NULL || !sameColor(piece)) {       // sameColor a implanter !
+                    loop = (piece == NULL);
+                    c = new coup(getCasePiece(), caseArr);
+                    if (p->isCoupValid(c)) {
+                        listCase->push_back(caseArr);
+                    }
+                }
+            }
+        } while (loop);
+    }
+
+    foreach (int sign_y, step) {
+        i = 0;
+        j = 0;
+        do {
+            loop = false;
+            j += sign_y;
+            if (p->valid(getColumn()+i, getLine()+j)) {
+                caseArr = p->getCase(getColumn()+i, getLine()+j);
+                piece = caseArr->getPiece();
+                if (piece == NULL || !sameColor(piece)) {
+                    loop = (piece == NULL);
+                    c = new coup(getCasePiece(), caseArr);
+                    if (p->isCoupValid(c)) {
+                        listCase->push_back(caseArr);
+                    }
+                }
+            }
+        } while (loop);
+    }
+
+    return listCase;
+}
+
+bool tour::caseAttaquee(casePlateau *c){
+    int dx = c->getColumn() - getColumn();
+    int dy = c->getLine() - getLine();
+
+    // Si la tour est sur la meme ligne ou colonne que la case
+    if (dx == 0 || dy == 0) {
+        int sign_x = (dx > 0 ? 1 : -1);
+        int sign_y = 0;
+        if (dx == 0) {
+            sign_x = 0;
+            sign_y = (dy > 0 ? 1 : -1);
+        }
+        int i = 0;
+        int j = 0;
+        bool loop;
+        casePlateau *caseAttack;
+        do {
+            loop = false;
+            i += sign_x;
+            j += sign_y;
+            if (p->valid(getColumn()+i, getLine()+j)) {
+                caseAttack = p->getCase(getLine()+i, getColumn()+j);
+                if (caseAttack == c) {
+                    return true;
+                } else if (caseAttack->caseVide()) {
+                    loop = true;
+                }
+            }
+        } while (loop);
+    }
+
+    return false;
+}
+

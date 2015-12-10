@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=gnu++11 \
+QMAKE_CXXFLAGS += -std=gnu++0x \
 
 TARGET = Jeux-echec
 TEMPLATE = app

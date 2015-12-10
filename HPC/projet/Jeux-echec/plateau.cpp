@@ -1,6 +1,6 @@
 #include "plateau.h"
 
-plateau::plateau(QPainter* p){
+plateau::plateau(MainWindow *win){
     tab = new matrix<casePlateau *>(8, 8);
     for (int line = 0; line < 8; line++) {
         for (int column = 0; column < 8; column++) {
@@ -14,7 +14,7 @@ plateau::plateau(QPainter* p){
     }
     listeJoueurBlanc = new std::vector<pieces*>;
     listeJoueurNoir = new std::vector<pieces*>;
-    painter = p;
+    w = win;
 
     newGame();
 }
@@ -27,7 +27,11 @@ void plateau::setJoueur1(bool value){
     joueur1 = value;
 }
 
-casePlateau *plateau::getCasePlateau(int column, int line) {
+bool plateau::valid(int column, int line){
+    return (line >= 0 && line <= 7 && column >= 0 && column <= 7);
+}
+
+casePlateau *plateau::getCase(int column, int line) {
     return tab->at_element(line, column);
 }
 
@@ -36,7 +40,7 @@ casePlateau *plateau::getCaseKing(bool joueur1){
     if (!joueur1) {
         listPieces = getListeJoueurNoir();
     }
-    for (pieces *piece : *listPieces) {
+    foreach (pieces *piece, *listPieces) {
         if (piece->getName().compare("roi")) {
             return piece->getCasePiece();
         }
@@ -65,7 +69,7 @@ bool plateau::caseUnderAttackFromPlayer(bool joueur1, casePlateau *c){
     if (!joueur1) {
         listPieces = getListeJoueurNoir();
     }
-    for (pieces *piece : *listPieces) {
+    foreach (pieces *piece, *listPieces) {
         if (piece->caseAttaquee(c)) {
             return true;
         }
@@ -78,15 +82,23 @@ bool plateau::checkKing(bool joueur1){
 }
 
 bool plateau::checkMateKing(bool joueur1){
+    return false;
+}
+
+bool plateau::isCoupValid(coup *c){
+    bool res;
+    c->jouerCoup();
+    res = !checkKing(getJoueur1());
+    c->getBack();
+    return res;
+}
+
+int plateau::evaluation(){
+    return 0;
 }
 
 void plateau::changementJoueur(){
     setJoueur1(!getJoueur1());
-//    if (getJoueur1()) {
-//        setJoueur1(false);
-//    } else {
-//        setJoueur1(true);
-//    }
 }
 
 void plateau::jouerCoup(coup *c){
@@ -132,24 +144,58 @@ void plateau::getBack(coup *c){
     }
 }
 
-QPixmap *plateau::affichagePlateau(){
+void plateau::affichagePlateau(){
     QPixmap *res = new QPixmap(":images/plateau.png");
-    return res;
+
+    QGraphicsItem *item;
+    item = w->scene->addPixmap(*res);
+    w->itemVector->push_back( item );
 }
 
 void plateau::newGame(){
 
-    casePlateau * c = tab->at_element(0,0);
-    tour * tb = new tour(0);
-    tb->setCase(c);
-    listeJoueurBlanc->push_back(tb);
-    c->setPiece( tb );
+    casePlateau * c;
+
+    c = tab->at_element(0,7);
+    tour * tb1 = new tour(this, 0);
+    tb1->setCasePiece(c);
+    listeJoueurBlanc->push_back(tb1);
+    c->setPiece(tb1);
+
+    c = tab->at_element(7,7);
+    tour * tb2 = new tour(this, 0);
+    tb2->setCasePiece(c);
+    listeJoueurBlanc->push_back(tb2);
+    c->setPiece(tb2);
+
+    c = tab->at_element(0,0);
+    tour * tn1 = new tour(this, 1);
+    tn1->setCasePiece(c);
+    listeJoueurNoir->push_back(tn1);
+    c->setPiece(tn1);
+
+    c = tab->at_element(7,0);
+    tour * tn2 = new tour(this, 1);
+    tn2->setCasePiece(c);
+    listeJoueurNoir->push_back(tn2);
+    c->setPiece(tn2);
 
     setJoueur1(true);
 }
 
 void plateau::affichagePieces(){
     foreach (pieces* p, *listeJoueurBlanc) {
+        QGraphicsItem *item;
+        item = w->scene->addPixmap( *(p->getRep()) );
+        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        w->itemVector->push_back( item );
+    }
+
+    foreach (pieces* p, *listeJoueurNoir) {
+        QGraphicsItem *item;
+        item = w->scene->addPixmap( *(p->getRep()) );
+        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        w->itemVector->push_back( item );
     }
 }
 

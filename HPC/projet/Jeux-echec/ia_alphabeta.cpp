@@ -1,5 +1,8 @@
 #include "ia_alphabeta.h"
 
+#include "coup.h"
+#include "plateau.h"
+
 #include <vector>
 #include <climits>
 
@@ -18,12 +21,12 @@ void IA_AlphaBeta::jouerAlphaBeta() {
     int value;
     int value_min = INT_MAX;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        p->jouerCoup(c);
 
         value = ab_max_min(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value <= value_min) {
             value_min = value;
@@ -37,13 +40,12 @@ void IA_AlphaBeta::jouerBetaAlpha() {
     int value;
     int value_max = INT_MIN;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        p->jouerCoup(c);
 
         value = ab_min_max(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value >= value_max) {
             value_max = value;
@@ -54,22 +56,23 @@ void IA_AlphaBeta::jouerBetaAlpha() {
 
 int IA_AlphaBeta::ab_min_max(plateau *child, int alpha, int beta, unsigned int level) {
 
-    //    if (child->chekMateKing()) {
-    //        return INT_MAX;
-    //    }
-    //    if (level == 0) {
-    //        return child->evaluation();
-    //    }
+    // joueur1 == false
+    if (child->checkMateKing(false)) {
+        return INT_MAX;
+    }
+    if (level == 0) {
+        return child->evaluation();
+    }
 
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
-        //child->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        child->jouerCoup(c);
 
         value = ab_max_min(p, alpha, beta, level-1);
 
-        //child->getBack(c);
+        child->getBack(c);
 
         if (value < beta) {
             beta = value;
@@ -84,22 +87,23 @@ int IA_AlphaBeta::ab_min_max(plateau *child, int alpha, int beta, unsigned int l
 
 int IA_AlphaBeta::ab_max_min(plateau *child, int alpha, int beta, unsigned int level) {
 
-//    if (child->chekMateKing()) {
-//        return INT_MIN;
-//    }
-//    if (level == 0) {
-//        return child->evaluation();
-//    }
+    // joueur1 == true
+    if (child->checkMateKing(true)) {
+        return INT_MIN;
+    }
+    if (level == 0) {
+        return child->evaluation();
+    }
 
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
-        //child->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        child->jouerCoup(c);
 
         value = ab_min_max(p, alpha, beta, level-1);
 
-        //child->getBack(c);
+        child->getBack(c);
 
         if (value > alpha) {
             alpha = value;

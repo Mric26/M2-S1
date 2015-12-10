@@ -3,10 +3,15 @@
 
 #include <pieces.h>
 
+class plateau;
+
 class roi : public pieces
 {
 public:
-    roi(int color);
+    roi(plateau *plat, int color);
+
+    std::vector<casePlateau *> *deplacementPossible();
+    bool caseAttaquee(casePlateau *c);
 };
 
 #endif // ROI_H

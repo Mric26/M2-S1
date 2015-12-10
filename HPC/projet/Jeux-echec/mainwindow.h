@@ -18,7 +18,7 @@ public:
     ~MainWindow();
 
     QGraphicsScene * scene;
-    QPainter* painter;
+    std::vector<QGraphicsItem *> * itemVector;
 
 private:
     Ui::MainWindow *ui;

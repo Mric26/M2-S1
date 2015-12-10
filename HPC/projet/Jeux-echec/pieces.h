@@ -1,14 +1,14 @@
 #ifndef PIECES_H
 #define PIECES_H
 
-#include <QString>
 #include <vector>
-#include <QColor>
-#include <casePlateau.h>
 #include <QPixmap>
+#include <QString>
+
+using namespace std;
 
 class casePlateau;
-using namespace std;
+class plateau;
 
 class pieces
 {
@@ -16,11 +16,12 @@ class pieces
 
 public:
     enum name { Roi, Reine, Fou, Cavalier, Tour, Pion };
-    pieces(QString n, int c);
+    pieces(plateau *plat, QString n, int c);
 
+    int getLine();
+    int getColumn();
     QPixmap *getRep();
     void setRep(QPixmap *value);
-    void setCase(casePlateau *casePiece);
     casePlateau *getCasePiece();
     void setCasePiece(casePlateau *value);
     int getCouleur();
@@ -28,14 +29,19 @@ public:
     QString getName();
     void setName(QString &value);
 
-    vector<casePlateau> deplacementPossible();
-    bool caseAttaquee(casePlateau *c);
+    bool sameColor(pieces *piece);
+
+    virtual std::vector<casePlateau *> *deplacementPossible() = 0;
+    virtual bool caseAttaquee(casePlateau *c) = 0;
 
 private:
     QString name;
     int couleur;
     QPixmap *rep;
     casePlateau *casePiece;
+
+protected:
+    plateau *p;
 };
 
 #endif // PIECES_H
