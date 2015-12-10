@@ -20,7 +20,6 @@ std::vector<casePlateau *> *cavalier::deplacementPossible(){
 bool cavalier::caseAttaquee(casePlateau *c){
     casePlateau *caseAttack;
 
-    int i, j;
     std::vector<int> doubleStep = std::vector<int>(0);
     doubleStep.push_back(-2);
     doubleStep.push_back(2);
@@ -28,10 +27,8 @@ bool cavalier::caseAttaquee(casePlateau *c){
     simpleStep.push_back(-1);
     simpleStep.push_back(1);
 
-    for (unsigned int k = 0; k < doubleStep.size(); ++k) {
-        i = doubleStep[k];
-        for (unsigned int l = 0; l < simpleStep.size(); ++l) {
-            j = simpleStep[l];
+    foreach (int i, doubleStep) {
+        foreach (int j, simpleStep) {
             if (p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {
@@ -41,10 +38,8 @@ bool cavalier::caseAttaquee(casePlateau *c){
         }
     }
 
-    for (unsigned int k = 0; k < simpleStep.size(); ++k) {
-        i = simpleStep[k];
-        for (unsigned int l = 0; l < doubleStep.size(); ++l) {
-            j = doubleStep[l];
+    foreach (int i, simpleStep) {
+        foreach (int j, doubleStep) {
             if (p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {
