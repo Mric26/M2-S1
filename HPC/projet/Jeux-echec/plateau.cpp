@@ -85,6 +85,14 @@ bool plateau::checkMateKing(bool joueur1){
     return false;
 }
 
+bool plateau::isCoupValid(coup *c){
+    bool res;
+    c->jouerCoup();
+    res = !checkKing(getJoueur1());
+    c->getBack();
+    return res;
+}
+
 int plateau::evaluation(){
     return 0;
 }

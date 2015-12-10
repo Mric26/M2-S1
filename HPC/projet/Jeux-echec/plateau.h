@@ -38,6 +38,7 @@ public:
     bool caseUnderAttackFromPlayer(bool joueur1, casePlateau *c);
     bool checkKing(bool joueur1);
     bool checkMateKing(bool joueur1);   // A faire
+    bool isCoupValid(coup *c);
 
     int evaluation();
 
