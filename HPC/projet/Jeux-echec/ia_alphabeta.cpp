@@ -21,12 +21,12 @@ void IA_AlphaBeta::jouerAlphaBeta() {
     int value;
     int value_min = INT_MAX;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        p->jouerCoup(c);
 
         value = ab_max_min(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value <= value_min) {
             value_min = value;
@@ -40,13 +40,12 @@ void IA_AlphaBeta::jouerBetaAlpha() {
     int value;
     int value_max = INT_MIN;
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
-
-    for (coup *c : listCoup) {
-        //p->jouerCoup(c);
+    foreach (coup *c, listCoup) {
+        p->jouerCoup(c);
 
         value = ab_min_max(p, INT_MIN, INT_MAX, depth-1);
 
-        //p->getBack(c);
+        p->getBack(c);
 
         if (value >= value_max) {
             value_max = value;
@@ -68,7 +67,7 @@ int IA_AlphaBeta::ab_min_max(plateau *child, int alpha, int beta, unsigned int l
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
+    foreach (coup *c, listCoup) {
         child->jouerCoup(c);
 
         value = ab_max_min(p, alpha, beta, level-1);
@@ -99,7 +98,7 @@ int IA_AlphaBeta::ab_max_min(plateau *child, int alpha, int beta, unsigned int l
     std::vector< coup* > listCoup = std::vector< coup* >(0);    // A changer (getListCoup() !)
     int value;
 
-    for (coup *c : listCoup) {
+    foreach (coup *c, listCoup) {
         child->jouerCoup(c);
 
         value = ab_min_max(p, alpha, beta, level-1);

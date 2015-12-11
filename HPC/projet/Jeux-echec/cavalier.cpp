@@ -27,8 +27,8 @@ bool cavalier::caseAttaquee(casePlateau *c){
     simpleStep.push_back(-1);
     simpleStep.push_back(1);
 
-    for (int i : doubleStep) {
-        for (int j : simpleStep) {
+    foreach (int i, doubleStep) {
+        foreach (int j, simpleStep) {
             if (p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {
@@ -38,8 +38,8 @@ bool cavalier::caseAttaquee(casePlateau *c){
         }
     }
 
-    for (int j : doubleStep) {
-        for (int i : simpleStep) {
+    foreach (int i, simpleStep) {
+        foreach (int j, doubleStep) {
             if (p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {

@@ -29,6 +29,8 @@ public:
     QString getName();
     void setName(QString &value);
 
+    bool sameColor(pieces *piece);
+
     virtual std::vector<casePlateau *> *deplacementPossible() = 0;
     virtual bool caseAttaquee(casePlateau *c) = 0;
 

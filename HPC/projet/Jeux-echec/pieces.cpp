@@ -31,6 +31,10 @@ void pieces::setName(QString &value){
     name = value;
 }
 
+bool pieces::sameColor(pieces *piece){
+    return (couleur == piece->getCouleur());
+}
+
 int pieces::getCouleur(){
     return couleur;
 }

@@ -25,8 +25,8 @@ bool roi::caseAttaquee(casePlateau *c){
     step.push_back(0);
     step.push_back(1);
 
-    for (int i : step) {
-        for (int j : step) {
+    foreach (int i, step) {
+        foreach (int j, step) {
             if ((i != 0 || j != 0) && p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {

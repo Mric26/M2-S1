@@ -8,7 +8,7 @@ QT       += core gui widgets
 
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=gnu++11 \
+QMAKE_CXXFLAGS += -std=gnu++0x \
 
 TARGET = Jeux-echec
 TEMPLATE = app
@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     tour.cpp \
     pion.cpp \
     coup.cpp \
-    casePlateau.cpp
+    casePlateau.cpp \
+    sceneperso.cpp
 
 HEADERS  += mainwindow.h \
     ia_alphabeta.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     tour.h \
     pion.h \
     coup.h \
-    casePlateau.h
+    casePlateau.h \
+    sceneperso.h
 
 FORMS    += mainwindow.ui
 
