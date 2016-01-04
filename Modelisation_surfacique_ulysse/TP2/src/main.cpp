@@ -113,8 +113,8 @@ int main()
 
 //    Mesh m("../models/armadillo.off");
 //    Mesh m("../models/buddha.off");
-//    Mesh m("../models/bunny.off");
-    Mesh m("../models/ceasar.off");
+    Mesh m("../models/bunny.off");
+//    Mesh m("../models/ceasar.off");
 //    Mesh m("../models/cube_closed.off");
 //    Mesh m("../models/cylindre.off");
 //    Mesh m("../models/dragon.off");
@@ -139,13 +139,13 @@ int main()
     // Half edge conversion
     MeshHE m_he(m);
 
-
-    /// TODO : test your neighborhood and laplacian computation here.
-
-
-
+    //======================================================================================================
+    //==================== TODO : test your neighborhood and laplacian computation here. ===================
+    //======================================================================================================
 
 
+    //======================================================================================================
+    //======================================================================================================
 
 
 

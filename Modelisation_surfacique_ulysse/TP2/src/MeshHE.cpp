@@ -300,7 +300,21 @@ vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const
 {
     cout << "MeshHE::GetVertexNeighbors(const Vertex* v) is not coded yet!" << endl;
 
-    return vector<Vertex*>();
+//    res
+    vector<Vertex*> res(0);
+//    id origin
+    HalfEdge* current_edge = v->m_half_edge;
+    glm::uint id_origin = current_edge->m_id;
+//    1er point
+    HalfEdge* twin_edge = current_edge->m_twin;
+    Vertex* point = twin_edge->m_vertex;
+    res.push_back(point);
+//    suivant & boucle
+    glm::uint id;
+    while( id != id_origin ){
+
+    }
+    return res;
 }
 
 
