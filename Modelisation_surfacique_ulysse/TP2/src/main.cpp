@@ -136,22 +136,25 @@ int main()
 
     // Half edge conversion
     MeshHE m_he(m);
+    m_he.ComputeNormals();
 
     //======================================================================================================
     //==================== TODO : test your neighborhood and laplacian computation here. ===================
     //======================================================================================================
 
-    vector<Vertex*> voisinage;
-    Vertex* v;
-    Vertex*voisin;
-    for(unsigned int i=0; i<m_he.m_vertices.size(); i++){
-        v = m_he.m_vertices.at(i);
-        voisinage = m_he.GetVertexNeighbors( v );
-    }
+//    vector<Vertex*> voisinage;
+//    Vertex* v;
+//    Vertex*voisin;
+//    for(unsigned int i=0; i<m_he.m_vertices.size(); i++){
+//        v = m_he.m_vertices.at(i);
+//        voisinage = m_he.GetVertexNeighbors( v );
+//    }
+    
+    //m_he.LaplacianSmooth(0.330, 30);
+    //m_he.TaubinSmooth(0.330, -0.331, 30);
 
     //======================================================================================================
     //======================================================================================================
-
 
 
     // Object Generation
