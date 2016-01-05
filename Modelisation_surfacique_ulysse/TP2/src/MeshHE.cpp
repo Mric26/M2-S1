@@ -385,19 +385,20 @@ void MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb
 //***************
 // Border detection [TODO]
 
-bool MeshHE::IsAtBorder(const Vertex* v) const
-{
+bool MeshHE::IsAtBorder(const Vertex* v) const{
     HalfEdge* origin_he = v->m_half_edge;
     HalfEdge* current_he = origin_he;
     HalfEdge* twin_he = NULL;
 
     do {
+      if( current_he->m_twin == NULL ){
+          return true;
+      }
       twin_he = current_he->m_twin;
-      res.push_back(twin_he->m_vertex);
       current_he = twin_he->m_next;
     } while (current_he != origin_he);
 
-    return true;
+    return false;
 }
 
 
