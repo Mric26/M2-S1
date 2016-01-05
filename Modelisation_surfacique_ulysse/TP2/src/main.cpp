@@ -88,8 +88,6 @@ int main()
 
     cout << "Initializing..." << endl;
 
-
-
     //-------------------------------------------------
     // OpenGL Initialization
 
@@ -113,7 +111,7 @@ int main()
 
 //    Mesh m("../models/armadillo.off");
 //    Mesh m("../models/buddha.off");
-    Mesh m("../models/bunny.off");
+//    Mesh m("../models/bunny.off");
 //    Mesh m("../models/ceasar.off");
 //    Mesh m("../models/cube_closed.off");
 //    Mesh m("../models/cylindre.off");
@@ -125,7 +123,7 @@ int main()
 //    Mesh m("../models/sphere.off");
 //    Mesh m("../models/sphere_piece.off");
 //    Mesh m("../models/test.off");
-//    Mesh m("../models/tetrahedron.off");
+    Mesh m("../models/tetrahedron.off");
 //    Mesh m("../models/tetrahedron_2.off");
 //    Mesh m("../models/thing_rounded.off");
 //    Mesh m("../models/thing_squared.off");
@@ -143,6 +141,13 @@ int main()
     //==================== TODO : test your neighborhood and laplacian computation here. ===================
     //======================================================================================================
 
+    vector<Vertex*> voisinage;
+    Vertex* v;
+    Vertex*voisin;
+    for(unsigned int i=0; i<m_he.m_vertices.size(); i++){
+        v = m_he.m_vertices.at(i);
+        voisinage = m_he.GetVertexNeighbors( v );
+    }
 
     //======================================================================================================
     //======================================================================================================
@@ -154,7 +159,6 @@ int main()
     o.GenBuffers();
     o.SetMesh(&m_he);
     o.SetShader(programID);
-
 
 
     //-------------------------------------------------

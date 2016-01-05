@@ -295,34 +295,59 @@ MeshHE::MeshHE(const MeshHE& m)
 //***************
 // Smoothing [TODO]
 
-
-vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const
-{
-    cout << "MeshHE::GetVertexNeighbors(const Vertex* v) is not coded yet!" << endl;
-
+vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const{
 //    res
-    vector<Vertex*> res(0);
-//    id origin
-    HalfEdge* current_edge = v->m_half_edge;
-    glm::uint id_origin = current_edge->m_id;
-//    1er point
-    HalfEdge* twin_edge = current_edge->m_twin;
-    Vertex* point = twin_edge->m_vertex;
-    res.push_back(point);
-//    suivant & boucle
-    glm::uint id;
-    while( id != id_origin ){
+    vector<Vertex*> res;
 
-    }
+////    id origin
+//    HalfEdge* current_edge = v->m_half_edge;
+//    glm::uint id_origin = current_edge->m_id;
+////    1er point
+//    HalfEdge* twin_edge = current_edge->m_twin;
+//    Vertex* point = twin_edge->m_vertex;
+//    if( v->m_id != point->m_id){
+//        res.push_back(point);
+//    }
+////    suivant & boucle
+//    current_edge = twin_edge->m_next;
+//    glm::uint current_id = current_edge->m_id;
+//    while( current_id != id_origin ){
+//        twin_edge = current_edge->m_twin;
+//        point = twin_edge->m_vertex;
+//        res.push_back(point);
+//        current_edge = twin_edge->m_next;
+//        current_id = current_edge->m_id;
+//    }
+
+        HalfEdge* origin_he = v->m_half_edge;
+        HalfEdge* current_he = origin_he;
+        HalfEdge* twin_he = NULL;
+
+        do {
+          twin_he = current_he->m_twin;
+          res.push_back(twin_he->m_vertex);
+          current_he = twin_he->m_next;
+        } while (current_he != origin_he);
+
     return res;
 }
 
 
-glm::vec3 MeshHE::Laplacian(const Vertex* v) const
-{
-    cout << "MeshHE::Laplacian(const Vertex* v) is not coded yet!" << endl;
+glm::vec3 MeshHE::Laplacian(const Vertex* v) const {
 
-    return vec3(0.0);
+    vector<Vertex*> voisinage = GetVertexNeighbors(v);
+    Vertex *pi;
+    vec3 p = vec3(0, 0, 0);
+    double N = 0;
+
+    for (unsigned int i = 0; i < voisinage.size(); ++i) {
+      pi = voisinage[i];
+      p += (pi - v);
+      N += pi->m_position->length();
+    }
+
+    p *= (1.0/N);
+    return p;
 }
 
 void MeshHE::LaplacianSmooth(const float lambda, const glm::uint nb_iter)
