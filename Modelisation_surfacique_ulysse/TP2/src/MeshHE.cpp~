@@ -316,6 +316,8 @@ vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const
 
 glm::vec3 MeshHE::Laplacian(const Vertex* v) const
 {
+    cout << "MeshHE::Laplacian(const Vertex* v) is not coded yet!" << endl;
+    
     vector<Vertex*> voisinage = GetVertexNeighbors(v);
     Vertex *pi;
     vec3 p = vec3(0, 0, 0);

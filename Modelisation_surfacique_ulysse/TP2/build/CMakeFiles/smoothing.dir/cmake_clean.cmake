@@ -1,9 +1,9 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/smoothing.dir/src/main.cpp.o"
   "CMakeFiles/smoothing.dir/src/shader.cpp.o"
-  "CMakeFiles/smoothing.dir/src/Mesh.cpp.o"
-  "CMakeFiles/smoothing.dir/src/Object.cpp.o"
+  "CMakeFiles/smoothing.dir/src/main.cpp.o"
   "CMakeFiles/smoothing.dir/src/MeshHE.cpp.o"
+  "CMakeFiles/smoothing.dir/src/Object.cpp.o"
+  "CMakeFiles/smoothing.dir/src/Mesh.cpp.o"
   "smoothing.pdb"
   "smoothing"
 )
