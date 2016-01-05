@@ -150,7 +150,7 @@ int main()
 //        voisinage = m_he.GetVertexNeighbors( v );
 //    }
     
-    m_he.LaplacianSmooth(0.2, 20);
+    m_he.LaplacianSmooth(1, 20);
     //m_he.TaubinSmooth(0.330, -0.331, 30);
 
     //======================================================================================================
