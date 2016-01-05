@@ -113,13 +113,13 @@ int main()
 
 //    Mesh m("../models/armadillo.off");
 //    Mesh m("../models/buddha.off");
-    Mesh m("../models/bunny.off");
+//    Mesh m("../models/bunny.off");
 //    Mesh m("../models/ceasar.off");
 //    Mesh m("../models/cube_closed.off");
 //    Mesh m("../models/cylindre.off");
 //    Mesh m("../models/dragon.off");
 //    Mesh m("../models/half_cylindre.off");
-//    Mesh m("../models/max.off");
+    Mesh m("../models/max.off");
 //    Mesh m("../models/pipes_round.off");
 //    Mesh m("../models/pipes_squared.off");
 //    Mesh m("../models/sphere.off");
@@ -138,16 +138,17 @@ int main()
 
     // Half edge conversion
     MeshHE m_he(m);
+    m_he.ComputeNormals();
 
     //======================================================================================================
     //==================== TODO : test your neighborhood and laplacian computation here. ===================
     //======================================================================================================
     
+    //m_he.LaplacianSmooth(0.330, 30);
+    //m_he.TaubinSmooth(0.330, -0.331, 30);
 
     //======================================================================================================
     //======================================================================================================
-
-    m_he.LaplacianSmooth(0.2, 5);
 
 
     // Object Generation

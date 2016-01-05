@@ -320,10 +320,12 @@ glm::vec3 MeshHE::Laplacian(const Vertex* v) const
     Vertex *pi;
     vec3 p = vec3(0, 0, 0);
     
+    // Calcul du deplacement du point vers le voisinage
     for (unsigned int i = 0; i < voisinage.size(); ++i) {
       p += *((voisinage[i])->m_position) - *(v->m_position);
     }
     
+    // Ponderation par le voisinage
     p *= ( 1.0 / voisinage.size() );
     return p;
 }
@@ -357,7 +359,8 @@ void MeshHE::LaplacianSmooth(const float lambda, const glm::uint nb_iter)
 
 void MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb_iter)
 {
-    cout << "MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb_iter) is not coded yet!" << endl;
+    LaplacianSmooth(lambda, nb_iter);
+    LaplacianSmooth(mu, nb_iter);
 }
 
 
@@ -373,15 +376,22 @@ bool MeshHE::IsAtBorder(const Vertex* v) const
 
 bool MeshHE::IsAtBorder(const HalfEdge* he) const
 {
-    cout << "MeshHE::IsAtBorder(const HalfEdge* he) is not coded yet!" << endl;
-    return false;
+    return (he->m_twin == NULL);
 }
 
 
 bool MeshHE::IsAtBorder(const Face* f) const
 {
-    cout << "MeshHE::IsAtBorder(const Face* f) is not coded yet!" << endl;
-    return false;
+    bool isAtBorder = false;
+    HalfEdge* origin_he = f->m_half_edge;
+    HalfEdge* current_he = origin_he;
+    
+    do {
+      isAtBorder = IsAtBorder(current_he);
+      current_he = current_he->m_next;
+    } while (!isAtBorder && (current_he != origin_he));
+    
+    return isAtBorder;
 }
 
 
