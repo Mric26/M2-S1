@@ -335,25 +335,15 @@ vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const{
 glm::vec3 MeshHE::Laplacian(const Vertex* v) const {
 
     vector<Vertex*> voisinage = GetVertexNeighbors(v);
-    Vertex *pi;
     vec3 p = vec3(0, 0, 0);
-    double N = 0;
-
+    
+    // Calcul du deplacement du point vers le voisinage
     for (unsigned int i = 0; i < voisinage.size(); ++i) {
-      pi = voisinage[i];
-      p += (pi - v);
-      N += pi->m_position->length();
+      p += *((voisinage[i])->m_position) - *(v->m_position);
     }
-
-    p *= (1.0/N);
     
-//    // Calcul du deplacement du point vers le voisinage
-//    for (unsigned int i = 0; i < voisinage.size(); ++i) {
-//      p += *((voisinage[i])->m_position) - *(v->m_position);
-//    }
-    
-//    // Ponderation par le voisinage
-//    p *= ( 1.0 / voisinage.size() );
+    // Ponderation par le voisinage
+    p *= ( 1.0 / voisinage.size() );
 
     return p;
 }
@@ -397,8 +387,17 @@ void MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb
 
 bool MeshHE::IsAtBorder(const Vertex* v) const
 {
-    cout << "MeshHE::IsAtBorder(const Vertex* v) is not coded yet!" << endl;
-    return false;
+    HalfEdge* origin_he = v->m_half_edge;
+    HalfEdge* current_he = origin_he;
+    HalfEdge* twin_he = NULL;
+
+    do {
+      twin_he = current_he->m_twin;
+      res.push_back(twin_he->m_vertex);
+      current_he = twin_he->m_next;
+    } while (current_he != origin_he);
+
+    return true;
 }
 
 
