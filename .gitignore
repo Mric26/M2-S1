@@ -7,3 +7,6 @@ HPC/projet/build-Jeux-echec-Desktop-Debug/*
 HPC/projet/build-Jeux-echec-Desktop-Debug/*.o
 Modelisation_surfacique_ulysse/TP1/build/*
 Modelisation_surfacique_ulysse/TP2/build/*
+Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/*
+Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Release/*
+
