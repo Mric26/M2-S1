@@ -318,7 +318,8 @@ vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const{
 //        current_id = current_edge->m_id;
 //    }
 
-    if (IsAtBorder(v)) {
+    //if (IsAtBorder(v)) {
+    if (false) {
 	res.push_back(new Vertex(*v));
 	return res;
     }

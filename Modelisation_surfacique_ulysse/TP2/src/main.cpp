@@ -111,7 +111,7 @@ int main()
 
 //    Mesh m("../models/armadillo.off");
 //    Mesh m("../models/buddha.off");
-//    Mesh m("../models/bunny.off");
+    Mesh m("../models/bunny.off");
 //    Mesh m("../models/ceasar.off");
 //    Mesh m("../models/cube_closed.off");
 //    Mesh m("../models/cylindre.off");
@@ -120,7 +120,7 @@ int main()
 //    Mesh m("../models/max.off");
 //    Mesh m("../models/pipes_round.off");
 //    Mesh m("../models/pipes_squared.off");
-    Mesh m("../models/sphere.off");
+//    Mesh m("../models/sphere.off");
 //    Mesh m("../models/sphere_piece.off");
 //    Mesh m("../models/test.off");
 //    Mesh m("../models/tetrahedron.off");
@@ -150,7 +150,7 @@ int main()
 //        voisinage = m_he.GetVertexNeighbors( v );
 //    }
     
-    m_he.LaplacianSmooth(0.2, 20);
+    m_he.LaplacianSmooth(0.8, 10);
     //m_he.TaubinSmooth(0.330, -0.331, 30);
 
     //======================================================================================================
