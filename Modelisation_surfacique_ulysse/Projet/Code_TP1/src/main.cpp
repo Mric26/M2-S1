@@ -128,12 +128,12 @@ int main()
     //**********************************************************************************
 
     MyImplicitFunction f;
-//    MyImplicitSphere s;
-//    MyImplicitCylindre c;
-//    MyImplicitTore t;
-//    MyImplicitAddition *a = new MyImplicitAddition(&t, &c);
-//    MyImplicitSoustraction *b = new MyImplicitSoustraction(&t, &c);
-//    MyImplicitIntersection *i = new MyImplicitIntersection(&t, &c);
+    MyImplicitSphere s;
+    MyImplicitCylindre c;
+    MyImplicitTore t;
+    MyImplicitAddition *a = new MyImplicitAddition(&t, &c);
+    //MyImplicitSoustraction *b = new MyImplicitSoustraction(&t, &c);
+    MyImplicitIntersection *i = new MyImplicitIntersection(&t, &c);
     
     //**********************************************************************************
     //
@@ -141,9 +141,9 @@ int main()
     //
     //**********************************************************************************
 
-    Mesh m;
-    Mesh::CreateCube(m);
-//    Mesh m("../../models/bunny.off");
+//    Mesh m;
+//    Mesh::CreateCube(m);
+    Mesh m("../../models/bunny.off");
 
     Mesh::CreateIsoSurface(m, f, 0.5);
     
