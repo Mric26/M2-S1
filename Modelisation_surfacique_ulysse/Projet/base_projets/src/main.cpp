@@ -130,7 +130,7 @@ int main()
     // Data arrays Initialization
 
     // Mesh creation
-//    Mesh m("../models/triceratops.off");
+//    Mesh m("../../models/bunny.off");
 
     BarthFunction bf;
     float x = 1.8;
