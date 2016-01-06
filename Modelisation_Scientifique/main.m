@@ -357,10 +357,12 @@ clear i j;
 %% 
 
 % Resolution par carre de la grille
-reso = 10;
+reso = 50;
 
 % Creation de la colormap
-image = zeros(N*reso, N*reso, 3);
+img = zeros(N*reso, N*reso, 3);
+minT = min(min(interpoleShepard))
+maxT = max(max(interpoleShepard))
 
 for i=1:(N-1)
     for j=1:(N-1)
@@ -370,13 +372,13 @@ for i=1:(N-1)
                 
                 dx = di / reso;
                 dy = dj / reso;
-                v1 = (interpoleShepard(i,j) * (1-dx)) + (inteproleShepard(i,j+1) * dx);
-                v2 = (interpoleShepard(i+1,j) * (1-dx)) + (inteproleShepard(i+1,j+1) * dx);
+                v1 = (interpoleShepard(i,j) * (1-dx)) + (interpoleShepard(i,j+1) * dx);
+                v2 = (interpoleShepard(i+1,j) * (1-dx)) + (interpoleShepard(i+1,j+1) * dx);
                 d = (v1 * (1-dy)) + (v2 * dy);
                 
                 k = ((i-1) * reso) + di;
                 l = ((j-1) * reso) + dj;
-                image(k,l,:) = [0 0 d];
+                img(k,l,:) = [(d-minT)/(maxT-minT) (d-minT)/(maxT-minT) (d-minT)/(maxT-minT)];
             end
         end
         
@@ -384,4 +386,11 @@ for i=1:(N-1)
 end
 
 clear i j di dj k l dx dy d v1 v2;
+
+
+[r,c] = meshgrid(1:size(img,2),1:size(img,1)); 
+figure(1);
+ 
+hold on
+imagesc(img);
 
