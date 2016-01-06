@@ -144,8 +144,8 @@ for i=1:N
             
             % Calcul de wk
             s = 0;
-            for l=1:nb
-                xl = [m(l,3) m(l,4)];
+            for dj=1:nb
+                xl = [m(dj,3) m(dj,4)];
                 s = s + (1/(distance(iii, xl) ^ mu));
             end
             wk = (1 / (distance(iii, xk) ^ mu)) * (1 / s);
@@ -183,7 +183,7 @@ for k=1:length(lambda)
     end
 end
 
-clear elem bit;
+clear v1 v2 v3 v4 elem bit;
 
 % Tableau des segments presents dans chaque case de la grille
 %   premier entier : nombre de segments
@@ -193,152 +193,152 @@ segSquare = zeros(N-1,N-1,9);
 dI = (maxLat - minLat) / N;       % pas d'echantillonnage en latitude
 dJ = (maxLong - minLong) / N;     % pas d'echantillonnage en longitude
 
-% Remplissage de la segTable
-for k=1:length(lambda)
-    for i=1:(N-1)
-        for j=1:(N-1)
-            
-            % Valeurs aux quatre coins de la cellule
-            cij =   [minLat + u(i)*(maxLat - minLat), minLong + v(j)*(maxLong - minLong)];
-            cij1 =  [minLat + u(i)*(maxLat - minLat), minLong + v(j+1)*(maxLong - minLong)];
-            ci1j1 = [minLat + u(i+1)*(maxLat - minLat), minLong + v(j+1)*(maxLong - minLong)];
-            ci1j =  [minLat + u(i+1)*(maxLat - minLat), minLong + v(j)*(maxLong - minLong)];
-            
-            switch square(i,j)
-                case 1
-                    % haut gauche
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy4(1) xy4(2) 0 0 0 0];
-                case 2
-                    % haut droite
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy2(1) xy2(2) 0 0 0 0];
-                case 3
-                    % horizontal
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy2(1) xy2(2) xy4(1) xy4(2) 0 0 0 0];
-                case 4
-                    % bas droite
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    segSquare(i,j,:) = [1 xy2(1) xy2(2) xy3(1) xy3(2) 0 0 0 0];
-                case 5
-                    % cas casse co...ille
-                    if (((interpoleShepard(i,j) + interpoleShepard(i,j+1) + interpoleShepard(i+1,j+1) + interpoleShepard(i+1,j))/4) - lambda(k) < 0)
-                        alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                        alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                        xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                        xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                        alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                        alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                        xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                        xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                        segSquare(i,j,:) = [2 xy1(1) xy1(2) xy4(1) xy4(2) xy2(1) xy2(2) xy3(1) xy3(2)];
-                    else
-                        alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                        alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                        xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                        xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                        alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                        alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                        xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                        xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                        segSquare(i,j,:) = [2 xy1(1) xy1(2) xy2(1) xy2(2) xy3(1) xy3(2) xy4(1) xy4(2)];
-                    end
-                case 6
-                    % vertical
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy3(1) xy3(2) 0 0 0 0];
-                case 7
-                    % bas gauche
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy3(1) xy3(2) xy4(1) xy4(2) 0 0 0 0];
-                case 8
-                    % bas gauche
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy3(1) xy3(2) xy4(1) xy4(2) 0 0 0 0];
-                case 9
-                    %vertical
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy3(1) xy3(2) 0 0 0 0];
-                case 10
-                    % cas casse co...ille
-                    if (((interpoleShepard(i,j) + interpoleShepard(i,j+1) + interpoleShepard(i+1,j+1) + interpoleShepard(i+1,j))/4) - lambda(k) < 0)
-                        alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                        alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                        xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                        xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                        alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                        alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                        xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                        xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                        segSquare(i,j,:) = [2 xy1(1) xy1(2) xy2(1) xy2(2) xy3(1) xy3(2) xy4(1) xy4(2)];
-                    else
-                        alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                        alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                        xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                        xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                        alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                        alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                        xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                        xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                        segSquare(i,j,:) = [2 xy1(1) xy1(2) xy4(1) xy4(2) xy2(1) xy2(2) xy3(1) xy3(2)];
-                    end
-                case 11
-                    % bas droite
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
-                    segSquare(i,j,:) = [1 xy2(1) xy2(2) xy3(1) xy3(2) 0 0 0 0];
-                case 12
-                    %horizontal
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy2(1) xy2(2) xy4(1) xy4(2) 0 0 0 0];
-                case 13
-                    % haut droite
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy2(1) xy2(2) 0 0 0 0];
-                case 14
-                    % haut gauche
-                    alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
-                    alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
-                    xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
-                    xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
-                    segSquare(i,j,:) = [1 xy1(1) xy1(2) xy4(1) xy4(2) 0 0 0 0];
-            end
-        end
-    end
-end
+% % Remplissage de la segTable
+% for k=1:length(lambda)
+%     for i=1:(N-1)
+%         for j=1:(N-1)
+%             
+%             % Valeurs aux quatre coins de la cellule
+%             cij =   [minLat + u(i)*(maxLat - minLat), minLong + v(j)*(maxLong - minLong)];
+%             cij1 =  [minLat + u(i)*(maxLat - minLat), minLong + v(j+1)*(maxLong - minLong)];
+%             ci1j1 = [minLat + u(i+1)*(maxLat - minLat), minLong + v(j+1)*(maxLong - minLong)];
+%             ci1j =  [minLat + u(i+1)*(maxLat - minLat), minLong + v(j)*(maxLong - minLong)];
+%             
+%             switch square(i,j)
+%                 case 1
+%                     % haut gauche
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy4(1) xy4(2) 0 0 0 0];
+%                 case 2
+%                     % haut droite
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy2(1) xy2(2) 0 0 0 0];
+%                 case 3
+%                     % horizontal
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy2(1) xy2(2) xy4(1) xy4(2) 0 0 0 0];
+%                 case 4
+%                     % bas droite
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     segSquare(i,j,:) = [1 xy2(1) xy2(2) xy3(1) xy3(2) 0 0 0 0];
+%                 case 5
+%                     % cas casse co...ille
+%                     if (((interpoleShepard(i,j) + interpoleShepard(i,j+1) + interpoleShepard(i+1,j+1) + interpoleShepard(i+1,j))/4) - lambda(k) < 0)
+%                         alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                         alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                         xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                         xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                         alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                         alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                         xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                         xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                         segSquare(i,j,:) = [2 xy1(1) xy1(2) xy4(1) xy4(2) xy2(1) xy2(2) xy3(1) xy3(2)];
+%                     else
+%                         alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                         alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                         xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                         xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                         alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                         alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                         xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                         xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                         segSquare(i,j,:) = [2 xy1(1) xy1(2) xy2(1) xy2(2) xy3(1) xy3(2) xy4(1) xy4(2)];
+%                     end
+%                 case 6
+%                     % vertical
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy3(1) xy3(2) 0 0 0 0];
+%                 case 7
+%                     % bas gauche
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy3(1) xy3(2) xy4(1) xy4(2) 0 0 0 0];
+%                 case 8
+%                     % bas gauche
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy3(1) xy3(2) xy4(1) xy4(2) 0 0 0 0];
+%                 case 9
+%                     %vertical
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy3(1) xy3(2) 0 0 0 0];
+%                 case 10
+%                     % cas casse co...ille
+%                     if (((interpoleShepard(i,j) + interpoleShepard(i,j+1) + interpoleShepard(i+1,j+1) + interpoleShepard(i+1,j))/4) - lambda(k) < 0)
+%                         alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                         alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                         xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                         xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                         alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                         alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                         xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                         xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                         segSquare(i,j,:) = [2 xy1(1) xy1(2) xy2(1) xy2(2) xy3(1) xy3(2) xy4(1) xy4(2)];
+%                     else
+%                         alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                         alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                         xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                         xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                         alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                         alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                         xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                         xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                         segSquare(i,j,:) = [2 xy1(1) xy1(2) xy4(1) xy4(2) xy2(1) xy2(2) xy3(1) xy3(2)];
+%                     end
+%                 case 11
+%                     % bas droite
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     alpha3 = (lambda(k) - interpoleShepard(i+1,j)) / dJ;
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     xy3 = (ci1j * (1-alpha3)) + (ci1j1 * alpha3);
+%                     segSquare(i,j,:) = [1 xy2(1) xy2(2) xy3(1) xy3(2) 0 0 0 0];
+%                 case 12
+%                     %horizontal
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy2(1) xy2(2) xy4(1) xy4(2) 0 0 0 0];
+%                 case 13
+%                     % haut droite
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha2 = (lambda(k) - interpoleShepard(i,j+1)) / dI;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy2 = (cij1 * (1-alpha2)) + (ci1j1 * alpha2);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy2(1) xy2(2) 0 0 0 0];
+%                 case 14
+%                     % haut gauche
+%                     alpha1 = (lambda(k) - interpoleShepard(i,j)) / dJ;
+%                     alpha4 = (lambda(k) - interpoleShepard(i,j)) / dI;
+%                     xy1 = (cij * (1-alpha1)) + (cij1 * alpha1);
+%                     xy4 = (cij * (1-alpha4)) + (ci1j * alpha4);
+%                     segSquare(i,j,:) = [1 xy1(1) xy1(2) xy4(1) xy4(2) 0 0 0 0];
+%             end
+%         end
+%     end
+% end
 
 clear i j k xy1 xy2 xy3 xy4 cij cij1 ci1j1 ci1j alpha1 alpha2 alpha3 alpha4;
 
@@ -349,8 +349,39 @@ for i=1:(N-1)
     end
 end
 
+clear i j;
+
+%pwr_kml('output_Kelvin', segSquare(:,:,2));
 
 
+%% 
 
-pwr_kml('output_Kelvin', segSquare(:,:,2));
+% Resolution par carre de la grille
+reso = 10;
+
+% Creation de la colormap
+image = zeros(N*reso, N*reso, 3);
+
+for i=1:(N-1)
+    for j=1:(N-1)
+        
+        for di=1:reso
+            for dj=1:reso
+                
+                dx = di / reso;
+                dy = dj / reso;
+                v1 = (interpoleShepard(i,j) * (1-dx)) + (inteproleShepard(i,j+1) * dx);
+                v2 = (interpoleShepard(i+1,j) * (1-dx)) + (inteproleShepard(i+1,j+1) * dx);
+                d = (v1 * (1-dy)) + (v2 * dy);
+                
+                k = ((i-1) * reso) + di;
+                l = ((j-1) * reso) + dj;
+                image(k,l,:) = [0 0 d];
+            end
+        end
+        
+    end
+end
+
+clear i j di dj k l dx dy d v1 v2;
 

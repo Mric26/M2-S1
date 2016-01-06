@@ -295,68 +295,136 @@ MeshHE::MeshHE(const MeshHE& m)
 //***************
 // Smoothing [TODO]
 
+vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const{
+    vector<Vertex*> res;
 
-vector<Vertex*> MeshHE::GetVertexNeighbors(const Vertex* v) const
-{
-    cout << "MeshHE::GetVertexNeighbors(const Vertex* v) is not coded yet!" << endl;
+////    id origin
+//    HalfEdge* current_edge = v->m_half_edge;
+//    glm::uint id_origin = current_edge->m_id;
+////    1er point
+//    HalfEdge* twin_edge = current_edge->m_twin;
+//    Vertex* point = twin_edge->m_vertex;
+//    if( v->m_id != point->m_id){
+//        res.push_back(point);
+//    }
+////    suivant & boucle
+//    current_edge = twin_edge->m_next;
+//    glm::uint current_id = current_edge->m_id;
+//    while( current_id != id_origin ){
+//        twin_edge = current_edge->m_twin;
+//        point = twin_edge->m_vertex;
+//        res.push_back(point);
+//        current_edge = twin_edge->m_next;
+//        current_id = current_edge->m_id;
+//    }
 
-//    res
-    vector<Vertex*> res(0);
-//    id origin
-    HalfEdge* current_edge = v->m_half_edge;
-    glm::uint id_origin = current_edge->m_id;
-//    1er point
-    HalfEdge* twin_edge = current_edge->m_twin;
-    Vertex* point = twin_edge->m_vertex;
-    res.push_back(point);
-//    suivant & boucle
-    glm::uint id;
-    while( id != id_origin ){
-
+    if (IsAtBorder(v)) {
+	res.push_back(new Vertex(*v));
+	return res;
     }
+
+    HalfEdge* origin_he = v->m_half_edge;
+    HalfEdge* current_he = origin_he;
+    HalfEdge* twin_he = NULL;
+
+    do {
+      twin_he = current_he->m_twin;
+      res.push_back(twin_he->m_vertex);
+      current_he = twin_he->m_next;
+    } while (current_he != origin_he);
+
     return res;
 }
 
 
-glm::vec3 MeshHE::Laplacian(const Vertex* v) const
-{
-    cout << "MeshHE::Laplacian(const Vertex* v) is not coded yet!" << endl;
+glm::vec3 MeshHE::Laplacian(const Vertex* v) const {
 
-    return vec3(0.0);
+    vector<Vertex*> voisinage = GetVertexNeighbors(v);
+    vec3 p = vec3(0, 0, 0);
+    
+    // Calcul du deplacement du point vers le voisinage
+    for (unsigned int i = 0; i < voisinage.size(); ++i) {
+      p += *((voisinage[i])->m_position) - *(v->m_position);
+    }
+    
+    // Ponderation par le voisinage
+    p *= ( 1.0 / voisinage.size() );
+
+    return p;
 }
 
 void MeshHE::LaplacianSmooth(const float lambda, const glm::uint nb_iter)
 {
-    cout << "MeshHE::LaplacianSmooth(const float lambda, const glm::uint nb_iter) is not coded yet!" << endl;
+    Vertex *v;
+    vec3 v_laplacian;
+    vector<vec3> list_laplacian(0);
+    
+    for (int nb = 0; nb < nb_iter; ++nb) {
+	list_laplacian.clear();
+	
+	// Calcul des Laplacian de chaque vertice
+	for (unsigned int i = 0; i < m_vertices.size(); ++i) {
+	  v = m_vertices[i];
+	  list_laplacian.push_back(Laplacian(v));
+	}
+	
+	// Deplacement des vertices
+	for (unsigned int i = 0; i < m_vertices.size(); ++i) {
+	    v = m_vertices[i];
+	    *(v->m_position) += lambda * list_laplacian[i];
+	}
+	
+	// Recalcul du mesh
+	Normalize();
+	ComputeNormals();
+    }
 }
 
 void MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb_iter)
 {
-    cout << "MeshHE::TaubinSmooth(const float lambda, const float mu, const glm::uint nb_iter) is not coded yet!" << endl;
+    LaplacianSmooth(lambda, nb_iter);
+    LaplacianSmooth(mu, nb_iter);
 }
 
 
 //***************
 // Border detection [TODO]
 
-bool MeshHE::IsAtBorder(const Vertex* v) const
-{
-    cout << "MeshHE::IsAtBorder(const Vertex* v) is not coded yet!" << endl;
+bool MeshHE::IsAtBorder(const Vertex* v) const{
+    HalfEdge* origin_he = v->m_half_edge;
+    HalfEdge* current_he = origin_he;
+    HalfEdge* twin_he = NULL;
+
+    do {
+      if( current_he->m_twin == NULL ){
+          return true;
+      }
+      twin_he = current_he->m_twin;
+      current_he = twin_he->m_next;
+    } while (current_he != origin_he);
+
     return false;
 }
 
 
 bool MeshHE::IsAtBorder(const HalfEdge* he) const
 {
-    cout << "MeshHE::IsAtBorder(const HalfEdge* he) is not coded yet!" << endl;
-    return false;
+    return (he->m_twin == NULL);
 }
 
 
 bool MeshHE::IsAtBorder(const Face* f) const
 {
-    cout << "MeshHE::IsAtBorder(const Face* f) is not coded yet!" << endl;
-    return false;
+    bool isAtBorder = false;
+    HalfEdge* origin_he = f->m_half_edge;
+    HalfEdge* current_he = origin_he;
+    
+    do {
+      isAtBorder = IsAtBorder(current_he);
+      current_he = current_he->m_next;
+    } while (!isAtBorder && (current_he != origin_he));
+    
+    return isAtBorder;
 }
 
 
