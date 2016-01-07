@@ -16,6 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Affichage->show();
 
     p->affichagePieces();
+
+    ////////////////////////////////////////////////////////
+    p->enleverPiece( new casePlateau(0,1) );
+    scene->clear();
+    p->affichagePlateau();
+    p->affichagePieces();
+    ////////////////////////////////////////////////////////
+
     this->repaint();
 }
 
