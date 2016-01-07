@@ -16,6 +16,37 @@ fou::fou(plateau *plat, int color):pieces(plat, QString("fou"), color){
 std::vector<casePlateau *> *fou::deplacementPossible(){
     std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
 
+    casePlateau *caseArr;
+    coup *cp;
+    pieces *piece;
+    bool loop;
+    int i, j;
+
+    std::vector<int> simpleStep = {-1, 1};
+
+    foreach (int sign_x, simpleStep) {
+        foreach (int sign_y, simpleStep) {
+            i = getColumn();
+            j = getLine();
+            do {
+                loop = false;
+                i += sign_x;
+                j += sign_y;
+                if (p->valid(i, j)) {
+                    caseArr = p->getCase(i, j);
+                    piece = caseArr->getPiece();
+                    if (piece == NULL || !sameColor(piece)) {
+                        loop = (piece == NULL);
+                        cp = new coup(casePiece, caseArr);
+                        if (p->isCoupValid(cp)) {
+                            listCase->push_back(caseArr);
+                        }
+                    }
+                }
+            } while (loop);
+        }
+    }
+
     return listCase;
 }
 

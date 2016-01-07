@@ -34,14 +34,19 @@ public:
     virtual std::vector<casePlateau *> *deplacementPossible() = 0;
     virtual bool caseAttaquee(casePlateau *c) = 0;
 
+
 private:
     QString name;
-    int couleur;
+    int couleur; // 0 blanc, 1 noir
     QPixmap *rep;
-    casePlateau *casePiece;
+    //casePlateau *casePiece;
 
 protected:
     plateau *p;
+    casePlateau *casePiece;
 };
+
+//std::vector<int> pieces::simpleStep = {-1, 1};
+//std::vector<int> pieces::doubleStep = {-2, 2};
 
 #endif // PIECES_H

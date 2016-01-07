@@ -16,6 +16,18 @@ reine::reine(plateau *plat, int color):pieces(plat, QString("reine"), color){
 std::vector<casePlateau *> *reine::deplacementPossible(){
     std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
 
+    fou *f = new fou(p, getCouleur());
+    f->setCasePiece(getCasePiece());
+    tour *t = new tour(p, getCouleur());
+    t->setCasePiece(getCasePiece());
+
+    foreach (casePlateau* caseArr, *(f->deplacementPossible())) {
+        listCase->push_back(caseArr);
+    }
+    foreach (casePlateau* caseArr, *(t->deplacementPossible())) {
+        listCase->push_back(caseArr);
+    }
+
     return listCase;
 }
 

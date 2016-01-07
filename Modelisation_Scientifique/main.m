@@ -90,7 +90,7 @@ clearvars filename delimiter formatSpec fileID dataArray ans raw col numericData
 %% Extraction des donn�es pour lesquelle on a une coordonn�e g�ographique
 
 % importation de la table de positions geographiques
-m = importFile(fullfile(pwd,'/postesSynop.csv'));
+m = importFile(fullfile(pwd,'Data/postesSynop.csv'));
 
 setId = m(:,1);
 indices = [];       % indices des lignes a prendre dans la matrice des donnees

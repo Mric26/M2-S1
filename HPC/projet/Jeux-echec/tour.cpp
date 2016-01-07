@@ -15,16 +15,14 @@ std::vector<casePlateau *> *tour::deplacementPossible(){
     std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
 
     casePlateau *caseArr;
-    coup *c;
+    coup *cp;
     pieces *piece;
     bool loop;
     int i, j;
 
-    std::vector<int> step = std::vector<int>(0);
-    step.push_back(-1);
-    step.push_back(1);
+    std::vector<int> simpleStep = {-1, 1};
 
-    foreach (int sign_x, step) {
+    foreach (int sign_x, simpleStep) {
         i = 0;
         j = 0;
         do {
@@ -35,8 +33,8 @@ std::vector<casePlateau *> *tour::deplacementPossible(){
                 piece = caseArr->getPiece();
                 if (piece == NULL || !sameColor(piece)) {       // sameColor a implanter !
                     loop = (piece == NULL);
-                    c = new coup(getCasePiece(), caseArr);
-                    if (p->isCoupValid(c)) {
+                    cp = new coup(getCasePiece(), caseArr);
+                    if (p->isCoupValid(cp)) {
                         listCase->push_back(caseArr);
                     }
                 }
@@ -44,7 +42,7 @@ std::vector<casePlateau *> *tour::deplacementPossible(){
         } while (loop);
     }
 
-    foreach (int sign_y, step) {
+    foreach (int sign_y, simpleStep) {
         i = 0;
         j = 0;
         do {
@@ -55,8 +53,8 @@ std::vector<casePlateau *> *tour::deplacementPossible(){
                 piece = caseArr->getPiece();
                 if (piece == NULL || !sameColor(piece)) {
                     loop = (piece == NULL);
-                    c = new coup(getCasePiece(), caseArr);
-                    if (p->isCoupValid(c)) {
+                    cp = new coup(getCasePiece(), caseArr);
+                    if (p->isCoupValid(cp)) {
                         listCase->push_back(caseArr);
                     }
                 }

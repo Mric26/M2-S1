@@ -14,19 +14,38 @@ roi::roi(plateau *plat, int color):pieces(plat, QString("roi"), color){
 std::vector<casePlateau *> *roi::deplacementPossible(){
     std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
 
+    casePlateau *caseArr;
+    coup *cp;
+    pieces *piece;
+
+    std::vector<int> simpleStep = {-1, 0, 1};
+
+    // Parcours des 8 cases adjacentes
+    foreach (int i, simpleStep) {
+        foreach (int j, simpleStep) {
+            if ((i != 0 || j != 0) && p->valid(getColumn()+i, getLine()+j)) {
+                caseArr = p->getCase(getLine()+i, getColumn()+j);
+                piece = caseArr->getPiece();
+                if (piece == NULL || !sameColor(piece)) {
+                    cp = new coup(casePiece, caseArr);
+                    if (p->isCoupValid(cp)) {
+                        listCase->push_back(caseArr);
+                    }
+                }
+            }
+        }
+    }
+
     return listCase;
 }
 
 bool roi::caseAttaquee(casePlateau *c){
     casePlateau *caseAttack;
 
-    std::vector<int> step = std::vector<int>(0);
-    step.push_back(-1);
-    step.push_back(0);
-    step.push_back(1);
+    std::vector<int> simpleStep = {-1, 0, 1};
 
-    foreach (int i, step) {
-        foreach (int j, step) {
+    foreach (int i, simpleStep) {
+        foreach (int j, simpleStep) {
             if ((i != 0 || j != 0) && p->valid(getColumn()+i, getLine()+j)) {
                 caseAttack = p->getCase(getColumn()+i, getLine()+j);
                 if (caseAttack->equals(c)) {

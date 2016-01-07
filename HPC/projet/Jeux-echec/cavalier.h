@@ -12,6 +12,7 @@ public:
 
     std::vector<casePlateau *> *deplacementPossible();
     bool caseAttaquee(casePlateau *c);
+
 };
 
 #endif // CAVALIER_H
