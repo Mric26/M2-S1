@@ -152,6 +152,47 @@ void plateau::affichagePlateau(){
     w->itemVector->push_back( item );
 }
 
+void plateau::affichagePieces(){
+    foreach (pieces* p, *listeJoueurBlanc) {
+        QGraphicsItem *item;
+        item = w->scene->addPixmap( *(p->getRep()) );
+        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        w->itemVector->push_back( item );
+    }
+
+    foreach (pieces* p, *listeJoueurNoir) {
+        QGraphicsItem *item;
+        item = w->scene->addPixmap( *(p->getRep()) );
+        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        w->itemVector->push_back( item );
+    }
+}
+
+void plateau::enleverPiece( casePlateau * c ){
+//    std::vector<pieces*> *res = new  std::vector<pieces*>;
+//    pieces p1 = c->getPiece();
+//    //blanc
+//    if( p1.couleur == 0 ){
+//        foreach (pieces* p, *listeJoueurBlanc) {
+//            if( (p->name != p1.name) ){
+//                res->push_back(p);
+//            }
+//        }
+//        listeJoueurBlanc->clear();
+//        listeJoueurBlanc = res;
+//    }
+//    //noir
+//    else{
+//        foreach (pieces* p, *listeJoueurNoir) {
+//            if( (p->name != p1.name) ){
+//                res->push_back(p);
+//            }
+//        }
+//        listeJoueurNoir->clear();
+//        listeJoueurNoir = res;
+//    }
+}
+
 void plateau::newGame(){
     casePlateau * c;
 
@@ -266,26 +307,10 @@ void plateau::newGame(){
         c = tab->at_element(i,1);
         pion * pn = new pion(this, 1);
         pn->setCasePiece(c);
-        listeJoueurBlanc->push_back(pn);
+        listeJoueurNoir->push_back(pn);
         c->setPiece(pn);
     }
 
     setJoueur1(true);
-}
-
-void plateau::affichagePieces(){
-    foreach (pieces* p, *listeJoueurBlanc) {
-        QGraphicsItem *item;
-        item = w->scene->addPixmap( *(p->getRep()) );
-        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
-        w->itemVector->push_back( item );
-    }
-
-    foreach (pieces* p, *listeJoueurNoir) {
-        QGraphicsItem *item;
-        item = w->scene->addPixmap( *(p->getRep()) );
-        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
-        w->itemVector->push_back( item );
-    }
 }
 

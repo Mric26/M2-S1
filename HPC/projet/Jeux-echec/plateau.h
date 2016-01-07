@@ -48,7 +48,8 @@ public:
     void jouerCoup(coup *c);
     void getBack(coup*c);
     void newGame();
-    void affichagePieces();
+    void affichagePieces();        
+    void enleverPiece(casePlateau *c);
 
 private:
     MainWindow * w;
