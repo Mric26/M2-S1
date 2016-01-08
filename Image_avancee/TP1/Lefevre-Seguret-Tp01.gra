@@ -125,8 +125,8 @@
     <uint val="7" name="nodeId-7"/>
     <uint val="0" name="nodeGraphId-7"/>
     <vector2f name="nodePos-7">
-     <float val="-2136.05" name="0"/>
-     <float val="-3168.62" name="1"/>
+     <float val="-1964.21" name="0"/>
+     <float val="-3228.56" name="1"/>
     </vector2f>
     <int val="1" name="nodeInputNameSize-7"/>
     <int val="1" name="nodeOutputNameSize-7"/>
@@ -158,8 +158,8 @@
     <uint val="9" name="nodeId-9"/>
     <uint val="0" name="nodeGraphId-9"/>
     <vector2f name="nodePos-9">
-     <float val="-5115.05" name="0"/>
-     <float val="-5365.29" name="1"/>
+     <float val="-4539.03" name="0"/>
+     <float val="-5974.22" name="1"/>
     </vector2f>
     <int val="0" name="nodeInputNameSize-9"/>
     <int val="1" name="nodeOutputNameSize-9"/>
@@ -173,8 +173,8 @@
     <uint val="10" name="nodeId-10"/>
     <uint val="0" name="nodeGraphId-10"/>
     <vector2f name="nodePos-10">
-     <float val="-5008.62" name="0"/>
-     <float val="-3655.09" name="1"/>
+     <float val="-5090.91" name="0"/>
+     <float val="-4568.49" name="1"/>
     </vector2f>
     <int val="0" name="nodeInputNameSize-10"/>
     <int val="1" name="nodeOutputNameSize-10"/>
@@ -188,8 +188,8 @@
     <uint val="11" name="nodeId-11"/>
     <uint val="0" name="nodeGraphId-11"/>
     <vector2f name="nodePos-11">
-     <float val="-636.666" name="0"/>
-     <float val="-3782.75" name="1"/>
+     <float val="-646.327" name="0"/>
+     <float val="-3792.41" name="1"/>
     </vector2f>
     <int val="4" name="nodeInputNameSize-11"/>
     <int val="1" name="nodeOutputNameSize-11"/>
@@ -1511,7 +1511,7 @@
      <string val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericFragHead"/>
      <string val="in vec3  normalV;&#xa;in float depthV;&#xa;layout(location = 0) in vec2 inCoord;&#xa;&#xa;void main() {&#xa;&#x9;//outBuffer0 = vec4(inCoord.x, inCoord.y,1,1);&#xa;&#x9;outBuffer0 = texture(normales, inCoord);&#xa;}&#xa;" name="genericFragBody"/>
      <string val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericTessCHead"/>
-     <string val="layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord[2];&#xa;layout(location = 1) out mat4 outMvp[];&#xa;&#xa;const float t = ( ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x +texture(courbures,inCoord[2]).x +texture(courbures,inCoord[3]).x ) / 4 ) * 30 ;&#xa;&#xa;void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[1] = ( texture(courbures,inCoord[1]).x + texture(courbures,inCoord[2]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[2] = ( texture(courbures,inCoord[2]).x + texture(courbures,inCoord[3]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[3] = ( texture(courbures,inCoord[3]).x + texture(courbures,inCoord[0]).x ) / 2 ;&#xa;&#x9;gl_TessLevelInner[0] = t;&#xa;&#x9;gl_TessLevelInner[1] = t;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;&#x9;outCoord[gl_InvocationID] = inCoord[gl_InvocationID];&#xa;&#x9;outMvp[gl_InvocationID] = inMvp[gl_InvocationID];&#xa;}&#xa;" name="genericTessCBody"/>
+     <string val="layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord[2];&#xa;layout(location = 1) out mat4 outMvp[];&#xa;&#xa;const float t = ( ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x +texture(courbures,inCoord[2]).x +texture(courbures,inCoord[3]).x ) / 4 ) * 30 ;&#xa;&#xa;void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = ( texture(courbures,inCoord[3]).x + texture(courbures,inCoord[0]).x ) / 2  * 50;&#xa;&#x9;gl_TessLevelOuter[1] = ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x ) / 2  * 50;&#xa;&#x9;gl_TessLevelOuter[2] = ( texture(courbures,inCoord[1]).x + texture(courbures,inCoord[2]).x ) / 2  * 50;&#xa;&#x9;gl_TessLevelOuter[3] = ( texture(courbures,inCoord[2]).x + texture(courbures,inCoord[3]).x ) / 2  * 50;&#xa;&#x9;gl_TessLevelInner[0] = t;&#xa;&#x9;gl_TessLevelInner[1] = t;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;&#x9;outCoord[gl_InvocationID] = inCoord[gl_InvocationID];&#xa;&#x9;outMvp[gl_InvocationID] = inMvp[gl_InvocationID];&#xa;}&#xa;" name="genericTessCBody"/>
      <string val="#version 420&#xa;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericTessEHead"/>
      <string val="layout(quads,equal_spacing) in;&#xa;&#xa;layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord;&#xa;&#xa;void main() {&#xa;&#x9;vec2 v1 = mix(inCoord[0],inCoord[1],gl_TessCoord.x);&#xa;&#x9;vec2 v2 = mix(inCoord[3],inCoord[2],gl_TessCoord.x);&#xa;&#x9;outCoord = mix(v1,v2,gl_TessCoord.y);&#xa;&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;&#x9;gl_Position.z = texture(normales, outCoord).w / 2;&#xa;&#xa;&#x9;gl_Position = inMvp[0] * gl_Position;&#xa;}&#xa;" name="genericTessEBody"/>
      <string val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericGeomHead"/>
@@ -1709,7 +1709,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-9"/>
     <IOData name="node-9">
-     <string val="../../../M1/S8/PROJET_SIM/TP09/textures/foret.jpg" name="filename"/>
+     <string val="foret.jpg" name="filename"/>
      <vector2i name="size">
       <int val="1600" name="0"/>
       <int val="1063" name="1"/>
@@ -1725,7 +1725,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-10"/>
     <IOData name="node-10">
-     <string val="../../../M1/S8/PROJET_SIM/TP09/textures/roche.jpg" name="filename"/>
+     <string val="roche.jpg" name="filename"/>
      <vector2i name="size">
       <int val="1400" name="0"/>
       <int val="1100" name="1"/>
@@ -1758,14 +1758,14 @@
       <vector3f name="shift">
        <float val="0.0851978" name="0"/>
        <float val="-0.000798916" name="1"/>
-       <float val="1.201" name="2"/>
+       <float val="2.401" name="2"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float val="-0.811295" name="0"/>
-        <float val="0.449629" name="1"/>
-        <float val="0.18279" name="2"/>
-        <float val="0.325866" name="3"/>
+        <float val="-0.217331" name="0"/>
+        <float val="0.247481" name="1"/>
+        <float val="0.373118" name="2"/>
+        <float val="0.867332" name="3"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float val="256" name="0"/>
@@ -1798,7 +1798,7 @@
      <string val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform sampler2D roche;&#xa;uniform sampler2D foret;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericFragHead"/>
      <string val="layout(location = 0) in vec2 inCoord;&#xa;&#xa;void main() {&#xa;&#x9;vec3 l = normalize( vec3(-2,-2,6) );&#xa;&#x9;vec3 n = normalize( texture( normales, inCoord ) .xyz );&#xa;&#x9;float diff = max( dot ( l, n ), 0.0 );&#xa;&#xa;&#x9;vec4 color;&#xa;&#x9;float h = texture(courbures,inCoord).x;&#xa;&#x9;if ( h &lt; 0.20 ){&#xa;&#x9;&#x9;color = texture(foret, inCoord);&#xa;     }&#xa;&#x9;else if (h > 0.35) {&#xa;&#x9;&#x9;color = texture(roche, inCoord);&#xa;&#x9;} else {&#xa;&#x9;&#x9;float t = (h - 0.20) / 0.15;&#xa;&#x9;&#x9;color = t * texture(roche, inCoord) + (1 - t) * texture(foret, inCoord);&#xa;&#x9;}&#xa;&#xa;&#x9;outBuffer0 = color*diff;&#xa;}&#xa;" name="genericFragBody"/>
      <string val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform sampler2D roche;&#xa;uniform sampler2D foret;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericTessCHead"/>
-     <string val="layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord[2];&#xa;layout(location = 1) out mat4 outMvp[];&#xa;&#xa;const float t = ( ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x +texture(courbures,inCoord[2]).x +texture(courbures,inCoord[3]).x ) / 4 ) * 40 ;&#xa;&#xa;void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[1] = ( texture(courbures,inCoord[1]).x + texture(courbures,inCoord[2]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[2] = ( texture(courbures,inCoord[2]).x + texture(courbures,inCoord[3]).x ) / 2 ;&#xa;&#x9;gl_TessLevelOuter[3] = ( texture(courbures,inCoord[3]).x + texture(courbures,inCoord[0]).x ) / 2 ;&#xa;&#x9;gl_TessLevelInner[0] = t;&#xa;&#x9;gl_TessLevelInner[1] = t;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;&#x9;outCoord[gl_InvocationID] = inCoord[gl_InvocationID];&#xa;&#x9;outMvp[gl_InvocationID] = inMvp[gl_InvocationID];&#xa;}&#xa;" name="genericTessCBody"/>
+     <string val="layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord[2];&#xa;layout(location = 1) out mat4 outMvp[];&#xa;&#xa;const float t = ( ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x +texture(courbures,inCoord[2]).x +texture(courbures,inCoord[3]).x ) / 4 ) * 40 ;&#xa;&#xa;void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = ( texture(courbures,inCoord[3]).x + texture(courbures,inCoord[0]).x ) / 2 * 50 ;&#xa;&#x9;gl_TessLevelOuter[1] = ( texture(courbures,inCoord[0]).x + texture(courbures,inCoord[1]).x ) / 2 * 50 ;&#xa;&#x9;gl_TessLevelOuter[2] = ( texture(courbures,inCoord[1]).x + texture(courbures,inCoord[2]).x ) / 2 * 50 ;&#xa;&#x9;gl_TessLevelOuter[3] = ( texture(courbures,inCoord[2]).x + texture(courbures,inCoord[3]).x ) / 2 * 50 ;&#xa;&#x9;gl_TessLevelInner[0] = t;&#xa;&#x9;gl_TessLevelInner[1] = t;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;&#x9;outCoord[gl_InvocationID] = inCoord[gl_InvocationID];&#xa;&#x9;outMvp[gl_InvocationID] = inMvp[gl_InvocationID];&#xa;}&#xa;" name="genericTessCBody"/>
      <string val="#version 420&#xa;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform sampler2D roche;&#xa;uniform sampler2D foret;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericTessEHead"/>
      <string val="layout(quads,equal_spacing) in;&#xa;&#xa;layout(location = 0) in vec2 inCoord[];&#xa;layout(location = 1) in mat4 inMvp[];&#xa;layout(location = 0) out vec2 outCoord;&#xa;&#xa;void main() {&#xa;&#x9;vec2 v1 = mix(inCoord[0],inCoord[1],gl_TessCoord.x);&#xa;&#x9;vec2 v2 = mix(inCoord[3],inCoord[2],gl_TessCoord.x);&#xa;&#x9;outCoord = mix(v1,v2,gl_TessCoord.y);&#xa;&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;&#x9;gl_Position.z = texture(normales, outCoord).w / 2;&#xa;&#xa;&#x9;gl_Position = inMvp[0] * gl_Position;&#xa;}&#xa;" name="genericTessEBody"/>
      <string val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform sampler2D normales;&#xa;uniform sampler2D courbures;&#xa;uniform sampler2D roche;&#xa;uniform sampler2D foret;&#xa;uniform int T;&#xa;uniform mat4 model;&#xa;uniform mat4 view;&#xa;uniform mat4 proj;&#xa;uniform float zmin;&#xa;uniform float zmax;&#xa;" name="genericGeomHead"/>
@@ -1840,7 +1840,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="-0.811295" name="1"/>
+          <float val="-0.217331" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1853,7 +1853,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.449629" name="1"/>
+          <float val="0.247481" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1866,7 +1866,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.18279" name="1"/>
+          <float val="0.373118" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1879,7 +1879,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.325866" name="1"/>
+          <float val="0.867332" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1926,7 +1926,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="1.201" name="1"/>
+          <float val="2.401" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -2003,10 +2003,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="15.3395" name="scale"/>
+   <float val="9.66118" name="scale"/>
    <vector2f name="offset">
-    <float val="-2027.39" name="0"/>
-    <float val="-2203.16" name="1"/>
+    <float val="-1238.19" name="0"/>
+    <float val="-3723.5" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
@@ -2024,10 +2024,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float val="0.74754" name="scale"/>
+   <float val="0.636071" name="scale"/>
    <vector2f name="offset">
-    <float val="401.997" name="0"/>
-    <float val="214.798" name="1"/>
+    <float val="391.82" name="0"/>
+    <float val="219.25" name="1"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>
