@@ -30,6 +30,8 @@
 #include "MyImplicitSoustraction.h"
 #include "MyImplicitIntersection.h"
 
+//#include "projet.h"
+
 // Window size :
 #define WIDTH 1000.0f
 #define HEIGHT 800.0f
@@ -108,7 +110,8 @@ int main()
 //    glClearColor(1.0, 1.0, 1.0, 1.0);
     glEnable(GL_DEPTH_TEST);
 
-
+    glEnable(GL_PROGRAM_POINT_SIZE);
+    glPointSize(5);
 
     //-------------------------------------------------
     // Shader program initialization

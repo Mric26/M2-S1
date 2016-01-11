@@ -20,6 +20,7 @@
 #include "MeshHE.h"
 #include "Object.h"
 
+#include "reconstructionsurface.h"
 
 // Window size :
 #define WIDTH 1000.0f
@@ -117,7 +118,7 @@ int main()
 //    glClearColor(1.0, 1.0, 1.0, 1.0);       /// Light Back ground
     glEnable(GL_DEPTH_TEST);
 
-
+    glPointSize(5);
 
     //-------------------------------------------------
     // Shader program initialization
@@ -130,11 +131,13 @@ int main()
     // Data arrays Initialization
 
     // Mesh creation
-//    Mesh m("../../models/bunny.off");
+    Mesh m("../../models/bunny.off");
 
     BarthFunction bf;
+    ReconstructionSurface rs(m);
     float x = 1.8;
-    Mesh m; m.CreateIsoSurface(m, bf, -0.2, -x, x, -x, x, -x ,x, 100, 100, 100);
+//    Mesh m;
+    m.CreateIsoSurface(m, rs, -0.2, -x, x, -x, x, -x ,x, 100, 100, 100);
 
 //    m.Normalize();
 //    m.ComputeNormals();

@@ -284,6 +284,30 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/reconstructionsurface.o: src/reconstructionsurface.cpp.o
+.PHONY : src/reconstructionsurface.o
+
+# target to build an object file
+src/reconstructionsurface.cpp.o:
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o
+.PHONY : src/reconstructionsurface.cpp.o
+
+src/reconstructionsurface.i: src/reconstructionsurface.cpp.i
+.PHONY : src/reconstructionsurface.i
+
+# target to preprocess a source file
+src/reconstructionsurface.cpp.i:
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/reconstructionsurface.cpp.i
+.PHONY : src/reconstructionsurface.cpp.i
+
+src/reconstructionsurface.s: src/reconstructionsurface.cpp.s
+.PHONY : src/reconstructionsurface.s
+
+# target to generate assembly for a file
+src/reconstructionsurface.cpp.s:
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/reconstructionsurface.cpp.s
+.PHONY : src/reconstructionsurface.cpp.s
+
 src/shader.o: src/shader.cpp.o
 .PHONY : src/shader.o
 
@@ -337,6 +361,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/reconstructionsurface.o"
+	@echo "... src/reconstructionsurface.i"
+	@echo "... src/reconstructionsurface.s"
 	@echo "... src/shader.o"
 	@echo "... src/shader.i"
 	@echo "... src/shader.s"

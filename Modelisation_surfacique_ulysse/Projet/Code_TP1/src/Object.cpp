@@ -97,7 +97,7 @@ void Object::Draw(const mat4& projection_matrix, const mat4& view_matrix, const 
     // Matrix transmission
     glUniformMatrix4fv(PmatrixID, 1, GL_FALSE, value_ptr(projection_matrix));
     glUniformMatrix4fv(VmatrixID, 1, GL_FALSE, value_ptr(view_matrix));
-    glUniformMatrix4fv(m_matrixID, 1, GL_FALSE, value_ptr(m_matrix));
+    //glUniformMatrix4fv(m_matrixID, 1, GL_FALSE, value_ptr(m_matrix));
 
 
     // Pointer settings
@@ -130,7 +130,8 @@ void Object::Draw(const mat4& projection_matrix, const mat4& view_matrix, const 
 
     // Draw triangles
     glDrawElements(
-                GL_POINT,           // mode
+                //GL_TRIANGLES,           // mode
+                GL_POINTS,
                 m_mesh.faces.size(),    // count
                 GL_UNSIGNED_INT,        // type
                 (void*)0                // offset

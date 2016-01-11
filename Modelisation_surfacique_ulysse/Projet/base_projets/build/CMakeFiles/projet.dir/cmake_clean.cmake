@@ -6,6 +6,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/projet.dir/src/Mesh.cpp.o"
   "CMakeFiles/projet.dir/src/Object.cpp.o"
   "CMakeFiles/projet.dir/src/MeshHE.cpp.o"
+  "CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o"
   "projet.pdb"
   "projet"
 )
