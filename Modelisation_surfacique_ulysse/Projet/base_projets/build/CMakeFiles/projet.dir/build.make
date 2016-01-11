@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets
+CMAKE_SOURCE_DIR = /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build
+CMAKE_BINARY_DIR = /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/projet.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/projet.dir/flags.make
 
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.o: CMakeFiles/projet.dir/flags.make
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.o: ../src/AbstractMesh.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/AbstractMesh.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/AbstractMesh.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/AbstractMesh.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp
 
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/AbstractMesh.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp > CMakeFiles/projet.dir/src/AbstractMesh.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp > CMakeFiles/projet.dir/src/AbstractMesh.cpp.i
 
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/AbstractMesh.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp -o CMakeFiles/projet.dir/src/AbstractMesh.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/AbstractMesh.cpp -o CMakeFiles/projet.dir/src/AbstractMesh.cpp.s
 
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.o.requires:
 .PHONY : CMakeFiles/projet.dir/src/AbstractMesh.cpp.o.requires
@@ -75,65 +75,19 @@ CMakeFiles/projet.dir/src/AbstractMesh.cpp.o.provides: CMakeFiles/projet.dir/src
 
 CMakeFiles/projet.dir/src/AbstractMesh.cpp.o.provides.build: CMakeFiles/projet.dir/src/AbstractMesh.cpp.o
 
-CMakeFiles/projet.dir/src/main.cpp.o: CMakeFiles/projet.dir/flags.make
-CMakeFiles/projet.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/main.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp
-
-CMakeFiles/projet.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp > CMakeFiles/projet.dir/src/main.cpp.i
-
-CMakeFiles/projet.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp -o CMakeFiles/projet.dir/src/main.cpp.s
-
-CMakeFiles/projet.dir/src/main.cpp.o.requires:
-.PHONY : CMakeFiles/projet.dir/src/main.cpp.o.requires
-
-CMakeFiles/projet.dir/src/main.cpp.o.provides: CMakeFiles/projet.dir/src/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/main.cpp.o.provides.build
-.PHONY : CMakeFiles/projet.dir/src/main.cpp.o.provides
-
-CMakeFiles/projet.dir/src/main.cpp.o.provides.build: CMakeFiles/projet.dir/src/main.cpp.o
-
-CMakeFiles/projet.dir/src/shader.cpp.o: CMakeFiles/projet.dir/flags.make
-CMakeFiles/projet.dir/src/shader.cpp.o: ../src/shader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/shader.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/shader.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp
-
-CMakeFiles/projet.dir/src/shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/shader.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp > CMakeFiles/projet.dir/src/shader.cpp.i
-
-CMakeFiles/projet.dir/src/shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/shader.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp -o CMakeFiles/projet.dir/src/shader.cpp.s
-
-CMakeFiles/projet.dir/src/shader.cpp.o.requires:
-.PHONY : CMakeFiles/projet.dir/src/shader.cpp.o.requires
-
-CMakeFiles/projet.dir/src/shader.cpp.o.provides: CMakeFiles/projet.dir/src/shader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/shader.cpp.o.provides.build
-.PHONY : CMakeFiles/projet.dir/src/shader.cpp.o.provides
-
-CMakeFiles/projet.dir/src/shader.cpp.o.provides.build: CMakeFiles/projet.dir/src/shader.cpp.o
-
 CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o: CMakeFiles/projet.dir/flags.make
 CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o: ../src/ImplicitFunction.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp
 
 CMakeFiles/projet.dir/src/ImplicitFunction.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/ImplicitFunction.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp > CMakeFiles/projet.dir/src/ImplicitFunction.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp > CMakeFiles/projet.dir/src/ImplicitFunction.cpp.i
 
 CMakeFiles/projet.dir/src/ImplicitFunction.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/ImplicitFunction.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp -o CMakeFiles/projet.dir/src/ImplicitFunction.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.cpp -o CMakeFiles/projet.dir/src/ImplicitFunction.cpp.s
 
 CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o.requires:
 .PHONY : CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o.requires
@@ -146,17 +100,17 @@ CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o.provides.build: CMakeFiles/proj
 
 CMakeFiles/projet.dir/src/Mesh.cpp.o: CMakeFiles/projet.dir/flags.make
 CMakeFiles/projet.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/Mesh.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/Mesh.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/Mesh.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp
 
 CMakeFiles/projet.dir/src/Mesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/Mesh.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp > CMakeFiles/projet.dir/src/Mesh.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp > CMakeFiles/projet.dir/src/Mesh.cpp.i
 
 CMakeFiles/projet.dir/src/Mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/Mesh.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp -o CMakeFiles/projet.dir/src/Mesh.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.cpp -o CMakeFiles/projet.dir/src/Mesh.cpp.s
 
 CMakeFiles/projet.dir/src/Mesh.cpp.o.requires:
 .PHONY : CMakeFiles/projet.dir/src/Mesh.cpp.o.requires
@@ -167,42 +121,19 @@ CMakeFiles/projet.dir/src/Mesh.cpp.o.provides: CMakeFiles/projet.dir/src/Mesh.cp
 
 CMakeFiles/projet.dir/src/Mesh.cpp.o.provides.build: CMakeFiles/projet.dir/src/Mesh.cpp.o
 
-CMakeFiles/projet.dir/src/Object.cpp.o: CMakeFiles/projet.dir/flags.make
-CMakeFiles/projet.dir/src/Object.cpp.o: ../src/Object.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/Object.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/Object.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp
-
-CMakeFiles/projet.dir/src/Object.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/Object.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp > CMakeFiles/projet.dir/src/Object.cpp.i
-
-CMakeFiles/projet.dir/src/Object.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/Object.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp -o CMakeFiles/projet.dir/src/Object.cpp.s
-
-CMakeFiles/projet.dir/src/Object.cpp.o.requires:
-.PHONY : CMakeFiles/projet.dir/src/Object.cpp.o.requires
-
-CMakeFiles/projet.dir/src/Object.cpp.o.provides: CMakeFiles/projet.dir/src/Object.cpp.o.requires
-	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/Object.cpp.o.provides.build
-.PHONY : CMakeFiles/projet.dir/src/Object.cpp.o.provides
-
-CMakeFiles/projet.dir/src/Object.cpp.o.provides.build: CMakeFiles/projet.dir/src/Object.cpp.o
-
 CMakeFiles/projet.dir/src/MeshHE.cpp.o: CMakeFiles/projet.dir/flags.make
 CMakeFiles/projet.dir/src/MeshHE.cpp.o: ../src/MeshHE.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/MeshHE.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/MeshHE.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/MeshHE.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp
 
 CMakeFiles/projet.dir/src/MeshHE.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/MeshHE.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp > CMakeFiles/projet.dir/src/MeshHE.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp > CMakeFiles/projet.dir/src/MeshHE.cpp.i
 
 CMakeFiles/projet.dir/src/MeshHE.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/MeshHE.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp -o CMakeFiles/projet.dir/src/MeshHE.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/MeshHE.cpp -o CMakeFiles/projet.dir/src/MeshHE.cpp.s
 
 CMakeFiles/projet.dir/src/MeshHE.cpp.o.requires:
 .PHONY : CMakeFiles/projet.dir/src/MeshHE.cpp.o.requires
@@ -213,19 +144,88 @@ CMakeFiles/projet.dir/src/MeshHE.cpp.o.provides: CMakeFiles/projet.dir/src/MeshH
 
 CMakeFiles/projet.dir/src/MeshHE.cpp.o.provides.build: CMakeFiles/projet.dir/src/MeshHE.cpp.o
 
+CMakeFiles/projet.dir/src/Object.cpp.o: CMakeFiles/projet.dir/flags.make
+CMakeFiles/projet.dir/src/Object.cpp.o: ../src/Object.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/Object.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/Object.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp
+
+CMakeFiles/projet.dir/src/Object.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/Object.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp > CMakeFiles/projet.dir/src/Object.cpp.i
+
+CMakeFiles/projet.dir/src/Object.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/Object.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Object.cpp -o CMakeFiles/projet.dir/src/Object.cpp.s
+
+CMakeFiles/projet.dir/src/Object.cpp.o.requires:
+.PHONY : CMakeFiles/projet.dir/src/Object.cpp.o.requires
+
+CMakeFiles/projet.dir/src/Object.cpp.o.provides: CMakeFiles/projet.dir/src/Object.cpp.o.requires
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/Object.cpp.o.provides.build
+.PHONY : CMakeFiles/projet.dir/src/Object.cpp.o.provides
+
+CMakeFiles/projet.dir/src/Object.cpp.o.provides.build: CMakeFiles/projet.dir/src/Object.cpp.o
+
+CMakeFiles/projet.dir/src/main.cpp.o: CMakeFiles/projet.dir/flags.make
+CMakeFiles/projet.dir/src/main.cpp.o: ../src/main.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/main.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp
+
+CMakeFiles/projet.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp > CMakeFiles/projet.dir/src/main.cpp.i
+
+CMakeFiles/projet.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/main.cpp -o CMakeFiles/projet.dir/src/main.cpp.s
+
+CMakeFiles/projet.dir/src/main.cpp.o.requires:
+.PHONY : CMakeFiles/projet.dir/src/main.cpp.o.requires
+
+CMakeFiles/projet.dir/src/main.cpp.o.provides: CMakeFiles/projet.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/projet.dir/src/main.cpp.o.provides
+
+CMakeFiles/projet.dir/src/main.cpp.o.provides.build: CMakeFiles/projet.dir/src/main.cpp.o
+
+CMakeFiles/projet.dir/src/shader.cpp.o: CMakeFiles/projet.dir/flags.make
+CMakeFiles/projet.dir/src/shader.cpp.o: ../src/shader.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/shader.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/shader.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp
+
+CMakeFiles/projet.dir/src/shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/shader.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp > CMakeFiles/projet.dir/src/shader.cpp.i
+
+CMakeFiles/projet.dir/src/shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/shader.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/shader.cpp -o CMakeFiles/projet.dir/src/shader.cpp.s
+
+CMakeFiles/projet.dir/src/shader.cpp.o.requires:
+.PHONY : CMakeFiles/projet.dir/src/shader.cpp.o.requires
+
+CMakeFiles/projet.dir/src/shader.cpp.o.provides: CMakeFiles/projet.dir/src/shader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/projet.dir/build.make CMakeFiles/projet.dir/src/shader.cpp.o.provides.build
+.PHONY : CMakeFiles/projet.dir/src/shader.cpp.o.provides
+
+CMakeFiles/projet.dir/src/shader.cpp.o.provides.build: CMakeFiles/projet.dir/src/shader.cpp.o
+
 CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o: CMakeFiles/projet.dir/flags.make
 CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o: ../src/reconstructionsurface.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o -c /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o -c /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp
 
 CMakeFiles/projet.dir/src/reconstructionsurface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/projet.dir/src/reconstructionsurface.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp > CMakeFiles/projet.dir/src/reconstructionsurface.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp > CMakeFiles/projet.dir/src/reconstructionsurface.cpp.i
 
 CMakeFiles/projet.dir/src/reconstructionsurface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/projet.dir/src/reconstructionsurface.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp -o CMakeFiles/projet.dir/src/reconstructionsurface.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp -o CMakeFiles/projet.dir/src/reconstructionsurface.cpp.s
 
 CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o.requires:
 .PHONY : CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o.requires
@@ -239,34 +239,34 @@ CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o.provides.build: CMakeFiles
 # Object files for target projet
 projet_OBJECTS = \
 "CMakeFiles/projet.dir/src/AbstractMesh.cpp.o" \
-"CMakeFiles/projet.dir/src/main.cpp.o" \
-"CMakeFiles/projet.dir/src/shader.cpp.o" \
 "CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o" \
 "CMakeFiles/projet.dir/src/Mesh.cpp.o" \
-"CMakeFiles/projet.dir/src/Object.cpp.o" \
 "CMakeFiles/projet.dir/src/MeshHE.cpp.o" \
+"CMakeFiles/projet.dir/src/Object.cpp.o" \
+"CMakeFiles/projet.dir/src/main.cpp.o" \
+"CMakeFiles/projet.dir/src/shader.cpp.o" \
 "CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o"
 
 # External object files for target projet
 projet_EXTERNAL_OBJECTS =
 
 projet: CMakeFiles/projet.dir/src/AbstractMesh.cpp.o
-projet: CMakeFiles/projet.dir/src/main.cpp.o
-projet: CMakeFiles/projet.dir/src/shader.cpp.o
 projet: CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o
 projet: CMakeFiles/projet.dir/src/Mesh.cpp.o
-projet: CMakeFiles/projet.dir/src/Object.cpp.o
 projet: CMakeFiles/projet.dir/src/MeshHE.cpp.o
+projet: CMakeFiles/projet.dir/src/Object.cpp.o
+projet: CMakeFiles/projet.dir/src/main.cpp.o
+projet: CMakeFiles/projet.dir/src/shader.cpp.o
 projet: CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o
 projet: CMakeFiles/projet.dir/build.make
 projet: external/libGLFW_276.a
 projet: external/libGLEW_190.a
-projet: /usr/lib64/libGLU.so
-projet: /usr/lib64/libGL.so
-projet: /usr/lib64/libSM.so
-projet: /usr/lib64/libICE.so
-projet: /usr/lib64/libX11.so
-projet: /usr/lib64/libXext.so
+projet: /usr/lib/x86_64-linux-gnu/libGLU.so
+projet: /usr/lib/x86_64-linux-gnu/libGL.so
+projet: /usr/lib/x86_64-linux-gnu/libSM.so
+projet: /usr/lib/x86_64-linux-gnu/libICE.so
+projet: /usr/lib/x86_64-linux-gnu/libX11.so
+projet: /usr/lib/x86_64-linux-gnu/libXext.so
 projet: CMakeFiles/projet.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable projet"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/projet.dir/link.txt --verbose=$(VERBOSE)
@@ -276,12 +276,12 @@ CMakeFiles/projet.dir/build: projet
 .PHONY : CMakeFiles/projet.dir/build
 
 CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/AbstractMesh.cpp.o.requires
-CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/main.cpp.o.requires
-CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/shader.cpp.o.requires
 CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/ImplicitFunction.cpp.o.requires
 CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/Mesh.cpp.o.requires
-CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/Object.cpp.o.requires
 CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/MeshHE.cpp.o.requires
+CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/Object.cpp.o.requires
+CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/main.cpp.o.requires
+CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/shader.cpp.o.requires
 CMakeFiles/projet.dir/requires: CMakeFiles/projet.dir/src/reconstructionsurface.cpp.o.requires
 .PHONY : CMakeFiles/projet.dir/requires
 
@@ -290,6 +290,6 @@ CMakeFiles/projet.dir/clean:
 .PHONY : CMakeFiles/projet.dir/clean
 
 CMakeFiles/projet.dir/depend:
-	cd /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles/projet.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles/projet.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/projet.dir/depend
 
