@@ -17,14 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     p->affichagePieces();
 
-    ////////////////////////////////////////////////////////
-    p->enleverPiece( new casePlateau(0,1) );
-    scene->clear();
-    p->affichagePlateau();
-    p->affichagePieces();
-    ////////////////////////////////////////////////////////
-
     this->repaint();
+
+    p->afficherDeplacementPossible( p->getCase(2,0) );
 }
 
 MainWindow::~MainWindow(){

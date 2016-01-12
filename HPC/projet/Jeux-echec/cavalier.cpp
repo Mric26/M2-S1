@@ -50,7 +50,6 @@ std::vector<casePlateau *> *cavalier::deplacementPossible(){
             }
         }
     }
-
     return listCase;
 }
 

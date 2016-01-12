@@ -13,6 +13,11 @@ public:
     void jouerCoup();
     void getBack();
 
+    casePlateau *getCaseDep();
+    void setCaseDep(casePlateau *value);
+    casePlateau *getCaseArr();
+    void setCaseArr(casePlateau *value);
+
 private:
     casePlateau *caseDep;
     casePlateau *caseArr;
