@@ -14,13 +14,12 @@
 
 #include "csv_meteofranceparser.h"
 
-#define RESO_INTERPOLE 50
-#define RESO 10
+#define RESO_INTERPOLE 100   // Resolution de la grille interpolante
+#define RESO 10             // Taille (en pixel) des carres du marchingSquare
 
 QString* pathPoste = new QString("../Data/postesSynop_modif.csv");
 QString* pathDatas = new QString("../Data/synop.2015110912.csv");
 float mu = 2;   // Coefficient de l'interpolant de Shepard
-float isoLine = 290.0;
 
 
 void fillInfo(Csv_meteoFranceParser* csvInfos, float* minLat, float* maxLat, float* minLong, float* maxLong, float* minT, float* maxT) {
@@ -46,22 +45,30 @@ void fillInfo(Csv_meteoFranceParser* csvInfos, float* minLat, float* maxLat, flo
     }
 }
 
-void drawCube(QPainter &painter, size_t i, size_t j, std::vector< std::vector< short >* >* square, bool b) {
+void drawCube(QPainter &painter, size_t i, size_t j, const std::vector< std::vector< float >* >* interpoleShepard, const std::vector< std::vector< short >* >* square, float isoLine) {
     painter.setPen(Qt::red);
     painter.drawRect(i*RESO, j*RESO, RESO, RESO);
 
     int n = square->at(i)->at(j);
+    bool b = ((interpoleShepard->at(i)->at(j) + interpoleShepard->at(i)->at(j+1) +
+              interpoleShepard->at(i+1)->at(j+1) + interpoleShepard->at(i+1)->at(j)) / 4.0) > isoLine;
+
+    // Calcul des coefficients
+    float is1 = interpoleShepard->at(i)->at(j);
+    float is2 = interpoleShepard->at(i)->at(j+1);
+    float is3 = interpoleShepard->at(i+1)->at(j+1);
+    float is4 = interpoleShepard->at(i+1)->at(j);
+    float t1 = (isoLine - is1) / (is2 - is1);
+    float t2 = (isoLine - is2) / (is3 - is2);
+    float t3 = (isoLine - is4) / (is3 - is4);
+    float t4 = (isoLine - is1) / (is4 - is1);
 
     QPoint p1 = QPoint(-1, -1);
     QPoint p2 = QPoint(-1, -1);
-    float t1 = 0.0;
-    float t2 = 0.0;
-    float t3 = 0.0;
-    float t4 = 0.0;
-    QPoint pt1 = QPoint(j*RESO + (RESO/2), i*RESO);
-    QPoint pt2 = QPoint(j*RESO + RESO, i*RESO + (RESO/2));
-    QPoint pt3 = QPoint(j*RESO + (RESO/2), i*RESO + RESO);
-    QPoint pt4 = QPoint(j*RESO, i*RESO + (RESO/2));
+    QPoint pt1 = QPoint((j+t1)*RESO, i*RESO);
+    QPoint pt2 = QPoint((j+1)*RESO, (i+t2)*RESO);
+    QPoint pt3 = QPoint((j+t3)*RESO, (i+1)*RESO);
+    QPoint pt4 = QPoint(j*RESO, (i+t4)*RESO);
 
     if (n == 0 || n == 15) {
 
@@ -155,9 +162,9 @@ int main() {
         (*interpoleShepard)[i] = new std::vector<float>(reso);
     }
 
-    size_t resoSquare = reso-1;
+    int resoSquare = reso-1;
     std::vector< std::vector< short >* >* square = new std::vector< std::vector< short >* >(resoSquare);
-    for (size_t i = 0; i < resoSquare; ++i) {
+    for (int i = 0; i < resoSquare; ++i) {
         (*square)[i] = new std::vector<short>(resoSquare);
     }
 
@@ -190,43 +197,58 @@ int main() {
         }
     }
 
-    QImage *img = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
-    int i = 1;
-    for (float isoLigne = 288.0; isoLigne < 295.0; isoLigne += 1) {
+//    QImage *img = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
+//    int count = 1;
 
-        // Calcul des isolignes
-        bool v1, v2, v3, v4;
-        short bit;
-        for (size_t i = 0; i < resoSquare; ++i) {
-            for (size_t j = 0; j < resoSquare; ++j) {
-                v1 = (interpoleShepard->at(i)->at(j) >= isoLigne);
-                v2 = (interpoleShepard->at(i)->at(j+1) >= isoLigne);
-                v3 = (interpoleShepard->at(i+1)->at(j+1) >= isoLigne);
-                v4 = (interpoleShepard->at(i+1)->at(j) >= isoLigne);
-                bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
-                square->at(i)->at(j) = bit;
-            }
+//    // Calcul des isolignes
+//    for (float isoLigne = minT; isoLigne < maxT; isoLigne += 0.1) {
+
+//        // Calcul des etats de chaque square
+//        bool v1, v2, v3, v4;
+//        short bit;
+//        for (int i = 0; i < resoSquare; ++i) {
+//            for (int j = 0; j < resoSquare; ++j) {
+//                v1 = (interpoleShepard->at(i)->at(j) >= isoLigne);
+//                v2 = (interpoleShepard->at(i)->at(j+1) >= isoLigne);
+//                v3 = (interpoleShepard->at(i+1)->at(j+1) >= isoLigne);
+//                v4 = (interpoleShepard->at(i+1)->at(j) >= isoLigne);
+//                bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
+//                square->at(i)->at(j) = bit;
+//            }
+//        }
+
+//        // Initialisation de l'image de sortie
+//        img->fill(qRgb(0,0,0));
+
+//        // Representation du marching square
+//        QPainter painter(img);
+//        for (int i = 0; i < resoSquare; ++i) {
+//            for (int j = 0; j < resoSquare; ++j) {
+//                drawCube(painter, i, j, interpoleShepard, square, isoLigne);
+//            }
+//        }
+
+//        img->save(QString("../Images/Anim" + QString::number(count) + ".png"));
+//        count++;
+//        std::cout << "n° : " << count << std::endl;
+//    }
+//    delete img;
+
+
+    QImage *colormap = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
+    QRgb color1 = qRgb(0, 0, 255);
+    QRgb color2 = qRgb(255, 0, 0);
+
+    // Calcul de la colormap
+    for (int i = 0; i < resoSquare; ++i) {
+        for (int j = 0; j < resoSquare; ++j) {
+            float t = (interpoleShepard->at(i)->at(j) - minT) / (maxT - minT);
+            QRgb color = (1-t)*color1 + t*color2;
+            colormap->setPixel(i, j, qRgba(qRed(color), qGreen(color), qBlue(color), 128));
         }
-
-
-        // Initialisation de l'image de sortie
-        img->fill(qRgb(0,0,0));
-
-        // Representation du marching square
-        QPainter painter(img);
-        for (size_t i = 0; i < resoSquare; ++i) {
-            for (size_t j = 0; j < resoSquare; ++j) {
-                bool b = ((interpoleShepard->at(i)->at(j) + interpoleShepard->at(i)->at(j+1) +
-                          interpoleShepard->at(i+1)->at(j+1) + interpoleShepard->at(i+1)->at(j)) / 4.0) > isoLigne;
-                drawCube(painter, i, j, square, b);
-            }
-        }
-
-        img->save(QString("../Images/Anim" + QString::number(i) + ".png"));
-        i++;
-        std::cout << "n° : " << i << std::endl;
     }
-    delete img;
+
+    colormap->save(QString("../Images/Colormap.png"));
 
 
     std::cout << "Delete memory" << std::endl;
@@ -237,6 +259,7 @@ int main() {
     delete latitude;
     delete longitude;
     delete kelvin;
+    delete colormap;
 
     std::cout << "Fin" << std::endl;
     return 0;
