@@ -1,16 +1,15 @@
 
+#include <climits>
 #include <iostream>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <climits>
-#include <math.h>
-
-#include <QString>
 #include <QImage>
-#include <QPixmap>
 #include <QPainter>
+#include <QPixmap>
 #include <QPoint>
+#include <QString>
 
 #include "csv_meteofranceparser.h"
 
@@ -22,29 +21,7 @@ QString* pathDatas = new QString("../Data/synop.2015110912.csv");
 float mu = 2;   // Coefficient de l'interpolant de Shepard
 
 
-void fillInfo(Csv_meteoFranceParser* csvInfos, float* minLat, float* maxLat, float* minLong, float* maxLong, float* minT, float* maxT) {
-    std::vector<std::string>* latitude = (*csvInfos)[std::string("Latitude")];
-    std::vector<std::string>* longitude = (*csvInfos)[std::string("Longitude")];
-    std::vector<std::string>* kelvin = (*csvInfos)[std::string("t")];
-
-    unsigned int nbData = latitude->size();
-    float lati, longi, t;
-
-    // Calcul des min/max
-    for (unsigned int i = 0; i < nbData; ++i) {
-        lati = atof(latitude->at(i).c_str());
-        longi = atof(longitude->at(i).c_str());
-        t = atof(kelvin->at(i).c_str());
-
-        *minLat = (lati < *minLat) ? lati : *minLat;
-        *maxLat = (lati > *maxLat) ? lati : *maxLat;
-        *minLong = (longi < *minLong) ? longi : *minLong;
-        *maxLong = (longi > *maxLong) ? longi : *maxLong;
-        *minT = (t < *minT) ? t : *minT;
-        *maxT = (t > *maxT) ? t : *maxT;
-    }
-}
-
+// Dessine l'isoligne dans un QPainter
 void drawCube(QPainter &painter, size_t i, size_t j, const std::vector< std::vector< float >* >* interpoleShepard, const std::vector< std::vector< short >* >* square, float isoLine) {
     painter.setPen(Qt::red);
     painter.drawRect(i*RESO, j*RESO, RESO, RESO);
@@ -124,41 +101,128 @@ void drawCube(QPainter &painter, size_t i, size_t j, const std::vector< std::vec
     painter.drawLine(p1, p2);
 }
 
+// Retourne la distance euclidienne
 float distance(float x1, float y1, float x2, float y2) {
     return sqrt( pow(x2-x1, 2) + pow(y2-y1, 2) );
+}
+
+// Calcul les extremas
+void findExtrema(float &min, float &max, std::vector<std::string>* data) {
+    float d;
+    min = INT_MAX;
+    max = INT_MIN;
+    for (unsigned int i = 0; i < data->size(); ++i) {
+        d = atof(data->at(i).c_str());
+        min = (d < min) ? d : min;
+        max = (d > max) ? d : max;
+    }
+}
+
+
+// Interpolation de Shepard
+void computeShepard(std::vector< std::vector< float >* >* interpoleData, std::vector<std::string>* latitude, std::vector<std::string>* longitude, std::vector<std::string>* data) {
+
+    float lati, longi;
+    int reso = RESO_INTERPOLE;
+
+    float minLat, maxLat;
+    float minLong, maxLong;
+    findExtrema(minLat, maxLat, latitude);
+    findExtrema(minLong, maxLong, longitude);
+
+    // interpolation sur toutes les grilles
+    for (int i = 0; i < reso; ++i) {
+        for (int j = 0; j < reso; ++j) {
+            lati = minLat + ((double(i)/(reso-1)) * (maxLat - minLat));
+            longi = minLong + ((double(j)/(reso-1)) * (maxLong - minLong));
+
+            // calcul de s pour wk
+            float s = 0;
+            for (unsigned int l = 0; l < data->size(); ++l) {
+                float latil = atof(latitude->at(l).c_str());
+                float longil = atof(longitude->at(l).c_str());
+                s += 1.0 / pow(distance(lati, longi, latil, longil), mu);
+            }
+
+            // interpolation des donnees
+            float eval = 0;
+            for (unsigned int k = 0; k < data->size(); ++k) {
+                float latik = atof(latitude->at(k).c_str());
+                float longik = atof(longitude->at(k).c_str());
+
+                float wk = (1.0 / pow(distance(lati, longi, latik, longik), mu)) * (1.0 / s);
+                eval += wk * atof(data->at(k).c_str());
+            }
+
+            interpoleData->at(i)->at(j) = eval;
+        }
+    }
+
+}
+
+// Calcul l'etat de chaque square en fonction d'une isoligne
+void computeMarchingSquare(std::vector< std::vector< short >* >* square, std::vector< std::vector< float >* >* interpoleData, float isoLine) {
+    // Calcul des etats de chaque square
+    int resoSquare = RESO_INTERPOLE - 1;
+    bool v1, v2, v3, v4;
+    short bit;
+    for (int i = 0; i < resoSquare; ++i) {
+        for (int j = 0; j < resoSquare; ++j) {
+            v1 = (interpoleData->at(i)->at(j) >= isoLine);
+            v2 = (interpoleData->at(i)->at(j+1) >= isoLine);
+            v3 = (interpoleData->at(i+1)->at(j+1) >= isoLine);
+            v4 = (interpoleData->at(i+1)->at(j) >= isoLine);
+            bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
+            square->at(i)->at(j) = bit;
+        }
+    }
+}
+
+void computeColormap(QImage *colormap, QRgb color1, QRgb color2, std::vector< std::vector< float >* >* interpoleData) {
+    int reso = RESO_INTERPOLE;
+    int resoSquare = RESO_INTERPOLE - 1;
+    float minD = INT_MAX;
+    float maxD = INT_MIN;
+
+    // calcul du min et du max
+    for (int i = 0; i < reso; ++i) {
+        for (int j = 0; j < reso; ++j) {
+            float d = interpoleData->at(i)->at(j);
+            minD = (d < minD) ? d : minD;
+            maxD = (d > maxD) ? d : maxD;
+        }
+    }
+
+    // calcul de la colormap
+    for (int i = 0; i < resoSquare; ++i) {
+        for (int j = 0; j < resoSquare; ++j) {
+            float t = (interpoleData->at(i)->at(j) - minD) / (maxD - minD);
+            float r = (1-t)*qRed(color1) + t * qRed(color2);
+            float g = (1-t)*qGreen(color1) + t * qGreen(color2);
+            float b = (1-t)*qBlue(color1) + t * qBlue(color2);
+            colormap->setPixel(i, j, qRgba(r, g, b, 200));
+        }
+    }
 }
 
 
 int main() {
 
+    // importation des donnees
     Csv_meteoFranceParser* csvPoste = new Csv_meteoFranceParser(pathPoste);
     Csv_meteoFranceParser* csvDatas = new Csv_meteoFranceParser(pathDatas);
-
-
     Csv_meteoFranceParser* csvJoin = csv_join_force(csvPoste, csvDatas, std::string("ID"), std::string("numer_sta"), std::string("Id_Fusion"));
-    //csvJoin->showMap();
 
+    // selection des donnes requises (latitude, longitude, temperature, ...)
     std::vector<std::string>* id = (*csvJoin)[std::string("Id_Fusion")];
     std::vector<std::string>* latitude = (*csvJoin)[std::string("Latitude")];
     std::vector<std::string>* longitude = (*csvJoin)[std::string("Longitude")];
     std::vector<std::string>* kelvin = (*csvJoin)[std::string("t")];
 
-    unsigned int nbData = id->size();   // nombre de donnees acquises
-    float minLat = INT_MAX;
-    float maxLat = INT_MIN;
-    float minLong = INT_MAX;
-    float maxLong = INT_MIN;
-    float minT = INT_MAX;
-    float maxT = INT_MIN;
 
-    fillInfo(csvJoin, &minLat, &maxLat, &minLong, &maxLong, &minT, &maxT);
-    std::cout << minLat << ", " << maxLat << std::endl;
-    std::cout << minLong << ", " << maxLong << std::endl;
-    std::cout << minT << ", " << maxT << std::endl;
-
-    size_t reso = RESO_INTERPOLE;
+    int reso = RESO_INTERPOLE;
     std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(reso);
-    for (size_t i = 0; i < reso; ++i) {
+    for (int i = 0; i < reso; ++i) {
         (*interpoleShepard)[i] = new std::vector<float>(reso);
     }
 
@@ -168,86 +232,45 @@ int main() {
         (*square)[i] = new std::vector<short>(resoSquare);
     }
 
-    float lati, longi;
 
-    // Interpolation de Shepard
-    for (size_t i = 0; i < reso; ++i) {
-        for (size_t j = 0; j < reso; ++j) {
-            lati = minLat + ((double(i)/(reso-1)) * (maxLat - minLat));
-            longi = minLong + ((double(j)/(reso-1)) * (maxLong - minLong));
+    // interpolation des temperatures
+    computeShepard(interpoleShepard, latitude, longitude, kelvin);
 
-            // interpolation de la temperature
-            float eval = 0;
-            for (size_t k = 0; k < nbData; ++k) {
-                float latik = atof(latitude->at(k).c_str());
-                float longik = atof(longitude->at(k).c_str());
 
-                // calcul de wk
-                float s = 0;
-                for (size_t l = 0; l < nbData; ++l) {
-                    float latil = atof(latitude->at(l).c_str());
-                    float longil = atof(longitude->at(l).c_str());
-                    s += 1.0 / pow(distance(lati, longi, latil, longil), mu);
-                }
-                float wk = (1.0 / pow(distance(lati, longi, latik, longik), mu)) * (1.0 / s);
-                eval += wk * atof(kelvin->at(k).c_str());;
+    float minT, maxT;
+    findExtrema(minT, maxT, kelvin);
+
+    QImage *imgSquare = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
+    int count = 1;
+
+    // calcul des isolignes
+    for (float isoLine = minT; isoLine < maxT; isoLine += 1) {
+
+        computeMarchingSquare(square, interpoleShepard, isoLine);
+
+        // initialisation de l'image de sortie
+        imgSquare->fill(qRgb(0,0,0));
+
+        // representation du marching square
+        QPainter painter(imgSquare);
+        for (int i = 0; i < resoSquare; ++i) {
+            for (int j = 0; j < resoSquare; ++j) {
+                drawCube(painter, i, j, interpoleShepard, square, isoLine);
             }
-
-            interpoleShepard->at(i)->at(j) = eval;
         }
+
+        imgSquare->save(QString("../Images/Anim" + QString::number(count) + ".png"));
+        std::cout << "n° : " << count << std::endl;
+        count++;
     }
-
-//    QImage *img = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
-//    int count = 1;
-
-//    // Calcul des isolignes
-//    for (float isoLigne = minT; isoLigne < maxT; isoLigne += 0.1) {
-
-//        // Calcul des etats de chaque square
-//        bool v1, v2, v3, v4;
-//        short bit;
-//        for (int i = 0; i < resoSquare; ++i) {
-//            for (int j = 0; j < resoSquare; ++j) {
-//                v1 = (interpoleShepard->at(i)->at(j) >= isoLigne);
-//                v2 = (interpoleShepard->at(i)->at(j+1) >= isoLigne);
-//                v3 = (interpoleShepard->at(i+1)->at(j+1) >= isoLigne);
-//                v4 = (interpoleShepard->at(i+1)->at(j) >= isoLigne);
-//                bit = v1 + (v2 * 2) + (v3 * 4) + (v4 * 8);
-//                square->at(i)->at(j) = bit;
-//            }
-//        }
-
-//        // Initialisation de l'image de sortie
-//        img->fill(qRgb(0,0,0));
-
-//        // Representation du marching square
-//        QPainter painter(img);
-//        for (int i = 0; i < resoSquare; ++i) {
-//            for (int j = 0; j < resoSquare; ++j) {
-//                drawCube(painter, i, j, interpoleShepard, square, isoLigne);
-//            }
-//        }
-
-//        img->save(QString("../Images/Anim" + QString::number(count) + ".png"));
-//        count++;
-//        std::cout << "n° : " << count << std::endl;
-//    }
-//    delete img;
 
 
     QImage *colormap = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
     QRgb color1 = qRgb(0, 0, 255);
     QRgb color2 = qRgb(255, 0, 0);
 
-    // Calcul de la colormap
-    for (int i = 0; i < resoSquare; ++i) {
-        for (int j = 0; j < resoSquare; ++j) {
-            float t = (interpoleShepard->at(i)->at(j) - minT) / (maxT - minT);
-            QRgb color = (1-t)*color1 + t*color2;
-            colormap->setPixel(i, j, qRgba(qRed(color), qGreen(color), qBlue(color), 128));
-        }
-    }
-
+    // calcul de la colormap
+    computeColormap(colormap, color1, color2, interpoleShepard);
     colormap->save(QString("../Images/Colormap.png"));
 
 
@@ -259,6 +282,7 @@ int main() {
     delete latitude;
     delete longitude;
     delete kelvin;
+    delete imgSquare;
     delete colormap;
 
     std::cout << "Fin" << std::endl;
