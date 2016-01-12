@@ -32,7 +32,7 @@ bool plateau::valid(int column, int line){
 }
 
 casePlateau *plateau::getCase(int column, int line) {
-    return tab->at_element(line, column);
+    return tab->at_element(column, line);
 }
 
 casePlateau *plateau::getCaseKing(bool joueur1){
@@ -107,23 +107,9 @@ void plateau::jouerCoup(coup *c){
     // Mise a jour des listes de piece du joueur
     pieces *piece = c->getPrise();
     if (piece != NULL) {
-        int pos = -1;
-        if (piece->getCouleur() == 0) {
-            for (unsigned int i = 0; i < listeJoueurBlanc->size() && pos == -1; ++i) {
-                if (piece == listeJoueurBlanc->at(i)) {
-                    pos = i;
-                }
-            }
-            listeJoueurBlanc->erase(listeJoueurBlanc->begin() + pos);
-        } else {
-            for (unsigned int i = 0; i < listeJoueurNoir->size() && pos == -1; ++i) {
-                if (piece == listeJoueurNoir->at(i)) {
-                    pos = i;
-                }
-            }
-            listeJoueurNoir->erase(listeJoueurNoir->begin() + pos);
-        }
+        enleverPiece( piece );
     }
+    majPlateau();
     // Changement de joueur
     changementJoueur();
 }
@@ -168,29 +154,33 @@ void plateau::affichagePieces(){
     }
 }
 
-void plateau::enleverPiece( casePlateau * c ){
-//    std::vector<pieces*> *res = new  std::vector<pieces*>;
-//    pieces p1 = c->getPiece();
-//    //blanc
-//    if( p1.couleur == 0 ){
-//        foreach (pieces* p, *listeJoueurBlanc) {
-//            if( (p->name != p1.name) ){
-//                res->push_back(p);
-//            }
-//        }
-//        listeJoueurBlanc->clear();
-//        listeJoueurBlanc = res;
-//    }
-//    //noir
-//    else{
-//        foreach (pieces* p, *listeJoueurNoir) {
-//            if( (p->name != p1.name) ){
-//                res->push_back(p);
-//            }
-//        }
-//        listeJoueurNoir->clear();
-//        listeJoueurNoir = res;
-//    }
+void plateau::enleverPiece( pieces * p ){
+    int pos = -1;
+    //blanc
+    if( p->getCouleur() == 0 ){
+        for (unsigned int i = 0; i < listeJoueurBlanc->size() && pos == -1; ++i) {
+            if (p == listeJoueurBlanc->at(i)) {
+                pos = i;
+            }
+        }
+        listeJoueurBlanc->erase(listeJoueurBlanc->begin() + pos);
+    }
+    //noir
+    else{
+        for (unsigned int i = 0; i < listeJoueurNoir->size() && pos == -1; ++i) {
+            if (p == listeJoueurNoir->at(i)) {
+                pos = i;
+            }
+        }
+        listeJoueurNoir->erase(listeJoueurNoir->begin() + pos);
+    }
+}
+
+void plateau::majPlateau(){
+    w->scene->clear();
+    affichagePlateau();
+    affichagePieces();
+    w->repaint();
 }
 
 void plateau::newGame(){
@@ -314,3 +304,21 @@ void plateau::newGame(){
     setJoueur1(true);
 }
 
+void plateau::afficherDeplacementPossible( casePlateau * c ){
+    QRect * rectangle = new QRect(50 + c->getLine() * 80, 60 + c->getColumn() * 80, 75, 75);
+    QPen  * pen = new QPen(Qt::cyan, 1, Qt::SolidLine);
+    w->scene->addRect(*rectangle, *pen);
+
+    pieces * p = c->getPiece();
+    std::vector<casePlateau *> * dp = p->deplacementPossible();
+    if( dp->size() == 0 ){
+        cout << "CEST NULL BITCH !!!" << endl;
+    }
+    foreach (casePlateau *cp, *dp) {
+        rectangle = new QRect(50 + cp->getLine() * 80, 60 + cp->getColumn() * 80, 75, 75);
+        pen = new QPen(Qt::magenta, 1, Qt::SolidLine);
+        w->scene->addRect(*rectangle, *pen);
+    }
+
+    w->repaint();
+}

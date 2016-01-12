@@ -30,3 +30,21 @@ void coup::getBack(){
     caseDep->getPiece()->setCasePiece(caseDep);
 }
 
+casePlateau *coup::getCaseDep(){
+    return caseDep;
+}
+
+void coup::setCaseDep(casePlateau *value){
+    caseDep = value;
+}
+
+casePlateau *coup::getCaseArr(){
+    return caseArr;
+}
+
+void coup::setCaseArr(casePlateau *value){
+    caseArr = value;
+}
+
+
+

@@ -49,7 +49,9 @@ public:
     void getBack(coup*c);
     void newGame();
     void affichagePieces();        
-    void enleverPiece(casePlateau *c);
+    void enleverPiece(pieces *p);
+    void majPlateau();
+    void afficherDeplacementPossible(casePlateau * c);
 
 private:
     MainWindow * w;
