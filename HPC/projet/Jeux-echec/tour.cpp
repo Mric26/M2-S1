@@ -31,7 +31,7 @@ std::vector<casePlateau *> *tour::deplacementPossible(){
             if (p->valid(getColumn()+i, getLine()+j)) {
                 caseArr = p->getCase(getColumn()+i, getLine()+j);
                 piece = caseArr->getPiece();
-                if (piece == NULL || !sameColor(piece)) {       // sameColor a implanter !
+                if (piece == NULL || !sameColor(piece)) {
                     loop = (piece == NULL);
                     cp = new coup(getCasePiece(), caseArr);
                     if (p->isCoupValid(cp)) {

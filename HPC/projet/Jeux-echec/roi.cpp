@@ -24,7 +24,7 @@ std::vector<casePlateau *> *roi::deplacementPossible(){
     foreach (int i, simpleStep) {
         foreach (int j, simpleStep) {
             if ((i != 0 || j != 0) && p->valid(getColumn()+i, getLine()+j)) {
-                caseArr = p->getCase(getLine()+i, getColumn()+j);
+                caseArr = p->getCase(getColumn()+i, getLine()+j);
                 piece = caseArr->getPiece();
                 if (piece == NULL || !sameColor(piece)) {
                     cp = new coup(casePiece, caseArr);
