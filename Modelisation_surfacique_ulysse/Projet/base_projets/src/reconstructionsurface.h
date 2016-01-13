@@ -1,8 +1,8 @@
 #ifndef RECONSTRUCTIONSURFACE_H
 #define RECONSTRUCTIONSURFACE_H
 
-#include <glm/glm.hpp>
-#include <glm/gtc/type_precision.hpp> //i32vec3
+//#include <glm/glm.hpp>
+//#include <glm/gtc/type_precision.hpp> //i32vec3
 #include <vector>
 #include <string>
 #include <eigen3/Eigen/Dense>

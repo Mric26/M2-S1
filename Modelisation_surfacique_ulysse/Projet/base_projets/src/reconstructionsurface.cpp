@@ -12,12 +12,12 @@ using namespace Eigen;
 ReconstructionSurface::ReconstructionSurface( Mesh m ){
     //variables
     mesh = m;
-    vertices_tab = mesh.Vertices();
+    vertices_tab = mesh.vertices;
     //ajout du barycentre
     vertices_tab.push_back( barycentre() );
     //calcul des distances
     int taille = static_cast<int>(vertices_tab.size());
-    Matrix3f distances = Matrix3f(taille, taille);
+    MatrixXf distances = MatrixXf(taille, taille);
 
     for (int i = 0; i < taille; ++i) {
         for (int j = i; j < taille; ++j) {
@@ -38,10 +38,13 @@ ReconstructionSurface::ReconstructionSurface( Mesh m ){
 }
 
 float ReconstructionSurface::Eval(glm::vec3 p) const{
-    double res = 0;
+    double res = 0.0;
+    double dist =0.0;
     int taille = static_cast<int>(vertices_tab.size());
     for (int i = 0; i < taille; ++i) {
-        res = res + (vertices_tab.at(i) * weight_tab(i) );
+        dist = glm::distance(p, vertices_tab.at(i));
+        dist = exp(-(dist*dist));
+        res = res + (dist * weight_tab(i) );
     }
     return res;
 }
