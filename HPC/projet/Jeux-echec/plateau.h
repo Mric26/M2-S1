@@ -32,6 +32,7 @@ public:
     bool valid(int column, int line);
     casePlateau *getCase(int column, int line);
     casePlateau *getCaseKing(bool joueur1);
+    std::vector<casePlateau *> *getCaseJouableFromPlayer(bool joueur1);
     std::vector<pieces*> *getListeJoueurBlanc() const;
     void setListeJoueurBlanc(std::vector<pieces *> *value);
     std::vector<pieces*> *getListeJoueurNoir() const;

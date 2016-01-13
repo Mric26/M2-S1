@@ -32,7 +32,7 @@ bool plateau::valid(int column, int line){
 }
 
 casePlateau *plateau::getCase(int column, int line) {
-    return tab->at_element(column, line);
+    return tab->at_element(line, column);
 }
 
 casePlateau *plateau::getCaseKing(bool joueur1){
@@ -41,11 +41,26 @@ casePlateau *plateau::getCaseKing(bool joueur1){
         listPieces = getListeJoueurNoir();
     }
     foreach (pieces *piece, *listPieces) {
-        if (piece->getName().compare("roi")) {
+        if (piece->getName().compare("roi") == 0) {
             return piece->getCasePiece();
         }
     }
     return NULL;
+}
+
+/** Retourne l'ensemble des cases attaquees par le joueur passe en parametre */
+std::vector<casePlateau *> *plateau::getCaseJouableFromPlayer(bool joueur1) {
+    std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
+    std::vector< pieces* > *listPieces = getListeJoueurBlanc();
+    if (!joueur1) {
+        listPieces = getListeJoueurNoir();
+    }
+    foreach (pieces *piece, *listPieces) {
+        foreach (casePlateau *c, *piece->deplacementPossible()) {
+            listCase->push_back(c);
+        }
+    }
+    return listCase;
 }
 
 std::vector<pieces *> *plateau::getListeJoueurBlanc() const{
@@ -82,13 +97,15 @@ bool plateau::checkKing(bool joueur1){
 }
 
 bool plateau::checkMateKing(bool joueur1){
-    return false;
+    // Retourne faux si le roi n'est pas en echec
+    if (!checkKing(joueur1)) {
+        return false;
+    }
+    // Retourne vrai si aucun deplacement ne peut proteger le roi
+    return (getCaseJouableFromPlayer(joueur1)->size() == 0);
 }
 
 bool plateau::isCoupValid(coup *c){
-    ///////////////////////////////////////////////////////////////
-    return true;
-    ///////////////////////////////////////////////////////////////
     bool res;
     c->jouerCoup();
     res = !checkKing(getJoueur1());
@@ -145,14 +162,14 @@ void plateau::affichagePieces(){
     foreach (pieces* p, *listeJoueurBlanc) {
         QGraphicsItem *item;
         item = w->scene->addPixmap( *(p->getRep()) );
-        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        item->setPos(65 + p->getCasePiece()->getColumn() * 80, 72 + p->getCasePiece()->getLine() * 80 );
         w->itemVector->push_back( item );
     }
 
     foreach (pieces* p, *listeJoueurNoir) {
         QGraphicsItem *item;
         item = w->scene->addPixmap( *(p->getRep()) );
-        item->setPos(65 + p->getCasePiece()->getLine() * 80, 72 + p->getCasePiece()->getColumn() * 80 );
+        item->setPos(65 + p->getCasePiece()->getColumn() * 80, 72 + p->getCasePiece()->getLine() * 80 );
         w->itemVector->push_back( item );
     }
 }
@@ -190,56 +207,56 @@ void plateau::newGame(){
     casePlateau * c;
 
     //piece blanche
-    c = tab->at_element(0,7);
+    c = getCase(0,7);
     tour * tb1 = new tour(this, 0);
     tb1->setCasePiece(c);
     listeJoueurBlanc->push_back(tb1);
     c->setPiece(tb1);
 
-    c = tab->at_element(1,7);
+    c = getCase(1,7);
     cavalier * cb1 = new cavalier(this, 0);
     cb1->setCasePiece(c);
     listeJoueurBlanc->push_back(cb1);
     c->setPiece(cb1);
 
-    c = tab->at_element(2,7);
+    c = getCase(2,7);
     fou * fb1 = new fou(this, 0);
     fb1->setCasePiece(c);
     listeJoueurBlanc->push_back(fb1);
     c->setPiece(fb1);
 
-    c = tab->at_element(3,7);
+    c = getCase(3,7);
     reine * rb = new reine(this, 0);
     rb->setCasePiece(c);
     listeJoueurBlanc->push_back(rb);
     c->setPiece(rb);
 
-    c = tab->at_element(4,7);
+    c = getCase(4,7);
     roi * roib = new roi(this, 0);
     roib->setCasePiece(c);
     listeJoueurBlanc->push_back(roib);
     c->setPiece(roib);
 
-    c = tab->at_element(5,7);
+    c = getCase(5,7);
     fou * fb2 = new fou(this, 0);
     fb2->setCasePiece(c);
     listeJoueurBlanc->push_back(fb2);
     c->setPiece(fb2);
 
-    c = tab->at_element(6,7);
+    c = getCase(6,7);
     cavalier * cb2 = new cavalier(this, 0);
     cb2->setCasePiece(c);
     listeJoueurBlanc->push_back(cb2);
     c->setPiece(cb2);
 
-    c = tab->at_element(7,7);
+    c = getCase(7,7);
     tour * tb2 = new tour(this, 0);
     tb2->setCasePiece(c);
     listeJoueurBlanc->push_back(tb2);
     c->setPiece(tb2);
 
     for (int i = 0; i < 8; ++i) {
-        c = tab->at_element(i,6);
+        c = getCase(i,6);
         pion * pb = new pion(this, 0);
         pb->setCasePiece(c);
         listeJoueurBlanc->push_back(pb);
@@ -247,49 +264,49 @@ void plateau::newGame(){
     }
 
     //piece noir
-    c = tab->at_element(0,0);
+    c = getCase(0,0);
     tour * tn1 = new tour(this, 1);
     tn1->setCasePiece(c);
     listeJoueurNoir->push_back(tn1);
     c->setPiece(tn1);
 
-    c = tab->at_element(1,0);
+    c = getCase(1,0);
     cavalier * cn1 = new cavalier(this, 1);
     cn1->setCasePiece(c);
     listeJoueurNoir->push_back(cn1);
     c->setPiece(cn1);
 
-    c = tab->at_element(2,0);
+    c = getCase(2,0);
     fou * fn1 = new fou(this, 1);
     fn1->setCasePiece(c);
     listeJoueurNoir->push_back(fn1);
     c->setPiece(fn1);
 
-    c = tab->at_element(3,0);
+    c = getCase(3,0);
     reine * rn = new reine(this, 1);
     rn->setCasePiece(c);
     listeJoueurNoir->push_back(rn);
-    c->setPiece(rb);
+    c->setPiece(rn);
 
-    c = tab->at_element(4,0);
+    c = getCase(4,0);
     roi * roin = new roi(this, 1);
     roin->setCasePiece(c);
     listeJoueurNoir->push_back(roin);
     c->setPiece(roin);
 
-    c = tab->at_element(5,0);
+    c = getCase(5,0);
     fou * fn2 = new fou(this, 1);
     fn2->setCasePiece(c);
     listeJoueurNoir->push_back(fn2);
     c->setPiece(fn2);
 
-    c = tab->at_element(6,0);
+    c = getCase(6,0);
     cavalier * cn2 = new cavalier(this, 1);
     cn2->setCasePiece(c);
     listeJoueurNoir->push_back(cn2);
     c->setPiece(cn2);
 
-    c = tab->at_element(7,0);
+    c = getCase(7,0);
     tour * tn2 = new tour(this, 1);
     tn2->setCasePiece(c);
     listeJoueurNoir->push_back(tn2);
@@ -297,7 +314,7 @@ void plateau::newGame(){
 
 
     for (int i = 0; i < 8; ++i) {
-        c = tab->at_element(i,1);
+        c = getCase(i,1);
         pion * pn = new pion(this, 1);
         pn->setCasePiece(c);
         listeJoueurNoir->push_back(pn);
@@ -308,7 +325,7 @@ void plateau::newGame(){
 }
 
 void plateau::afficherDeplacementPossible( casePlateau * c ){
-    QRect * rectangle = new QRect(50 + c->getLine() * 80, 60 + c->getColumn() * 80, 75, 75);
+    QRect * rectangle = new QRect(50 + c->getColumn() * 80, 60 + c->getLine() * 80, 75, 75);
     QPen  * pen = new QPen(Qt::cyan, 1, Qt::SolidLine);
     w->scene->addRect(*rectangle, *pen);
 
@@ -318,7 +335,7 @@ void plateau::afficherDeplacementPossible( casePlateau * c ){
         cout << "CEST NULL BITCH !!!" << endl;
     }
     foreach (casePlateau *cp, *dp) {
-        rectangle = new QRect(50 + cp->getLine() * 80, 60 + cp->getColumn() * 80, 75, 75);
+        rectangle = new QRect(50 + cp->getColumn() * 80, 60 + cp->getLine() * 80, 75, 75);
         pen = new QPen(Qt::magenta, 1, Qt::SolidLine);
         w->scene->addRect(*rectangle, *pen);
     }
