@@ -22,6 +22,7 @@ ReconstructionSurface::ReconstructionSurface( Mesh m ){
     for (int i = 0; i < taille; ++i) {
         for (int j = i; j < taille; ++j) {
             double dist = glm::distance(vertices_tab.at(i), vertices_tab.at(j));
+            dist = exp(-(dist*dist));
             distances(i,j) = dist;
             distances(j,i) = dist;
         }

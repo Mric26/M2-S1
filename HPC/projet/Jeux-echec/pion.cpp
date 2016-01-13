@@ -12,6 +12,10 @@ pion::pion(plateau *plat, int color):pieces(plat, QString("pion"), color){
 }
 
 std::vector<casePlateau *> *pion::deplacementPossible(){
+    ////////////////////////////////////////
+    /// INVERSION POSSIBLE LIGNE/COLONNE ///
+    ////////////////////////////////////////
+
     std::vector<casePlateau *> *listCase = new std::vector<casePlateau *>(0);
     std::vector<casePlateau *> *caseJouable = new std::vector<casePlateau *>(0);
 

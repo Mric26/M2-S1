@@ -11,15 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
     itemVector = new std::vector<QGraphicsItem *>;
     plateau *p = new plateau( this );
 
-    p->affichagePlateau();
     ui->Affichage->setScene(scene);
     ui->Affichage->show();
+    p->majPlateau();
 
-    p->affichagePieces();
-
-    this->repaint();
-
-    p->afficherDeplacementPossible( p->getCase(2,0) );
+    p->afficherDeplacementPossible( p->getCase(2,1) );
 }
 
 MainWindow::~MainWindow(){
