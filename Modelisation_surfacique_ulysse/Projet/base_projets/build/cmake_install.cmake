@@ -1,4 +1,4 @@
-# Install script for directory: /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets
+# Install script for directory: /user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,12 +29,12 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 # Install shared libraries without execute permission?
 IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  SET(CMAKE_INSTALL_SO_NO_EXE "1")
+  SET(CMAKE_INSTALL_SO_NO_EXE "0")
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/cmake_install.cmake")
+  INCLUDE("/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -44,7 +44,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

@@ -114,7 +114,49 @@ bool plateau::isCoupValid(coup *c){
 }
 
 int plateau::evaluation(){
-    return 0;
+    int resb = 0;
+    foreach (pieces* p, *listeJoueurBlanc) {
+        if( p->getName() == QString("roi") ){
+            resb = resb + 500;
+        }
+        if( p->getName() == QString("reine") ){
+            resb = resb + 50;
+        }
+        if( p->getName() == QString("tour") ){
+            resb = resb + 10;
+        }
+        if( p->getName() == QString("fou") ){
+            resb = resb + 5;
+        }
+        if( p->getName() == QString("cavalier") ){
+            resb = resb + 5;
+        }
+        if( p->getName() == QString("pion") ){
+            resb = resb + 1;
+        }
+    }
+    int resn = 0;
+    foreach (pieces* p, *listeJoueurNoir) {
+        if( p->getName() == QString("roi") ){
+            resn = resn + 500;
+        }
+        if( p->getName() == QString("reine") ){
+            resn = resn + 50;
+        }
+        if( p->getName() == QString("tour") ){
+            resn = resn + 10;
+        }
+        if( p->getName() == QString("fou") ){
+            resn = resn + 5;
+        }
+        if( p->getName() == QString("cavalier") ){
+            resn = resn + 5;
+        }
+        if( p->getName() == QString("pion") ){
+            resn = resn + 1;
+        }
+    };
+    return resb - resn;
 }
 
 void plateau::changementJoueur(){
@@ -148,6 +190,26 @@ void plateau::getBack(coup *c){
             listeJoueurNoir->push_back(piece);
         }
     }
+}
+
+std::vector<coup *> * plateau::getListCoup(bool j){
+    std::vector<coup *> * res = new std::vector<coup *>;
+    std::vector<pieces*> *liste_Pieces;
+    if( j ){
+        liste_Pieces = listeJoueurBlanc;
+    }
+    else{
+        liste_Pieces = listeJoueurNoir;
+    }
+    coup * c;
+    foreach (pieces* p, *liste_Pieces) {
+        std::vector<casePlateau *> *liste_Coups = p->deplacementPossible();
+        foreach (casePlateau *ca, *liste_Coups) {
+            c = new coup( p->getCasePiece(), ca );
+            res->push_back( c );
+        }
+    }
+    return res;
 }
 
 void plateau::affichagePlateau(){
