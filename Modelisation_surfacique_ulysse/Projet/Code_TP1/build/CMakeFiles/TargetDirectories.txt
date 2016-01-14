@@ -1,3 +1,0 @@
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/Code_TP1/build/external/CMakeFiles/GLEW_190.dir
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/Code_TP1/build/external/CMakeFiles/GLFW_276.dir
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/Code_TP1/build/CMakeFiles/marching_cube.dir

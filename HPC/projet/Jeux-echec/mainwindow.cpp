@@ -11,20 +11,17 @@ MainWindow::MainWindow(QWidget *parent) :
     itemVector = new std::vector<QGraphicsItem *>;
     plateau *p = new plateau( this );
 
-    p->affichagePlateau();
     ui->Affichage->setScene(scene);
     ui->Affichage->show();
+    p->majPlateau();
 
-    p->affichagePieces();
-
-    this->repaint();
-
-    p->afficherDeplacementPossible( p->getCase(2,0) );
+    p->jouerCoup( new coup(p->getCase(5,6), p->getCase(5,4)) );
+    p->jouerCoup( new coup(p->getCase(4,1), p->getCase(4,2)) );
+    p->jouerCoup( new coup(p->getCase(6,6), p->getCase(6,4)) );
+    p->jouerCoup( new coup(p->getCase(3,0), p->getCase(7,4)) );
+//    p->afficherDeplacementPossible( p->getCase(7,4) );
 }
 
 MainWindow::~MainWindow(){
     delete ui;
 }
-
-
-
