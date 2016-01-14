@@ -161,8 +161,8 @@ void Object::Draw(const mat4& projection_matrix, const mat4& view_matrix, const 
 
     // Draw triangles
     glDrawElements(
-                //GL_TRIANGLES,               // mode
-                GL_POINTS,
+                GL_TRIANGLES,               // mode
+                //GL_POINTS,
                 m_mesh->NbFaces()*3,        // count
                 GL_UNSIGNED_INT,            // type
                 (void*)0                    // offset

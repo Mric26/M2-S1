@@ -1,3 +1,3 @@
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/CMakeFiles/GLEW_190.dir
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/CMakeFiles/GLFW_276.dir
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles/projet.dir
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/CMakeFiles/GLEW_190.dir
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/external/CMakeFiles/GLFW_276.dir
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/build/CMakeFiles/projet.dir
