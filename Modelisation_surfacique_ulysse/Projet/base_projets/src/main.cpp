@@ -132,7 +132,7 @@ int main()
 
     // Mesh creation
 //    Mesh m("../../models/bunny.off");
-    Mesh m("../../models/tetrahedron.off");
+    Mesh m("../../models/cube.off");
 
     BarthFunction bf;
     ReconstructionSurface rs(m);

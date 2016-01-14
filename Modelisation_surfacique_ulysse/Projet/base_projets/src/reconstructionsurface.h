@@ -30,6 +30,7 @@ private:
     std::vector< glm::vec3 > vertices_tab;
     std::vector< glm::vec3 > * ajout_tab;
     Eigen::VectorXf weight_tab;
+
 };
 
 #endif // RECONSTRUCTIONSURFACE_H
