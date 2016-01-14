@@ -208,20 +208,18 @@ void computeColormap(QImage *colormap, QRgb color1, QRgb color2, std::vector< st
     }
 }
 
-// Ecriture dans un fichier KML
-void writeKmlFile(QString filename, std::vector<std::string>* infos, std::vector<std::string>* latitude, std::vector<std::string>* longitude) {
+// Ecriture dans un fichier KML pour afficher des donnees ponctuelles
+void writeKmlInfoFile(QString filename, std::vector<std::string>* infos, std::vector<std::string>* latitude, std::vector<std::string>* longitude) {
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
     }
 
     QTextStream out(&file);
-
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     out << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">" << endl;
     out << "  <Document>" << endl;
-    for (unsigned
-         int i = 0; i < infos->size(); ++i) {
+    for (unsigned int i = 0; i < infos->size(); ++i) {
         out << "  <Placemark>" << endl;
         out << "    <name>" << infos->at(i).c_str() << "</name>" << endl;
         out << "    <Point>" << endl;
@@ -232,6 +230,35 @@ void writeKmlFile(QString filename, std::vector<std::string>* infos, std::vector
     out << "  </Document>" << endl;
     out << "</kml>" << endl;
 }
+
+// Ecriture d'un fichier KML pour afficher une image
+void writeKmlImgFile(QString filename, float minLong, float maxLong, float minLat, float maxLat) {
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream out(&file);
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    out << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">" << endl;
+    out << "  <Folder>" << endl;
+    out << "    <name>Ground Overlays</name>" << endl;
+    out << "    <GroundOverlay>" << endl;
+    out << "      <name>Large-scale overlay on terrain</name>" << endl;
+    out << "      <Icon>" << endl;
+    out << "        <href>../Image/colormapShepard.png</href>" << endl;
+    out << "      </Icon>" << endl;
+    out << "      <LatLonBox>" << endl;
+    out << "        <north>" << maxLat << "</north>" << endl;
+    out << "        <south>" << minLat << "</south>" << endl;
+    out << "        <east>" << minLong << "</east>" << endl;
+    out << "        <west>" << maxLong << "</west>" << endl;
+    out << "      </LatLonBox>" << endl;
+    out << "    </GroundOverlay>" << endl;
+    out << "  </Folder>" << endl;
+    out << "</kml>" << endl;
+}
+
 
 int main() {
 
@@ -264,8 +291,11 @@ int main() {
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
 
-
+    float minLong, maxLong;
+    float minLat, maxLat;
     float minT, maxT;
+    findExtrema(minLong, maxLong, longitude);
+    findExtrema(minLat, maxLat, latitude);
     findExtrema(minT, maxT, kelvin);
 
     QImage *imgSquare = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
@@ -301,7 +331,8 @@ int main() {
     computeColormap(colormap, color1, color2, interpoleShepard);
     colormap->save(QString("../Images/colormapShepard.png"));
 
-    writeKmlFile(QString("../output_Kelvin.kml"), cities, latitude, longitude);
+    writeKmlInfoFile(QString("../cities.kml"), cities, latitude, longitude);
+    writeKmlImgFile(QString("../colormapShepard.kml"), minLong, maxLong, minLat, maxLat);
 
     std::cout << "Delete memory" << std::endl;
     delete csvPoste;
