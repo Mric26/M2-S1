@@ -5,11 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <QFile>
 #include <QImage>
 #include <QPainter>
 #include <QPixmap>
 #include <QPoint>
 #include <QString>
+#include <QTextStream>
 
 #include "csv_meteofranceparser.h"
 
@@ -178,6 +180,7 @@ void computeMarchingSquare(std::vector< std::vector< short >* >* square, std::ve
     }
 }
 
+// Calcul la colormap sur l'image
 void computeColormap(QImage *colormap, QRgb color1, QRgb color2, std::vector< std::vector< float >* >* interpoleData) {
     int reso = RESO_INTERPOLE;
     int resoSquare = RESO_INTERPOLE - 1;
@@ -205,6 +208,30 @@ void computeColormap(QImage *colormap, QRgb color1, QRgb color2, std::vector< st
     }
 }
 
+// Ecriture dans un fichier KML
+void writeKmlFile(QString filename, std::vector<std::string>* infos, std::vector<std::string>* latitude, std::vector<std::string>* longitude) {
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream out(&file);
+
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    out << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">" << endl;
+    out << "  <Document>" << endl;
+    for (unsigned
+         int i = 0; i < infos->size(); ++i) {
+        out << "  <Placemark>" << endl;
+        out << "    <name>" << infos->at(i).c_str() << "</name>" << endl;
+        out << "    <Point>" << endl;
+        out << "      <coordinates>" << atof(longitude->at(i).c_str()) << "," << atof(latitude->at(i).c_str()) << ",0</coordinates>" << endl;
+        out << "    </Point>" << endl;
+        out << "  </Placemark>" << endl;
+    }
+    out << "  </Document>" << endl;
+    out << "</kml>" << endl;
+}
 
 int main() {
 
@@ -215,6 +242,7 @@ int main() {
 
     // selection des donnes requises (latitude, longitude, temperature, ...)
     std::vector<std::string>* id = (*csvJoin)[std::string("Id_Fusion")];
+    std::vector<std::string>* cities = (*csvPoste)[std::string("Nom")];
     std::vector<std::string>* latitude = (*csvJoin)[std::string("Latitude")];
     std::vector<std::string>* longitude = (*csvJoin)[std::string("Longitude")];
     std::vector<std::string>* kelvin = (*csvJoin)[std::string("t")];
@@ -259,7 +287,7 @@ int main() {
             }
         }
 
-        imgSquare->save(QString("../Images/Anim" + QString::number(count) + ".png"));
+        imgSquare->save(QString("../Images/anim" + QString::number(count) + ".png"));
         std::cout << "n° : " << count << std::endl;
         count++;
     }
@@ -271,8 +299,9 @@ int main() {
 
     // calcul de la colormap
     computeColormap(colormap, color1, color2, interpoleShepard);
-    colormap->save(QString("../Images/Colormap.png"));
+    colormap->save(QString("../Images/colormapShepard.png"));
 
+    writeKmlFile(QString("../output_Kelvin.kml"), cities, latitude, longitude);
 
     std::cout << "Delete memory" << std::endl;
     delete csvPoste;
