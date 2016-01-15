@@ -1,15 +1,26 @@
 function Crust(S)
   // **** A MODIFIER/COMPLETER ****
-  [T,C,r] = delaunay(S);
-  
-  SP = cat(1,S,C);
-  
-  [T,C,r] = delaunay(SP);.
-  
   // R should contain a list of pair of indices connecting the initial points in S
   // for instance: 
   // R = [R ; [1,2]] adds the edge connecting points 1 and 2 in the array R
   R = [];
+  
+  [T,C,r] = delaunay(S);
+  
+  SP = cat(1,S,C);
+  [T,C,r] = delaunay(SP);
+  
+  n = size(T,1);
+  for i = 1:n;
+      i1 = T(i,1);
+      i2 = T(i,2);
+      i3 = T(i,3);
+      
+      if ()  then
+      end
+  end
+  
+
   
   // ******************************
   
