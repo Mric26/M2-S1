@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/Sparse>
 
 #include "ImplicitFunction.h"
 #include "Mesh.h"
@@ -29,7 +30,8 @@ private:
     Mesh mesh;
     std::vector< glm::vec3 > vertices_tab;
     std::vector< glm::vec3 > * ajout_tab;
-    Eigen::VectorXf weight_tab;
+    Eigen::VectorXd weight_tab;
+    //Eigen::VectorXd weight_tab            //Pour passer sur des matrices creuses
 
 };
 

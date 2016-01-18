@@ -29,6 +29,7 @@
 #include "MyImplicitAddition.h"
 #include "MyImplicitSoustraction.h"
 #include "MyImplicitIntersection.h"
+#include "reconstructionsurface.h"
 
 // Window size :
 #define WIDTH 1000.0f
@@ -144,7 +145,8 @@ int main()
     Mesh m;
     Mesh::CreateCube(m);        // This is a place holder, comment it
 
-    Mesh::CreateIsoSurface(m, c, 0.5);
+    ReconstructionSurface rs(m);
+    Mesh::CreateIsoSurface(m, rs, 0.5);
     
     //**********************************************************************************
 
