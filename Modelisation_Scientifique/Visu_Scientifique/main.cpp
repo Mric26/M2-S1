@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//#include <QColor>
+#include <QDir>
 #include <QFile>
 #include <QImage>
 #include <QPainter>
@@ -13,6 +15,7 @@
 #include <QString>
 #include <QTextStream>
 
+#include "colormap.h"
 #include "csv_meteofranceparser.h"
 
 #define RESO_INTERPOLE 100   // Resolution de la grille interpolante
@@ -181,31 +184,42 @@ void computeMarchingSquare(std::vector< std::vector< short >* >* square, std::ve
 }
 
 // Calcul la colormap sur l'image
-void computeColormap(QImage *colormap, QRgb color1, QRgb color2, std::vector< std::vector< float >* >* interpoleData) {
+void computeColorImg(QImage *imgColor, Colormap *colorMap, std::vector< std::vector< float >* >* interpoleData) {
     int reso = RESO_INTERPOLE;
     int resoSquare = RESO_INTERPOLE - 1;
-    float minD = INT_MAX;
-    float maxD = INT_MIN;
+//    float minD = INT_MAX;
+//    float maxD = INT_MIN;
 
-    // calcul du min et du max
-    for (int i = 0; i < reso; ++i) {
-        for (int j = 0; j < reso; ++j) {
-            float d = interpoleData->at(i)->at(j);
-            minD = (d < minD) ? d : minD;
-            maxD = (d > maxD) ? d : maxD;
-        }
-    }
+//    // calcul du min et du max
+//    for (int i = 0; i < reso; ++i) {
+//        for (int j = 0; j < reso; ++j) {
+//            float d = interpoleData->at(i)->at(j);
+//            minD = (d < minD) ? d : minD;
+//            maxD = (d > maxD) ? d : maxD;
+//        }
+//    }
 
     // calcul de la colormap
     for (int i = 0; i < resoSquare; ++i) {
         for (int j = 0; j < resoSquare; ++j) {
-            float t = (interpoleData->at(i)->at(j) - minD) / (maxD - minD);
-            float r = (1-t)*qRed(color1) + t * qRed(color2);
-            float g = (1-t)*qGreen(color1) + t * qGreen(color2);
-            float b = (1-t)*qBlue(color1) + t * qBlue(color2);
-            colormap->setPixel(i, j, qRgba(r, g, b, 200));
+            QRgb rgb = colorMap->getColorAt(interpoleData->at(i)->at(j));
+            imgColor->setPixel(i, j, qRgba(qRed(rgb), qGreen(rgb), qBlue(rgb), 255));
+//            float t = (interpoleData->at(i)->at(j) - minD) / (maxD - minD);
+//            float r = (1-t)*qRed(color1) + t * qRed(color2);
+//            float g = (1-t)*qGreen(color1) + t * qGreen(color2);
+//            float b = (1-t)*qBlue(color1) + t * qBlue(color2);
         }
     }
+}
+
+Colormap* createColorMap(float min, float max) {
+    Colormap *colorMap = new Colormap();
+    colorMap->addColor(min, qRgb(0,0,255));
+    colorMap->addColor(290, qRgb(0,255,0));
+    colorMap->addColor(max, qRgb(255,0,0));
+    //colorMap->addColor(290, qRgb(0,255,0));
+    colorMap->show();
+    return colorMap;
 }
 
 // Ecriture dans un fichier KML pour afficher des donnees ponctuelles
@@ -237,6 +251,7 @@ void writeKmlImgFile(QString filename, float minLong, float maxLong, float minLa
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
     }
+    QString path = QDir::currentPath() + "/../Images/colormapShepard.png";
 
     QTextStream out(&file);
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -246,7 +261,7 @@ void writeKmlImgFile(QString filename, float minLong, float maxLong, float minLa
     out << "    <GroundOverlay>" << endl;
     out << "      <name>Large-scale overlay on terrain</name>" << endl;
     out << "      <Icon>" << endl;
-    out << "        <href>../Image/colormapShepard.png</href>" << endl;
+    out << "        <href>" << path << "</href>" << endl;
     out << "      </Icon>" << endl;
     out << "      <LatLonBox>" << endl;
     out << "        <north>" << maxLat << "</north>" << endl;
@@ -273,7 +288,6 @@ int main() {
     std::vector<std::string>* latitude = (*csvJoin)[std::string("Latitude")];
     std::vector<std::string>* longitude = (*csvJoin)[std::string("Longitude")];
     std::vector<std::string>* kelvin = (*csvJoin)[std::string("t")];
-
 
     int reso = RESO_INTERPOLE;
     std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(reso);
@@ -322,14 +336,15 @@ int main() {
         count++;
     }
 
+    Colormap *colorMap = createColorMap(minT, maxT);
 
-    QImage *colormap = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
+    QImage *imgColor = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
     QRgb color1 = qRgb(0, 0, 255);
     QRgb color2 = qRgb(255, 0, 0);
 
     // calcul de la colormap
-    computeColormap(colormap, color1, color2, interpoleShepard);
-    colormap->save(QString("../Images/colormapShepard.png"));
+    computeColorImg(imgColor, colorMap, interpoleShepard);
+    imgColor->save(QString("../Images/colormapShepard.png"));
 
     writeKmlInfoFile(QString("../cities.kml"), cities, latitude, longitude);
     writeKmlImgFile(QString("../colormapShepard.kml"), minLong, maxLong, minLat, maxLat);
@@ -343,7 +358,8 @@ int main() {
     delete longitude;
     delete kelvin;
     delete imgSquare;
-    delete colormap;
+    delete imgColor;
+    delete colorMap;
 
     std::cout << "Fin" << std::endl;
     return 0;
