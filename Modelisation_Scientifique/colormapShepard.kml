@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Folder>
+    <name>Ground Overlays</name>
+    <GroundOverlay>
+      <name>Large-scale overlay on terrain</name>
+      <Icon>
+        <href>../Image/colormapShepard.png</href>
+      </Icon>
+      <LatLonBox>
+        <north>50.57</north>
+        <south>41.918</south>
+        <east>-4.412</east>
+        <west>9.48517</west>
+      </LatLonBox>
+    </GroundOverlay>
+  </Folder>
+</kml>

@@ -1,209 +1,209 @@
 <Gratin type="pipeline">
- <int val="0" name="majorVersion"/>
- <int val="3" name="minorVersion"/>
+ <int name="majorVersion" val="0"/>
+ <int name="minorVersion" val="3"/>
  <IOData name="mainWindow">
   <IOData name="graphWidget">
    <IOData name="graph">
-    <uint val="1" name="nbNodes"/>
-    <string val="imgGenericId" name="nodeStringId-0"/>
-    <uint val="1" name="nodeVersion-0"/>
-    <string val="genericImage" name="nodeName-0"/>
-    <string val="Generic/" name="nodePath-0"/>
-    <string val="Generic node for image processing" name="nodeDesc-0"/>
-    <string val="This node was designed to create custom shaders&#xa;The settings widget allows to modify input, output parameters&#xa;as well as the output image sizes.&#xa;&#xa;WARNING1: you will be able to modify the number of inputs/outputs&#xa;only if the node is entirely disconnected.&#xa;WARNING2: input/output names will not be modified if a custom node is created&#xa;from this node because these names should be edited directly in the setting widget&#xa;WARNING3: modifying the settings of a node will remove all previously&#xa;defined keyframes&#xa;&#xa;* Special data allows to modify the output image (using a multiple of&#xa;the input size, plus an offset vector&#xa;Check use mouse/keyboard if you want to interact with the mouse&#xa;&#xa;* Input data allows to add/remove/displace input data (only if disconnected)&#xa;&#xa;* Output data allows to add/remove/displace output data (only if disconnected)&#xa;&#xa;* Param data allows to add/remove parameters that will automatically be &#xa;included in your shader.&#xa;For each of them you may choose a proper name, type, and min/max/default values.&#xa;Check keyframes if you want your parameter to be accessible&#xa; through the animation widget&#xa;&#xa;In the node interface itself:&#xa;Source tab contains the head and body of your GLSL source (only the body is editable)&#xa;Params tab contains the defined widgets according to your setting choices&#xa;Log tab contains compilation errors&#xa;&#xa;Once your settings and source completed, click on apply to see the result&#xa;" name="nodeHelp-0"/>
-    <uint val="0" name="nodeId-0"/>
-    <uint val="0" name="nodeGraphId-0"/>
+    <uint name="nbNodes" val="1"/>
+    <string name="nodeStringId-0" val="imgGenericId"/>
+    <uint name="nodeVersion-0" val="1"/>
+    <string name="nodeName-0" val="genericImage"/>
+    <string name="nodePath-0" val="Generic/"/>
+    <string name="nodeDesc-0" val="Generic node for image processing"/>
+    <string name="nodeHelp-0" val="This node was designed to create custom shaders&#xa;The settings widget allows to modify input, output parameters&#xa;as well as the output image sizes.&#xa;&#xa;WARNING1: you will be able to modify the number of inputs/outputs&#xa;only if the node is entirely disconnected.&#xa;WARNING2: input/output names will not be modified if a custom node is created&#xa;from this node because these names should be edited directly in the setting widget&#xa;WARNING3: modifying the settings of a node will remove all previously&#xa;defined keyframes&#xa;&#xa;* Special data allows to modify the output image (using a multiple of&#xa;the input size, plus an offset vector&#xa;Check use mouse/keyboard if you want to interact with the mouse&#xa;&#xa;* Input data allows to add/remove/displace input data (only if disconnected)&#xa;&#xa;* Output data allows to add/remove/displace output data (only if disconnected)&#xa;&#xa;* Param data allows to add/remove parameters that will automatically be &#xa;included in your shader.&#xa;For each of them you may choose a proper name, type, and min/max/default values.&#xa;Check keyframes if you want your parameter to be accessible&#xa; through the animation widget&#xa;&#xa;In the node interface itself:&#xa;Source tab contains the head and body of your GLSL source (only the body is editable)&#xa;Params tab contains the defined widgets according to your setting choices&#xa;Log tab contains compilation errors&#xa;&#xa;Once your settings and source completed, click on apply to see the result&#xa;"/>
+    <uint name="nodeId-0" val="0"/>
+    <uint name="nodeGraphId-0" val="0"/>
     <vector2f name="nodePos-0">
-     <float val="-1110.81" name="0"/>
-     <float val="-65.0383" name="1"/>
+     <float name="0" val="-567.992"/>
+     <float name="1" val="26.2553"/>
     </vector2f>
-    <int val="0" name="nodeInputNameSize-0"/>
-    <int val="1" name="nodeOutputNameSize-0"/>
-    <string val="outBuffer0" name="nodeOutputName-0-0"/>
-    <bool val="1" name="nodeHasWidget-0"/>
+    <int name="nodeInputNameSize-0" val="0"/>
+    <int name="nodeOutputNameSize-0" val="1"/>
+    <string name="nodeOutputName-0-0" val="outBuffer0"/>
+    <bool name="nodeHasWidget-0" val="1"/>
     <IOData name="node-0">
-     <string val="420" name="genericGlslVersion"/>
-     <string val="genericImage" name="genericNodeName"/>
-     <bool val="0" name="genericUseVertex"/>
-     <bool val="0" name="genericUseTesselation"/>
-     <bool val="0" name="genericUseGeometry"/>
-     <bool val="1" name="genericUseFragment"/>
-     <int val="9729" name="genericOutFilter"/>
-     <int val="33071" name="genericOutWrap"/>
-     <bool val="0" name="genericUseDepthTest"/>
-     <bool val="0" name="genericUseBlending"/>
-     <uint val="513" name="genericDepthFunc"/>
-     <uint val="1" name="genericBlendSrc"/>
-     <uint val="0" name="genericBlendDst"/>
+     <string name="genericGlslVersion" val="420"/>
+     <string name="genericNodeName" val="genericImage"/>
+     <bool name="genericUseVertex" val="0"/>
+     <bool name="genericUseTesselation" val="0"/>
+     <bool name="genericUseGeometry" val="0"/>
+     <bool name="genericUseFragment" val="1"/>
+     <int name="genericOutFilter" val="9729"/>
+     <int name="genericOutWrap" val="33071"/>
+     <bool name="genericUseDepthTest" val="0"/>
+     <bool name="genericUseBlending" val="0"/>
+     <uint name="genericDepthFunc" val="513"/>
+     <uint name="genericBlendSrc" val="1"/>
+     <uint name="genericBlendDst" val="0"/>
      <vector4f name="genericBackground">
-      <float val="0" name="0"/>
-      <float val="0" name="1"/>
-      <float val="0" name="2"/>
-      <float val="0" name="3"/>
+      <float name="0" val="0"/>
+      <float name="1" val="0"/>
+      <float name="2" val="0"/>
+      <float name="3" val="0"/>
      </vector4f>
-     <string val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;" name="genericVertHead"/>
-     <string val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;" name="genericVertBody"/>
-     <string val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;" name="genericFragHead"/>
-     <string val="precision highp float;&#xa;&#xa;#define PI 3.1415926535897932384626433832795&#xa;&#xa;in vec2 texcoord;&#xa;&#xa;vec3 backColor = vec3(1, 0, 1);&#xa;uniform vec2 mouse;&#xa;&#xa;struct Base3D{&#xa;&#x9;vec3 right;&#xa;&#x9;vec3 up;&#xa;&#x9;vec3 view;&#xa;};&#xa;&#xa;struct Cam{&#xa;&#x9;vec3 ro; &#x9;&#x9;//origine&#xa;&#x9;Base3D base;&#xa;&#x9;float angle;&#x9;//angle d'ouverture&#xa;&#x9;float ratio;&#x9;&#x9;//ration long/larg&#xa;};&#xa;&#xa;struct Ray {&#xa;&#x9;vec3 ro;&#x9;&#x9;// point origine&#xa;&#x9;vec3 rd;&#x9;&#x9;// vecteur directionnel&#xa;};&#xa;&#xa;struct Plane{&#xa;&#x9;vec3 n; &#x9;&#x9;&#x9;//normal&#xa;&#x9;float d; &#x9;&#x9;&#x9;//offset&#xa;&#x9;vec3 color; &#x9;//couleur&#xa;};&#xa;&#xa;struct Triangle {&#xa;&#x9;vec3 p1;&#xa;&#x9;vec3 p2;&#xa;&#x9;vec3 p3;&#xa;&#x9;vec3 color;&#xa;};&#xa;&#xa;struct Sphere{&#xa;&#x9;vec3 ro; &#x9;//origine&#xa;&#x9;float ra; &#x9;//rayon&#xa;};&#xa;&#xa;float computeIntersectionWithPlane( Plane p, Ray ray ){&#xa;&#x9;float res = 0.0;&#xa;&#x9;if( dot( ray.rd, p.n ) != 0 ){&#xa;&#x9;&#x9;res = (-( p.d + dot(ray.ro, p.n) ) ) / ( dot(ray.rd, p.n) );&#xa;&#x9;}&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float computeIntersectionWithTriangle(Triangle triangle, Ray ray){&#xa;&#x9;float res = 0.0;&#xa;&#x9;vec3 p1 = triangle.p1;&#xa;&#x9;vec3 p2 = triangle.p2;&#xa;&#x9;vec3 p3 = triangle.p3;&#xa;&#xa;&#x9;vec3 n = normalize( cross(vec3(p2 - p1), vec3(p3 - p1)) );&#xa;&#x9;float d = (p1.x * n.x) + (p1.y * n.y) + (p1.z * n.z);&#xa;&#x9;Plane p = Plane( n, -d, vec3(0,0,0) );&#xa;&#xa;//&#x9;return computeIntersectionWithPlane( p , ray );&#xa;&#xa;&#x9;if ( dot( ray.rd, p.n ) != 0 ){&#xa;&#x9;&#x9;float t = computeIntersectionWithPlane( p , ray );&#xa;&#x9;&#x9;vec3 p4 = ray.ro + (t * ray.rd);&#xa;&#xa;&#x9;&#x9;vec3 MA = vec3(p1 - p4);&#xa;&#x9;&#x9;vec3 MB = vec3(p2 - p4);&#xa;&#x9;&#x9;vec3 MC = vec3(p3 - p4);&#xa;&#xa;&#x9;&#x9;bool w1, w2, w3;&#xa;&#xa;&#x9;&#x9;// si la projection sur z = 0 est possible&#xa;&#x9;&#x9;if (dot(p.n, vec3(0,0,1)) != 0) {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).z > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).z > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).z > 0);&#xa;&#x9;&#x9;// si la projection sur y = 0 est possible&#xa;&#x9;&#x9;} else if (dot(p.n, vec3(0,1,0)) != 0) {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).y > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).y > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).y > 0);&#xa;&#x9;&#x9;// sinon la projection sur x = 0 est possible&#xa;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).x > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).x > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).x > 0);&#xa;&#x9;&#x9;}&#xa;&#xa;//&#x9;&#x9;vec3 AB = vec3(p2 - p1);&#xa;//&#x9;&#x9;vec3 BC = vec3(p3 - p2);&#xa;//&#x9;&#x9;vec3 AC = vec3(p3 - p1);&#xa;//&#x9;&#x9;vec3 AM = vec3(p4 - p1);&#xa;//&#x9;&#x9;vec3 BM = vec3(p4 - p2);&#xa;//&#x9;&#x9;vec3 CM = vec3(p4 - p3);&#xa;&#xa;//&#x9;&#x9;bool w1 = dot( cross(AB,AM) , cross(AM,AC) ) >= 0;&#xa;//&#x9;&#x9;bool w2 = dot( cross(-AB,BM) , cross(BM,BC) ) >= 0;&#xa;//&#x9;&#x9;bool w3 = dot( cross(-AC,CM) , cross(CM,-BC) ) >= 0;&#xa;&#x9;&#x9;&#xa;&#x9;&#x9;if ((w1 &amp;&amp; w2 &amp;&amp; w3) || (!w1 &amp;&amp; !w2 &amp;&amp; !w3)) {&#xa;&#x9;&#x9;&#x9;res = (-( p.d + dot(ray.ro, p.n) ) ) / ( dot(ray.rd, p.n) );&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float computeIntersectionWithSphere( Sphere s, Ray r ){&#xa;&#x9;float a = dot( r.rd, r.rd );&#xa;&#x9;float b = dot( 2 * ( r.ro - s.ro ) , r.rd );&#xa;&#x9;float c = dot( r.ro - s.ro, r.ro - s.ro ) - ((s.ra) * (s.ra));&#xa;&#x9;float deter = sqrt( b*b - 4*a*c );&#xa;&#x9;if ( deter &lt; 0.0 ) {&#xa;&#x9;&#x9;return 0;&#xa;&#x9;} else if ( deter == 0 ) {&#xa;&#x9;&#x9;return ( -b / (2*a) );&#xa;&#x9;} else {&#xa;&#x9;&#x9;float t1 = (-b - deter) / (2*a);&#xa;&#x9;&#x9;float t2 = (-b + deter) / (2*a);&#xa;&#x9;&#x9;if( (t1 &lt;0) &amp;&amp; (t2 &lt; 0) ){&#xa;&#x9;&#x9;&#x9;return 0.0;&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;else if( (t1 &lt;0) || (t2 &lt; 0) ){&#xa;&#x9;&#x9;&#x9;return max(t1,t2);&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;else{&#xa;&#x9;&#x9;&#x9;return min(t1, t2);&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;//// camera ////&#xa;&#x9;float xCam = module * cos(azimut) * cos(elevation);&#xa;&#x9;float yCam = module * sin(azimut) * cos(elevation);&#xa;&#x9;float zCam = module * sin(elevation);&#xa;&#x9;vec3 up = normalize ( vec3(0,0,1) );&#xa;&#x9;vec3 view = normalize ( -vec3(xCam,yCam,zCam) );&#xa;&#x9;vec3 right = normalize ( cross(view, up) );&#xa;&#x9;up = normalize ( cross(right, view) );&#xa;&#x9;Base3D b = Base3D(right, up, view);&#xa;&#x9;Cam c = Cam( vec3(xCam, yCam, zCam), b, PI/2, 4.0/4.0);&#xa;&#xa;&#x9;//// structures ////&#xa;&#x9;const int nb_plans = 6;&#xa;&#x9;Plane pls[nb_plans];&#xa;&#x9;pls[0] = Plane( vec3(1,0,0), 15, vec3(1,0,0) );&#xa;&#x9;pls[1] = Plane( vec3(0,1,0), 15, vec3(0,1,0) );&#xa;&#x9;pls[2] = Plane( vec3(0,0,1), 15, vec3(0,0,1) );&#xa;&#x9;pls[3] = Plane( vec3(-1,0,0), 15, vec3(1,1,0) );&#xa;&#x9;pls[4] = Plane( vec3(0,-1,0), 15, vec3(0,1,1) );&#xa;&#x9;pls[5] = Plane( vec3(0,0,-1), 15, vec3(1,0,1) );&#xa;&#x9;const int nb_spheres = 1;&#xa;&#x9;Sphere sls[nb_spheres];&#xa;&#x9;sls[0] = Sphere(vec3(0,0,2), t);&#xa;&#x9;const int nb_triangles = 12;&#xa;&#x9;Triangle tls[nb_triangles];&#xa;&#x9;vec3 p1 = vec3(-1,-1,-1);&#xa;&#x9;vec3 p2 = vec3(-1,1,-1);&#xa;&#x9;vec3 p3 = vec3(1,1,-1);&#xa;&#x9;vec3 p4 = vec3(1,-1,-1);&#xa;&#x9;vec3 p5 = vec3(-1,-1,1);&#xa;&#x9;vec3 p6 = vec3(-1,1,1);&#xa;&#x9;vec3 p7 = vec3(1,1,1);&#xa;&#x9;vec3 p8 = vec3(1,-1,1);&#xa;&#x9;// z = -1&#xa;&#x9;tls[0] = Triangle(p1,p3,p2, vec3(0,0,0.5));&#xa;&#x9;tls[1] = Triangle(p1,p4,p3, vec3(0,0,0.5));&#xa;&#x9;// z = 1&#xa;&#x9;tls[2] = Triangle(p5,p7,p6, vec3(1,0.25,1));&#xa;&#x9;tls[3] = Triangle(p5,p8,p7, vec3(1,0.25,1));&#xa;&#x9;// y = -1&#xa;&#x9;tls[4] = Triangle(p1,p4,p8, vec3(0,0.5,0));&#xa;&#x9;tls[5] = Triangle(p1,p8,p5, vec3(0,0.5,0));&#xa;&#x9;// y = 1&#xa;&#x9;tls[6] = Triangle(p2,p3,p6, vec3(0,0.5,0.5));&#xa;&#x9;tls[7] = Triangle(p3,p6,p7, vec3(0,0.5,0.5));&#xa;&#x9;// x = -1&#xa;&#x9;tls[8] = Triangle(p1,p2,p6, vec3(0.5,0,0));&#xa;&#x9;tls[9] = Triangle(p1,p6,p5, vec3(0.5,0,0));&#xa;&#x9;// x = 1&#xa;&#x9;tls[10] = Triangle(p3,p4,p7, vec3(0.5,0.5,0));&#xa;&#x9;tls[11] = Triangle(p4,p7,p8, vec3(0.5,0.5,0));&#xa;&#xa;&#xa;&#x9;//// Ray casting ////&#xa;&#x9;float D = 1.0 / tan( c.angle/2.0 );&#xa;&#x9;vec2 normalCoord = ( 2.0 * (gl_FragCoord.xy / vec2(512.0, 512.0)) ) - 1;&#x9;// Coordonnees du pixel entre [-1 1]x[-1 1]&#xa;&#x9;vec3 dr = normalize( (normalCoord.x * b.right) + ((c.ratio * normalCoord.y) * b.up) + (D * b.view) );&#xa;&#x9;Ray ray =  Ray ( c.ro, dr );&#xa;&#xa;&#x9;//// Boucles ////&#xa;&#x9;float t_min = 100.0;&#xa;&#x9;int i_min = nb_plans + nb_spheres + nb_triangles + 1;&#xa;&#x9;float t_temp = 0.0;&#xa;&#x9;for(int i=0; i&lt;nb_plans; i++){&#xa;&#x9;&#x9;t_temp = computeIntersectionWithPlane( pls[i], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = i;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;for(int j=0; j&lt;nb_spheres; j++){&#xa;&#x9;&#x9;float t_temp = computeIntersectionWithSphere( sls[j], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = nb_plans + j;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;for(int k=0;k&lt;nb_triangles;k++){&#xa;&#x9;&#x9;float t_temp = computeIntersectionWithTriangle( tls[k], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = nb_plans + nb_spheres + k;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#xa;&#x9;//// sorties ////&#xa;&#x9;if( i_min > nb_plans + nb_spheres + nb_triangles ){&#xa;&#x9;&#x9;outBuffer0 = vec4(backColor,1);&#xa;&#x9;}&#xa;&#x9;else{&#xa;&#x9;&#x9;&#x9;if( i_min &lt; nb_plans ){&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4( pls[ i_min ].color, 1 );&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;else if (i_min &lt; nb_plans + nb_spheres){&#xa;&#x9;&#x9;&#x9;&#x9;vec3 normaleSphere = normalize( (ray.ro + t_min * ray.rd)  - sls[ i_min - nb_plans ].ro );&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4(normaleSphere, 1 );&#xa;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4(tls[i_min - (nb_plans + nb_spheres)].color, 1 );&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;}&#xa;}&#xa;" name="genericFragBody"/>
-     <string val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;" name="genericTessCHead"/>
-     <string val="void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = 1;&#xa;&#x9;gl_TessLevelOuter[1] = 1;&#xa;&#x9;gl_TessLevelOuter[2] = 1;&#xa;&#x9;gl_TessLevelOuter[3] = 1;&#xa;&#x9;gl_TessLevelInner[0] = 1;&#xa;&#x9;gl_TessLevelInner[1] = 1;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;}&#xa;" name="genericTessCBody"/>
-     <string val="#version 420&#xa;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;" name="genericTessEHead"/>
-     <string val="layout(quads,equal_spacing) in;&#xa;&#xa;void main() {&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;}&#xa;" name="genericTessEBody"/>
-     <string val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;" name="genericGeomHead"/>
-     <string val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}" name="genericGeomBody"/>
+     <string name="genericVertHead" val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;"/>
+     <string name="genericVertBody" val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;"/>
+     <string name="genericFragHead" val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;"/>
+     <string name="genericFragBody" val="precision highp float;&#xa;&#xa;#define PI 3.1415926535897932384626433832795&#xa;&#xa;in vec2 texcoord;&#xa;&#xa;vec3 backColor = vec3(0, 0, 0);&#xa;&#xa;struct Base3D{&#xa;&#x9;vec3 right;&#xa;&#x9;vec3 up;&#xa;&#x9;vec3 view;&#xa;};&#xa;&#xa;struct Cam{&#xa;&#x9;vec3 ro; &#x9;&#x9;&#x9;//origine&#xa;&#x9;Base3D base;&#xa;&#x9;float angle;&#x9;&#x9;//angle d'ouverture&#xa;&#x9;float ratio;&#x9;&#x9;//ration long/larg&#xa;};&#xa;&#xa;struct Ray {&#xa;&#x9;vec3 ro;&#x9;&#x9;// point origine&#xa;&#x9;vec3 rd;&#x9;&#x9;// vecteur directionnel&#xa;};&#xa;&#xa;struct Plane{&#xa;&#x9;vec3 n; &#x9;&#x9;&#x9;//normal&#xa;&#x9;float d; &#x9;&#x9;&#x9;//offset&#xa;&#x9;vec3 color; &#x9;&#x9;//couleur&#xa;};&#xa;&#xa;struct Triangle {&#xa;&#x9;vec3 p1;&#x9;&#x9;&#x9;// 3 points&#xa;&#x9;vec3 p2;&#xa;&#x9;vec3 p3;&#xa;&#x9;vec3 color;&#x9;&#x9;// couleur&#xa;};&#xa;&#xa;struct Sphere{&#xa;&#x9;vec3 ro; &#x9;&#x9;//origine&#xa;&#x9;float ra; &#x9;&#x9;//rayon&#xa;};&#xa;&#xa;float computeIntersectionWithPlane( Plane p, Ray ray ){&#xa;&#x9;float res = 0.0;&#xa;&#x9;if( dot( ray.rd, p.n ) != 0 ){&#xa;&#x9;&#x9;res = (-( p.d + dot(ray.ro, p.n) ) ) / ( dot(ray.rd, p.n) );&#xa;&#x9;}&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float computeIntersectionWithTriangle(Triangle triangle, Ray ray){&#xa;&#x9;float res = 0.0;&#xa;&#x9;vec3 p1 = triangle.p1;&#xa;&#x9;vec3 p2 = triangle.p2;&#xa;&#x9;vec3 p3 = triangle.p3;&#xa;&#xa;&#x9;vec3 n = normalize( cross(vec3(p2 - p1), vec3(p3 - p1)) );&#xa;&#x9;float d = (p1.x * n.x) + (p1.y * n.y) + (p1.z * n.z);&#xa;&#x9;Plane p = Plane( n, -d, vec3(0,0,0) );&#x9;&#x9;// calcul du plan du triangle&#xa;&#xa;&#x9;if ( dot( ray.rd, p.n ) != 0 ){&#xa;&#x9;&#x9;float t = computeIntersectionWithPlane( p , ray );&#xa;&#x9;&#x9;vec3 p4 = ray.ro + (t * ray.rd);&#x9;&#x9;// calcul du point d'intersection&#xa;&#xa;&#x9;&#x9;vec3 MA = vec3(p1 - p4);&#xa;&#x9;&#x9;vec3 MB = vec3(p2 - p4);&#xa;&#x9;&#x9;vec3 MC = vec3(p3 - p4);&#xa;&#xa;&#x9;&#x9;bool w1, w2, w3;&#xa;&#xa;&#x9;&#x9;// si la projection sur z = 0 est possible&#xa;&#x9;&#x9;if (dot(p.n, vec3(0,0,1)) != 0) {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).z > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).z > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).z > 0);&#xa;&#x9;&#x9;// si la projection sur y = 0 est possible&#xa;&#x9;&#x9;} else if (dot(p.n, vec3(0,1,0)) != 0) {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).y > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).y > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).y > 0);&#xa;&#x9;&#x9;// sinon la projection sur x = 0 est possible&#xa;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;w1 = (cross(MA,MB).x > 0);&#xa;&#x9;&#x9;&#x9;w2 = (cross(MB,MC).x > 0);&#xa;&#x9;&#x9;&#x9;w3 = (cross(MC,MA).x > 0);&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;&#xa;&#x9;&#x9;if ((w1 &amp;&amp; w2 &amp;&amp; w3) || (!w1 &amp;&amp; !w2 &amp;&amp; !w3)) {&#xa;&#x9;&#x9;&#x9;res = (-( p.d + dot(ray.ro, p.n) ) ) / ( dot(ray.rd, p.n) );&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float computeIntersectionWithSphere( Sphere s, Ray r ){&#xa;&#x9;float a = dot( r.rd, r.rd );&#xa;&#x9;float b = dot( 2 * ( r.ro - s.ro ) , r.rd );&#xa;&#x9;float c = dot( r.ro - s.ro, r.ro - s.ro ) - ((s.ra) * (s.ra));&#xa;&#x9;float deter = sqrt( b*b - 4*a*c );&#xa;&#x9;if ( deter &lt; 0.0 ) {&#xa;&#x9;&#x9;return 0;&#xa;&#x9;} else if ( deter == 0 ) {&#xa;&#x9;&#x9;return ( -b / (2*a) );&#xa;&#x9;} else {&#xa;&#x9;&#x9;float t1 = (-b - deter) / (2*a);&#xa;&#x9;&#x9;float t2 = (-b + deter) / (2*a);&#xa;&#x9;&#x9;if( (t1 &lt;0) &amp;&amp; (t2 &lt; 0) ){&#xa;&#x9;&#x9;&#x9;return 0.0;&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;else if( (t1 &lt;0) || (t2 &lt; 0) ){&#xa;&#x9;&#x9;&#x9;return max(t1,t2);&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;else{&#xa;&#x9;&#x9;&#x9;return min(t1, t2);&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;//// camera ////&#xa;&#x9;float xCam = module * cos(azimut) * cos(elevation);&#xa;&#x9;float yCam = module * sin(azimut) * cos(elevation);&#xa;&#x9;float zCam = module * sin(elevation);&#xa;&#x9;vec3 up = normalize ( vec3(0,0,1) );&#xa;&#x9;vec3 view = normalize ( -vec3(xCam,yCam,zCam) );&#xa;&#x9;vec3 right = normalize ( cross(view, up) );&#xa;&#x9;up = normalize ( cross(right, view) );&#xa;&#x9;Base3D b = Base3D(right, up, view);&#xa;&#x9;Cam c = Cam( vec3(xCam, yCam, zCam), b, PI/2, 4.0/4.0);&#xa;&#xa;&#x9;//// structures ////&#xa;&#x9;const int nb_plans = 6;&#xa;&#x9;Plane pls[nb_plans];&#xa;&#x9;pls[0] = Plane( vec3(1,0,0), 15, vec3(1,0,0) );&#xa;&#x9;pls[1] = Plane( vec3(0,1,0), 15, vec3(0,1,0) );&#xa;&#x9;pls[2] = Plane( vec3(0,0,1), 15, vec3(0,0,1) );&#xa;&#x9;pls[3] = Plane( vec3(-1,0,0), 15, vec3(1,1,0) );&#xa;&#x9;pls[4] = Plane( vec3(0,-1,0), 15, vec3(0,1,1) );&#xa;&#x9;pls[5] = Plane( vec3(0,0,-1), 15, vec3(1,0,1) );&#xa;&#x9;const int nb_spheres = 1;&#xa;&#x9;Sphere sls[nb_spheres];&#xa;&#x9;sls[0] = Sphere(vec3(0,0,2), t);&#xa;&#x9;const int nb_triangles = 12;&#xa;&#x9;Triangle tls[nb_triangles];&#xa;&#x9;vec3 p1 = vec3(-1,-1,-1);&#xa;&#x9;vec3 p2 = vec3(-1,1,-1);&#xa;&#x9;vec3 p3 = vec3(1,1,-1);&#xa;&#x9;vec3 p4 = vec3(1,-1,-1);&#xa;&#x9;vec3 p5 = vec3(-1,-1,1);&#xa;&#x9;vec3 p6 = vec3(-1,1,1);&#xa;&#x9;vec3 p7 = vec3(1,1,1);&#xa;&#x9;vec3 p8 = vec3(1,-1,1);&#xa;&#x9;// z = -1&#xa;&#x9;tls[0] = Triangle(p1,p3,p2, vec3(0,0,0.5));&#xa;&#x9;tls[1] = Triangle(p1,p4,p3, vec3(0,0,0.5));&#xa;&#x9;// z = 1&#xa;&#x9;tls[2] = Triangle(p5,p7,p6, vec3(1,0.25,1));&#xa;&#x9;tls[3] = Triangle(p5,p8,p7, vec3(1,0.25,1));&#xa;&#x9;// y = -1&#xa;&#x9;tls[4] = Triangle(p1,p4,p8, vec3(0,0.5,0));&#xa;&#x9;tls[5] = Triangle(p1,p8,p5, vec3(0,0.5,0));&#xa;&#x9;// y = 1&#xa;&#x9;tls[6] = Triangle(p2,p3,p6, vec3(0,0.5,0.5));&#xa;&#x9;tls[7] = Triangle(p3,p6,p7, vec3(0,0.5,0.5));&#xa;&#x9;// x = -1&#xa;&#x9;tls[8] = Triangle(p1,p2,p6, vec3(0.5,0,0));&#xa;&#x9;tls[9] = Triangle(p1,p6,p5, vec3(0.5,0,0));&#xa;&#x9;// x = 1&#xa;&#x9;tls[10] = Triangle(p3,p4,p7, vec3(0.5,0.5,0));&#xa;&#x9;tls[11] = Triangle(p4,p7,p8, vec3(0.5,0.5,0));&#xa;&#xa;&#xa;&#x9;//// Ray casting ////&#xa;&#x9;float D = 1.0 / tan( c.angle/2.0 );&#xa;&#x9;vec2 normalCoord = ( 2.0 * (gl_FragCoord.xy / vec2(512.0, 512.0)) ) - 1;&#x9;// Coordonnees du pixel entre [-1 1]x[-1 1]&#xa;&#x9;vec3 dr = normalize( (normalCoord.x * b.right) + ((c.ratio * normalCoord.y) * b.up) + (D * b.view) );&#xa;&#x9;Ray ray =  Ray ( c.ro, dr );&#xa;&#xa;&#x9;//// Boucles ////&#xa;&#x9;float t_min = 100.0;&#xa;&#x9;int i_min = nb_plans + nb_spheres + nb_triangles + 1;&#xa;&#x9;float t_temp = 0.0;&#xa;&#x9;for(int i=0; i&lt;nb_plans; i++){&#xa;&#x9;&#x9;t_temp = computeIntersectionWithPlane( pls[i], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = i;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;for(int j=0; j&lt;nb_spheres; j++){&#xa;&#x9;&#x9;float t_temp = computeIntersectionWithSphere( sls[j], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = nb_plans + j;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;for(int k=0;k&lt;nb_triangles;k++){&#xa;&#x9;&#x9;float t_temp = computeIntersectionWithTriangle( tls[k], ray );&#xa;&#x9;&#x9;if( (t_temp &lt; t_min) &amp;&amp; ( t_temp > 0 ) ){&#xa;&#x9;&#x9;&#x9;t_min = t_temp;&#xa;&#x9;&#x9;&#x9;i_min = nb_plans + nb_spheres + k;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#xa;&#x9;float diff = 1 - (t_min  / 40.0);&#xa;&#xa;&#x9;//// sorties ////&#xa;&#x9;if( i_min > nb_plans + nb_spheres + nb_triangles ){&#xa;&#x9;&#x9;outBuffer0 = vec4(backColor,1);&#xa;&#x9;}&#xa;&#x9;else{&#xa;&#x9;&#x9;&#x9;if( i_min &lt; nb_plans ){&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4( pls[ i_min ].color - diff, 1 );&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;else if (i_min &lt; nb_plans + nb_spheres){&#xa;&#x9;&#x9;&#x9;&#x9;vec3 normaleSphere = normalize( (ray.ro + t_min * ray.rd)  - sls[ i_min - nb_plans ].ro );&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4(normaleSphere, 1 );&#xa;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;outBuffer0 = vec4(tls[i_min - (nb_plans + nb_spheres)].color, 1 );&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;}&#xa;}&#xa;"/>
+     <string name="genericTessCHead" val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;"/>
+     <string name="genericTessCBody" val="void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = 1;&#xa;&#x9;gl_TessLevelOuter[1] = 1;&#xa;&#x9;gl_TessLevelOuter[2] = 1;&#xa;&#x9;gl_TessLevelOuter[3] = 1;&#xa;&#x9;gl_TessLevelInner[0] = 1;&#xa;&#x9;gl_TessLevelInner[1] = 1;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;}&#xa;"/>
+     <string name="genericTessEHead" val="#version 420&#xa;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;"/>
+     <string name="genericTessEBody" val="layout(quads,equal_spacing) in;&#xa;&#xa;void main() {&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;}&#xa;"/>
+     <string name="genericGeomHead" val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float t;&#xa;"/>
+     <string name="genericGeomBody" val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}"/>
      <vector2f name="genericTSize">
-      <float val="1" name="0"/>
-      <float val="1" name="1"/>
+      <float name="0" val="1"/>
+      <float name="1" val="1"/>
      </vector2f>
      <vector2f name="genericTOffset">
-      <float val="512" name="0"/>
-      <float val="512" name="1"/>
+      <float name="0" val="512"/>
+      <float name="1" val="512"/>
      </vector2f>
-     <bool val="0" name="genericNeedMouse"/>
-     <bool val="0" name="genericNeedKeyboard"/>
-     <uint val="4" name="genericNbWidgets"/>
-     <int val="0" name="genericWidgetType-0"/>
-     <int val="1" name="genericWidgetView-0"/>
-     <string val="module" name="genericWidgetName-0"/>
-     <bool val="0" name="genericWidgetKeyframed-0"/>
-     <int val="0" name="genericWidgetType-1"/>
-     <int val="1" name="genericWidgetView-1"/>
-     <string val="azimut" name="genericWidgetName-1"/>
-     <bool val="0" name="genericWidgetKeyframed-1"/>
-     <int val="0" name="genericWidgetType-2"/>
-     <int val="1" name="genericWidgetView-2"/>
-     <string val="elevation" name="genericWidgetName-2"/>
-     <bool val="0" name="genericWidgetKeyframed-2"/>
-     <int val="0" name="genericWidgetType-3"/>
-     <int val="1" name="genericWidgetView-3"/>
-     <string val="t" name="genericWidgetName-3"/>
-     <bool val="1" name="genericWidgetKeyframed-3"/>
+     <bool name="genericNeedMouse" val="0"/>
+     <bool name="genericNeedKeyboard" val="0"/>
+     <uint name="genericNbWidgets" val="4"/>
+     <int name="genericWidgetType-0" val="0"/>
+     <int name="genericWidgetView-0" val="1"/>
+     <string name="genericWidgetName-0" val="module"/>
+     <bool name="genericWidgetKeyframed-0" val="0"/>
+     <int name="genericWidgetType-1" val="0"/>
+     <int name="genericWidgetView-1" val="1"/>
+     <string name="genericWidgetName-1" val="azimut"/>
+     <bool name="genericWidgetKeyframed-1" val="0"/>
+     <int name="genericWidgetType-2" val="0"/>
+     <int name="genericWidgetView-2" val="1"/>
+     <string name="genericWidgetName-2" val="elevation"/>
+     <bool name="genericWidgetKeyframed-2" val="0"/>
+     <int name="genericWidgetType-3" val="0"/>
+     <int name="genericWidgetView-3" val="1"/>
+     <string name="genericWidgetName-3" val="t"/>
+     <bool name="genericWidgetKeyframed-3" val="1"/>
     </IOData>
     <IOData name="nodeWidget-0">
-     <uint val="4" name="nbChildren"/>
+     <uint name="nbChildren" val="4"/>
      <IOData name="childWidget-0">
-      <bool val="0" name="floatAttribKeyframed"/>
-      <float val="0" name="floatAttribMinVal"/>
-      <float val="15" name="floatAttribMaxVal"/>
+      <bool name="floatAttribKeyframed" val="0"/>
+      <float name="floatAttribMinVal" val="0.001"/>
+      <float name="floatAttribMaxVal" val="15"/>
       <IOData name="floatAttribCurve">
-       <float val="6.6" name="currentVal"/>
-       <uint val="1" name="nbCurves"/>
+       <float name="currentVal" val="8.13046"/>
+       <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int val="0" name="interpType"/>
-        <int val="0" name="leftType"/>
-        <int val="0" name="rightType"/>
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
         <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
-         <uint val="0" name="nbTangents"/>
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
-          <float val="0" name="0"/>
-          <float val="6.6" name="1"/>
+          <float name="0" val="0"/>
+          <float name="1" val="8.13046"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint val="0" name="nbChildren"/>
+      <uint name="nbChildren" val="0"/>
      </IOData>
      <IOData name="childWidget-1">
-      <bool val="0" name="floatAttribKeyframed"/>
-      <float val="0" name="floatAttribMinVal"/>
-      <float val="6.28319" name="floatAttribMaxVal"/>
+      <bool name="floatAttribKeyframed" val="0"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
       <IOData name="floatAttribCurve">
-       <float val="0.552921" name="currentVal"/>
-       <uint val="1" name="nbCurves"/>
+       <float name="currentVal" val="1.25664"/>
+       <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int val="0" name="interpType"/>
-        <int val="0" name="leftType"/>
-        <int val="0" name="rightType"/>
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
         <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
-         <uint val="0" name="nbTangents"/>
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
-          <float val="0" name="0"/>
-          <float val="0.552921" name="1"/>
+          <float name="0" val="0"/>
+          <float name="1" val="1.25664"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint val="0" name="nbChildren"/>
+      <uint name="nbChildren" val="0"/>
      </IOData>
      <IOData name="childWidget-2">
-      <bool val="0" name="floatAttribKeyframed"/>
-      <float val="-1.5708" name="floatAttribMinVal"/>
-      <float val="1.5708" name="floatAttribMaxVal"/>
+      <bool name="floatAttribKeyframed" val="0"/>
+      <float name="floatAttribMinVal" val="-1.5708"/>
+      <float name="floatAttribMaxVal" val="1.5708"/>
       <IOData name="floatAttribCurve">
-       <float val="0.285886" name="currentVal"/>
-       <uint val="1" name="nbCurves"/>
+       <float name="currentVal" val="0.455532"/>
+       <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int val="0" name="interpType"/>
-        <int val="0" name="leftType"/>
-        <int val="0" name="rightType"/>
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
         <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
-         <uint val="0" name="nbTangents"/>
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
-          <float val="0" name="0"/>
-          <float val="0.285886" name="1"/>
+          <float name="0" val="0"/>
+          <float name="1" val="0.455532"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint val="0" name="nbChildren"/>
+      <uint name="nbChildren" val="0"/>
      </IOData>
      <IOData name="childWidget-3">
-      <bool val="1" name="floatAttribKeyframed"/>
-      <float val="0" name="floatAttribMinVal"/>
-      <float val="2" name="floatAttribMaxVal"/>
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="2"/>
       <IOData name="floatAttribCurve">
-       <float val="0.942" name="currentVal"/>
-       <uint val="1" name="nbCurves"/>
+       <float name="currentVal" val="1"/>
+       <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int val="0" name="interpType"/>
-        <int val="0" name="leftType"/>
-        <int val="0" name="rightType"/>
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
         <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
-         <uint val="0" name="nbTangents"/>
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
-          <float val="0" name="0"/>
-          <float val="0.942" name="1"/>
+          <float name="0" val="0"/>
+          <float name="1" val="1"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint val="0" name="nbChildren"/>
+      <uint name="nbChildren" val="0"/>
      </IOData>
     </IOData>
     <vector2f name="nodeOutputPos-0-0">
-     <float val="56.32" name="0"/>
-     <float val="28.16" name="1"/>
+     <float name="0" val="56.32"/>
+     <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float val="1.28394" name="scale"/>
+   <float name="scale" val="1.99599"/>
    <vector2f name="offset">
-    <float val="-694.205" name="0"/>
-    <float val="256.432" name="1"/>
+    <float name="0" val="-694.205"/>
+    <float name="1" val="256.432"/>
    </vector2f>
    <IOData name="animation">
-    <uint val="0" name="firstFrame"/>
-    <uint val="99" name="lastFrame"/>
-    <uint val="27" name="currentFrame"/>
-    <uint val="24" name="fps"/>
+    <uint name="firstFrame" val="0"/>
+    <uint name="lastFrame" val="99"/>
+    <uint name="currentFrame" val="27"/>
+    <uint name="fps" val="24"/>
    </IOData>
   </IOData>
   <IOData name="animationWidget">
    <vector2i name="animationWidgetSize">
-    <int val="1918" name="0"/>
-    <int val="336" name="1"/>
+    <int name="0" val="1918"/>
+    <int name="1" val="336"/>
    </vector2i>
    <IOData name="timelineWidget"/>
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float val="1.86161" name="scale"/>
+   <float name="scale" val="1.86161"/>
    <vector2f name="offset">
-    <float val="459.543" name="0"/>
-    <float val="244.125" name="1"/>
+    <float name="0" val="459.543"/>
+    <float name="1" val="244.125"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>

@@ -12,11 +12,11 @@ using namespace Eigen;
 ReconstructionSurface::ReconstructionSurface( Mesh m ){
     //variables
     mesh = m;
-    vertices_tab = mesh.vertices;
+    vertices_tab = mesh.Vertices();
     //ajout des points
     ajout_tab = new std::vector< glm::vec3 >;
     ajout_tab->push_back( barycentre() );
-    for (int i = 0; i < ajout_tab->size; ++i) {
+    for (int i = 0; i < ajout_tab->size(); ++i) {
         vertices_tab.push_back( ajout_tab->at(i) );
     }
     //calcul
@@ -42,7 +42,7 @@ void ReconstructionSurface::construction_RBF(){
     for (int k = 0; k < taille-1; ++k) {
         iso_tab(k) = 0;
     }
-    iso_tab(taille) = 1;
+    iso_tab(taille-1) = 1;
     //calcul des poids
     weight_tab = distances.colPivHouseholderQr().solve(iso_tab);
 }

@@ -435,10 +435,6 @@ math.h
 -
 
 /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.h
-glm/glm.hpp
--
-glm/gtc/type_precision.hpp
--
 vector
 -
 string
