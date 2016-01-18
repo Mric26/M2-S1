@@ -134,11 +134,15 @@ int main()
 //    Mesh m("../../models/bunny.off");
     Mesh m("../../models/cube.off");
 
+
     BarthFunction bf;
     ReconstructionSurface rs(m);
     float x = 1.8;
 //    Mesh m;
     m.CreateIsoSurface(m, rs, -0.2, -x, x, -x, x, -x ,x, 100, 100, 100);
+
+    //write obj
+    m.write_obj("../sorties/my_reconstructed_surface.obj");
 
 //    m.Normalize();
 //    m.ComputeNormals();

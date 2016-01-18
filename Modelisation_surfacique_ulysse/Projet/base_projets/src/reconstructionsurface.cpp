@@ -27,24 +27,38 @@ ReconstructionSurface::ReconstructionSurface( Mesh m ){
 void ReconstructionSurface::construction_RBF(){
     //calcul des distances
     int taille = static_cast<int>(vertices_tab.size());
-    MatrixXf distances = MatrixXf(taille, taille);
-
+    //// Utilisation de matrice classique
+//    MatrixXd distances = MatrixXd(taille, taille);
+    //// Utilisation de matrice creuse
+    Eigen::SparseMatrix<double> distances(taille, taille);
     for (int i = 0; i < taille; ++i) {
         for (int j = i; j < taille; ++j) {
             double dist = glm::distance(vertices_tab.at(i), vertices_tab.at(j));
             dist = fonction_RBF(dist);
-            distances(i,j) = dist;
-            distances(j,i) = dist;
+//            distances(i,j) = dist;
+//            distances(j,i) = dist;
+            distances.coeffRef(i,j) = dist;
+            distances.coeffRef(j,i) = dist;
         }
     }
     //construction des iso
-    Eigen::VectorXf iso_tab(taille);
+    Eigen::VectorXd iso_tab(taille);
     for (int k = 0; k < taille-1; ++k) {
         iso_tab(k) = 0;
     }
     iso_tab(taille-1) = 1;
-    //calcul des poids
-    weight_tab = distances.colPivHouseholderQr().solve(iso_tab);
+    //calcul des poids par resolution du sistème
+    //// Utilisation de matrice classique
+//    weight_tab = distances.colPivHouseholderQr().solve(iso_tab);
+    //// Utilisation de matrice creuse
+    Eigen::BiCGSTAB< Eigen::SparseMatrix<double> > solver;
+    solver.compute(distances);
+    weight_tab = solver.solve(iso_tab);
+    std::cout << "###########################" << std::endl;
+    std::cout << "Sorties du solveurs :      " << std::endl;
+    std::cout << "Iterations :     " << solver.iterations() << std::endl;
+    std::cout << "Estimated error: " << solver.error()      << std::endl;
+    std::cout << "###########################" << std::endl;
 }
 
 double ReconstructionSurface::fonction_RBF( double x ){
@@ -60,8 +74,16 @@ double ReconstructionSurface::fonction_RBF( double x ){
         res = x * log(x);
         break;
     case 3 :
-        //Multi - Quadratique
-        res = sqrt( (x * x) + 1 );
+        //Multiquadrique
+        res = sqrt( 1 + (x * x) );
+        break;
+    case 4 :
+        //Inverse quadratic
+        res = 1 / ( 1 + (x * x) );
+        break;
+    case 5 :
+        //Inverse multiquadric
+        res = 1 / sqrt  ( 1 + (x * x) );
         break;
     default:
         res = 0.0;
@@ -73,8 +95,7 @@ double ReconstructionSurface::fonction_RBF( double x ){
 void ReconstructionSurface::construction_CSRBF(){
     //calcul des distances
     int taille = static_cast<int>(vertices_tab.size());
-    MatrixXf distances = MatrixXf(taille, taille);
-    ////SparseMatrix<double> distances(taille, taille); ////Matrice creuse pour accelerer
+    MatrixXd distances = MatrixXd(taille, taille);
 
     for (int i = 0; i < taille; ++i) {
         for (int j = i; j < taille; ++j) {
@@ -85,14 +106,13 @@ void ReconstructionSurface::construction_CSRBF(){
         }
     }
     //construction des iso
-    Eigen::VectorXf iso_tab(taille);
+    Eigen::VectorXd iso_tab(taille);
     for (int k = 0; k < taille-1; ++k) {
         iso_tab(k) = 0;
     }
     iso_tab(taille) = 1;
     //calcul des poids
     weight_tab = distances.colPivHouseholderQr().solve(iso_tab);
-    ////utiliser un solveur de matrice creuse
 }
 
 double ReconstructionSurface::fonction_CSRBF( double x ){
@@ -133,7 +153,11 @@ float ReconstructionSurface::Eval(glm::vec3 p) const{
 }
 
 glm::vec3 ReconstructionSurface::EvalDev(glm::vec3 p) const{
-    return p;
+    //fonction de calcul de normales qui ne fonctionne que dans certains cas (calcul approximatif)
+    //A REMPLACER PAR UN MLS
+    int taille = static_cast<int>(vertices_tab.size());
+    glm::vec3 b = vertices_tab.at( taille-1 );
+    return( p - b);
 }
 
 
