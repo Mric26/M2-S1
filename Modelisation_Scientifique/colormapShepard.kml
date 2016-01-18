@@ -5,7 +5,7 @@
     <GroundOverlay>
       <name>Large-scale overlay on terrain</name>
       <Icon>
-        <href>/user/0/.base/lefevreh/home/Documents/M2-S1/Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/../Images/colormapShepard.png</href>
+        <href>/home/henry/Documents/M2-S1/Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/../Images/colormapShepard.png</href>
       </Icon>
       <LatLonBox>
         <north>50.57</north>
