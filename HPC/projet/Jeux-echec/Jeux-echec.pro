@@ -10,6 +10,7 @@ QT       += core gui widgets
 
 QMAKE_CXXFLAGS += -std=gnu++0x \
 
+
 TARGET = Jeux-echec
 TEMPLATE = app
 

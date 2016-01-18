@@ -1,0 +1,6 @@
+ssh-keygen //pour  générer une clé privé et publique
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys // copie de la clé publique
+ssh ensipc67 // diffusion de la clé sur une machine qqlconque.
+
+
+http://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9

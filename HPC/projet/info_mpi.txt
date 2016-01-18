@@ -1,0 +1,44 @@
+module load openmpi-x86_64 // a mettre dans le bashrc
+
+mpirun -machinefile machine.txt -np 8 display_mpi
+
+//machine.txt contient l'ensemble des machines sur lesquels les threads seront executés, -np 8 definit l nombre de thread
+
+A scalar product -> reduction
+
+
+Space memory disjoint so we need to comunicate between processus.
+Several ways to do it :
+
+1) every MPI.send (used the most because data are distributed randomly)
+Rank0 MPI-Recv( )
+
+Send will be completed when the Recv will be completed
+Non blocking messsage
+
+MPI_ISend
+MPI_IRecv
+MPI_Barrier( )is to force synchronisation at on time in your process
+
+A non blocking alternative : 
+MPI_IRecv
+MPI_Send
+(but we need ) MPI_Barrier
+
+MPI_BSend (Buffer send)
+MPI_RSend
+MPI_BISend
+
+2) MPI_Reduce
+  MPI_Operatot_PLus
+  
+3) MPI_Gather on rank0
+ 
+4) MPI_AlltoAll 
+
+
+Time function in MPI :
+
+st = MPI_Wtime()
+stop = MPI_Wtime()
+stop - start -> elapsed time.
