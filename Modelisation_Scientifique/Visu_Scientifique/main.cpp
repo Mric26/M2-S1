@@ -169,9 +169,18 @@ void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
 // Renvoie une colormap personnalisable
 Colormap* createColorMap(float min, float max) {
     Colormap *colorMap = new Colormap();
-    colorMap->addColor(min, qRgb(0,0,255));
-    colorMap->addColor(290, qRgb(0,255,0));
-    colorMap->addColor(max, qRgb(255,0,0));
+    unsigned int nb_iter = 4;
+    float dt = (max-min) / (nb_iter-1);
+    for (unsigned int k = 0; k < nb_iter; ++k) {
+        colorMap->addColor(min+k*dt, qRgb(255,k*(255/(nb_iter-1)),0));    // du rouge vers le jaune
+//        float r = k*(255/(nb_iter-1));
+//        float g = 128+(k-(nb_iter/2)*(255/(nb_iter-1)));
+//        float b = (nb_iter-1-k)*(255/(nb_iter-1));
+//        colorMap->addColor(min+k*dt, qRgb(r, g, b));    // du bleu vers le rouge
+    }
+//    colorMap->addColor(min, qRgb(0,0,255));
+//    colorMap->addColor(290, qRgb(0,255,0));
+//    colorMap->addColor(max, qRgb(255,0,0));
     return colorMap;
 }
 
@@ -191,10 +200,10 @@ void computeShepard(std::vector< std::vector< float >* >* interpoleData, std::ve
 
             // calcul de s pour wk
             float s = 0;
-            for (unsigned int l = 0; l < data->size(); ++l) {
-                float latil = atof(latitude->at(l).c_str());
-                float longil = atof(longitude->at(l).c_str());
-                s += 1.0 / pow(distance(lati, longi, latil, longil), mu);
+            for (unsigned int k = 0; k < data->size(); ++k) {
+                float latik = atof(latitude->at(k).c_str());
+                float longik = atof(longitude->at(k).c_str());
+                s += 1.0 / pow(distance(lati, longi, latik, longik), mu);
             }
 
             // interpolation des donnees
@@ -240,16 +249,17 @@ void computeHardly(std::vector< std::vector< float >* >* interpoleData, std::vec
     }
 
     x = A.ldlt().solve(b);
+    std::cout << x << std::endl;
 
     for (int i = 0; i < resolution; ++i) {
         for (int j = 0; j < resolution; ++j) {
+            lati = minLat + ((double(i)/(resolution-1)) * (maxLat - minLat));
+            longi = minLong + ((double(j)/(resolution-1)) * (maxLong - minLong));
             float eval = 0.0;
             for (unsigned int k = 0; k < n; ++k) {
-                lati = minLat + ((double(i)/(resolution-1)) * (maxLat - minLat));
-                longi = minLong + ((double(j)/(resolution-1)) * (maxLong - minLong));
                 latk = atof(latitude->at(k).c_str());
                 longk = atof(longitude->at(k).c_str());
-                eval += x(k) * sqrt(R + pow(distance(longi,lati,latk,longk),2));
+                eval += x(k) * sqrt(R + pow(distance(lati, longi, latk, longk),2));
             }
             interpoleData->at(i)->at(j) = eval;
         }
@@ -345,6 +355,10 @@ int main() {
     std::vector<std::string>* longitude = (*csvJoin)[std::string("Longitude")];
     std::vector<std::string>* kelvin = (*csvJoin)[std::string("t")];
 
+    float minT, maxT;
+    findExtrema(minT, maxT, kelvin);
+
+    ////////////////////////////// Instanciation //////////////////////////////
     std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(resolution);
     for (int i = 0; i < resolution; ++i) {
         (*interpoleShepard)[i] = new std::vector<float>(resolution);
@@ -361,41 +375,48 @@ int main() {
         (*square)[i] = new std::vector<short>(resoSquare);
     }
 
+
+    ////////////////////////////// Interpolation //////////////////////////////
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
     computeHardly(interpoleHarldy, latitude, longitude, kelvin);
+    std::vector< std::vector< float >* >* interpoleData = interpoleHarldy;
 
-    float minT, maxT;
-    findExtrema(minT, maxT, kelvin);
 
+    ////////////////////////////// Creation des images //////////////////////////////
     QImage *imgSquare = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
     int count = 1;
 
-    // calcul des isolignes
+    // calcul des isolignes avec le marching square
     for (float isoLine = minT; isoLine < maxT; isoLine += 1) {
 
-        computeMarchingSquare(square, interpoleShepard, isoLine);
-        drawMarchingSquare(imgSquare, square, interpoleShepard, isoLine);
+        computeMarchingSquare(square, interpoleData, isoLine);
+        drawMarchingSquare(imgSquare, square, interpoleData, isoLine);
 
         imgSquare->save(QString("../Images/anim" + QString::number(count) + ".png"));
         std::cout << "n° : " << count << std::endl;
         count++;
     }
 
-    // calcul de la colormap
-    QImage *imgColor = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
+    // creation de la colormap
     Colormap *colorMap = createColorMap(minT, maxT);
-    drawData(imgColor, colorMap, interpoleShepard);
-    imgColor->save(QString("../Images/colormapShepard.png"));
 
-    // Dessine la colormap
+    // calcul de la map des couleurs
+    QImage *imgColor = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
+    drawData(imgColor, colorMap, interpoleData);
+
+    // dessine la colormap
     QImage *imgColormap = new QImage(50, 200, QImage::Format_RGB32);
     drawColorMap(imgColormap, colorMap, minT, maxT);
-    imgColormap->save(QString("../Images/colormap.png"));
 
+    // ecriture dans les fichiers de sorties
+    imgColormap->save(QString("../Images/colorMap.png"));
+    imgColor->save(QString("../Images/colorData.png"));
     writeKmlInfoFile(QString("../cities.kml"), cities, latitude, longitude);
-    writeKmlImgFile(QString("../colormapShepard.kml"), latitude, longitude);
+    writeKmlImgFile(QString("../colorData.kml"), latitude, longitude);
 
+
+    ////////////////////////////// Free Memory //////////////////////////////
     std::cout << "Delete memory" << std::endl;
     delete csvPoste;
     delete csvDatas;
