@@ -404,7 +404,7 @@ glm/glm.hpp
 vector
 -
 
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.h
 glm/glm.hpp
 -
 glm/gtc/type_precision.hpp
@@ -414,7 +414,7 @@ vector
 string
 -
 
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.h
 glm/glm.hpp
 -
 glm/gtc/type_precision.hpp
@@ -426,15 +426,15 @@ string
 AbstractMesh.h
 -
 
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.cpp
 reconstructionsurface.h
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.h
 iostream
 -
 math.h
 -
 
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/reconstructionsurface.h
 vector
 -
 string
@@ -444,7 +444,7 @@ eigen3/Eigen/Dense
 eigen3/Eigen/Sparse
 -
 ImplicitFunction.h
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/ImplicitFunction.h
 Mesh.h
-/user/6/.base/segureta/home/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.h
+/home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/src/Mesh.h
 

@@ -494,7 +494,6 @@ void Mesh::ProcessTetrahedron(Mesh& mesh, const ImplicitFunction& function, cons
                 mesh.m_indices.push_back(N+2);
                 mesh.m_indices.push_back(N+1);
             }
-
             return;
         }
     }
@@ -572,7 +571,6 @@ void Mesh::ProcessTetrahedron(Mesh& mesh, const ImplicitFunction& function, cons
                     mesh.m_indices.push_back(N+1);
                     mesh.m_indices.push_back(N+3);
                 }
-
 
                 return;
             }

@@ -10,6 +10,7 @@ float MyImplicitCylindre::Eval(glm::vec3 p) const{
   // x² + y² = r²
   float res = 0;
   res = sqrt(p.x * p.x + p.y * p.y);
+  cout << res << endl;
   return res;
 }
 

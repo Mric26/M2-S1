@@ -145,8 +145,8 @@ int main()
     Mesh m;
     Mesh::CreateCube(m);        // This is a place holder, comment it
 
-    ReconstructionSurface rs(m);
-    Mesh::CreateIsoSurface(m, rs, 0.5);
+    //ReconstructionSurface rs(m);
+    Mesh::CreateIsoSurface(m, c, 0.5);
     
     //**********************************************************************************
 
