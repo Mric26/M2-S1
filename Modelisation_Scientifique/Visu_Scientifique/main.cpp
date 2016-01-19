@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include <QColor>
 #include <QDir>
 #include <QFile>
 #include <QImage>
@@ -17,13 +16,15 @@
 
 #include "colormap.h"
 #include "csv_meteofranceparser.h"
+#include "Eigen/Dense"
 
 #define RESO 10             // Taille (en pixel) des carres du marchingSquare
 
 QString* pathPoste = new QString("../Data/postesSynop_modif.csv");
 QString* pathDatas = new QString("../Data/synop.2015110912.csv");
 int resolution = 100;       // Resolution de la grille interpolante
-float mu = 2;               // Coefficient de l'interpolant de Shepard
+float mu = 2;               // Coefficient de l'interpolant pour Shepard
+float R = 4;                // Coefficient de l'interpolant pour Harldy
 
 
 // Retourne la distance euclidienne
@@ -151,6 +152,19 @@ void drawData(QImage *imgColor, Colormap *colorMap, std::vector< std::vector< fl
     }
 }
 
+// Dessine la colormap dans une image
+void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
+    QPainter painter(imgSrc);
+    painter.fillRect(0, 0, 50, 200, qRgb(0, 0, 0));
+    for (int i = 0; i < 200; ++i) {
+        float t = min + (i/200.0) * (max - min);
+        QColor rgb = colormap->getColorAt(t);
+        painter.setPen(rgb);
+        painter.drawLine(0, 200-i, 50, 200-i);
+    }
+    painter.end();
+}
+
 
 // Renvoie une colormap personnalisable
 Colormap* createColorMap(float min, float max) {
@@ -198,8 +212,48 @@ void computeShepard(std::vector< std::vector< float >* >* interpoleData, std::ve
     }
 }
 
-// inteprolation de Hardly
-void computeHardly() {
+// Inteprolation de Hardly
+void computeHardly(std::vector< std::vector< float >* >* interpoleData, std::vector<std::string>* latitude, std::vector<std::string>* longitude, std::vector<std::string>* data) {
+    unsigned int n = data->size();
+    Eigen::MatrixXf A = Eigen::MatrixXf(n,n);
+    Eigen::VectorXf b = Eigen::VectorXf(data->size());
+    Eigen::VectorXf x;
+
+    float lati, longi, latj, longj, latk, longk;
+    float minLat, maxLat;
+    float minLong, maxLong;
+    findExtrema(minLat, maxLat, latitude);
+    findExtrema(minLong, maxLong, longitude);
+
+    for (unsigned int i = 0; i < n; ++i) {
+        for (unsigned int j = 0; j < n; ++j) {
+            lati = atof(latitude->at(i).c_str());
+            longi = atof(longitude->at(i).c_str());
+            latj = atof(latitude->at(j).c_str());
+            longj = atof(longitude->at(j).c_str());
+            A(i,j) = sqrt(R + pow(distance(longi,lati,longj,latj),2));
+        }
+    }
+
+    for (unsigned int i = 0; i < data->size(); ++i) {
+        b(i) = atof(data->at(i).c_str());
+    }
+
+    x = A.ldlt().solve(b);
+
+    for (int i = 0; i < resolution; ++i) {
+        for (int j = 0; j < resolution; ++j) {
+            float eval = 0.0;
+            for (unsigned int k = 0; k < n; ++k) {
+                lati = minLat + ((double(i)/(resolution-1)) * (maxLat - minLat));
+                longi = minLong + ((double(j)/(resolution-1)) * (maxLong - minLong));
+                latk = atof(latitude->at(k).c_str());
+                longk = atof(longitude->at(k).c_str());
+                eval += x(k) * sqrt(R + pow(distance(longi,lati,latk,longk),2));
+            }
+            interpoleData->at(i)->at(j) = eval;
+        }
+    }
 }
 
 // Calcul l'etat de chaque square en fonction d'une isoligne
@@ -291,13 +345,17 @@ int main() {
     std::vector<std::string>* longitude = (*csvJoin)[std::string("Longitude")];
     std::vector<std::string>* kelvin = (*csvJoin)[std::string("t")];
 
-    int reso = resolution;
-    std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(reso);
-    for (int i = 0; i < reso; ++i) {
-        (*interpoleShepard)[i] = new std::vector<float>(reso);
+    std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(resolution);
+    for (int i = 0; i < resolution; ++i) {
+        (*interpoleShepard)[i] = new std::vector<float>(resolution);
     }
 
-    int resoSquare = reso-1;
+    std::vector< std::vector< float >* >* interpoleHarldy = new std::vector< std::vector< float >* >(resolution);
+    for (int i = 0; i < resolution; ++i) {
+        (*interpoleHarldy)[i] = new std::vector<float>(resolution);
+    }
+
+    int resoSquare = resolution-1;
     std::vector< std::vector< short >* >* square = new std::vector< std::vector< short >* >(resoSquare);
     for (int i = 0; i < resoSquare; ++i) {
         (*square)[i] = new std::vector<short>(resoSquare);
@@ -305,6 +363,7 @@ int main() {
 
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
+    computeHardly(interpoleHarldy, latitude, longitude, kelvin);
 
     float minT, maxT;
     findExtrema(minT, maxT, kelvin);
@@ -329,6 +388,11 @@ int main() {
     drawData(imgColor, colorMap, interpoleShepard);
     imgColor->save(QString("../Images/colormapShepard.png"));
 
+    // Dessine la colormap
+    QImage *imgColormap = new QImage(50, 200, QImage::Format_RGB32);
+    drawColorMap(imgColormap, colorMap, minT, maxT);
+    imgColormap->save(QString("../Images/colormap.png"));
+
     writeKmlInfoFile(QString("../cities.kml"), cities, latitude, longitude);
     writeKmlImgFile(QString("../colormapShepard.kml"), latitude, longitude);
 
@@ -343,6 +407,7 @@ int main() {
     delete imgSquare;
     delete imgColor;
     delete colorMap;
+    delete imgColormap;
 
     std::cout << "Fin" << std::endl;
     return 0;
