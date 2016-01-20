@@ -22,7 +22,7 @@
 
 QString* pathPoste = new QString("../Data/postesSynop_modif.csv");
 QString* pathDatas = new QString("../Data/synop.2015110912.csv");
-int resolution = 100;       // Resolution de la grille interpolante
+int resolution = 20;       // Resolution de la grille interpolante
 float mu = 2;               // Coefficient de l'interpolant pour Shepard
 float R = 4;                // Coefficient de l'interpolant pour Harldy
 
@@ -160,7 +160,7 @@ void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
         float t = min + (i/200.0) * (max - min);
         QColor rgb = colormap->getColorAt(t);
         painter.setPen(rgb);
-        painter.drawLine(0, 200-i, 50, 200-i);
+        painter.drawLine(0, 199-i, 50, 199-i);
     }
     painter.end();
 }
@@ -169,15 +169,19 @@ void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
 // Renvoie une colormap personnalisable
 Colormap* createColorMap(float min, float max) {
     Colormap *colorMap = new Colormap();
-    unsigned int nb_iter = 4;
-    float dt = (max-min) / (nb_iter-1);
-    for (unsigned int k = 0; k < nb_iter; ++k) {
-        colorMap->addColor(min+k*dt, qRgb(255,k*(255/(nb_iter-1)),0));    // du rouge vers le jaune
+    colorMap->addColor(min,qRgb(0,0,255));
+    colorMap->addColor(min+(max-min)/4,qRgb(0,255,255));
+    colorMap->addColor(min+3*(max-min)/4,qRgb(255,255,0));
+    colorMap->addColor(max,qRgb(255,0,0));
+//    unsigned int nb_iter = 4;
+//    float dt = (max-min) / (nb_iter-1);
+//    for (unsigned int k = 0; k < nb_iter; ++k) {
+//        colorMap->addColor(min+k*dt, qRgb(255,k*(255/(nb_iter-1)),0));    // du rouge vers le jaune
 //        float r = k*(255/(nb_iter-1));
-//        float g = 128+(k-(nb_iter/2)*(255/(nb_iter-1)));
+//        float g = abs(k-(nb_iter/2.0))*(128/(nb_iter-1));
 //        float b = (nb_iter-1-k)*(255/(nb_iter-1));
 //        colorMap->addColor(min+k*dt, qRgb(r, g, b));    // du bleu vers le rouge
-    }
+//    }
 //    colorMap->addColor(min, qRgb(0,0,255));
 //    colorMap->addColor(290, qRgb(0,255,0));
 //    colorMap->addColor(max, qRgb(255,0,0));
@@ -249,7 +253,6 @@ void computeHardly(std::vector< std::vector< float >* >* interpoleData, std::vec
     }
 
     x = A.ldlt().solve(b);
-    std::cout << x << std::endl;
 
     for (int i = 0; i < resolution; ++i) {
         for (int j = 0; j < resolution; ++j) {
@@ -381,6 +384,22 @@ int main() {
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
     computeHardly(interpoleHarldy, latitude, longitude, kelvin);
     std::vector< std::vector< float >* >* interpoleData = interpoleHarldy;
+
+    std::cout << "Shepard" << std::endl;
+    for (int i = 0; i < resolution; ++i) {
+        for (int j = 0; j < resolution; ++j) {
+            std::cout << interpoleShepard->at(i)->at(j) << ", ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+    std::cout << "Hardly" << std::endl;
+    for (int i = 0; i < resolution; ++i) {
+        for (int j = 0; j < resolution; ++j) {
+            std::cout << interpoleHarldy->at(i)->at(j) << ", ";
+        }
+        std::cout << std::endl;
+    }
 
 
     ////////////////////////////// Creation des images //////////////////////////////
