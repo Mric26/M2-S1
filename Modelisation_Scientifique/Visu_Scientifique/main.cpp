@@ -22,9 +22,9 @@
 
 QString* pathPoste = new QString("../Data/postesSynop_modif.csv");
 QString* pathDatas = new QString("../Data/synop.2015110912.csv");
-int resolution = 20;       // Resolution de la grille interpolante
+int resolution = 200;       // Resolution de la grille interpolante
 float mu = 2;               // Coefficient de l'interpolant pour Shepard
-float R = 4;                // Coefficient de l'interpolant pour Harldy
+float R = 4;                // Coefficient de l'interpolant pour Hardy
 
 
 // Retourne la distance euclidienne
@@ -169,9 +169,9 @@ void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
 // Renvoie une colormap personnalisable
 Colormap* createColorMap(float min, float max) {
     Colormap *colorMap = new Colormap();
-    colorMap->addColor(min,qRgb(0,0,255));
-    colorMap->addColor(min+(max-min)/4,qRgb(0,255,255));
-    colorMap->addColor(min+3*(max-min)/4,qRgb(255,255,0));
+    colorMap->addColor(min,qRgb(255,255,0));
+//    colorMap->addColor(min+(max-min)/4,qRgb(0,255,255));
+//    colorMap->addColor(min+3*(max-min)/4,qRgb(255,255,0));
     colorMap->addColor(max,qRgb(255,0,0));
 //    unsigned int nb_iter = 4;
 //    float dt = (max-min) / (nb_iter-1);
@@ -225,8 +225,8 @@ void computeShepard(std::vector< std::vector< float >* >* interpoleData, std::ve
     }
 }
 
-// Inteprolation de Hardly
-void computeHardly(std::vector< std::vector< float >* >* interpoleData, std::vector<std::string>* latitude, std::vector<std::string>* longitude, std::vector<std::string>* data) {
+// Inteprolation de Hardy
+void computeHardy(std::vector< std::vector< float >* >* interpoleData, std::vector<std::string>* latitude, std::vector<std::string>* longitude, std::vector<std::string>* data) {
     unsigned int n = data->size();
     Eigen::MatrixXf A = Eigen::MatrixXf(n,n);
     Eigen::VectorXf b = Eigen::VectorXf(data->size());
@@ -361,15 +361,22 @@ int main() {
     float minT, maxT;
     findExtrema(minT, maxT, kelvin);
 
+    float minLat, maxLat;
+    float minLong, maxLong;
+    findExtrema(minLat, maxLat, latitude);
+    findExtrema(minLong, maxLong, longitude);
+    std::cout << "lat : " << minLat << " --> " << maxLat  << std::endl;
+    std::cout << "long : " << minLong << " --> " << maxLong  << std::endl;
+
     ////////////////////////////// Instanciation //////////////////////////////
     std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(resolution);
     for (int i = 0; i < resolution; ++i) {
         (*interpoleShepard)[i] = new std::vector<float>(resolution);
     }
 
-    std::vector< std::vector< float >* >* interpoleHarldy = new std::vector< std::vector< float >* >(resolution);
+    std::vector< std::vector< float >* >* interpoleHardy = new std::vector< std::vector< float >* >(resolution);
     for (int i = 0; i < resolution; ++i) {
-        (*interpoleHarldy)[i] = new std::vector<float>(resolution);
+        (*interpoleHardy)[i] = new std::vector<float>(resolution);
     }
 
     int resoSquare = resolution-1;
@@ -382,24 +389,24 @@ int main() {
     ////////////////////////////// Interpolation //////////////////////////////
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
-    computeHardly(interpoleHarldy, latitude, longitude, kelvin);
-    std::vector< std::vector< float >* >* interpoleData = interpoleHarldy;
+    computeHardy(interpoleHardy, latitude, longitude, kelvin);
+    std::vector< std::vector< float >* >* interpoleData = interpoleHardy;
 
-    std::cout << "Shepard" << std::endl;
-    for (int i = 0; i < resolution; ++i) {
-        for (int j = 0; j < resolution; ++j) {
-            std::cout << interpoleShepard->at(i)->at(j) << ", ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-    std::cout << "Hardly" << std::endl;
-    for (int i = 0; i < resolution; ++i) {
-        for (int j = 0; j < resolution; ++j) {
-            std::cout << interpoleHarldy->at(i)->at(j) << ", ";
-        }
-        std::cout << std::endl;
-    }
+//    std::cout << "Shepard" << std::endl;
+//    for (int i = 0; i < resolution; ++i) {
+//        for (int j = 0; j < resolution; ++j) {
+//            std::cout << interpoleShepard->at(i)->at(j) << ", ";
+//        }
+//        std::cout << std::endl;
+//    }
+//    std::cout << std::endl;
+//    std::cout << "Hardy" << std::endl;
+//    for (int i = 0; i < resolution; ++i) {
+//        for (int j = 0; j < resolution; ++j) {
+//            std::cout << interpoleHardy->at(i)->at(j) << ", ";
+//        }
+//        std::cout << std::endl;
+//    }
 
 
     ////////////////////////////// Creation des images //////////////////////////////
