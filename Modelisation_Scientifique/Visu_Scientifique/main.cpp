@@ -170,21 +170,7 @@ void drawColorMap(QImage *imgSrc, Colormap *colormap, float min, float max) {
 Colormap* createColorMap(float min, float max) {
     Colormap *colorMap = new Colormap();
     colorMap->addColor(min,qRgb(255,255,0));
-//    colorMap->addColor(min+(max-min)/4,qRgb(0,255,255));
-//    colorMap->addColor(min+3*(max-min)/4,qRgb(255,255,0));
     colorMap->addColor(max,qRgb(255,0,0));
-//    unsigned int nb_iter = 4;
-//    float dt = (max-min) / (nb_iter-1);
-//    for (unsigned int k = 0; k < nb_iter; ++k) {
-//        colorMap->addColor(min+k*dt, qRgb(255,k*(255/(nb_iter-1)),0));    // du rouge vers le jaune
-//        float r = k*(255/(nb_iter-1));
-//        float g = abs(k-(nb_iter/2.0))*(128/(nb_iter-1));
-//        float b = (nb_iter-1-k)*(255/(nb_iter-1));
-//        colorMap->addColor(min+k*dt, qRgb(r, g, b));    // du bleu vers le rouge
-//    }
-//    colorMap->addColor(min, qRgb(0,0,255));
-//    colorMap->addColor(290, qRgb(0,255,0));
-//    colorMap->addColor(max, qRgb(255,0,0));
     return colorMap;
 }
 
@@ -317,7 +303,7 @@ void writeKmlImgFile(QString filename, std::vector<std::string>* latitude, std::
         return;
     }
 
-    QString path = QDir::currentPath() + "/../Images/colormapShepard.png";
+    QString path = QDir::currentPath() + "/../Images/colormapData.png";
     float minLat, maxLat;
     float minLong, maxLong;
     findExtrema(minLat, maxLat, latitude);
@@ -365,8 +351,6 @@ int main() {
     float minLong, maxLong;
     findExtrema(minLat, maxLat, latitude);
     findExtrema(minLong, maxLong, longitude);
-    std::cout << "lat : " << minLat << " --> " << maxLat  << std::endl;
-    std::cout << "long : " << minLong << " --> " << maxLong  << std::endl;
 
     ////////////////////////////// Instanciation //////////////////////////////
     std::vector< std::vector< float >* >* interpoleShepard = new std::vector< std::vector< float >* >(resolution);
@@ -390,23 +374,7 @@ int main() {
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
     computeHardy(interpoleHardy, latitude, longitude, kelvin);
-    std::vector< std::vector< float >* >* interpoleData = interpoleHardy;
-
-//    std::cout << "Shepard" << std::endl;
-//    for (int i = 0; i < resolution; ++i) {
-//        for (int j = 0; j < resolution; ++j) {
-//            std::cout << interpoleShepard->at(i)->at(j) << ", ";
-//        }
-//        std::cout << std::endl;
-//    }
-//    std::cout << std::endl;
-//    std::cout << "Hardy" << std::endl;
-//    for (int i = 0; i < resolution; ++i) {
-//        for (int j = 0; j < resolution; ++j) {
-//            std::cout << interpoleHardy->at(i)->at(j) << ", ";
-//        }
-//        std::cout << std::endl;
-//    }
+    std::vector< std::vector< float >* >* interpoleData = interpoleShepard;
 
 
     ////////////////////////////// Creation des images //////////////////////////////
