@@ -63,9 +63,9 @@ function c = mcDroite(x,y)
   // c = [a,b] -> les coeficients de la droite obtenue, tels que y=ax+b
   
   // **** A MODIFIER/COMPLETER ****
-  n = size(x,2);                 // nombre de colonnes de x
-  one = ones(n,1);               // vecteur de 1
-  A = matrix([x';one],n,2);    // creation de la matrice A
+  n = size(x,2);                    // nombre de colonnes de x
+  one = ones(n,1);                  // vecteur de 1
+  A = matrix([x';one],n,2);         // creation de la matrice A
   c = inv(A' * A) * A' * y';        // solution au sens des moindre carres
   // ******************************
   
@@ -95,12 +95,12 @@ function c = mcCubique(x,y)
   // c = [a,b,c,d] -> les coeficients de la cubique obtenue, tels que y=ax^3+bx^2+cx+d
   
   // **** A MODIFIER/COMPLETER ****
-  line = size(x,2);                    // nombre de colonnes de x
-  one = ones(line,1);                  // vecteur de 1
+  line = size(x,2);                       // nombre de colonnes de x
+  one = ones(line,1);                     // vecteur de 1
   x3 = (x').^3;
   x2 = (x').^2;
   A = matrix([x3;x2;x';one], line, 4);    // creation de la matrice A
-  c = inv(A' * A) * A' * y';           // solution au sens des moindre carres
+  c = inv(A' * A) * A' * y';              // solution au sens des moindre carres
   // ******************************
   
 endfunction

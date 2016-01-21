@@ -96,13 +96,12 @@ function c = mcQuadric(x,y,z)
   // x,y,z -> données d'entrées
   // c=[a,b,c] -> coef de la quadrique z=ax^2+by^2+c
     // **** A MODIFIER/COMPLETER ****
-  n = size(x,1);
+  n = size(x,1);                                // nombre de lines de x
   x2 = x.^2;
   y2 = y.^2;
-  one = ones(n,1);
-  A = matrix([x2,y2,one],n,3);
-  b = z;
-  c = inv(A' * A) * A' * b;                                // solution au sens des moindre carres
+  one = ones(n,1);                              // vecteur de 1
+  A = matrix([x2,y2,one],n,3);                  // creation de la matrice A
+  c = inv(A' * A) * A' * b;                     // solution au sens des moindre carres
   // ******************************
 endfunction
 

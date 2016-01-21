@@ -1,4 +1,4 @@
-# Install script for directory: /home/s/segureta/Documents/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/external
+# Install script for directory: /home/l/lefevreh/Documents/M2/M2-S1/Modelisation_surfacique_ulysse/Projet/base_projets/external
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

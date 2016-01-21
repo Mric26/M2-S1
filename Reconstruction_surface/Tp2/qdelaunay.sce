@@ -22,7 +22,7 @@ endfunction
 // Entree : S = d+1 points de dimension d, sommets de la d-cellule
 //              tableau de d+1 lignes et d colonnes (1 point par ligne)
 // Sortie : C = point de R^d (ligne de d colonnes)
-function C = centre_sphere_circonscrite(S)
+function C = centre_sphere_cir(S)
    
   d = size(S,2);
   M = zeros(d,d);
@@ -36,12 +36,12 @@ function C = centre_sphere_circonscrite(S)
   C = (M\b)';
 endfunction
 
-function test_centre_sphere_circonscrite()
+function test_centre_sphere_cir()
 
   // test 1
   d = 10;
   S = rand(d+1,d);
-  C = centre_sphere_circonscrite(S);
+  C = centre_sphere_cir(S);
   mprintf("C = ");
   mprintf("%15.7e ",C');
   mprintf("\n");
@@ -123,7 +123,7 @@ function [T,C,r] = delaunay(S)
     // calcul des centres des spheres circonscrites
     C = zeros(nT,d);
     for i=1:nT
-      C(i,:) = centre_sphere_circonscrite(S(T(i,:),:));
+      C(i,:) = centre_sphere_cir(S(T(i,:),:));
     end    
     if nargout>2
       // calcul des rayons
