@@ -54,7 +54,7 @@ endfunction
 
 
 function test_crust(num_test)
-  //exec("qdelaunay.sce",-1);
+  exec("qdelaunay.sce",-1);
   
   if argn(2)<1
     num_test=0;

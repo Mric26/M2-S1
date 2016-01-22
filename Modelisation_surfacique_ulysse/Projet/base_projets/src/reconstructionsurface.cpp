@@ -7,8 +7,6 @@ using namespace glm;
 using namespace std;
 using namespace Eigen;
 
-//exp(-x²)
-
 ReconstructionSurface::ReconstructionSurface( Mesh m ){
     //variables
     mesh = m;
@@ -43,13 +41,16 @@ void ReconstructionSurface::construction_points(){
     int taille = static_cast<int>(vertices_tab.size());
     //switch sur le choix de l'ajout
     int f = 10;
-    int p  = 1;
+    int p  = 0;
     switch ( p ) {
     case 1 :
         // ajout test pour cube
         for (int v = 0; v < taille; ++v) {
             glm::vec3 c = vertices_tab.at(v);
-            c = glm::vec3( b.x/f + (f-1)*c.x/f, b.y/f + (f-1)*c.y/f, b.z/f + (f-1)*c.z/f );
+            glm::vec3 d = c - b;
+            c = glm::vec3( c.x + (d.x/f), c.y + (d.y/f), c.z + (d.z/f) );
+            ajout_tab->push_back( c );
+            c = glm::vec3( c.x - (d.x/f), c.y - (d.y/f), c.z - (d.z/f) );
             ajout_tab->push_back( c );
         }
         break;
@@ -68,8 +69,9 @@ void ReconstructionSurface::construction_points(){
     for (int k = 0; k < taille; ++k) {
         iso_tab(k) = 0;
     }
-    for (int l = 0; l < taille2; ++l) {
-        iso_tab(taille + l) = 1;
+    for (int l = 0; l < taille2; l++) {
+        iso_tab(taille + l) = -1;
+//        iso_tab(taille + l + 1) = 1;
     }
 }
 
