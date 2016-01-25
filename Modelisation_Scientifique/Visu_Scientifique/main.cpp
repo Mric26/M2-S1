@@ -24,7 +24,7 @@ QString* pathPoste = new QString("../Data/postesSynop_modif.csv");
 QString* pathDatas = new QString("../Data/synop.2015110912.csv");
 int resolution = 200;       // Resolution de la grille interpolante
 float mu = 2;               // Coefficient de l'interpolant pour Shepard
-float R = 4;                // Coefficient de l'interpolant pour Hardy
+float R = 1;                // Coefficient de l'interpolant pour Hardy
 
 
 // Retourne la distance euclidienne
@@ -47,7 +47,7 @@ void findExtrema(float &min, float &max, std::vector<std::string>* data) {
 // Dessine l'isoligne dans un QPainter
 void drawCube(QPainter &painter, size_t i, size_t j, const std::vector< std::vector< float >* >* interpoleShepard, const std::vector< std::vector< short >* >* square, float isoLine) {
     painter.setPen(Qt::red);
-    painter.drawRect(i*RESO, j*RESO, RESO, RESO);
+    //painter.drawRect(i*RESO, j*RESO, RESO, RESO);
 
     int n = square->at(i)->at(j);
     bool b = ((interpoleShepard->at(i)->at(j) + interpoleShepard->at(i)->at(j+1) +
@@ -120,7 +120,7 @@ void drawCube(QPainter &painter, size_t i, size_t j, const std::vector< std::vec
         }
     }
 
-    painter.setPen(Qt::yellow);
+    painter.setPen(Qt::red);
     painter.drawLine(p1, p2);
 }
 
@@ -297,13 +297,13 @@ void writeKmlInfoFile(QString filename, std::vector<std::string>* infos, std::ve
 }
 
 // Ecriture d'un fichier KML pour afficher une image
-void writeKmlImgFile(QString filename, std::vector<std::string>* latitude, std::vector<std::string>* longitude) {
+void writeKmlImgFile(QString filename, std::vector<std::string>* latitude, std::vector<std::string>* longitude, QString output) {
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
     }
 
-    QString path = QDir::currentPath() + "/../Images/colormapData.png";
+    QString path = QDir::currentPath() + "/../Images/" + output;
     float minLat, maxLat;
     float minLong, maxLong;
     findExtrema(minLat, maxLat, latitude);
@@ -374,11 +374,11 @@ int main() {
     // interpolation des temperatures
     computeShepard(interpoleShepard, latitude, longitude, kelvin);
     computeHardy(interpoleHardy, latitude, longitude, kelvin);
-    std::vector< std::vector< float >* >* interpoleData = interpoleShepard;
+    std::vector< std::vector< float >* >* interpoleData = interpoleHardy;
 
 
     ////////////////////////////// Creation des images //////////////////////////////
-    QImage *imgSquare = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_RGB32);
+    QImage *imgSquare = new QImage(resoSquare * RESO, resoSquare * RESO, QImage::Format_ARGB32);
     int count = 1;
 
     // calcul des isolignes avec le marching square
@@ -388,7 +388,7 @@ int main() {
         drawMarchingSquare(imgSquare, square, interpoleData, isoLine);
 
         imgSquare->save(QString("../Images/anim" + QString::number(count) + ".png"));
-        std::cout << "n° : " << count << std::endl;
+        std::cout << "n° : " << count << " --> " <<  isoLine << std::endl;
         count++;
     }
 
@@ -397,6 +397,7 @@ int main() {
 
     // calcul de la map des couleurs
     QImage *imgColor = new QImage(resoSquare, resoSquare, QImage::Format_ARGB32);
+    imgColor->fill(qRgba(0,0,0,0));
     drawData(imgColor, colorMap, interpoleData);
 
     // dessine la colormap
@@ -407,7 +408,8 @@ int main() {
     imgColormap->save(QString("../Images/colorMap.png"));
     imgColor->save(QString("../Images/colorData.png"));
     writeKmlInfoFile(QString("../cities.kml"), cities, latitude, longitude);
-    writeKmlImgFile(QString("../colorData.kml"), latitude, longitude);
+    writeKmlImgFile(QString("../colorData.kml"), latitude, longitude, QString("colorData.png"));
+    writeKmlImgFile(QString("../isoLine.kml"), latitude, longitude, QString("anim4.png"));
 
 
     ////////////////////////////// Free Memory //////////////////////////////
