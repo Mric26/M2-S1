@@ -131,8 +131,8 @@ int main()
     // Data arrays Initialization
 
     // Mesh creation
-    Mesh m("../../models/cube26.off");
-//    Mesh m("../../models/cube.off");
+//    Mesh m("../../models/cube26.off");
+    Mesh m("../../models/cube.off");
 
     ReconstructionSurface rs(m);
     float x = 1.8;
