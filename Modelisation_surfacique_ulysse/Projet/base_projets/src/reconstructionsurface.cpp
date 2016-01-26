@@ -41,7 +41,7 @@ void ReconstructionSurface::construction_points(){
     int taille = static_cast<int>(vertices_tab.size());
     //switch sur le choix de l'ajout
     int f = 10;
-    int p  = 0;
+    int p  = 1;
     switch ( p ) {
     case 1 :
         // ajout test pour cube
@@ -69,9 +69,9 @@ void ReconstructionSurface::construction_points(){
     for (int k = 0; k < taille; ++k) {
         iso_tab(k) = 0;
     }
-    for (int l = 0; l < taille2; l++) {
+    for (int l = 0; l < taille2; l=l+2) {
         iso_tab(taille + l) = -1;
-//        iso_tab(taille + l + 1) = 1;
+        iso_tab(taille + l + 1) = 1;
     }
 }
 
