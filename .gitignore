@@ -11,3 +11,5 @@ Modelisation_surfacique_ulysse/Projet/base_projets/build/*
 Modelisation_Scientifique/Visu_Scientifique/*.pro.user
 Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/*
 Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Release/*
+Reconstruction_surface/build-imageMLS-Desktop-Debug/*
+Reconstruction_surface/Tp3/*.pro.user
