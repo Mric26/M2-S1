@@ -1,0 +1,13 @@
+# -------------------------------------------------------------------------#
+#	Test Perso 01														   #
+# -------------------------------------------------------------------------#							
+
+def runTest01(context):
+	import salome
+	from Test01 import test
+	print "Est-ce que le test est positif ?"
+	test()
+
+salome_pluginsmanager.AddFunction('Test 01',
+                                  'Petit programme python pour tester si cela focntionne',
+                                  runTest01)
