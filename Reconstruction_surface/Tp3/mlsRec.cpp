@@ -24,7 +24,8 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
       if(colorMissing(current)) {
         // set color as red
 //        current = Color(255.0f,0.0f,0.0f,255.0f);
-        current = estimateColorPlane(img, x, y, sigma);
+//        current = estimateColorPlane(img, x, y, sigma);
+          current = estimateColorQuadric(img, x, y, sigma);
       }
       // set color in the new image 
       setColor(newImg,x,y,current);
@@ -63,7 +64,7 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
 }
 
 double Distance(double dX0, double dY0, double dX1, double dY1){
-    return sqrt((dX1 - dX0)*(dX1 - dX0) + (dY1 - dY0)*(dY1 - dY0));
+    return sqrt(pow(dX1 - dX0, 2) + pow(dY1 - dY0, 2));
 }
 
 MLSRec::Color MLSRec::estimateColorPlane(const QImage &img,int x,int y,float sigma) {
@@ -72,26 +73,25 @@ MLSRec::Color MLSRec::estimateColorPlane(const QImage &img,int x,int y,float sig
     // z being the value at pixel x,y (One MLS per channel then!)
     int f = 3 * sigma;
     int taille = 2*f + 1;
-    Eigen::MatrixXf A = Eigen::MatrixXf(taille*taille, 3);
-    Eigen::MatrixXf W = Eigen::MatrixXf(taille*taille, taille*taille);
-    Eigen::VectorXf br = Eigen::VectorXf(taille*taille);
-    Eigen::VectorXf bg = Eigen::VectorXf(taille*taille);
-    Eigen::VectorXf bb = Eigen::VectorXf(taille*taille);
-    float Pi = 3.141592;
+    Eigen::MatrixXf A = Eigen::MatrixXf::Zero(taille*taille, 3);
+    Eigen::MatrixXf W = Eigen::MatrixXf::Zero(taille*taille, taille*taille);
+    Eigen::VectorXf br = Eigen::VectorXf::Zero(taille*taille);
+    Eigen::VectorXf bg = Eigen::VectorXf::Zero(taille*taille);
+    Eigen::VectorXf bb = Eigen::VectorXf::Zero(taille*taille);
+    float PI = 3.141592;
     for(int i=-f; i<f+1; ++i) {
         for(int j=-f; j<f+1; ++j) {
-            if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.height()) && ((y+i)<img.width()) ){
-                A( (i+f)*5+(j+f), 0) = x+j;
-                A( (i+f)*5+(j+f), 1) = y+i;
-                A( (i+f)*5+(j+f), 2) = 1;
-                if (colorMissing( getColor(img, x+j, y+i )) ) {
-                    W( (i+f)*5+(j+f), (i+f)*5+(j+f) ) = 0;
-                } else {
-                    W( (i+f)*5+(j+f), (i+f)*5+(j+f) ) = ( 1.0 / ( sigma * sqrt( 2 * Pi ) ) ) * exp( - pow(( Distance( x+j, y+i, x, y ) / sigma ),2) );
+            if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) ){
+                if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+                    A( (j+f)*taille+(i+f), 0) = x+j;
+                    A( (j+f)*taille+(i+f), 1) = y+i;
+                    A( (j+f)*taille+(i+f), 2) = 1;
+                    float dist = pow( Distance( x+j, y+i, x, y ),2);
+                    W( (j+f)*taille+(i+f), (j+f)*taille+(i+f) ) = ( 1.0 / ( sigma * sqrt( 2 * PI ) ) ) * exp( - (dist / (2*sigma*sigma)) );
+                    br( (j+f)*taille+(i+f) ) = qRed( img.pixel(x+j, y+i) );
+                    bg( (j+f)*taille+(i+f) ) = qGreen( img.pixel(x+j, y+i) );
+                    bb( (j+f)*taille+(i+f) ) = qBlue( img.pixel(x+j, y+i) );
                 }
-                br( (i+f)*5+(j+f) ) = qRed( img.pixel(x+j, y+i) );
-                bg( (i+f)*5+(j+f) ) = qGreen( img.pixel(x+j, y+i) );
-                bb( (i+f)*5+(j+f) ) = qBlue( img.pixel(x+j, y+i) );
             }
         }
     }
@@ -106,12 +106,44 @@ MLSRec::Color MLSRec::estimateColorPlane(const QImage &img,int x,int y,float sig
 }
 
 MLSRec::Color MLSRec::estimateColorQuadric(const QImage &img,int x,int y,float sigma) {
-  // estimate (and eval) a,b,c,d,e,f such that 
-  // ax^2 + by^2 + cxy + dx + ey + f = z
-  // z being the value at pixel x,y (One MLS per channel then!)
-
-  // TODO
-  return Color(0.0f,0.0f,0.0f,255.0f);
+    // estimate (and eval) a,b,c,d,e,f such that
+    // ax^2 + by^2 + cxy + dx + ey + f = z
+    // z being the value at pixel x,y (One MLS per channel then!)
+    int f = 3 * sigma;
+    int taille = 2*f + 1;
+    Eigen::MatrixXf A = Eigen::MatrixXf::Zero(taille*taille, 6);
+    Eigen::MatrixXf W = Eigen::MatrixXf::Zero(taille*taille, taille*taille);
+    Eigen::VectorXf br = Eigen::VectorXf::Zero(taille*taille);
+    Eigen::VectorXf bg = Eigen::VectorXf::Zero(taille*taille);
+    Eigen::VectorXf bb = Eigen::VectorXf::Zero(taille*taille);
+    float PI = 3.141592;
+    for(int i=-f; i<f+1; ++i) {
+        for(int j=-f; j<f+1; ++j) {
+            if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) ){
+                if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+                    A( (j+f)*taille+(i+f), 0) = pow(x+j, 2);
+                    A( (j+f)*taille+(i+f), 1) = pow(y+i, 2);
+                    A( (j+f)*taille+(i+f), 2) = (x+j) * (y+i);
+                    A( (j+f)*taille+(i+f), 3) = x+j;
+                    A( (j+f)*taille+(i+f), 4) = y+i;
+                    A( (j+f)*taille+(i+f), 5) = 1;
+                    float dist = pow( Distance( x+j, y+i, x, y ),2);
+                    W( (j+f)*taille+(i+f), (j+f)*taille+(i+f) ) = ( 1.0 / ( sigma * sqrt( 2 * PI ) ) ) * exp( - (dist / (2*sigma*sigma)) );
+                    br( (j+f)*taille+(i+f) ) = qRed( img.pixel(x+j, y+i) );
+                    bg( (j+f)*taille+(i+f) ) = qGreen( img.pixel(x+j, y+i) );
+                    bb( (j+f)*taille+(i+f) ) = qBlue( img.pixel(x+j, y+i) );
+                }
+            }
+        }
+    }
+    Eigen::MatrixXf ATA = A.transpose() * W * A;
+    Eigen::VectorXf xr = ATA.ldlt().solve(A.transpose() * W * br);
+    Eigen::VectorXf xg = ATA.ldlt().solve(A.transpose() * W * bg);
+    Eigen::VectorXf xb = ATA.ldlt().solve(A.transpose() * W * bb);
+    float r = max(0, min( (int) (xr(0) * (x*x) + xr(1) * (y*y) + xr(2)*x*y + xr(3) * x + xr(4) * y + xr(5)), 255));
+    float g = max(0, min( (int) (xg(0) * (x*x) + xg(1) * (y*y) + xg(2)*x*y + xg(3) * x + xg(4) * y + xg(5)), 255));
+    float b = max(0, min( (int) (xb(0) * (x*x) + xb(1) * (y*y) + xb(2)*x*y + xb(3) * x + xb(4) * y + xb(5)), 255));
+    return Color( r, g, b, 255.0f );
 }
 
 
