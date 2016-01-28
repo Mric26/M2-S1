@@ -1,6 +1,5 @@
 #include "mlsRec.h"
 #include <cmath>
-#include <algorithm>
 #include <Eigen/Dense>
 
 using namespace std;
@@ -22,10 +21,10 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
       
       // check if this color is missing in the image
       if(colorMissing(current)) {
-        // set color as red
-//        current = Color(255.0f,0.0f,0.0f,255.0f);
-//        current = estimateColorPlane(img, x, y, sigma);
-          current = estimateColorQuadric(img, x, y, sigma);
+	// set color as red 
+//    current = Color(255.0f,0.0f,0.0f,255.0f);
+//    current = estimateColorPlane(img, x, y, sigma);
+    current = estimateColorQuadric(img, x, y, sigma);
       }
       // set color in the new image 
       setColor(newImg,x,y,current);
