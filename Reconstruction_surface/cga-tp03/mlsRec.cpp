@@ -24,7 +24,8 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
 	// set color as red 
 //    current = Color(255.0f,0.0f,0.0f,255.0f);
 //    current = estimateColorPlane(img, x, y, sigma);
-    current = estimateColorQuadric(img, x, y, sigma);
+    current = estimateColorQuadric(img, x, y, estimateSigma(img, x, y));
+//    current = estimateColorQuadric(img, x, y, 2.0);
       }
       // set color in the new image 
       setColor(newImg,x,y,current);
@@ -72,6 +73,7 @@ MLSRec::Color MLSRec::estimateColorPlane(const QImage &img,int x,int y,float sig
     // z being the value at pixel x,y (One MLS per channel then!)
     int f = 3 * sigma;
     int taille = 2*f + 1;
+    // Initialisation des differentes matrices
     Eigen::MatrixXf A = Eigen::MatrixXf::Zero(taille*taille, 3);
     Eigen::MatrixXf W = Eigen::MatrixXf::Zero(taille*taille, taille*taille);
     Eigen::VectorXf br = Eigen::VectorXf::Zero(taille*taille);
@@ -147,8 +149,22 @@ MLSRec::Color MLSRec::estimateColorQuadric(const QImage &img,int x,int y,float s
 
 
 float MLSRec::estimateSigma(const QImage &img,int x,int y) {
-  // estimate sigma at x,y depending on the positions of nearest valid neighbors
-  
-  // TODO 
-  return 2.0f;
+    // estimate sigma at x,y depending on the positions of nearest valid neighbors
+    int seuil = 6;
+    int radius = 3.0;
+    int count = 0;
+//    while (count < seuil && count < 100) {
+//        for(int i=-radius; i<radius+1; ++i) {
+//            for(int j=-radius; j<radius+1; ++j) {
+//                if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) && (i != 0 || j != 0) ){
+//                    if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+//                        count += 1;
+//                    }
+//                }
+//            }
+//        }
+//        radius++;
+//    }
+    // TODO
+    return radius;
 }
