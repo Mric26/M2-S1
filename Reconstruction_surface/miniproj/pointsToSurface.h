@@ -62,6 +62,9 @@ class PointsToSurface {
 
   // mean distance between pairs of closest points (rempli à la lecture du fichier)
   double    _meanDist;
+
+  //FOCNTIONS PERSOS
+  Point3D barycentre(v_Point3D v);
 };
 
 

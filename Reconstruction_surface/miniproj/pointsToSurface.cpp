@@ -17,9 +17,50 @@ PointsToSurface::~PointsToSurface() {
   _points.clear();
 }
 
+Point3D PointsToSurface::barycentre( v_Point3D v) {
+    double taille = v.size();
+    Point3D res;
+    foreach (Point3D p, v) {
+        res = res + p;
+    }
+    return Point3D( res/taille );
+}
+
 void PointsToSurface::computeNonOrientedNormals() {
     foreach (Point3D p, _points) {
-        v_Point3D v = kneighborhoodPoints(p, _points, k);
+        //calcul voisins
+        v_Point3D v = kneighborhoodPoints(p, _points, 6);
+        //calcul barycentre
+        Point3D B = barycentre( v );
+        //calcul A
+        vector< vector<double> > A = vector< vector<double> >();
+        foreach (Point3D p2, v) {
+            vector<double> temp = vector<double>();
+            temp.push_back( p2.x - B.x );
+            temp.push_back( p2.y - B.y );
+            temp.push_back( p2.z - B.z );
+            A.push_back( temp);
+        }
+        //calcul At * A (Si bug pensezr a verifier)
+        vector< vector<double> > AtA = vector< vector<double> >(3);
+        for (int k = 0; k < AtA.size(); ++k) {
+            AtA[k] = vector<double>(3);
+        }
+        for (int i = 0; i < AtA.size(); ++i) {
+            for (int j = 0; j < AtA[i].size(); ++j) {
+                double res = 0.0;
+                for (int k = 0; k < v.size(); ++k) {
+                    res += A[k][i] * A[k][j];
+                }
+                AtA[i][j] = res;
+            }
+        }
+        //calculs des vecteurs propres
+        Point3D a;
+        Point3D b;
+        Point3D c;
+        calcul_repere_vecteurs_propres( AtA[0][0], AtA[0][1], AtA[0][2], AtA[1][0], AtA[1][1], AtA[1][2], AtA[2][0], AtA[2][1], AtA[2][2], &a, &b, &c );
+        //recuperation normales non orientés
     }
 }
 
