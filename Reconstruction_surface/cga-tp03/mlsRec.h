@@ -9,7 +9,7 @@ class MLSRec {
  public:
   static QImage apply(const QImage &img,float sigma);
 
- private:
+private:
   // convenient structure for color 
   typedef struct Color {
   Color() : red(0.0f),green(0.0f),blue(0.0f),alpha(0.0f) { }
@@ -44,6 +44,7 @@ class MLSRec {
   static Color estimateColorPlane(const QImage &img,int x,int y,float sigma);
   static Color estimateColorQuadric(const QImage &img,int x,int y,float sigma);
   static float estimateSigma(const QImage &img,int x,int y);
+  static float estimateSigma2(const QImage &img, int x, int y);
 };
 
 #endif // MLS_REC

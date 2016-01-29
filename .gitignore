@@ -13,3 +13,5 @@ Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/*
 Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Release/*
 Reconstruction_surface/build-imageMLS-Desktop-Debug/*
 Reconstruction_surface/Tp3/*.pro.user
+Reconstruction_surface/miniproj/*.o
+Reconstruction_surface/miniproj/*.pro.user
