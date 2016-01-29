@@ -15,3 +15,4 @@ Reconstruction_surface/build-imageMLS-Desktop-Debug/*
 Reconstruction_surface/Tp3/*.pro.user
 Reconstruction_surface/miniproj/*.o
 Reconstruction_surface/miniproj/*.pro.user
+Reconstruction_surface/miniproj/pointsToSurface
