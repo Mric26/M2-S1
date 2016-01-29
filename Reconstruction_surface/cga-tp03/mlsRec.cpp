@@ -24,7 +24,8 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
 	// set color as red 
 //    current = Color(255.0f,0.0f,0.0f,255.0f);
 //    current = estimateColorPlane(img, x, y, sigma);
-    current = estimateColorQuadric(img, x, y, sigma);
+//    current = estimateColorQuadric(img, x, y, sigma);
+          current = estimateColorQuadric(img, x, y, estimateSigma(img, x, y) );
       }
       // set color in the new image 
       setColor(newImg,x,y,current);
@@ -148,7 +149,18 @@ MLSRec::Color MLSRec::estimateColorQuadric(const QImage &img,int x,int y,float s
 
 float MLSRec::estimateSigma(const QImage &img,int x,int y) {
   // estimate sigma at x,y depending on the positions of nearest valid neighbors
-  
-  // TODO 
-  return 2.0f;
+    int d = 5;
+    int somme = 0;
+    int nb_elems = 0;
+    for (int i = -d; i <= d; ++i) {
+        for (int j = -d; j <= d; ++j) {
+            if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) ){
+                if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+                    nb_elems++;
+                    somme += Distance( x+j, y+i, x, y );
+                }
+            }
+        }
+    }
+    return somme / nb_elems;
 }
