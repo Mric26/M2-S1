@@ -17,9 +17,6 @@ PointsToSurface::~PointsToSurface() {
   _points.clear();
 }
 
-
-
-
 void PointsToSurface::computeNonOrientedNormals() {
   // a remplir : _noNormals
 }
