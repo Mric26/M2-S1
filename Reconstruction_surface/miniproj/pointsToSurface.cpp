@@ -18,7 +18,9 @@ PointsToSurface::~PointsToSurface() {
 }
 
 void PointsToSurface::computeNonOrientedNormals() {
-  // a remplir : _noNormals
+    foreach (Point3D p, _points) {
+        v_Point3D v = kneighborhoodPoints(p, _points, k);
+    }
 }
 
 void PointsToSurface::computeMinimalSpanningTree() {
@@ -43,11 +45,6 @@ void PointsToSurface::computeMesh() {
   // a remplir : _surfacep
 }
 
-
-
-
-
-
 void PointsToSurface::computeSurface() {
   // appelle toutes les fonctions pour reconstruire la surface 
   cout << "computing non-oriented normals..." << endl;
@@ -61,10 +58,6 @@ void PointsToSurface::computeSurface() {
   cout << "computing final normals..." << endl;
   computeNormalsFromImplicitFunc();
 }
-
-
-
-
 
 v_Point3D  PointsToSurface::kneighborhoodPoints(const Point3D &p,const v_Point3D &pts,unsigned int k) const {
   // renvoie les k points les plus proches de p dans la liste de points pts
