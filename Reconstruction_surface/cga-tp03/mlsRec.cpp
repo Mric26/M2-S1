@@ -11,8 +11,7 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
   // example of image manipulation using Qt: 
 
   // copy input 
-  QImage newImg = img; 
-
+  QImage newImg = img;
   // iterate eover pixels 
   for(int x=0;x<img.width();++x) {
     for(int y=0;y<img.height();++y) {
@@ -25,9 +24,9 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
 //    current = Color(255.0f,0.0f,0.0f,255.0f);
 //    current = estimateColorPlane(img, x, y, sigma);
 //    current = estimateColorQuadric(img, x, y, sigma);
-          current = estimateColorQuadric(img, x, y, estimateSigma(img, x, y) );
+          current = estimateColorPlane(img, x, y, estimateSigma2(img, x, y) );
       }
-      // set color in the new image 
+      // set color in the new image
       setColor(newImg,x,y,current);
     }
 
@@ -167,21 +166,23 @@ float MLSRec::estimateSigma(const QImage &img,int x,int y) {
 
 float MLSRec::estimateSigma2(const QImage &img,int x,int y) {
     // estimate sigma at x,y depending on the positions of nearest valid neighbors
-    int seuil = 6;
-    int radius = 3.0;
+    int seuil = 3;
+    int sigma = 1.0;
     int count = 0;
-//    while (count < seuil && count < 100) {
-//        for(int i=-radius; i<radius+1; ++i) {
-//            for(int j=-radius; j<radius+1; ++j) {
-//                if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) && (i != 0 || j != 0) ){
-//                    if ( !colorMissing( getColor(img, x+j, y+i )) ) {
-//                        count += 1;
-//                    }
-//                }
-//            }
-//        }
-//        radius++;
-//    }
-    // TODO
-    return radius;
+    while (count < seuil && sigma < 100) {
+        for(int i=-sigma; i<sigma+1; ++i) {
+            for(int j=-sigma; j<sigma+1; ++j) {
+                if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) && (i != 0 || j != 0) ){
+                    if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+                        count += 1;
+                        if (count >= seuil) {
+                            return sigma;
+                        }
+                    }
+                }
+            }
+        }
+        sigma++;
+    }
+    return sigma;
 }
