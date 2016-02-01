@@ -92,15 +92,15 @@
       <float name="2" val="0.980392"/>
       <float name="3" val="0"/>
      </vector4f>
-     <string name="genericVertHead" val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform vec2 mouse;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
+     <string name="genericVertHead" val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
      <string name="genericVertBody" val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;"/>
-     <string name="genericFragHead" val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform vec2 mouse;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
-     <string name="genericFragBody" val="precision highp float;&#xa;&#xa;#define PI 3.1415926535897932384626433832795&#xa;&#xa;in vec2 texcoord;&#xa;&#xa;// Parametres de la lumiere&#xa;vec3 posLight = vec3(xLight, yLight, zLight);&#xa;&#xa;vec3 backColor = vec3(0.15,0.15,0.15);&#xa;int nb_iter_max = 500;&#xa;float dt = 0.1;&#xa;float d_min = 0.0;&#xa;float d_max = 50;&#xa;float epsi = 0.05;&#xa;&#xa;&#xa;struct Base3D{&#xa;&#x9;vec3 right;&#xa;&#x9;vec3 up;&#xa;&#x9;vec3 view;&#xa;};&#xa;&#xa;struct Cam{&#xa;&#x9;vec3 ro; &#x9;&#x9;&#x9;//origine&#xa;&#x9;Base3D base;&#xa;&#x9;float angle;&#x9;&#x9;//angle d'ouverture&#xa;&#x9;float ratio;&#x9;&#x9;//ration long/larg&#xa;};&#xa;&#xa;struct Ray{&#xa;&#x9;vec3 ro;&#x9;&#x9;//point origine&#xa;&#x9;vec3 rd;&#x9;&#x9;//vecteur directionnel&#xa;};&#xa;&#xa;&#xa;//// Objet 3D ////&#xa;struct Plan{&#xa;&#x9;vec3 n; &#x9;&#x9;&#x9;//normal&#xa;&#x9;float d; &#x9;&#x9;&#x9;//offset&#xa;&#x9;vec3 color; &#x9;&#x9;//couleur&#xa;};&#xa;&#xa;struct Sphere{&#xa;&#x9;vec3 ro; &#x9;&#x9;&#x9;&#x9;&#x9;//origine&#xa;&#x9;float ra; &#x9;&#x9;&#x9;&#x9;&#x9;//rayon&#xa;&#x9;vec3 color;&#x9;&#x9;&#x9;&#x9;&#x9;//couleur&#xa;};&#xa;&#xa;struct Torus{&#xa;&#x9;vec3 ro;&#xa;&#x9;float R;&#xa;&#x9;float r;&#xa;};&#xa;&#xa;struct Capsule{&#xa;&#x9;vec3 a;&#xa;&#x9;vec3 b;&#xa;&#x9;float r;&#xa;};&#xa;&#xa;struct resP{&#xa;&#x9;float x;&#xa;&#x9;vec3 y;&#xa;};&#xa;&#xa;//// Implicit Fonction ////&#xa;float implicitPlan( vec3 p, Plan plan ){&#xa;&#x9;return dot(p,plan.n) + plan.d;&#xa;}&#xa;&#xa;float implicitSphere( vec3 p, Sphere s ){&#xa; &#x9;return length(p-s.ro) - s.ra;&#xa;}&#xa;&#xa;float implicitTorus( vec3 p, Torus t ){&#xa;&#x9;vec2 q = vec2( length(p.xz - t.ro.xz) - t.R, p.y - t.ro.y );&#xa;&#x9;return length(q) - t.r;&#xa;}&#xa;&#xa;float implicitCapsule( vec3 p, Capsule c ){&#xa;&#x9;vec3 pa = p - c.a;&#xa;&#x9;vec3 ba = c.b - c.a;&#xa;&#x9;float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );&#xa;&#x9;return length( pa - ba*h ) - c.r;&#xa;}&#xa;&#xa;&#xa;//// Operateur ////&#xa;float opUnion(float d1, float d2) {&#xa;&#x9;return min( d1, d2 );&#xa;}&#xa;&#xa;float opIntersection(float d1, float d2) {&#xa;&#x9;return max(d1, d2);&#xa;}&#xa;&#xa;float opSoustraction(float d1, float d2) {&#xa;&#x9;return max(d1, -d2);&#xa;}&#xa;&#xa;float opBlend( float d1, float d2, float k ){&#xa;    float res = exp( -k*d1 ) + exp( -k*d2 );&#xa;    return -log( res )/k;&#xa;}&#xa;&#xa;mat3 rotationZ(float radian){&#xa;&#x9;return mat3(&#xa;   &#x9;&#x9; cos(radian), sin(radian), 0.0, &#x9;// first column (not row!)&#xa;   &#x9;&#x9;-sin(radian), cos(radian), 0.0, &#x9;// second column&#xa;   &#x9;&#x9;0.0, 0.0, 1.0  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// third column&#xa;&#x9;);&#xa;}&#xa;&#xa;mat3 scale( float sx, float sy, float sz ){&#xa;&#x9;return mat3(&#xa;&#x9;&#x9;sx, 0.0, 0.0, // first column (not row!)&#xa;&#x9;&#x9;0.0, sy, 0.0, // second column&#xa;&#x9;&#x9;0.0, 0.0, sz  // third column&#xa;&#x9;);&#xa;}&#xa;&#xa;//// Fonction de distance de la scene ////&#xa;resP distanceField( vec3 pos ) {&#xa;&#x9;Plan p = Plan( vec3(0,0,1), 0, vec3(1,0,0) );&#xa;&#x9;Sphere s = Sphere(vec3(1,0,1), 1, vec3(1,0,1));&#xa;&#xa;&#x9;// Scene initiale, Plan + Sphere&#xa;&#x9;float resp, ress;&#xa;&#x9;resp = implicitPlan( pos, p );&#xa;&#x9;ress = implicitSphere(pos, s);&#xa;&#xa;&#x9;resP res;&#xa;&#x9;if( resp &lt; ress ){&#xa;&#x9;&#x9;res = resP( resp, p.color);&#xa;&#x9;}&#xa;&#x9;else{&#xa;&#x9;&#x9;res = resP( ress, s.color);&#xa;&#x9;}&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;// Recherche d'une intersection de la source du rayon jusqu'a une distance max&#xa;resP computeIntersection( Ray ray, float distMax ){&#xa;&#x9;float t = 0;&#xa;&#x9;float ft, ft_old;&#xa;&#x9;while (t &lt; distMax) {&#xa;&#x9;&#x9;vec3 pos = ray.ro + (t * ray.rd);&#xa;&#x9;&#x9;resP df = distanceField( pos );&#xa;&#x9;&#x9;ft = df.x;&#xa;&#x9;&#x9;if (ft &lt; 0) {&#xa;&#x9;&#x9;&#x9;if (t == 0) {&#x9;// Cas limite ou la source du rayon est a l'interieur du champ&#xa;&#x9;&#x9;&#x9;&#x9;return resP(0,vec3(0,0,0));&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;return resP(t - dt, df.y);&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;t += dt;&#xa;&#x9;&#x9;ft_old = ft;&#xa;&#x9;}&#xa;&#x9;// On retourne -1 si le champ n'a pas été intersecté&#xa;&#x9;return resP(-1,vec3(0,0,0));&#xa;}&#xa;&#xa;// Calcul du coefficient d'ombre (methode d'iquilezles)&#xa;float softShadow( Ray ray, float distMax, float k ){&#xa;&#x9;float t = 0;&#xa;&#x9;float res = 1.0;&#xa;&#x9;while (t &lt; distMax) {&#xa;&#x9;&#x9;vec3 pos = ray.ro + (t * ray.rd);&#xa;&#x9;&#x9;float ft = (distanceField( pos )).x;&#xa;&#x9;&#x9;if (ft &lt;= 0) {&#xa;&#x9;&#x9;&#x9;return 0.0;&#x9;// On retourne 0 si un objet est intersecté&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;res = min( res, k * ft/t );&#xa;&#x9;&#x9;t += dt;&#xa;&#x9;}&#xa;&#x9;// On retourne la distance minimale entre le rayon et le champ scalaire&#xa;&#x9;return res;&#xa;}&#xa;&#xa;// Calcul de la normale&#xa;vec3 computeNormale( vec3 pos ){&#xa;&#x9;float dx = (distanceField( vec3(pos.x+epsi, pos.y, pos.z) )).x - (distanceField( vec3(pos.x-epsi, pos.y, pos.z) )).x;&#xa;&#x9;float dy = (distanceField( vec3(pos.x, pos.y+epsi, pos.z) )).x - (distanceField( vec3(pos.x, pos.y-epsi, pos.z) )).x;&#xa;&#x9;float dz = (distanceField( vec3(pos.x, pos.y, pos.z+epsi) )).x - (distanceField( vec3(pos.x, pos.y, pos.z-epsi) )).x;&#xa;&#x9;return normalize( vec3(dx, dy, dz) );&#xa;}&#xa;&#xa;&#xa;// Rendu de profondeur&#xa;vec3 renderDepth(  float t  ) {&#xa;&#x9;return vec3(t/d_max, t/d_max, t/d_max);&#xa;}&#xa;&#xa;// Rendu des normales&#xa;vec3 renderNormale( vec3 pos ) {&#xa;&#x9;return computeNormale( pos );&#xa;}&#xa;&#xa;// Rendu avec lumiere et ombres&#xa;vec3 renderShadow( vec3 pos ) {&#xa;&#x9;vec3 normale = computeNormale( pos );&#xa;&#xa;&#x9;// Caclcul du coefficient de l'ombre&#xa;&#x9;vec3 shadowDir = normalize( vec3(posLight - pos) );&#xa;&#x9;Ray shadowRay = Ray( pos+shadowDir/4, shadowDir );&#xa;&#x9;float shadowCoef = softShadow( shadowRay, length(posLight - pos), 8 );&#xa;&#xa;&#x9;// Calcul de l'eclairement&#xa;&#x9;vec3 dirLight = normalize( vec3(pos - posLight) );&#xa;&#x9;float intensity = - (min( 0, dot( normale, dirLight ) ) - 0.20 );&#xa;&#xa;&#x9;// rendu final de la lumiere&#xa;&#x9;return shadowCoef * (intensity * normale);&#xa;}&#xa;&#xa;vec3 hash(vec3 p) {&#xa;&#x9;p = vec3(dot(p,vec3(127.1,311.7, 74.7)), dot(p,vec3(269.5,183.3,246.1)), dot(p,vec3(113.5,271.9,124.6)));&#xa;&#x9;return -1.0 + 2.0*fract(sin(p)*43758.5453123);&#xa;}&#xa;&#xa;float GradientNoise( vec3 p){&#xa;&#x9;vec3 f = fract(p);&#xa;&#xa;&#x9;float v000 = dot( hash( floor(p) + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) );&#xa;&#x9;float v100 = dot( hash( floor(p) + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) );&#xa;&#x9;float v010 = dot( hash( floor(p) + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) );&#xa;&#x9;float v110 = dot( hash( floor(p) + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) );&#xa;&#x9;float v001 = dot( hash( floor(p) + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) );&#xa;&#x9;float v101 = dot( hash( floor(p) + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) );&#xa;&#x9;float v011 = dot( hash( floor(p) + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) );&#xa;&#x9;float v111 = dot( hash( floor(p) + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) );&#xa;&#xa;&#x9;vec3 u = f*f*(3.0-2.0*f) ;&#xa;&#x9;float a1 = mix(v000, v100, u.x);&#xa;&#x9;float a2 = mix(v010, v110, u.x);&#xa;&#x9;float a3 = mix(v001, v101, u.x);&#xa;&#x9;float a4 = mix(v011, v111, u.x);&#xa;&#x9;float b1 = mix(a1, a3, u.x);&#xa;&#x9;float b2 = mix(a2, a4, u.x);&#xa;&#x9;float res = mix(b1, b2, u.x);&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;vec3 BRDF( vec3 l, vec3 v, vec3 n, vec3 coul ){&#xa;&#x9;vec3 f0 = vec3(1,1,1); &#xa;&#x9;vec3 h = normalize( l + v );&#xa;&#x9;vec3 m = h / 2;&#xa;&#x9;float alpha = 1;&#xa;&#x9;//lumière diffuse&#xa;&#x9;vec3 diff = coul / PI;&#xa;&#x9;//lumière speculaire&#xa;&#x9;vec3 Fresnel = f0 + (1 - f0) * pow( 1 - dot(l, h), 5 );&#xa;&#x9;float GImplicit = dot( n, l ) * dot( n, v );&#xa;&#x9;float D = ( (alpha + 2) / (2 * PI) ) * pow( dot( n, m ), alpha ) ;&#xa;&#x9;vec3 spec = (Fresnel * GImplicit * D) / (4 * GImplicit)  ;&#xa;&#x9;//resultat&#xa;&#x9;return diff + spec;&#xa;}&#xa;&#xa;vec3 directIllumination( vec3 pos, Cam c, vec3 coul ){&#xa;&#x9;// Calcul de la BRDF&#xa;&#x9;vec3 normale = computeNormale( pos );&#xa;&#x9;/*if ( distanceField(pos) &lt; 0) {&#xa;&#x9;&#x9;return vec3(1,0,0);&#xa;&#x9;}*/&#xa;&#x9;vec3 dirLight = normalize( vec3(posLight - pos) );&#xa;&#x9;vec3 BRDF = BRDF( dirLight, normalize(c.ro - pos), normale, coul );&#xa;&#x9;float k = dot(normale, dirLight);&#xa;&#x9;if( k &lt; 0 ){&#xa;&#x9;&#x9;k = 0;&#xa;&#x9;}&#xa;&#x9;// Equation de la reflectance&#xa;&#x9;vec3 res = PI * BRDF * k;&#xa;&#x9;// Caclcul du coefficient de l'ombre&#xa;&#x9;vec3 shadowDir = normalize( vec3(posLight - pos) );&#xa;&#x9;Ray shadowRay = Ray( pos+shadowDir/4, shadowDir );&#xa;&#x9;float shadowCoef = softShadow( shadowRay, length(posLight - pos), 8 );&#xa;&#x9;// Couleur de sortie&#xa;&#x9;return shadowCoef * res;&#xa;}&#xa;&#xa;vec3 color_trace( Ray ray, Cam c  ){&#xa;&#x9;float c_refl = 0.4;&#xa;&#x9;vec3 accum = vec3(0,0,0);&#xa;&#x9;vec3 mask = vec3(1,1,1);&#xa;&#x9;vec3 pos, color;&#xa;&#x9;for( int i = 0; i &lt;10; i++){&#xa;&#x9;&#x9;resP ci = computeIntersection( ray, d_max );&#xa;&#x9;&#x9;float t = ci.x;&#xa;&#x9;&#x9;if ( t != -1 ) {&#xa;&#x9;&#x9;&#x9;pos = ray.ro + (t * ray.rd);&#xa;&#x9;&#x9;&#x9;if ( (distanceField( pos )).x &lt; 0 ) {&#xa;&#x9;&#x9;&#x9;&#x9;return vec3(1, 0, 1);&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;color = directIllumination(pos , c, ci.y);&#xa;&#x9;&#x9;&#x9;accum = accum + (mask * color);&#xa;&#x9;&#x9;&#x9;mask = c_refl * mask;&#xa;&#x9;&#x9;&#x9;ray = Ray(pos, reflect(ray.rd, computeNormale(pos) ) );&#xa;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;return accum;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;return accum;&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;//// camera ////&#xa;&#x9;float xCam = module * cos(azimut) * cos(elevation);&#xa;&#x9;float yCam = module * sin(azimut) * cos(elevation);&#xa;&#x9;float zCam = module * sin(elevation);&#xa;&#x9;vec3 up = normalize ( vec3(0,0,1) );&#xa;&#x9;vec3 view = normalize ( -vec3(xCam,yCam,zCam) );&#xa;&#x9;vec3 right = normalize ( cross(view, up) );&#xa;&#x9;up = normalize ( cross(right, view) );&#xa;&#x9;Base3D b = Base3D(right, up, view);&#xa;&#x9;Cam c = Cam( vec3(xCam, yCam, zCam), b, PI/2, 4.0/4.0);&#xa;&#x9;&#xa;&#x9;//// Ray tracing ////&#xa;&#x9;float D = 1.0 / tan( c.angle/2.0 );&#xa;&#x9;vec2 normalCoord = ( 2.0 * (gl_FragCoord.xy / vec2(512.0, 512.0)) ) - 1;&#x9;// Coordonnees du pixel entre [-1 1]x[-1 1]&#xa;&#x9;vec3 dr = normalize( (normalCoord.x * b.right) + ((c.ratio * normalCoord.y) * b.up) + (D * b.view) );&#xa;&#x9;Ray ray =  Ray ( c.ro, dr );&#xa;&#xa;&#x9;vec3 color = backColor;&#xa;&#x9;float t = (computeIntersection( ray, d_max )).x;&#xa;&#x9;if (t != -1) {&#xa;&#x9;&#x9;&#x9;color = color_trace(ray, c);&#xa;&#x9;}&#xa;&#xa;&#x9;outBuffer0 = vec4(color, 1);&#xa;}&#xa;"/>
-     <string name="genericTessCHead" val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform vec2 mouse;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
+     <string name="genericFragHead" val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
+     <string name="genericFragBody" val="precision highp float;&#xa;&#xa;#define PI 3.1415926535897932384626433832795&#xa;&#xa;in vec2 texcoord;&#xa;&#xa;// Parametres de la lumiere&#xa;vec3 posLight = vec3(xLight, yLight, zLight);&#xa;&#xa;vec3 backColor = vec3(0.15,0.15,0.15);&#xa;float d_min = 0.0;&#xa;float d_max = 50;&#xa;float epsi = 0.01;&#xa;&#xa;&#xa;//// Strucutre ////&#xa;struct Base3D{&#xa;&#x9;vec3 right;&#xa;&#x9;vec3 up;&#xa;&#x9;vec3 view;&#xa;};&#xa;&#xa;struct Cam{&#xa;&#x9;vec3 ro; &#x9;&#x9;&#x9;//origine&#xa;&#x9;Base3D base;&#xa;&#x9;float angle;&#x9;&#x9;//angle d'ouverture&#xa;&#x9;float ratio;&#x9;&#x9;&#x9;//ration long/larg&#xa;};&#xa;&#xa;struct Ray{&#xa;&#x9;vec3 ro;&#x9;&#x9;//point origine&#xa;&#x9;vec3 rd;&#x9;&#x9;//vecteur directionnel&#xa;};&#xa;&#xa;&#xa;//// Objet 3D ////&#xa;struct Plan{&#xa;&#x9;vec3 n; &#x9;&#x9;&#x9;//normal&#xa;&#x9;float d; &#x9;&#x9;&#x9;//offset&#xa;&#x9;vec3 color; &#x9;//couleur&#xa;};&#xa;&#xa;struct Sphere{&#xa;&#x9;vec3 ro; &#x9;&#x9;//origine&#xa;&#x9;float ra; &#x9;&#x9;//rayon&#xa;&#x9;vec3 color;&#x9;&#x9;//couleur&#xa;};&#xa;&#xa;struct Torus{&#xa;&#x9;vec3 ro;&#x9;&#x9;//origine&#xa;&#x9;float R;&#x9;&#x9;// grand rayon&#xa;&#x9;float r;&#x9;&#x9;// petit rayon&#xa;};&#xa;&#xa;struct Capsule{&#xa;&#x9;vec3 a;&#xa;&#x9;vec3 b;&#xa;&#x9;float r;&#xa;};&#xa;&#xa;struct resP{&#xa;&#x9;float x;&#xa;&#x9;vec3 y;&#xa;};&#xa;&#xa;&#xa;//// Implicit Fonction ////&#xa;float implicitPlan( vec3 p, Plan plan ){&#xa;&#x9;return dot(p,plan.n) + plan.d;&#xa;}&#xa;&#xa;float implicitSphere( vec3 p, Sphere s ){&#xa; &#x9;return length(p-s.ro) - s.ra;&#xa;}&#xa;&#xa;float implicitTorus( vec3 p, Torus t ){&#xa;&#x9;vec2 q = vec2( length(p.xz - t.ro.xz) - t.R, p.y - t.ro.y );&#xa;&#x9;return length(q) - t.r;&#xa;}&#xa;&#xa;float implicitCapsule( vec3 p, Capsule c ){&#xa;&#x9;vec3 pa = p - c.a;&#xa;&#x9;vec3 ba = c.b - c.a;&#xa;&#x9;float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );&#xa;&#x9;return length( pa - ba*h ) - c.r;&#xa;}&#xa;&#xa;&#xa;//// Operateur ////&#xa;float opUnion(float d1, float d2) {&#xa;&#x9;return min( d1, d2 );&#xa;}&#xa;&#xa;float opIntersection(float d1, float d2) {&#xa;&#x9;return max(d1, d2);&#xa;}&#xa;&#xa;float opSoustraction(float d1, float d2) {&#xa;&#x9;return max(d1, -d2);&#xa;}&#xa;&#xa;float opBlend( float d1, float d2, float k ){&#xa;    float res = exp( -k*d1 ) + exp( -k*d2 );&#xa;    return -log( res )/k;&#xa;}&#xa;&#xa;mat3 rotationZ(float radian){&#xa;&#x9;return mat3(&#xa;   &#x9;&#x9; cos(radian), sin(radian), 0.0, &#x9;// first column (not row!)&#xa;   &#x9;&#x9;-sin(radian), cos(radian), 0.0, &#x9;// second column&#xa;   &#x9;&#x9;0.0, 0.0, 1.0  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;// third column&#xa;&#x9;);&#xa;}&#xa;&#xa;mat3 scale( float sx, float sy, float sz ){&#xa;&#x9;return mat3(&#xa;&#x9;&#x9;sx, 0.0, 0.0, // first column (not row!)&#xa;&#x9;&#x9;0.0, sy, 0.0, // second column&#xa;&#x9;&#x9;0.0, 0.0, sz  // third column&#xa;&#x9;);&#xa;}&#xa;&#xa;//// Fonction de distance de la scene ////&#xa;resP distanceField( vec3 pos ) {&#xa;&#x9;Plan p = Plan( vec3(0,0,1), 0, vec3(1,0,0) );&#xa;&#x9;Sphere s = Sphere(vec3(1,0,1), 1, vec3(1,0,1));&#xa;&#xa;&#x9;// Scene initiale, Plan + Sphere&#xa;&#x9;float resp, ress;&#xa;&#x9;resp = implicitPlan( pos, p );&#xa;&#x9;ress = implicitSphere(pos, s);&#xa;&#xa;&#x9;resP res;&#xa;&#x9;if( resp &lt; ress ){&#xa;&#x9;&#x9;res = resP( resp, p.color);&#xa;&#x9;}&#xa;&#x9;else{&#xa;&#x9;&#x9;res = resP( ress, s.color);&#xa;&#x9;}&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;// Recherche d'une intersection de la source du rayon jusqu'a une distance max&#xa;resP computeIntersection( Ray ray, float distMax ){&#xa;&#x9;float t = 0;&#xa;&#x9;&#xa;&#x9;while (t &lt; distMax) {&#xa;&#x9;&#x9;vec3 pos = ray.ro + (t * ray.rd);&#xa;&#x9;&#x9;resP ft = distanceField( pos );&#xa;&#x9;&#x9;if ( ft.x &lt; epsi ) {&#xa;&#x9;&#x9;&#x9;return resP(t, ft.y);&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;t += ft.x;&#xa;&#x9;}&#xa;&#xa;&#x9;// On retourne -1 si le champ n'a pas été intersecté&#xa;&#x9;return resP(-1, backColor);&#xa;}&#xa;&#xa;// Calcul du coefficient d'ombre (methode d'iquilezles)&#xa;float softShadow( Ray ray, float distMax, float k ){&#xa;&#x9;float t = 0;&#xa;&#x9;float res = 1.0;&#xa;&#xa;&#x9;while (t &lt; distMax) {&#xa;&#x9;&#x9;vec3 pos = ray.ro + (t * ray.rd);&#xa;&#x9;&#x9;float ft = distanceField( pos ).x;&#xa;&#x9;&#x9;if ( ft &lt; epsi ) {&#xa;&#x9;&#x9;&#x9;return 0.0;&#xa;&#x9;&#x9;}&#xa;&#x9;&#x9;res = min( res, k * ft/t );&#xa;&#x9;&#x9;t += ft;&#xa;&#x9;}&#xa;&#xa;&#x9;// On retourne la distance minimale entre le rayon et le champ scalaire&#xa;&#x9;return res;&#xa;}&#xa;&#xa;// Calcul de la normale&#xa;vec3 computeNormale( vec3 pos ){&#xa;&#x9;float dx = (distanceField( vec3(pos.x+epsi, pos.y, pos.z) )).x - (distanceField( vec3(pos.x-epsi, pos.y, pos.z) )).x;&#xa;&#x9;float dy = (distanceField( vec3(pos.x, pos.y+epsi, pos.z) )).x - (distanceField( vec3(pos.x, pos.y-epsi, pos.z) )).x;&#xa;&#x9;float dz = (distanceField( vec3(pos.x, pos.y, pos.z+epsi) )).x - (distanceField( vec3(pos.x, pos.y, pos.z-epsi) )).x;&#xa;&#x9;return normalize( vec3(dx, dy, dz) );&#xa;}&#xa;&#xa;// Calcul de la BRDF&#xa;vec3 BRDF( vec3 l, vec3 v, vec3 n, vec3 color ){&#xa;&#x9;vec3 f0 = vec3(1,1,1); &#xa;&#x9;vec3 h = normalize( l + v );&#xa;&#x9;vec3 m = h / 2;&#xa;&#x9;float alpha = 1;&#xa;&#x9;//lumière diffuse&#xa;&#x9;vec3 diff = color / PI;&#xa;&#x9;//lumière speculaire&#xa;&#x9;vec3 Fresnel = f0 + (1 - f0) * pow( 1 - dot(l, h), 5 );&#xa;&#x9;float GImplicit = dot( n, l ) * dot( n, v );&#xa;&#x9;float D = ( (alpha + 2) / (2 * PI) ) * pow( dot( n, m ), alpha ) ;&#xa;&#x9;vec3 spec = (Fresnel * GImplicit * D) / (4 * GImplicit)  ;&#xa;&#x9;//resultat&#xa;&#x9;return diff + spec;&#xa;}&#xa;&#xa;&#xa;// Rendu de profondeur&#xa;vec3 renderDepth(  float t  ) {&#xa;&#x9;return vec3(t/d_max, t/d_max, t/d_max);&#xa;}&#xa;&#xa;// Rendu des normales&#xa;vec3 renderNormale( vec3 pos ) {&#xa;&#x9;return computeNormale( pos );&#xa;}&#xa;&#xa;vec3 hash(vec3 p) {&#xa;&#x9;p = vec3(dot(p,vec3(127.1,311.7, 74.7)), dot(p,vec3(269.5,183.3,246.1)), dot(p,vec3(113.5,271.9,124.6)));&#xa;&#x9;return -1.0 + 2.0*fract(sin(p)*43758.5453123);&#xa;}&#xa;&#xa;float GradientNoise( vec3 p){&#xa;&#x9;vec3 f = fract(p);&#xa;&#xa;&#x9;float v000 = dot( hash( floor(p) + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) );&#xa;&#x9;float v100 = dot( hash( floor(p) + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) );&#xa;&#x9;float v010 = dot( hash( floor(p) + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) );&#xa;&#x9;float v110 = dot( hash( floor(p) + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) );&#xa;&#x9;float v001 = dot( hash( floor(p) + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) );&#xa;&#x9;float v101 = dot( hash( floor(p) + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) );&#xa;&#x9;float v011 = dot( hash( floor(p) + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) );&#xa;&#x9;float v111 = dot( hash( floor(p) + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) );&#xa;&#xa;&#x9;vec3 u = f*f*(3.0-2.0*f) ;&#xa;&#x9;float a1 = mix(v000, v100, u.x);&#xa;&#x9;float a2 = mix(v010, v110, u.x);&#xa;&#x9;float a3 = mix(v001, v101, u.x);&#xa;&#x9;float a4 = mix(v011, v111, u.x);&#xa;&#x9;float b1 = mix(a1, a3, u.x);&#xa;&#x9;float b2 = mix(a2, a4, u.x);&#xa;&#x9;float res = mix(b1, b2, u.x);&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;// Rendu avec illumination direct&#xa;vec3 directIllumination( vec3 pos, Cam c, vec3 color ){&#xa;&#x9;// Calcul de la BRDF&#xa;&#x9;vec3 normale = computeNormale( pos );&#xa;&#x9;vec3 dirLight = normalize( vec3(posLight - pos) );&#xa;&#x9;vec3 BRDF = BRDF( dirLight, normalize(c.ro - pos), normale, color );&#xa;&#x9;float k = dot(normale, dirLight);&#xa;&#x9;if( k &lt; 0 ){&#xa;&#x9;&#x9;k = 0;&#xa;&#x9;}&#xa;&#x9;// Equation de la reflectance&#xa;&#x9;vec3 res = PI * BRDF * k;&#xa;&#x9;// Caclcul du coefficient de l'ombre&#xa;&#x9;vec3 shadowDir = normalize( vec3(posLight - pos) );&#xa;&#x9;Ray shadowRay = Ray( pos, shadowDir );&#xa;&#x9;float shadowCoef = softShadow( shadowRay, length(posLight - pos), 8 );&#xa;&#x9;// Couleur de sortie&#xa;&#x9;return shadowCoef * res;&#xa;}&#xa;&#xa;// Rendu avec effet de reflection&#xa;vec3 color_trace( Ray ray, Cam c  ){&#xa;&#x9;float c_refl = 0.4;&#xa;&#x9;vec3 accum = vec3(0,0,0);&#xa;&#x9;vec3 mask = vec3(1,1,1);&#xa;&#x9;vec3 pos, color;&#xa;&#x9;for( int i = 0; i &lt;5; i++){&#xa;&#x9;&#x9;resP ci = computeIntersection( ray, d_max );&#xa;&#x9;&#x9;float t = ci.x;&#xa;&#x9;&#x9;if ( t != -1 ) {&#xa;&#x9;&#x9;&#x9;pos = ray.ro + ( (t - epsi) * ray.rd);&#xa;&#x9;&#x9;&#x9;color = directIllumination(pos , c, ci.y);&#xa;&#x9;&#x9;&#x9;accum = accum + (mask * color);&#xa;&#x9;&#x9;&#x9;mask = c_refl * mask;&#xa;&#x9;&#x9;&#x9;ray = Ray(pos, reflect(ray.rd, computeNormale(pos) ) );&#xa;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;return accum;&#xa;&#x9;&#x9;}&#xa;&#x9;}&#xa;&#x9;return accum;&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;//// Camera ////&#xa;&#x9;float xCam = module * cos(azimut) * cos(elevation);&#xa;&#x9;float yCam = module * sin(azimut) * cos(elevation);&#xa;&#x9;float zCam = module * sin(elevation);&#xa;&#x9;vec3 up = normalize ( vec3(0,0,1) );&#xa;&#x9;vec3 view = normalize ( -vec3(xCam,yCam,zCam) );&#xa;&#x9;vec3 right = normalize ( cross(view, up) );&#xa;&#x9;up = normalize ( cross(right, view) );&#xa;&#x9;Base3D b = Base3D(right, up, view);&#xa;&#x9;Cam c = Cam( vec3(xCam, yCam, zCam), b, PI/2, 4.0/4.0);&#xa;&#x9;&#xa;&#x9;//// Ray tracing ////&#xa;&#x9;float D = 1.0 / tan( c.angle/2.0 );&#xa;&#x9;vec2 normalCoord = ( 2.0 * (gl_FragCoord.xy / vec2(512.0, 512.0)) ) - 1;&#x9;// Coordonnees du pixel entre [-1 1]x[-1 1]&#xa;&#x9;vec3 dr = normalize( (normalCoord.x * b.right) + ((c.ratio * normalCoord.y) * b.up) + (D * b.view) );&#xa;&#x9;Ray ray =  Ray ( c.ro, dr );&#xa;&#xa;&#x9;vec3 color = backColor;&#xa;&#x9;float t = computeIntersection( ray, d_max ).x;&#xa;&#x9;if (t != -1) {&#xa;&#x9;&#x9;color = color_trace(ray, c);&#xa;&#x9;}&#xa;&#xa;&#x9;outBuffer0 = vec4(color, 1);&#xa;}&#xa;"/>
+     <string name="genericTessCHead" val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
      <string name="genericTessCBody" val="void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = 1;&#xa;&#x9;gl_TessLevelOuter[1] = 1;&#xa;&#x9;gl_TessLevelOuter[2] = 1;&#xa;&#x9;gl_TessLevelOuter[3] = 1;&#xa;&#x9;gl_TessLevelInner[0] = 1;&#xa;&#x9;gl_TessLevelInner[1] = 1;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;}&#xa;"/>
-     <string name="genericTessEHead" val="#version 420&#xa;&#xa;uniform vec2 mouse;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
+     <string name="genericTessEHead" val="#version 420&#xa;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
      <string name="genericTessEBody" val="layout(quads,equal_spacing) in;&#xa;&#xa;void main() {&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;}&#xa;"/>
-     <string name="genericGeomHead" val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform vec2 mouse;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
+     <string name="genericGeomHead" val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;"/>
      <string name="genericGeomBody" val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}"/>
      <vector2f name="genericTSize">
       <float name="0" val="1"/>
@@ -110,7 +110,7 @@
       <float name="0" val="512"/>
       <float name="1" val="512"/>
      </vector2f>
-     <bool name="genericNeedMouse" val="1"/>
+     <bool name="genericNeedMouse" val="0"/>
      <bool name="genericNeedKeyboard" val="0"/>
      <uint name="genericNbWidgets" val="6"/>
      <int name="genericWidgetType-0" val="0"/>
@@ -139,23 +139,14 @@
      <bool name="genericWidgetKeyframed-5" val="0"/>
     </IOData>
     <IOData name="nodeWidget-0">
-     <uint name="nbChildren" val="7"/>
+     <uint name="nbChildren" val="6"/>
      <IOData name="childWidget-0">
-      <bool name="vector2iAttribKeyframed" val="1"/>
-      <vector2i name="vector2iAttribMinVal">
-       <int name="0" val="-10000"/>
-       <int name="1" val="-10000"/>
-      </vector2i>
-      <vector2i name="vector2iAttribMaxVal">
-       <int name="0" val="10000"/>
-       <int name="1" val="10000"/>
-      </vector2i>
-      <IOData name="vector2iAttribCurve">
-       <vector2i name="currentVal">
-        <int name="0" val="0"/>
-        <int name="1" val="0"/>
-       </vector2i>
-       <uint name="nbCurves" val="2"/>
+      <bool name="floatAttribKeyframed" val="0"/>
+      <float name="floatAttribMinVal" val="0.1"/>
+      <float name="floatAttribMaxVal" val="30"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="5.4521"/>
+       <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
         <int name="leftType" val="0"/>
@@ -165,20 +156,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="0"/>
-         </vector2f>
-        </IOData>
-       </IOData>
-       <IOData name="curve-1">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
-        <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
-         <vector2f name="controlPoint-0">
-          <float name="0" val="0"/>
-          <float name="1" val="0"/>
+          <float name="1" val="5.4521"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -187,10 +165,10 @@
      </IOData>
      <IOData name="childWidget-1">
       <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0.1"/>
-      <float name="floatAttribMaxVal" val="30"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="2.8209"/>
+       <float name="currentVal" val="0"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -201,7 +179,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="2.8209"/>
+          <float name="1" val="0"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -210,10 +188,10 @@
      </IOData>
      <IOData name="childWidget-2">
       <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="6.28319"/>
+      <float name="floatAttribMinVal" val="0.1"/>
+      <float name="floatAttribMaxVal" val="1.4708"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="4.64328"/>
+       <float name="currentVal" val="0.740164"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -224,7 +202,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="4.64328"/>
+          <float name="1" val="0.740164"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -233,10 +211,10 @@
      </IOData>
      <IOData name="childWidget-3">
       <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0.1"/>
-      <float name="floatAttribMaxVal" val="1.4708"/>
+      <float name="floatAttribMinVal" val="-10"/>
+      <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="1.0952"/>
+       <float name="currentVal" val="4.04"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -247,7 +225,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="1.0952"/>
+          <float name="1" val="4.04"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -259,7 +237,7 @@
       <float name="floatAttribMinVal" val="-10"/>
       <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0.16"/>
+       <float name="currentVal" val="4.04"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -270,7 +248,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="0.16"/>
+          <float name="1" val="4.04"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -279,33 +257,10 @@
      </IOData>
      <IOData name="childWidget-5">
       <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="-10"/>
-      <float name="floatAttribMaxVal" val="10"/>
-      <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0.1"/>
-       <uint name="nbCurves" val="1"/>
-       <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
-        <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
-         <vector2f name="controlPoint-0">
-          <float name="0" val="0"/>
-          <float name="1" val="0.1"/>
-         </vector2f>
-        </IOData>
-       </IOData>
-      </IOData>
-      <uint name="nbChildren" val="0"/>
-     </IOData>
-     <IOData name="childWidget-6">
-      <bool name="floatAttribKeyframed" val="0"/>
       <float name="floatAttribMinVal" val="0.0001"/>
       <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="7.73002"/>
+       <float name="currentVal" val="5.57004"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -316,7 +271,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="7.73002"/>
+          <float name="1" val="5.57004"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -325,8 +280,8 @@
      </IOData>
     </IOData>
     <vector2f name="nodeOutputPos-0-0">
-     <float name="0" val="188.32"/>
-     <float name="1" val="72.05"/>
+     <float name="0" val="56.32"/>
+     <float name="1" val="28.16"/>
     </vector2f>
     <bool name="nodeHasWidget-1" val="1"/>
     <IOData name="node-1">
@@ -857,10 +812,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="2.35633"/>
+   <float name="scale" val="1.56921"/>
    <vector2f name="offset">
-    <float name="0" val="2163.75"/>
-    <float name="1" val="-9.14369"/>
+    <float name="0" val="1442.24"/>
+    <float name="1" val="101.283"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
