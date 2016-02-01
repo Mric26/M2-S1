@@ -11,7 +11,7 @@
 
 using namespace std;
 
-float noise = 0.5f;
+float noise = 0.8f;
 float sigma = 1.0f;
 QString filename ("test.jpg");
 
