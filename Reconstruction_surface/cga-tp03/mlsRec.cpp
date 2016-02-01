@@ -24,8 +24,8 @@ QImage MLSRec::apply(const QImage &img,float sigma) {
 	// set color as red 
 //    current = Color(255.0f,0.0f,0.0f,255.0f);
 //    current = estimateColorPlane(img, x, y, sigma);
-//    current = estimateColorQuadric(img, x, y, sigma);
-          current = estimateColorQuadric(img, x, y, estimateSigma(img, x, y) );
+    current = estimateColorQuadric(img, x, y, sigma);
+//          current = estimateColorQuadric(img, x, y, estimateSigma2(img, x, y) );
       }
       // set color in the new image 
       setColor(newImg,x,y,current);
@@ -170,18 +170,18 @@ float MLSRec::estimateSigma2(const QImage &img,int x,int y) {
     int seuil = 6;
     int radius = 3.0;
     int count = 0;
-//    while (count < seuil && count < 100) {
-//        for(int i=-radius; i<radius+1; ++i) {
-//            for(int j=-radius; j<radius+1; ++j) {
-//                if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) && (i != 0 || j != 0) ){
-//                    if ( !colorMissing( getColor(img, x+j, y+i )) ) {
-//                        count += 1;
-//                    }
-//                }
-//            }
-//        }
-//        radius++;
-//    }
+    while (count < seuil && count < 100) {
+        for(int i=-radius; i<radius+1; ++i) {
+            for(int j=-radius; j<radius+1; ++j) {
+                if( ((x+j) >= 0) && ((y+i)>=0) && ((x+j)<img.width()) && ((y+i)<img.height()) && (i != 0 || j != 0) ){
+                    if ( !colorMissing( getColor(img, x+j, y+i )) ) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+        radius++;
+    }
     // TODO
     return radius;
 }
