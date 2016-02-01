@@ -12,7 +12,9 @@ Modelisation_Scientifique/Visu_Scientifique/*.pro.user
 Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Debug/*
 Modelisation_Scientifique/build-Visu_Scientifique-Desktop-Release/*
 Reconstruction_surface/build-imageMLS-Desktop-Debug/*
+Reconstruction_surface/cga-tp03/*.o
 Reconstruction_surface/cga-tp03/*.pro.user
+Reconstruction_surface/cga-tp03/imageMLS
 Reconstruction_surface/miniproj/*.o
 Reconstruction_surface/miniproj/*.pro.user
 Reconstruction_surface/miniproj/pointsToSurface

@@ -51,10 +51,10 @@ int main(int argc, char *argv[]) {
   QImage origImg(filename);
 
   // noisy image 
-  QImage noisyImg(NoiseFilter::applyWhiteNoise(origImg,noise));
+//  QImage noisyImg(NoiseFilter::applyWhiteNoise(origImg,noise));
 
   // squared missing data
-  //QImage noisyImg(SquareFilter::applySquare(origImg,(int)(noise*50.0f)));
+  QImage noisyImg(SquareFilter::applySquare(origImg,(int)(noise*50.0f)));
 
   // reconstruct using MLS
   QImage recImg(MLSRec::apply(noisyImg,sigma));
