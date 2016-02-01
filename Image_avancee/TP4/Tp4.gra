@@ -14,8 +14,8 @@
     <uint name="nodeId-0" val="0"/>
     <uint name="nodeGraphId-0" val="0"/>
     <vector2f name="nodePos-0">
-     <float name="0" val="118.807"/>
-     <float name="1" val="-236.819"/>
+     <float name="0" val="60.8151"/>
+     <float name="1" val="-224.568"/>
     </vector2f>
     <int name="nodeInputNameSize-0" val="0"/>
     <int name="nodeOutputNameSize-0" val="1"/>
@@ -185,7 +185,7 @@
       <float name="floatAttribMinVal" val="0.1"/>
       <float name="floatAttribMaxVal" val="1.4708"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0.557847"/>
+       <float name="currentVal" val="0.556476"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -196,7 +196,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="0.557847"/>
+          <float name="1" val="0.556476"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -208,7 +208,7 @@
       <float name="floatAttribMinVal" val="-10"/>
       <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="4.04"/>
+       <float name="currentVal" val="2.66"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -219,7 +219,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="4.04"/>
+          <float name="1" val="2.66"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -231,7 +231,7 @@
       <float name="floatAttribMinVal" val="-10"/>
       <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="1.08"/>
+       <float name="currentVal" val="2.58"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -242,7 +242,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="1.08"/>
+          <float name="1" val="2.58"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -254,7 +254,7 @@
       <float name="floatAttribMinVal" val="0.0001"/>
       <float name="floatAttribMaxVal" val="10"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="6.97003"/>
+       <float name="currentVal" val="5.34005"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -265,7 +265,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="6.97003"/>
+          <float name="1" val="5.34005"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -278,7 +278,7 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="1.30934"/>
+   <float name="scale" val="1.22039"/>
    <vector2f name="offset">
     <float name="0" val="429.426"/>
     <float name="1" val="119.968"/>
