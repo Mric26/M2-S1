@@ -56,11 +56,12 @@ void PointsToSurface::computeNonOrientedNormals() {
             }
         }
         //calculs des vecteurs propres
-        Point3D a;
-        Point3D b;
-        Point3D c;
-        calcul_repere_vecteurs_propres( AtA[0][0], AtA[0][1], AtA[0][2], AtA[1][0], AtA[1][1], AtA[1][2], AtA[2][0], AtA[2][1], AtA[2][2], &a, &b, &c );
+        Point3D a = Point3D();
+        Point3D b = Point3D();
+        Point3D c = Point3D();
+        calcul_repere_vecteurs_propres( AtA[0][0], AtA[0][1], AtA[0][2], AtA[1][1], AtA[1][2], AtA[2][2], a, b, c );
         //recuperation normales non orientés
+//        _noNormals = v_Point3D();
     }
 }
 

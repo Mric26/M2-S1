@@ -9,5 +9,5 @@ def runTest01(context):
 	test()
 
 salome_pluginsmanager.AddFunction('Test 01',
-                                  'Petit programme python pour tester si cela focntionne',
+                                  'Petit programme python pour tester si cela fonctionne',
                                   runTest01)

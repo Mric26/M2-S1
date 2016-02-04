@@ -14,6 +14,8 @@ public:
     void jouerAlphaBeta();
     void jouerBetaAlpha();
 
+    void jouerParalleleAlphaBeta();
+
 private:
     // Features
     plateau *p;

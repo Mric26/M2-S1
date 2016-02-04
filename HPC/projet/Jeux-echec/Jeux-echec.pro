@@ -6,14 +6,10 @@
 
 QT       += core gui widgets
 
-#greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-QMAKE_CXXFLAGS += -std=gnu++0x \
-
+QMAKE_CXXFLAGS += -std=gnu++0x -fopenmp \
 
 TARGET = Jeux-echec
 TEMPLATE = app
-
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -48,3 +44,5 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     ressources.qrc
+
+LIBS += -fopenmp \

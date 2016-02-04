@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <plateau.h>
+#include <ia_alphabeta.h>
 #include <sceneperso.h>
 
 class scenePerso;

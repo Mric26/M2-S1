@@ -1,0 +1,16 @@
+env_launch.bat :
+
+@SET SALOME_TMP_DIR=%TEMP%
+
+
+
+
+
+	
+set_one_module_env.bat :
+
+rem =========================================
+rem Ajout de mon path pour les plugins
+rem =========================================
+@SET PYTHONPATH=Z:\Documents\M2-S1\CAO\Projet\Src_Python;%PYTHONPATH%
+@SET SALOME_PLUGIN_PATH=Z:\Documents\M2-S1\CAO\Projet\Src_Python;%SALOME_PLUGIN_PATH%

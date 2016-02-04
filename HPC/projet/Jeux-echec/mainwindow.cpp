@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     p->jouerCoup( new coup(p->getCase(3,0), p->getCase(7,4)) );
     p->jouerCoup( new coup(p->getCase(6,4), p->getCase(7,4)) );
 //    p->afficherDeplacementPossible( p->getCase(7,4) );
+
+    IA_AlphaBeta * cerveau = new IA_AlphaBeta(p);
+    cerveau->jouerParalleleAlphaBeta();
 }
 
 MainWindow::~MainWindow(){
