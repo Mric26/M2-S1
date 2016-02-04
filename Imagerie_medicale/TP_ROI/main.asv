@@ -32,35 +32,38 @@ imagesc(fbSino);
 %%%%%%%%%%%%%%%%%%%%%%%% Filtre de Hilbert %%%%%%%%%%%%%%%%%%%%%%%
 %%% Calcul du filtre de Hilbert %%%
 hs = 2 / (ndetecteurs - 1);
-freqcutoff = (1+r) * nprojections * 0.5;
+%freqcutoff = (1+r) * nprojections * 0.5;
+freqcutoff = (1 - cos(2*pi*c*s)) / (pi*s);
 HFilter = hilbertfilter(ndetecteurs, hs, freqcutoff);
+%HFilter = fftshift( HFilter );
 fft_HFilter = fft( HFilter );
 
 figure('Name',' Hilbert Filter ')
 colormap(gray);
-plot( fftshift(HFilter) )
+plot( real(fft_HFilter) )
 
 clear freqcutoff;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%% Filtered Data %%%%%%%%%%%%%%%%%%%%%
 %%% Zero padding %%%
-zpdata = zeros(nprojections, 2*ndetecteurs-1);
-zpdata(:,1:ndetecteurs) = fbSino;
-filteredzpdata = zeros(nprojections,2*ndetecteurs-1);
-%filtereddata = zeros(nprojections,ndetecteurs);
+%zpdata = zeros(nprojections, 2*ndetecteurs-1);
+%zpdata(:,1:ndetecteurs) = fbSino;
+%filteredzpdata = zeros(nprojections,2*ndetecteurs-1);
+filtereddata
 
 %%% Filtrage des projections
 for p = 1:nprojections
-    %zeropaddedproj = [fbSino(p,:) zeros(1,ndetecteurs-1)]; % zeropadding
-    %paddedHproj = cconv(zeropaddedproj, HFilter, 2*ndetecteurs-1); % circular convolution
-    %filtereddata(p,:) = paddedHproj(1:ndetecteurs); % unzeropadding
+    zeropaddedproj = [fbSino(p,:) zeros(1,ndetecteurs-1)]; % zeropadding
+    paddedHproj = cconv(zeropaddedproj, HFilter, 2*ndetecteurs-1); % circular convolution
+    filtereddata(p,:) = paddedHproj(1:ndetecteurs); % unzeropadding
 
-    ftzpdata = fft(zpdata(p,:));
-    filteredftzpdata = ftzpdata .* fft_HFilter;
-    filteredzpdata(p,:) = real(ifft(filteredftzpdata));
+
+    %ftzpdata = fft(zpdata(p,:));
+    %filteredftzpdata = ftzpdata .* fft_HFilter;
+    %filteredzpdata(p,:) = real(ifft(filteredftzpdata));
 end
-filtereddata = filteredzpdata(:,1:ndetecteurs);
+%filtereddata = filteredzpdata(:,1:ndetecteurs);
 
 figure('Name',' Filtred Data ')
 colormap(gray);
@@ -98,7 +101,7 @@ cosphi = cos(phi);
 sinphi = sin(phi);
 arrayS = -1:hs:1;
 
-N = nprojections;
+N = 100;
 imgFinale = zeros(N);   % creation de l'image a calculer
 
 for x=1:N

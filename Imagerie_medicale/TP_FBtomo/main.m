@@ -27,14 +27,14 @@ r2 = 3;
 
 %%%%%%%%%%%%%%%%%% Lecture des données & Affichage %%%%%%%%%%%%%%%%%
 fbsino1 = litfbsinogramme(filename1, nprojections1, ndetecteurs1);
-figure('Name',' Sinograme 1 ', 'position', [400, 400, 550, 400])
+figure('Name',' Sinograme 1 ')
 colormap(gray);
 imagesc(fbsino1);
 xlabel('Pan Axis    or   Detector Axis')
 ylabel('Projection   or   Source Position Number')
 
 fbsino2 = litfbsinogramme(filename2, nprojections2, ndetecteurs2);
-figure('Name',' Sinograme 2 ', 'position', [1200, 400, 200, 500])
+figure('Name',' Sinograme 2 ')
 colormap(gray);
 imagesc(fbsino2);
 xlabel('Pan Axis    or   Detector Axis')
@@ -64,7 +64,7 @@ WFBsino1 = zeros(nprojections1, ndetecteurs1);
 for k=1:nprojections1
     WFBsino1(k,:) = fbsino1(k,:) .* cospsi1(1,:);
 end
-figure('Name',' Weighting 1 ', 'position', [400, 400, 550, 400])
+figure('Name',' Weighting 1 ')
 colormap(gray);
 imagesc(WFBsino1);
 
@@ -72,14 +72,14 @@ WFBsino2 = zeros(nprojections2, ndetecteurs2);
 for k=1:nprojections2
     WFBsino2(k,:) = fbsino2(k,:) .* cospsi2(1,:);
 end
-figure('Name',' Weighting 2 ', 'position', [1200, 400, 200, 500])
+figure('Name',' Weighting 2 ')
 colormap(gray);
 imagesc(WFBsino2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Filtrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 freqcutoff1 = (1+r1) * nprojections1 * 0.5;
 fbSLfilter1 = fbshepploganfilter(ndetecteurs1, hpsi1, freqcutoff1);
-figure('Name',' Filtre 1 ', 'position', [400, 400, 550, 400])
+figure('Name',' Filtre 1 ')
 xalpha1 = -ndetecteurs1 * hpsi1:hpsi1:ndetecteurs1*hpsi1;
 fftFbSLfilter1 = fft(fbSLfilter1);
 plot(xalpha1, real(fftFbSLfilter1))
@@ -96,14 +96,14 @@ for r = 1:nprojections1
 end
 filteredwdata1 = filteredzpwdata1(:,1:ndetecteurs1);
 
-figure('Name',' Filtred 1 ', 'position', [400, 400, 550, 400])
+figure('Name',' Filtred 1 ')
 colormap(gray);
 imagesc(filteredwdata1)
 
 %%donnée2%%
 freqcutoff2 = (1+r2) * nprojections2 * 0.5;
 fbSLfilter2 = fbshepploganfilter(ndetecteurs2, hpsi2, freqcutoff2);
-figure('Name',' Filtre 2 ', 'position', [1200, 400, 550, 400])
+figure('Name',' Filtre 2 ')
 xalpha2 = -ndetecteurs2 * hpsi2:hpsi2:ndetecteurs2*hpsi2;
 fftFbSLfilter2 = fft(fbSLfilter2);
 plot(xalpha2, fftFbSLfilter2)
@@ -120,7 +120,7 @@ for r = 1:nprojections2
 end
 filteredwdata2 = filteredzpwdata2(:,1:ndetecteurs2);
 
-figure('Name',' Filtred 2 ', 'position', [1200, 400, 200, 500])
+figure('Name',' Filtred 2 ')
 colormap(gray);
 imagesc(filteredwdata2)
 
@@ -162,7 +162,7 @@ for x=1:Reso
     end
 end
 
-figure('Name',' Backprojection 1 ', 'position', [400, 400, 550, 400])
+figure('Name',' Backprojection 1 ')
 colormap(gray);
 imagesc(res1)
 
@@ -203,7 +203,7 @@ for x=1:Reso
     end
 end
 
-figure('Name',' Backprojection 2 ', 'position', [1200, 400, 500, 500])
+figure('Name',' Backprojection 2 ')
 colormap(gray);
 imagesc(res2)
 
