@@ -32,7 +32,7 @@ imagesc(fbSino);
 %%%%%%%%%%%%%%%%%%%%%%%% Filtre de Hilbert %%%%%%%%%%%%%%%%%%%%%%%
 %%% Calcul du filtre de Hilbert %%%
 hs = 2 / (ndetecteurs - 1);
-freqcutoff = (1+r) * nprojections * 0.5;
+freqcutoff = 124;%(1+r) * nprojections * 0.5;
 HFilter = hilbertfilter(ndetecteurs, hs, freqcutoff);
 fft_HFilter = fft( HFilter );
 
