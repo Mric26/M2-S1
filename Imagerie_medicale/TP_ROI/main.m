@@ -17,9 +17,10 @@ clear all; close all;
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Paramètres %%%%%%%%%%%%%%%%%%%%%%%%%%%
 filename = 'dataFB384_2PIx125_SL';
-ndetecteurs = 125;
+%filename = 'dataFB192_PIx125_SL';
+%filename = 'data127x80';
 nprojections = 384;
-r = 3;
+ndetecteurs = 125;
 
 fbSino = litfbsinogramme(filename, nprojections, ndetecteurs);
 
@@ -32,13 +33,15 @@ imagesc(fbSino);
 %%%%%%%%%%%%%%%%%%%%%%%% Filtre de Hilbert %%%%%%%%%%%%%%%%%%%%%%%
 %%% Calcul du filtre de Hilbert %%%
 hs = 2 / (ndetecteurs - 1);
-freqcutoff = 124;%(1+r) * nprojections * 0.5;
+freqcutoff = 90;
+%for freqcutoff = 80:100
+
 HFilter = hilbertfilter(ndetecteurs, hs, freqcutoff);
 fft_HFilter = fft( HFilter );
 
-figure('Name',' Hilbert Filter ')
-colormap(gray);
-plot( fftshift(HFilter) )
+%figure('Name',' Hilbert Filter ')
+%colormap(gray);
+%plot( fftshift(HFilter) )
 
 clear freqcutoff;
 
@@ -62,9 +65,9 @@ for p = 1:nprojections
 end
 filtereddata = filteredzpdata(:,1:ndetecteurs);
 
-figure('Name',' Filtred Data ')
-colormap(gray);
-imagesc(filtereddata)
+%figure('Name',' Filtred Data ')
+%colormap(gray);
+%imagesc(filtereddata)
 
 clear p zpdata ftzpdata filteredftzpdata filteredzpdata;
 
@@ -80,54 +83,58 @@ for d = 2:ndetecteurs-1
 %     fdata_next = filtereddata(:,d+1);
 %     derivativedata(:,d) = (fdata_next - fdata_prev) / (2*hs);
 end
-derivativedata(:,1) = (filtereddata(:,2) - filtereddata(:,1)) / hs;
-derivativedata(:,ndetecteurs) = (filtereddata(:,ndetecteurs) - filtereddata(:,ndetecteurs-1)) / hs;
+%derivativedata(:,1) = (filtereddata(:,2) - filtereddata(:,1)) / hs;
+%derivativedata(:,ndetecteurs) = (filtereddata(:,ndetecteurs) - filtereddata(:,ndetecteurs-1)) / hs;
 derivativedata = derivativedata / (2*pi);
 
-figure('Name',' Derivative Data ')
-colormap(gray);
-imagesc(derivativedata)
+%figure('Name',' Derivative Data ')
+%colormap(gray);
+%imagesc(derivativedata)
 
 clear d fdata_prev fdata_next;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%% Backprojection %%%%%%%%%%%%%%%%%%%%%%%%
 hphi = (2*pi / (nprojections-1));
-phi = 0:hphi:2*pi;
+phi = -pi:hphi:pi;
 cosphi = cos(phi);
 sinphi = sin(phi);
-arrayS = -1:hs:1;
+hs = 2 / (ndetecteurs-1);
+S = -1:hs:1;
 
-N = nprojections;
+N = 200;
 imgFinale = zeros(N);   % creation de l'image a calculer
-
-for x=1:N
-    xn = ((x / N) * 2) - 1;
-    for y=1:N
-        yn = ((y / N) * 2) - 1;
-        if (xn^2 + yn^2 < 1)
-            for p=1:nprojections
-                xn = ((x / N) * 2) - 1;
-                yn = ((y / N) * 2) - 1;
-                
-                S = xn * cosphi(p) + yn * sinphi(p);    % S : abscisse sur O(phi)
-                L = 1 + floor( ((S+1)/2) * (ndetecteurs-1));
-                s_prev = derivativedata(p,L);
-                s_next = derivativedata(p,L+1);
-                alpha = (S - arrayS(L)) / hs;
-                value = ((1-alpha) * s_prev) + (alpha * s_next);
-                
-                imgFinale(x,y) = imgFinale(x,y) + value;
-            end
-        end
-    end
-end
 
 figure('Name',' Backprojection ')
 colormap(gray);
 imagesc(imgFinale)
 
-clear r N x y xn yn p arrayS S L s_prev s_next alpha value phi hphi cosphi sinphi;
+for p=1:nprojections
+    for x=1:N
+        xn = ((x / N) * 2) - 1;
+        for y=1:N
+            yn = ((y / N) * 2) - 1;
+            if (xn^2 + yn^2 < 1)
+            
+                s = xn * cosphi(p) + yn * sinphi(p);            % S : abscisse sur O(phi)
+                index_prev = 1 + floor( (s - (-1)) / hs );      % indice precedent s dans la tableau des abscisses
+                alpha = (s - S(index_prev)) / hs;
+                value = ((1-alpha) * fbSino(p,index_prev)) + (alpha * fbSino(p,index_prev+1));
+                
+                imgFinale(x,y) = imgFinale(x,y) + value;
+            end
+            
+        end
+    end
+    imagesc(imgFinale)
+    drawnow
+end
 
+%figure('Name',' Backprojection ')
+%colormap(gray);
+%imagesc(imgFinale)
 
+clear r N x y xn yn p S s L index_prev alpha value phi hphi cosphi sinphi;
+
+%end
 
