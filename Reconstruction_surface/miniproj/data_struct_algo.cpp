@@ -963,17 +963,17 @@ Graphe Graphe::arbre_couvrant_minimal()
       iA++;
     }
 	
-  // 	// ecrit l'ACM
-  // 	for (int i=0; i<n; i++)
-  // 	{
-  // 		printf("sommet %d (%d) : [", i, noeuds[i].m);
-  // 		for (int k=0; k<noeuds[i].la.size(); k++)
-  // 		{
-  // 			int j = noeuds[i].voisins[k];
-  // 			printf(" %d",j);
-  // 		}
-  // 		printf(" ]\n");
-  // 	}
+//    // ecrit l'ACM
+//    for (int i=0; i<n; i++)
+//    {
+//        printf("sommet %d (%d) : [", i, noeuds[i].m);
+//        for (int k=0; k<noeuds[i].la.size(); k++)
+//        {
+//            int j = noeuds[i].voisins[k];
+//            printf(" %d",j);
+//        }
+//        printf(" ]\n");
+//    }
 	
   // retourner l'arbre CM
   return ACM;
