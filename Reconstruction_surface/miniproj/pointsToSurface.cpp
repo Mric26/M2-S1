@@ -68,31 +68,23 @@ void PointsToSurface::computeNonOrientedNormals() {
 
 void PointsToSurface::computeMinimalSpanningTree() {
     //construction graphe de proximité
+    double r = 0.25;
     int t = _points.size();
     _acm = Graphe(t);
     for (int i = 0; i < t; ++i) {
         Point3D p1 = _points.at(i);
-        //utilise les 4 voisins les plus proches plutot qu'une distance
-        v_Point3D v = kneighborhoodPoints(p1, _points, 4);
-        foreach (Point3D p2, v) {
-           //recherche positions p2
-           size_t k = 0;
-           bool trouve = false;
-           while( (k < _points.size()) && !trouve ){
-               if( p2 == _points.at(k) ){
-                   trouve = true;
-               }
-               else{
-                   k++;
-               }
-           }
-           //calcul du poids
-           double poids = 0.0;
-           Point3D n1 = _noNormals.at(i);
-           Point3D n2 = _noNormals.at(k);
-           poids = 1 - abs( n1.x*n2.x + n1.y*n2.y + n1.z*n2.z );
-           //ajout arc
-           _acm.ajouter_arc(i, k, poids );
+        //recherche selon la distance
+        for (int k = i; k < t; ++k) {
+            Point3D p2 = _points.at(k);
+            if( (i!=k) && (distance_(p1, p2) < r) ){
+                //calcul du poids
+                double poids = 0.0;
+                Point3D n1 = _noNormals.at(i);
+                Point3D n2 = _noNormals.at(k);
+                poids = 1 - abs( n1.x*n2.x + n1.y*n2.y + n1.z*n2.z );
+                //ajout arc
+                _acm.ajouter_arc(i, k, poids );
+            }
         }
     }
     //calcul arbre couvrant de poids minimal
@@ -101,6 +93,32 @@ void PointsToSurface::computeMinimalSpanningTree() {
 
 void PointsToSurface::computeOrientedNormals() {
   // a remplir : _oNormals
+    _oNormals = v_Point3D( _noNormals );
+    int racine = 0;
+    Noeud racineN = _acm.noeud(racine);
+    foreach ( int n, racineN.la ) {
+        Arc a = _acm.arc(n);
+        Point3D n1 = _noNormals.at(a.n1);
+        Point3D n2 = _noNormals.at(a.n2);
+        double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
+        if( ps < 0 ){
+            _oNormals[a.n2] = -n2;
+        }
+        computeRecursiveOrientedNormals( a.n2 );
+    }
+}
+
+void PointsToSurface::computeRecursiveOrientedNormals( int racine ) {
+    Noeud racineN = _acm.noeud(racine);
+    foreach ( int n, racineN.la ) {
+        Arc a = _acm.arc(n);
+        Point3D n1 = _noNormals.at(a.n1);
+        Point3D n2 = _noNormals.at(a.n2);
+        double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
+        if( ps < 0 ){
+            _oNormals[a.n2] = -n2;
+        }
+    }
 }
 
 double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
