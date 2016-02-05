@@ -16,10 +16,10 @@ clear all; close all;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Paramètres %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%filename = 'dataFB384_2PIx125_SL';
-filename = 'dataFB192_PIx125_SL';
+filename = 'dataFB384_2PIx125_SL';
+%filename = 'dataFB192_PIx125_SL';
 %filename = 'data127x80';
-nprojections = 192;
+nprojections = 384;
 ndetecteurs = 125;
 
 fbSino = litfbsinogramme(filename, nprojections, ndetecteurs);
@@ -65,9 +65,9 @@ for p = 1:nprojections
 end
 filtereddata = filteredzpdata(:,1:ndetecteurs);
 
-figure('Name',' Filtred Data ')
-colormap(gray);
-imagesc(filtereddata)
+%figure('Name',' Filtred Data ')
+%colormap(gray);
+%imagesc(filtereddata)
 
 clear p zpdata ftzpdata filteredftzpdata filteredzpdata;
 
@@ -87,16 +87,16 @@ end
 %derivativedata(:,ndetecteurs) = (filtereddata(:,ndetecteurs) - filtereddata(:,ndetecteurs-1)) / hs;
 derivativedata = derivativedata / (2*pi);
 
-figure('Name',' Derivative Data ')
-colormap(gray);
-imagesc(derivativedata)
+%figure('Name',' Derivative Data ')
+%colormap(gray);
+%imagesc(derivativedata)
 
 clear d fdata_prev fdata_next;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%% Backprojection %%%%%%%%%%%%%%%%%%%%%%%%
-hphi = (pi / (nprojections-1));
-phi = 0:hphi:pi;
+hphi = (2*pi / (nprojections-1));
+phi = 0:hphi:2*pi;
 cosphi = cos(phi);
 sinphi = sin(phi);
 hs = 2 / (ndetecteurs-1);
