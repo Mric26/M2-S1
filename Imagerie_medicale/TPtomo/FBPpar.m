@@ -32,10 +32,11 @@ imagesc(real(gfiltered));
 
 
 %%%%%%%%%%%%% backprojection %%%%%%%%%%%%%
-N = 200;                                                % resolution de l'image
-hs = 1 / ns;
-dPhi = linspace(0,pi-(pi/nphi),nphi);                   % discretisation de [0, pi] en 127 intervalle
-dS = linspace(-1,1,ns);                                 % discretisation de [-1 1] en 80 intervalle
+N = 1000;                                                % resolution de l'image
+hs = 2 / (ns-1);
+hphi = pi / (nphi-1);
+dPhi = 0:hphi:pi;                                       % discretisation de [0, pi] en 127 intervalle
+dS = -1:hs:1;                                           % discretisation de [-1 1] en 80 intervalle
 cosphi = cos(dPhi);
 sinphi = sin(dPhi);
 
@@ -49,9 +50,10 @@ for x=1:N
             yn = ((y / N) * 2) - 1;
             if (xn^2 + yn^2 < 1)
                 S = xn * cosphi(j) + yn * sinphi(j);    % S : abscisse sur O(phi)
-                L = 1 + floor( ((S+1)/2) * 79);
-                a = gfiltered(L,j);
-                b = gfiltered(L+1,j);
+                L = 1 + floor( (S - (-1)) / hs );
+                %L = 1 + floor( ((S+1)/2) * 79);
+                a = g(L,j);
+                b = g(L+1,j);
                 t = (S - dS(L)) / hs;
                 v = (1-t) * a + t * b;
                 A(x,y) = A(x,y) + v;
