@@ -65,7 +65,7 @@ class PointsToSurface {
 
   //FOCNTIONS PERSOS
   Point3D barycentre(v_Point3D v);
-  void computeRecursiveOrientedNormals(int racine);
+  void computeRecursiveOrientedNormals(vector<int> v, bool t[]);
 };
 
 
