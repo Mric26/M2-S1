@@ -88,36 +88,81 @@ void PointsToSurface::computeMinimalSpanningTree() {
         }
     }
     //calcul arbre couvrant de poids minimal
-    _acm.arbre_couvrant_minimal();
+    _acm = _acm.arbre_couvrant_minimal();
 }
 
 void PointsToSurface::computeOrientedNormals() {
   // a remplir : _oNormals
     _oNormals = v_Point3D( _noNormals );
-    int racine = 0;
+    unsigned int racine = 0;
+    //paramètre recursifs
+    vector<int> v;
+    bool t[ _acm.nb_noeuds() ];
+    for (unsigned int a = 0; a < _acm.nb_noeuds(); ++a) {
+       t[a] = false;
+    }
+    //boucles
     Noeud racineN = _acm.noeud(racine);
+    t[racine] = true;
     foreach ( int n, racineN.la ) {
         Arc a = _acm.arc(n);
-        Point3D n1 = _noNormals.at(a.n1);
-        Point3D n2 = _noNormals.at(a.n2);
+        Point3D n1 = _oNormals.at(a.n1);
+        Point3D n2 = _oNormals.at(a.n2);
         double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
+        //si negatif on inverse la bonne normale
         if( ps < 0 ){
-            _oNormals[a.n2] = -n2;
+            cout << "NEGATIF" << endl;
+            if( a.n1 == racine ){
+                _oNormals[a.n2] = -n2;
+            }
+            else{
+                _oNormals[a.n1] = -n1;
+            }
         }
-        computeRecursiveOrientedNormals( a.n2 );
+        //on ajoute aux points à visiter
+        if( (a.n1 == racine) && (t[a.n2] == false) ){
+            v.push_back( a.n2 );
+            t[a.n2] = true;
+        }
+        else if ( (a.n2 == racine) && (t[a.n1] == false) ){
+            v.push_back( a.n1 );
+            t[a.n1] = true;
+        }
     }
+    computeRecursiveOrientedNormals( v, t );
 }
 
-void PointsToSurface::computeRecursiveOrientedNormals( int racine ) {
-    Noeud racineN = _acm.noeud(racine);
-    foreach ( int n, racineN.la ) {
-        Arc a = _acm.arc(n);
-        Point3D n1 = _noNormals.at(a.n1);
-        Point3D n2 = _noNormals.at(a.n2);
-        double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
-        if( ps < 0 ){
-            _oNormals[a.n2] = -n2;
+void PointsToSurface::computeRecursiveOrientedNormals( vector<int> v, bool t[]  ) {
+    vector<int> v2;
+    foreach (unsigned int racine, v) {
+        Noeud racineN = _acm.noeud(racine);
+        foreach ( int n, racineN.la ) {
+            Arc a = _acm.arc(n);
+            Point3D n1 = _oNormals.at(a.n1);
+            Point3D n2 = _oNormals.at(a.n2);
+            double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
+            //si negatif on inverse la bonne normale
+            if( ps < 0 ){
+                if( a.n1 == racine ){
+                    _oNormals[a.n2] = -n2;
+                }
+                else{
+                    _oNormals[a.n1] = -n1;
+                }
+            }
+            //on ajoute aux points à visiter
+            if( (a.n1 == racine) && (t[a.n2] == false) ){
+                v2.push_back( a.n2 );
+                t[a.n2] = true;
+            }
+            else if ( (a.n2 == racine) && (t[a.n1] == false) ){
+                v2.push_back( a.n1 );
+                t[a.n1] = true;
+            }
         }
+    }
+    if( v2.size() != 0 ){
+        computeRecursiveOrientedNormals( v2, t );
     }
 }
 
