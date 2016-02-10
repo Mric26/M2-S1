@@ -1,5 +1,6 @@
 #include "pointsToSurface.h"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -168,8 +169,22 @@ void PointsToSurface::computeRecursiveOrientedNormals( vector<int> v, bool t[]  
 
 double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
   // a faire : déterminer la fonction implicite (MLS)
-
-  return x+y+z;
+    double alpha = 0.5;
+    Point3D p = Point3D(x, y, z);
+    Point3D pi;
+    double somme_haut = 0.0;
+    double somme_bas = 0.0;
+    for (size_t i = 0; i < _points.size(); ++i) {
+        pi = _points.at(i);
+        double disti = distance_(p, pi);
+        double wi = exp( - pow( disti/alpha, 2.0 ) );
+        Point3D ni = _oNormals.at(i);
+        Point3D diff = p - pi;
+        double ps = ni.x*diff.x + ni.y*diff.y + ni.z*diff.z;
+        somme_haut += ps+wi;
+        somme_bas += wi;
+    }
+  return somme_haut/somme_bas;
 }
 
 void PointsToSurface::computeNormalsFromImplicitFunc() {
