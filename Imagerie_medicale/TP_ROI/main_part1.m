@@ -16,9 +16,8 @@ clear all; close all;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Paramètres %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%filename = 'dataFB384_2PIx125_SL';
-filename = 'dataFB192_PIx125_SL';
-%filename = 'data127x80';
+filename = 'data/dataFB192_PIx125_SL';
+%filename = 'data/data127x80';
 nprojections = 192;
 ndetecteurs = 125;
 
@@ -34,7 +33,6 @@ imagesc(fbSino);
 %%% Calcul du filtre de Hilbert %%%
 hs = 2 / (ndetecteurs - 1);
 freqcutoff = 100;
-%for freqcutoff = 80:100
 
 HFilter = hilbertfilter(ndetecteurs, hs, freqcutoff);
 fft_HFilter = fft( HFilter );
@@ -132,6 +130,3 @@ end
 %imagesc(imgFinale)
 
 clear r N x y xn yn p S s L index_prev alpha value phi hphi cosphi sinphi;
-
-%end
-

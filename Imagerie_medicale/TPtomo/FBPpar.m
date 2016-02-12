@@ -1,7 +1,8 @@
 %construit sur la base de ce qui a été donné
 clear all; close all;
-nphi = 127;                                       % nombre de projections
-ns = 80;                                          % nombre de translations  
+nphi = 180;                                       % nombre de projections
+ns = 100;                                          % nombre de translations  
+
 g = litsinogramme('data127x80',nphi,ns);          % lecture des données simulées
 
 %image de base
@@ -32,7 +33,7 @@ imagesc(real(gfiltered));
 
 
 %%%%%%%%%%%%% backprojection %%%%%%%%%%%%%
-N = 1000;                                                % resolution de l'image
+N = 400;                                                % resolution de l'image
 hs = 2 / (ns-1);
 hphi = pi / (nphi-1);
 dPhi = 0:hphi:pi;                                       % discretisation de [0, pi] en 127 intervalle
