@@ -1,6 +1,7 @@
 #include "coup.h"
 
 #include "casePlateau.h"
+#include <iostream>
 
 coup::coup(casePlateau *caseDep, casePlateau *caseArr){
     this->caseDep = caseDep;

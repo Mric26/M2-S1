@@ -164,16 +164,21 @@ void plateau::changementJoueur(){
 }
 
 void plateau::jouerCoup(coup *c){
-    // Deplace les pieces sur le plateau
-    c->jouerCoup();
-    // Mise a jour des listes de piece du joueur
-    pieces *piece = c->getPrise();
-    if (piece != NULL) {
-        enleverPiece( piece );
+    if( !c->getCaseDep()->caseVide() ){
+        // Deplace les pieces sur le plateau
+        c->jouerCoup();
+        // Mise a jour des listes de piece du joueur
+        pieces *piece = c->getPrise();
+        if (piece != NULL) {
+            enleverPiece( piece );
+        }
+        majPlateau();
+        // Changement de joueur
+        changementJoueur();
     }
-    majPlateau();
-    // Changement de joueur
-    changementJoueur();
+    else{
+        cout << "DEPLACEMENT IMPOSSIBLE !!" << endl;
+    }
 }
 
 void plateau::getBack(coup *c){
@@ -192,8 +197,8 @@ void plateau::getBack(coup *c){
     }
 }
 
-std::vector<coup *> * plateau::getListCoup(bool j){
-    std::vector<coup *> * res = new std::vector<coup *>;
+std::vector<coup *> plateau::getListCoup(bool j){
+    std::vector<coup *> res;
     std::vector<pieces*> *liste_Pieces;
     if( j ){
         liste_Pieces = listeJoueurBlanc;
@@ -206,7 +211,7 @@ std::vector<coup *> * plateau::getListCoup(bool j){
         std::vector<casePlateau *> *liste_Coups = p->deplacementPossible();
         foreach (casePlateau *ca, *liste_Coups) {
             c = new coup( p->getCasePiece(), ca );
-            res->push_back( c );
+            res.push_back( c );
         }
     }
     return res;
@@ -387,20 +392,25 @@ void plateau::newGame(){
 }
 
 void plateau::afficherDeplacementPossible( casePlateau * c ){
-    QRect * rectangle = new QRect(50 + c->getColumn() * 80, 60 + c->getLine() * 80, 75, 75);
-    QPen  * pen = new QPen(Qt::cyan, 1, Qt::SolidLine);
-    w->scene->addRect(*rectangle, *pen);
-
-    pieces * p = c->getPiece();
-    std::vector<casePlateau *> * dp = p->deplacementPossible();
-    if( dp->size() == 0 ){
-        cout << "CEST NULL BITCH !!!" << endl;
-    }
-    foreach (casePlateau *cp, *dp) {
-        rectangle = new QRect(50 + cp->getColumn() * 80, 60 + cp->getLine() * 80, 75, 75);
-        pen = new QPen(Qt::magenta, 1, Qt::SolidLine);
+    if( !c->caseVide() ){
+        QRect * rectangle = new QRect(50 + c->getColumn() * 80, 60 + c->getLine() * 80, 75, 75);
+        QPen  * pen = new QPen(Qt::cyan, 1, Qt::SolidLine);
         w->scene->addRect(*rectangle, *pen);
-    }
 
-    w->repaint();
+        pieces * p = c->getPiece();
+        std::vector<casePlateau *> * dp = p->deplacementPossible();
+        if( dp->size() == 0 ){
+            cout << "CEST NULL BITCH !!!" << endl;
+        }
+        foreach (casePlateau *cp, *dp) {
+            rectangle = new QRect(50 + cp->getColumn() * 80, 60 + cp->getLine() * 80, 75, 75);
+            pen = new QPen(Qt::magenta, 1, Qt::SolidLine);
+            w->scene->addRect(*rectangle, *pen);
+        }
+
+        w->repaint();
+    }
+    else{
+        cout << "PAS DE PIECE SUR LA CASE" << endl;
+    }
 }

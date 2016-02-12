@@ -17,13 +17,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     p->jouerCoup( new coup(p->getCase(5,6), p->getCase(5,4)) );
     p->jouerCoup( new coup(p->getCase(4,1), p->getCase(4,2)) );
-    p->jouerCoup( new coup(p->getCase(6,6), p->getCase(6,4)) );
+    p->jouerCoup( new coup(p->getCase(7,6), p->getCase(7,4)) );
+    p->jouerCoup( new coup(p->getCase(6,6), p->getCase(6,5)) );
     p->jouerCoup( new coup(p->getCase(3,0), p->getCase(7,4)) );
-    p->jouerCoup( new coup(p->getCase(6,4), p->getCase(7,4)) );
-//    p->afficherDeplacementPossible( p->getCase(7,4) );
+//    p->jouerCoup( new coup(p->getCase(6,5), p->getCase(7,4)) );
+//    p->afficherDeplacementPossible( p->getCase(6,5) );
 
     IA_AlphaBeta * cerveau = new IA_AlphaBeta(p);
     cerveau->jouerParalleleAlphaBeta();
+//    cerveau->jouerAlphaBeta();
+//    cerveau->jouerBetaAlpha();
+
 }
 
 MainWindow::~MainWindow(){

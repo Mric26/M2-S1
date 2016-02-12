@@ -48,7 +48,7 @@ public:
     void changementJoueur();
     void jouerCoup(coup *c);
     void getBack(coup*c);
-    std::vector<coup *> *getListCoup( bool j);
+    std::vector<coup *> getListCoup( bool j);
     void newGame();
     void affichagePieces();        
     void enleverPiece(pieces *p);

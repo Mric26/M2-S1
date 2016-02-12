@@ -14,7 +14,9 @@ public:
     void jouerAlphaBeta();
     void jouerBetaAlpha();
 
-    void jouerParalleleAlphaBeta();
+    void jouerParalleleAlphaBeta();   
+    void jouerMultiprocessAlphaBeta();
+    void HW();
 
 private:
     // Features
