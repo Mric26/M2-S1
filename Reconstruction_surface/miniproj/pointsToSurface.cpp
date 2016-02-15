@@ -1,6 +1,7 @@
 #include "pointsToSurface.h"
 #include <iostream>
 #include <math.h>
+#include <cmath>
 
 using namespace std;
 
@@ -112,7 +113,6 @@ void PointsToSurface::computeOrientedNormals() {
         double ps = n1.x*n2.x + n1.y*n2.y + n1.z*n2.z;
         //si negatif on inverse la bonne normale
         if( ps < 0 ){
-            cout << "NEGATIF" << endl;
             if( a.n1 == racine ){
                 _oNormals[a.n2] = -n2;
             }
@@ -192,6 +192,29 @@ void PointsToSurface::computeNormalsFromImplicitFunc() {
 }
 
 void PointsToSurface::computeMesh() {
+    //creation de la grille 3D
+    double xmin0 = 100000;
+    double ymin0 = 100000;
+    double zmin0 = 100000;
+    double xmax0 = -100000;
+    double ymax0 = -100000;
+    double zmax0 = -100000;
+    foreach ( Point3D p, _points ) {
+        xmin0 = min( xmin0, p.x );
+        ymin0 = min( ymin0, p.y );
+        zmin0 = min( zmin0, p.z );
+        xmax0 = max( xmax0, p.x );
+        ymax0 = max( ymax0, p.y );
+        zmax0 = max( zmax0, p.z );
+    }
+    double nx0 = _points.size();
+    double ny0 = _points.size();
+    double nz0 = _points.size();
+    Grille3D g = Grille3D(xmin0, ymin0, zmin0, xmax0, ymax0, zmax0, nx0, ny0, nz0);
+
+    //création d'un tableau contenant les valeurs de la fonction implicite
+
+
   // a remplir : _surfacep
 }
 
