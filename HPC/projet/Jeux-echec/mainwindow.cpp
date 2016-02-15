@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,9 +25,12 @@ MainWindow::MainWindow(QWidget *parent) :
 //    p->afficherDeplacementPossible( p->getCase(6,5) );
 
     IA_AlphaBeta * cerveau = new IA_AlphaBeta(p);
+//    QTime time;
+//    time.start();
     cerveau->jouerParalleleAlphaBeta();
 //    cerveau->jouerAlphaBeta();
-//    cerveau->jouerBetaAlpha();
+//    int temps = time.elapsed();
+//    cout << temps << endl;
 
 }
 
