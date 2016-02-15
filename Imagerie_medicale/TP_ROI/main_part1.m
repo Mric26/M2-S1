@@ -16,10 +16,9 @@ clear all; close all;
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Paramètres %%%%%%%%%%%%%%%%%%%%%%%%%%%
-filename = 'data/dataFB192_PIx125_SL';
-%filename = 'data/data127x80';
-nprojections = 192;
-ndetecteurs = 125;
+filename = 'data/data127x80';
+nprojections = 127;
+ndetecteurs = 80;
 
 fbSino = litfbsinogramme(filename, nprojections, ndetecteurs);
 
@@ -37,9 +36,9 @@ freqcutoff = 100;
 HFilter = hilbertfilter(ndetecteurs, hs, freqcutoff);
 fft_HFilter = fft( HFilter );
 
-%figure('Name',' Hilbert Filter ')
-%colormap(gray);
-%plot( fftshift(HFilter) )
+figure('Name',' Hilbert Filter ')
+colormap(gray);
+plot( fftshift(HFilter) )
 
 clear freqcutoff;
 
@@ -72,17 +71,11 @@ clear p zpdata ftzpdata filteredftzpdata filteredzpdata;
 %% 
 %%%%%%%%%%%%%%%%%%%%%% Derivatative Data %%%%%%%%%%%%%%%%%%%%%
 derivativedata = zeros(nprojections, ndetecteurs);
-ds = 0.2;
 for d = 2:ndetecteurs-1
-%    fdata_prev = ((1-ds) * filtereddata(:,d)) + (ds * filtereddata(:,d-1));
-%    fdata_next = ((1-ds) * filtereddata(:,d)) + (ds * filtereddata(:,d+1));
-%    derivativedata(:,d) = ((fdata_next - fdata_prev) / (2*hs));
      fdata_prev = filtereddata(:,d-1);
      fdata_next = filtereddata(:,d+1);
      derivativedata(:,d) = (fdata_next - fdata_prev) / (2*hs);
 end
-%derivativedata(:,1) = (filtereddata(:,2) - filtereddata(:,1)) / hs;
-%derivativedata(:,ndetecteurs) = (filtereddata(:,ndetecteurs) - filtereddata(:,ndetecteurs-1)) / hs;
 derivativedata = derivativedata / (2*pi);
 
 figure('Name',' Derivative Data ')

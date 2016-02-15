@@ -64,6 +64,8 @@ figure('Name',' Filtred Data ')
 colormap(gray);
 imagesc(filtereddata)
 
+pause
+
 clear p zpdata ftzpdata filteredftzpdata filteredzpdata;
 
 %% 
@@ -100,16 +102,40 @@ fb_halpha = (2*dfa) / (ndetecteurs-1);
 fb_alpha = -dfa:fb_halpha:dfa;
 
 for p = 1:nprojections
+    t = fb_phi(p);
+    for n = 1:ndetecteurs
+        alpha = fb_alpha(n);
+        
+        phi = t - (pi/2) + alpha;
+        %s = -R * cos(t - phi);
+        s = -R * sin(alpha);
+        
+        index_para_phi_prev = 1 + floor( (phi - 0) / para_hphi );
+        index_para_s_prev = 1 + floor( (s - (-1)) / para_hs );
+        coef_phi = (phi - para_phi(index_para_phi_prev)) / para_hphi;
+        coef_s = (s - para_S(index_para_s_prev )) / para_hs;
+        
+        data = derivativedata(p,n);
+%         A(index_para_phi_prev,index_para_s_prev) = ;
+%         A(index_para_phi_prev,index_para_s_prev+1) = ;
+%         A(index_para_phi_prev,index_para_s_prev+1) = ;
+%         A(index_para_phi_prev+1,index_para_s_prev+1) = ;
+%         
+    end
+end
+
+
+for p = 1:nprojections
     pphi = para_phi(p);
     for n = 1:ndetecteurs
         s = para_S(n);
         
         fb_alpha = (2*pphi) - acos(s/R);
-        fb_t = pphi + (pi/2) - fb_alpha;
-        index_fb_phi_prev = 1 + floor( (fb_t - 0) / fb_hphi );
+        t = pphi + (pi/2) - fb_alpha;
+        index_fb_phi_prev = 1 + floor( (t - 0) / fb_hphi );
         index_fb_alpha_prev = 1 + floor( (fb_alpha - (-dfa)) / fb_halpha );
         
-        coef_t = (fb_t - fb_phi(index_fb_phi_prev)) / fb_hphi;
+        coef_t = (t - fb_phi(index_fb_phi_prev)) / fb_hphi;
         projection1 = derivativedata(index_fb_phi_prev,:);
         projection2 = derivativedata(index_fb_phi_prev+1,:);
         line_fb_phi = ((1.0 - coef_t) * projection1) + (coef_t * projection2);
