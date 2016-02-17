@@ -12,8 +12,8 @@
     </Parameters>
     <Stereo focusDistance="50.1785" physScreenWidth="0.5" IODist="0.062"/>
     <ManipulatedCameraFrame>
-      <position x="4.54497" y="-6.94983" z="-2.52427"/>
-      <orientation q0="0.213251" q1="-0.766702" q2="0.572754" q3="-0.196582"/>
+      <position x="8.52267" y="-0.722735" z="-1.47333"/>
+      <orientation q0="0.529988" q1="-0.54097" q2="0.484201" q3="-0.438194"/>
       <ManipulatedParameters transSens="1" zoomSens="1" rotSens="1" wheelSens="1" spinSens="0.3"/>
       <ManipulatedCameraParameters zoomsOnPivotPoint="false" flySpeed="0.207846" rotatesAroundUpVector="false">
         <sceneUpVector x="0" y="1" z="0"/>

@@ -169,7 +169,7 @@ void PointsToSurface::computeRecursiveOrientedNormals( vector<int> v, bool t[]  
 
 double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
   // a faire : déterminer la fonction implicite (MLS)
-    double alpha = 0.5;
+    double sigma = 0.5;
     Point3D p = Point3D(x, y, z);
     Point3D pi;
     double somme_haut = 0.0;
@@ -177,11 +177,11 @@ double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
     for (size_t i = 0; i < _points.size(); ++i) {
         pi = _points.at(i);
         double disti = distance_(p, pi);
-        double wi = exp( - pow( disti/alpha, 2.0 ) );
+        double wi = exp( - pow( disti/sigma, 2.0 ) );
         Point3D ni = _oNormals.at(i);
         Point3D diff = p - pi;
         double ps = ni.x*diff.x + ni.y*diff.y + ni.z*diff.z;
-        somme_haut += ps+wi;
+        somme_haut += ps*wi;
         somme_bas += wi;
     }
   return somme_haut/somme_bas;
@@ -193,12 +193,12 @@ void PointsToSurface::computeNormalsFromImplicitFunc() {
 
 void PointsToSurface::computeMesh() {
     //creation de la grille 3D
-    double xmin0 = 100000;
-    double ymin0 = 100000;
-    double zmin0 = 100000;
-    double xmax0 = -100000;
-    double ymax0 = -100000;
-    double zmax0 = -100000;
+    double xmin0 = 10000000;
+    double ymin0 = 10000000;
+    double zmin0 = 10000000;
+    double xmax0 = -10000000;
+    double ymax0 = -10000000;
+    double zmax0 = -10000000;
     foreach ( Point3D p, _points ) {
         xmin0 = min( xmin0, p.x );
         ymin0 = min( ymin0, p.y );
@@ -207,15 +207,37 @@ void PointsToSurface::computeMesh() {
         ymax0 = max( ymax0, p.y );
         zmax0 = max( zmax0, p.z );
     }
-    double nx0 = _points.size();
-    double ny0 = _points.size();
-    double nz0 = _points.size();
-    Grille3D g = Grille3D(xmin0, ymin0, zmin0, xmax0, ymax0, zmax0, nx0, ny0, nz0);
+    xmin0 = xmin0 - 3 ;
+    ymin0 = ymin0 - 3 ;
+    zmin0 = zmin0 - 3 ;
+    xmax0 = xmax0 + 3 ;
+    ymax0 = ymax0 + 3 ;
+    zmax0 = zmax0 + 3 ;
+    unsigned int nx0 = 20;
+    unsigned int ny0 = 20;
+    unsigned int nz0 = 20;
+    Grille3D G = Grille3D(xmin0, ymin0, zmin0, xmax0, ymax0, zmax0, nx0, ny0, nz0);
 
     //création d'un tableau contenant les valeurs de la fonction implicite
-
-
-  // a remplir : _surfacep
+    double vf[ nx0 * ny0 * nz0 ];
+    int DIM_X = nx0;
+    int DIM_Y = ny0;
+    double x, y, z;
+    for (unsigned int i = 0; i < nx0; ++i) {
+        x = G.x(i);
+        for (unsigned int j = 0; j < ny0; ++j) {
+            y = G.y(j);
+            for (unsigned int k = 0; k < nz0; ++k) {
+                z = G.z(k);
+                vf[i+DIM_X*(j+DIM_Y*k)] = computeImplicitFunc( x, y, z );
+                cout << vf[i+DIM_X*(j+DIM_Y*k)] << endl;
+            }
+        }
+    }
+    //calcul surface
+    double v0 = 0.3;
+    SurfaceIsovaleurGrille sig;
+    sig.surface_isovaleur( _surfacep, G, vf, v0 );
 }
 
 void PointsToSurface::computeSurface() {
