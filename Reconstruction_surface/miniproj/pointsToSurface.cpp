@@ -2,6 +2,7 @@
 #include <iostream>
 #include <math.h>
 #include <cmath>
+#include <QHash>
 
 using namespace std;
 
@@ -169,7 +170,7 @@ void PointsToSurface::computeRecursiveOrientedNormals( vector<int> v, bool t[]  
 
 double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
   // a faire : déterminer la fonction implicite (MLS)
-    double sigma = 0.5;
+    double sigma = 1.0;
     Point3D p = Point3D(x, y, z);
     Point3D pi;
     double somme_haut = 0.0;
@@ -189,6 +190,44 @@ double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
 
 void PointsToSurface::computeNormalsFromImplicitFunc() {
   // a remplir : _surfacen
+    vector<Point3D> v;
+    Point3D p1, p2, p3, res;
+    double x, y, z;
+    foreach (Triangle3D t, _surfacep) {
+        p1 = t.S0;
+        p2 = t.S1;
+        p3 = t.S2;
+        if( !v.empty() && (find(v.begin(), v.end(), p1) == v.end()) ){
+            x = p1.x; y = p1.y; z = p1.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res = Point3D(nx, ny, nz);
+            res.normalise();
+//            _surfacen.push_back( res );
+            v.push_back(p1);
+        }
+        if( !v.empty() && (find(v.begin(), v.end(), p2) == v.end()) ){
+            x = p2.x; y = p2.y; z = p2.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res = Point3D(nx, ny, nz);
+            res.normalise();
+//            _surfacen.push_back( res );
+            v.push_back(p2);
+        }
+        if( !v.empty() && (find(v.begin(), v.end(), p3) == v.end()) ){
+            x = p3.x; y = p3.y; z = p3.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res = Point3D(nx, ny, nz);
+            res.normalise();
+//            _surfacen.push_back( res );
+            v.push_back(p3);
+        }
+    }
 }
 
 void PointsToSurface::computeMesh() {
@@ -207,15 +246,15 @@ void PointsToSurface::computeMesh() {
         ymax0 = max( ymax0, p.y );
         zmax0 = max( zmax0, p.z );
     }
-    xmin0 = xmin0 - 3 ;
-    ymin0 = ymin0 - 3 ;
-    zmin0 = zmin0 - 3 ;
-    xmax0 = xmax0 + 3 ;
-    ymax0 = ymax0 + 3 ;
-    zmax0 = zmax0 + 3 ;
-    unsigned int nx0 = 20;
-    unsigned int ny0 = 20;
-    unsigned int nz0 = 20;
+    xmin0 = xmin0 - 0.1 ;
+    ymin0 = ymin0 - 0.1 ;
+    zmin0 = zmin0 - 0.1 ;
+    xmax0 = xmax0 + 0.1 ;
+    ymax0 = ymax0 + 0.1 ;
+    zmax0 = zmax0 + 0.1 ;
+    unsigned int nx0 = 10;
+    unsigned int ny0 = 10;
+    unsigned int nz0 = 10;
     Grille3D G = Grille3D(xmin0, ymin0, zmin0, xmax0, ymax0, zmax0, nx0, ny0, nz0);
 
     //création d'un tableau contenant les valeurs de la fonction implicite
@@ -229,13 +268,13 @@ void PointsToSurface::computeMesh() {
             y = G.y(j);
             for (unsigned int k = 0; k < nz0; ++k) {
                 z = G.z(k);
-                vf[i+DIM_X*(j+DIM_Y*k)] = computeImplicitFunc( x, y, z );
-                cout << vf[i+DIM_X*(j+DIM_Y*k)] << endl;
+                vf[i+(DIM_X*(j+(DIM_Y*k)))] = computeImplicitFunc( x, y, z );
+//                cout << vf[i+DIM_X*(j+DIM_Y*k)] << endl;
             }
         }
     }
     //calcul surface
-    double v0 = 0.3;
+    double v0 = 0.0;
     SurfaceIsovaleurGrille sig;
     sig.surface_isovaleur( _surfacep, G, vf, v0 );
 }
