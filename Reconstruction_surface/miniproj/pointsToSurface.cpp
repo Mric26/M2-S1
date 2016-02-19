@@ -69,9 +69,19 @@ void PointsToSurface::computeNonOrientedNormals() {
     }
 }
 
+double PointsToSurface::calculR() {
+    double r = 0;
+    foreach (Point3D p1, _points) {
+        v_Point3D v = kneighborhoodPoints(p1, _points, 2);
+        Point3D p2 = v.at(1);
+        r = max(r, distance_(p1, p2) );
+    }
+    return r+(r/100);
+}
+
 void PointsToSurface::computeMinimalSpanningTree() {
     //construction graphe de proximité
-    double r = 0.25;
+    double r = calculR();
     int t = _points.size();
     _acm = Graphe(t);
     for (int i = 0; i < t; ++i) {
@@ -277,6 +287,18 @@ void PointsToSurface::computeMesh() {
     double v0 = 0.0;
     SurfaceIsovaleurGrille sig;
     sig.surface_isovaleur( _surfacep, G, vf, v0 );
+    ////// VERIFICATION //////
+//    Point3D p1, p2, p3;
+//    foreach (Triangle3D t, _surfacep) {
+//        cout << "Suivant : " << endl;
+//        p1 = t.S0;
+//        cout << p1.x << " ; " << p1.y << " ; "<< p1.z << endl;
+//        p2 = t.S1;
+//        cout << p2.x << " ; " << p2.y << " ; "<< p2.z << endl;
+//        p3 = t.S2;
+//        cout << p3.x << " ; " << p3.y << " ; "<< p3.z << endl;
+//    }
+    //////////////////////////
 }
 
 void PointsToSurface::computeSurface() {
