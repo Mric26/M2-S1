@@ -178,44 +178,46 @@ double PointsToSurface::computeImplicitFunc(double x,double y,double z) {
 
 void PointsToSurface::computeNormalsFromImplicitFunc() {
   // a remplir : _surfacen
-//    vector<Point3D> v;
-//    Point3D p1, p2, p3, res;
-//    double x, y, z;
-//    foreach (Triangle3D t, _surfacep) {
-//        p1 = t.S0;
-//        p2 = t.S1;
-//        p3 = t.S2;
-//        if( !v.empty() && (find(v.begin(), v.end(), p1) == v.end()) ){
-//            x = p1.x; y = p1.y; z = p1.z;
-//            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
-//            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
-//            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
-//            res = Point3D(nx, ny, nz);
-//            res.normalise();
-////            _surfacen.push_back( res );
-//            v.push_back(p1);
-//        }
-//        if( !v.empty() && (find(v.begin(), v.end(), p2) == v.end()) ){
-//            x = p2.x; y = p2.y; z = p2.z;
-//            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
-//            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
-//            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
-//            res = Point3D(nx, ny, nz);
-//            res.normalise();
-////            _surfacen.push_back( res );
-//            v.push_back(p2);
-//        }
-//        if( !v.empty() && (find(v.begin(), v.end(), p3) == v.end()) ){
-//            x = p3.x; y = p3.y; z = p3.z;
-//            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
-//            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
-//            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
-//            res = Point3D(nx, ny, nz);
-//            res.normalise();
-////            _surfacen.push_back( res );
-//            v.push_back(p3);
-//        }
-//    }
+    vector<Point3D> v;
+    Point3D p1, p2, p3, res1, res2, res3;
+    double x, y, z;
+    Triangle3D rest;
+    foreach (Triangle3D t, _surfacep) {
+        p1 = t.S0;
+        p2 = t.S1;
+        p3 = t.S2;
+        if( !v.empty() && (find(v.begin(), v.end(), p1) == v.end()) ){
+            x = p1.x; y = p1.y; z = p1.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res1 = Point3D(nx, ny, nz);
+            v.push_back(p1);
+        }
+        if( !v.empty() && (find(v.begin(), v.end(), p2) == v.end()) ){
+            x = p2.x; y = p2.y; z = p2.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res2 = Point3D(nx, ny, nz);
+            res2.normalise();
+            v.push_back(p2);
+        }
+        if( !v.empty() && (find(v.begin(), v.end(), p3) == v.end()) ){
+            x = p3.x; y = p3.y; z = p3.z;
+            double nx = computeImplicitFunc( x-0.01, y, z ) - computeImplicitFunc( x+0.01, y, z );
+            double ny = computeImplicitFunc( x, y-0.01, z ) - computeImplicitFunc( x, y+0.01, z );
+            double nz = computeImplicitFunc( x, y, z-0.01 ) - computeImplicitFunc( x, y, z+0.01 );
+            res3 = Point3D(nx, ny, nz);
+            res3.normalise();
+            v.push_back(p3);
+        }
+
+        rest.S0 = res1;
+        rest.S1 = res2;
+        rest.S2 = res3;
+        _surfacen.push_back( rest );
+    }
 }
 
 void PointsToSurface::save_obj(){
