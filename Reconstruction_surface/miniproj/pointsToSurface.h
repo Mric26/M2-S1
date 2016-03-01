@@ -7,6 +7,7 @@
 #include"data_struct_algo.h"
 #include"iso_value.h"
 #include <QString>
+#include <glm/glm.hpp>
 
 class PointsToSurface {
  public:
@@ -65,7 +66,9 @@ class PointsToSurface {
 
   //FOCNTIONS PERSOS
   Point3D barycentre(v_Point3D v);
+  double calculR();
   void computeRecursiveOrientedNormals(vector<int> v, bool t[]);
+  void save_obj();
 };
 
 

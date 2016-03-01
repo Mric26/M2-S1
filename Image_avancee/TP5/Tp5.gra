@@ -1,6 +1,6 @@
 <Gratin type="pipeline">
- <int name="majorVersion" val="0"/>
- <int name="minorVersion" val="3"/>
+ <int val="0" name="majorVersion"/>
+ <int val="3" name="minorVersion"/>
  <IOData name="mainWindow">
   <IOData name="graphWidget">
    <IOData name="graph">
@@ -17,53 +17,53 @@
      <float name="0" val="-404.381"/>
      <float name="1" val="-551.823"/>
     </vector2f>
-    <int name="nodeInputNameSize-0" val="0"/>
-    <int name="nodeOutputNameSize-0" val="1"/>
-    <string name="nodeOutputName-0-0" val="outBuffer0"/>
-    <string name="nodeStringId-1" val="imgLoaderId"/>
-    <uint name="nodeVersion-1" val="1"/>
-    <string name="nodeName-1" val="imageLoader"/>
-    <string name="nodePath-1" val="Imaging/"/>
-    <string name="nodeDesc-1" val="Image loader"/>
-    <string name="nodeHelp-1" val="Load an image."/>
-    <uint name="nodeId-1" val="1"/>
-    <uint name="nodeGraphId-1" val="0"/>
+    <int val="0" name="nodeInputNameSize-0"/>
+    <int val="1" name="nodeOutputNameSize-0"/>
+    <string val="outBuffer0" name="nodeOutputName-0-0"/>
+    <string val="imgLoaderId" name="nodeStringId-1"/>
+    <uint val="1" name="nodeVersion-1"/>
+    <string val="imageLoader" name="nodeName-1"/>
+    <string val="Imaging/" name="nodePath-1"/>
+    <string val="Image loader" name="nodeDesc-1"/>
+    <string val="Load an image." name="nodeHelp-1"/>
+    <uint val="1" name="nodeId-1"/>
+    <uint val="0" name="nodeGraphId-1"/>
     <vector2f name="nodePos-1">
      <float name="0" val="-1454.25"/>
      <float name="1" val="277.019"/>
     </vector2f>
-    <int name="nodeInputNameSize-1" val="0"/>
-    <int name="nodeOutputNameSize-1" val="1"/>
-    <string name="nodeOutputName-1-0" val="image"/>
-    <string name="nodeStringId-2" val="imgGenericId"/>
-    <uint name="nodeVersion-2" val="1"/>
-    <string name="nodeName-2" val="genericImage"/>
-    <string name="nodePath-2" val="Generic/"/>
-    <string name="nodeDesc-2" val="Generic node for image processing"/>
-    <string name="nodeHelp-2" val="This node was designed to create custom shaders&#xa;The settings widget allows to modify input, output parameters&#xa;as well as the output image sizes.&#xa;&#xa;WARNING1: you will be able to modify the number of inputs/outputs&#xa;only if the node is entirely disconnected.&#xa;WARNING2: input/output names will not be modified if a custom node is created&#xa;from this node because these names should be edited directly in the setting widget&#xa;WARNING3: modifying the settings of a node will remove all previously&#xa;defined keyframes&#xa;&#xa;* Special data allows to modify the output image (using a multiple of&#xa;the input size, plus an offset vector&#xa;Check use mouse/keyboard if you want to interact with the mouse&#xa;&#xa;* Input data allows to add/remove/displace input data (only if disconnected)&#xa;&#xa;* Output data allows to add/remove/displace output data (only if disconnected)&#xa;&#xa;* Param data allows to add/remove parameters that will automatically be &#xa;included in your shader.&#xa;For each of them you may choose a proper name, type, and min/max/default values.&#xa;Check keyframes if you want your parameter to be accessible&#xa; through the animation widget&#xa;&#xa;In the node interface itself:&#xa;Source tab contains the head and body of your GLSL source (only the body is editable)&#xa;Params tab contains the defined widgets according to your setting choices&#xa;Log tab contains compilation errors&#xa;&#xa;Once your settings and source completed, click on apply to see the result&#xa;"/>
-    <uint name="nodeId-2" val="2"/>
-    <uint name="nodeGraphId-2" val="0"/>
+    <int val="0" name="nodeInputNameSize-1"/>
+    <int val="1" name="nodeOutputNameSize-1"/>
+    <string val="image" name="nodeOutputName-1-0"/>
+    <string val="imgGenericId" name="nodeStringId-2"/>
+    <uint val="1" name="nodeVersion-2"/>
+    <string val="genericImage" name="nodeName-2"/>
+    <string val="Generic/" name="nodePath-2"/>
+    <string val="Generic node for image processing" name="nodeDesc-2"/>
+    <string val="This node was designed to create custom shaders&#xa;The settings widget allows to modify input, output parameters&#xa;as well as the output image sizes.&#xa;&#xa;WARNING1: you will be able to modify the number of inputs/outputs&#xa;only if the node is entirely disconnected.&#xa;WARNING2: input/output names will not be modified if a custom node is created&#xa;from this node because these names should be edited directly in the setting widget&#xa;WARNING3: modifying the settings of a node will remove all previously&#xa;defined keyframes&#xa;&#xa;* Special data allows to modify the output image (using a multiple of&#xa;the input size, plus an offset vector&#xa;Check use mouse/keyboard if you want to interact with the mouse&#xa;&#xa;* Input data allows to add/remove/displace input data (only if disconnected)&#xa;&#xa;* Output data allows to add/remove/displace output data (only if disconnected)&#xa;&#xa;* Param data allows to add/remove parameters that will automatically be &#xa;included in your shader.&#xa;For each of them you may choose a proper name, type, and min/max/default values.&#xa;Check keyframes if you want your parameter to be accessible&#xa; through the animation widget&#xa;&#xa;In the node interface itself:&#xa;Source tab contains the head and body of your GLSL source (only the body is editable)&#xa;Params tab contains the defined widgets according to your setting choices&#xa;Log tab contains compilation errors&#xa;&#xa;Once your settings and source completed, click on apply to see the result&#xa;" name="nodeHelp-2"/>
+    <uint val="2" name="nodeId-2"/>
+    <uint val="0" name="nodeGraphId-2"/>
     <vector2f name="nodePos-2">
      <float name="0" val="369.575"/>
      <float name="1" val="-222.098"/>
     </vector2f>
-    <int name="nodeInputNameSize-2" val="2"/>
-    <int name="nodeOutputNameSize-2" val="1"/>
-    <string name="nodeInputName-2-0" val="environnement"/>
-    <string name="nodeInputName-2-1" val="gradientNoise"/>
-    <string name="nodeOutputName-2-0" val="outBuffer0"/>
-    <uint name="nbConnections-0-1" val="0"/>
-    <uint name="nbConnections-0-2" val="1"/>
+    <int val="2" name="nodeInputNameSize-2"/>
+    <int val="1" name="nodeOutputNameSize-2"/>
+    <string val="environnement" name="nodeInputName-2-0"/>
+    <string val="gradientNoise" name="nodeInputName-2-1"/>
+    <string val="outBuffer0" name="nodeOutputName-2-0"/>
+    <uint val="0" name="nbConnections-0-1"/>
+    <uint val="1" name="nbConnections-0-2"/>
     <vector2u name="connection-0-2-0">
-     <uint name="0" val="0"/>
-     <uint name="1" val="1"/>
+     <uint val="0" name="0"/>
+     <uint val="1" name="1"/>
     </vector2u>
-    <uint name="nbConnections-1-2" val="1"/>
+    <uint val="1" name="nbConnections-1-2"/>
     <vector2u name="connection-1-2-0">
-     <uint name="0" val="0"/>
-     <uint name="1" val="0"/>
+     <uint val="0" name="0"/>
+     <uint val="0" name="1"/>
     </vector2u>
-    <bool name="nodeHasWidget-0" val="1"/>
+    <bool val="1" name="nodeHasWidget-0"/>
     <IOData name="node-0">
      <string name="genericGlslVersion" val="420"/>
      <string name="genericNodeName" val="GradientNoise"/>
@@ -79,69 +79,69 @@
      <uint name="genericBlendSrc" val="1"/>
      <uint name="genericBlendDst" val="0"/>
      <vector4f name="genericBackground">
-      <float name="0" val="0"/>
-      <float name="1" val="0"/>
-      <float name="2" val="0"/>
-      <float name="3" val="0"/>
+      <float val="0" name="0"/>
+      <float val="0" name="1"/>
+      <float val="0" name="2"/>
+      <float val="0" name="3"/>
      </vector4f>
-     <string name="genericVertHead" val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;"/>
-     <string name="genericVertBody" val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;"/>
-     <string name="genericFragHead" val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;"/>
-     <string name="genericFragBody" val="vec3 hash(vec3 p) {&#xa;&#x9;p = vec3(dot(p,vec3(127.1,311.7, 74.7)), dot(p,vec3(269.5,183.3,246.1)), dot(p,vec3(113.5,271.9,124.6)));&#xa;&#x9;return -1.0 + 2.0*fract(sin(p)*43758.5453123);&#xa;}&#xa;&#xa;float GradientNoise( vec3 p){&#xa;&#x9;vec3 f = fract(p);&#xa;&#xa;&#x9;float v000 = dot( hash( floor(p) + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) );&#xa;&#x9;float v100 = dot( hash( floor(p) + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) );&#xa;&#x9;float v010 = dot( hash( floor(p) + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) );&#xa;&#x9;float v110 = dot( hash( floor(p) + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) );&#xa;&#x9;float v001 = dot( hash( floor(p) + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) );&#xa;&#x9;float v101 = dot( hash( floor(p) + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) );&#xa;&#x9;float v011 = dot( hash( floor(p) + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) );&#xa;&#x9;float v111 = dot( hash( floor(p) + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) );&#xa;&#xa;&#x9;vec3 u = f*f*(3.0-2.0*f) ;&#xa;&#x9;float a1 = mix(v000, v100, u.x);&#xa;&#x9;float a2 = mix(v010, v110, u.x);&#xa;&#x9;float a3 = mix(v001, v101, u.x);&#xa;&#x9;float a4 = mix(v011, v111, u.x);&#xa;&#x9;float b1 = mix(a1, a2, u.y);&#xa;&#x9;float b2 = mix(a3, a4, u.y);&#xa;&#x9;float res = mix(b1, b2, u.z)*0.5+0.5;&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float FractalNoise(vec3 p, float amplitude, float frequence, float nbOctaves, float persistence) {&#xa;&#x9;float a = amplitude;&#xa;&#x9;float f = frequence;&#xa;&#x9;float n = 0.0;&#xa;&#xa;&#x9;for( int i = 0; i &lt; nbOctaves; ++i) {&#xa;&#x9;&#x9;n = n + a * GradientNoise( p * f );&#xa;&#x9;&#x9;f = f * 2.;&#xa;&#x9;&#x9;a = a * persistence;&#xa;&#x9;}&#x9;&#xa;&#x9;return n;&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;vec3 p = vec3(gl_FragCoord.xy/512, zCoord);&#xa;&#x9;float n = FractalNoise( p, Amplitude, Frequence, NbOctaves, Persistence );&#xa;&#x9;outBuffer0 =  vec4(vec3(n),1.);&#xa;}&#xa;"/>
-     <string name="genericTessCHead" val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;"/>
-     <string name="genericTessCBody" val="void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = 1;&#xa;&#x9;gl_TessLevelOuter[1] = 1;&#xa;&#x9;gl_TessLevelOuter[2] = 1;&#xa;&#x9;gl_TessLevelOuter[3] = 1;&#xa;&#x9;gl_TessLevelInner[0] = 1;&#xa;&#x9;gl_TessLevelInner[1] = 1;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;}&#xa;"/>
-     <string name="genericTessEHead" val="#version 420&#xa;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;"/>
-     <string name="genericTessEBody" val="layout(quads,equal_spacing) in;&#xa;&#xa;void main() {&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;}&#xa;"/>
-     <string name="genericGeomHead" val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;"/>
-     <string name="genericGeomBody" val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}"/>
+     <string val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;" name="genericVertHead"/>
+     <string val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;" name="genericVertBody"/>
+     <string val="#version 420&#xa;&#xa;layout(location = 0) out vec4 outBuffer0;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;" name="genericFragHead"/>
+     <string val="vec3 hash(vec3 p) {&#xa;&#x9;p = vec3(dot(p,vec3(127.1,311.7, 74.7)), dot(p,vec3(269.5,183.3,246.1)), dot(p,vec3(113.5,271.9,124.6)));&#xa;&#x9;return -1.0 + 2.0*fract(sin(p)*43758.5453123);&#xa;}&#xa;&#xa;float GradientNoise( vec3 p){&#xa;&#x9;vec3 f = fract(p);&#xa;&#xa;&#x9;float v000 = dot( hash( floor(p) + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) );&#xa;&#x9;float v100 = dot( hash( floor(p) + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) );&#xa;&#x9;float v010 = dot( hash( floor(p) + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) );&#xa;&#x9;float v110 = dot( hash( floor(p) + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) );&#xa;&#x9;float v001 = dot( hash( floor(p) + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) );&#xa;&#x9;float v101 = dot( hash( floor(p) + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) );&#xa;&#x9;float v011 = dot( hash( floor(p) + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) );&#xa;&#x9;float v111 = dot( hash( floor(p) + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) );&#xa;&#xa;&#x9;vec3 u = f*f*(3.0-2.0*f) ;&#xa;&#x9;float a1 = mix(v000, v100, u.x);&#xa;&#x9;float a2 = mix(v010, v110, u.x);&#xa;&#x9;float a3 = mix(v001, v101, u.x);&#xa;&#x9;float a4 = mix(v011, v111, u.x);&#xa;&#x9;float b1 = mix(a1, a2, u.y);&#xa;&#x9;float b2 = mix(a3, a4, u.y);&#xa;&#x9;float res = mix(b1, b2, u.z)*0.5+0.5;&#xa;&#xa;&#x9;return res;&#xa;}&#xa;&#xa;float FractalNoise(vec3 p, float amplitude, float frequence, float nbOctaves, float persistence) {&#xa;&#x9;float a = amplitude;&#xa;&#x9;float f = frequence;&#xa;&#x9;float n = 0.0;&#xa;&#xa;&#x9;for( int i = 0; i &lt; nbOctaves; ++i) {&#xa;&#x9;&#x9;n = n + a * GradientNoise( p * f );&#xa;&#x9;&#x9;f = f * 2.;&#xa;&#x9;&#x9;a = a * persistence;&#xa;&#x9;}&#x9;&#xa;&#x9;return n;&#xa;}&#xa;&#xa;void main() {&#xa;&#x9;vec3 p = vec3(gl_FragCoord.xy/512, zCoord);&#xa;&#x9;float n = FractalNoise( p, Amplitude, Frequence, NbOctaves, Persistence );&#xa;&#x9;outBuffer0 =  vec4(vec3(n),1.);&#xa;}&#xa;" name="genericFragBody"/>
+     <string val="#version 420&#xa;&#xa;layout(vertices = 4) out;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;" name="genericTessCHead"/>
+     <string val="void main(void) {&#xa;&#x9;gl_TessLevelOuter[0] = 1;&#xa;&#x9;gl_TessLevelOuter[1] = 1;&#xa;&#x9;gl_TessLevelOuter[2] = 1;&#xa;&#x9;gl_TessLevelOuter[3] = 1;&#xa;&#x9;gl_TessLevelInner[0] = 1;&#xa;&#x9;gl_TessLevelInner[1] = 1;&#xa;&#x9;gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;&#xa;}&#xa;" name="genericTessCBody"/>
+     <string val="#version 420&#xa;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;" name="genericTessEHead"/>
+     <string val="layout(quads,equal_spacing) in;&#xa;&#xa;void main() {&#xa;&#x9;vec4 p1 = mix(gl_in[0].gl_Position,gl_in[1].gl_Position,gl_TessCoord.x);&#xa;&#x9;vec4 p2 = mix(gl_in[3].gl_Position,gl_in[2].gl_Position,gl_TessCoord.x);&#xa;&#x9;gl_Position = mix(p1,p2,gl_TessCoord.y);&#xa;}&#xa;" name="genericTessEBody"/>
+     <string val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform float Frequence;&#xa;uniform float Amplitude;&#xa;uniform float Persistence;&#xa;uniform float zCoord;&#xa;uniform int NbOctaves;&#xa;" name="genericGeomHead"/>
+     <string val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}" name="genericGeomBody"/>
      <vector2f name="genericTSize">
-      <float name="0" val="1"/>
-      <float name="1" val="1"/>
+      <float val="1" name="0"/>
+      <float val="1" name="1"/>
      </vector2f>
      <vector2f name="genericTOffset">
-      <float name="0" val="500"/>
-      <float name="1" val="500"/>
+      <float val="500" name="0"/>
+      <float val="500" name="1"/>
      </vector2f>
-     <bool name="genericNeedMouse" val="0"/>
-     <bool name="genericNeedKeyboard" val="0"/>
-     <uint name="genericNbWidgets" val="5"/>
-     <int name="genericWidgetType-0" val="0"/>
-     <int name="genericWidgetView-0" val="1"/>
-     <string name="genericWidgetName-0" val="Frequence"/>
-     <bool name="genericWidgetKeyframed-0" val="0"/>
-     <int name="genericWidgetType-1" val="0"/>
-     <int name="genericWidgetView-1" val="1"/>
-     <string name="genericWidgetName-1" val="Amplitude"/>
-     <bool name="genericWidgetKeyframed-1" val="0"/>
-     <int name="genericWidgetType-2" val="0"/>
-     <int name="genericWidgetView-2" val="1"/>
-     <string name="genericWidgetName-2" val="Persistence"/>
-     <bool name="genericWidgetKeyframed-2" val="0"/>
-     <int name="genericWidgetType-3" val="1"/>
-     <int name="genericWidgetView-3" val="1"/>
-     <string name="genericWidgetName-3" val="NbOctaves"/>
-     <bool name="genericWidgetKeyframed-3" val="0"/>
-     <int name="genericWidgetType-4" val="0"/>
-     <int name="genericWidgetView-4" val="1"/>
-     <string name="genericWidgetName-4" val="zCoord"/>
-     <bool name="genericWidgetKeyframed-4" val="0"/>
+     <bool val="0" name="genericNeedMouse"/>
+     <bool val="0" name="genericNeedKeyboard"/>
+     <uint val="5" name="genericNbWidgets"/>
+     <int val="0" name="genericWidgetType-0"/>
+     <int val="1" name="genericWidgetView-0"/>
+     <string val="Frequence" name="genericWidgetName-0"/>
+     <bool val="0" name="genericWidgetKeyframed-0"/>
+     <int val="0" name="genericWidgetType-1"/>
+     <int val="1" name="genericWidgetView-1"/>
+     <string val="Amplitude" name="genericWidgetName-1"/>
+     <bool val="0" name="genericWidgetKeyframed-1"/>
+     <int val="0" name="genericWidgetType-2"/>
+     <int val="1" name="genericWidgetView-2"/>
+     <string val="Persistence" name="genericWidgetName-2"/>
+     <bool val="0" name="genericWidgetKeyframed-2"/>
+     <int val="1" name="genericWidgetType-3"/>
+     <int val="1" name="genericWidgetView-3"/>
+     <string val="NbOctaves" name="genericWidgetName-3"/>
+     <bool val="0" name="genericWidgetKeyframed-3"/>
+     <int val="0" name="genericWidgetType-4"/>
+     <int val="1" name="genericWidgetView-4"/>
+     <string val="zCoord" name="genericWidgetName-4"/>
+     <bool val="0" name="genericWidgetKeyframed-4"/>
     </IOData>
     <IOData name="nodeWidget-0">
-     <uint name="nbChildren" val="5"/>
+     <uint val="5" name="nbChildren"/>
      <IOData name="childWidget-0">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="100"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="100" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="33.4"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="33.4"/>
@@ -149,22 +149,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-1">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="1"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="0.763"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="0.763"/>
@@ -172,22 +172,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-2">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="1"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="0.351"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="0.351"/>
@@ -195,60 +195,60 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-3">
-      <bool name="intAttribKeyframed" val="0"/>
-      <int name="intAttribMinVal" val="0"/>
-      <int name="intAttribMaxVal" val="10"/>
+      <bool val="0" name="intAttribKeyframed"/>
+      <int val="0" name="intAttribMinVal"/>
+      <int val="10" name="intAttribMaxVal"/>
       <IOData name="intAttribCurve">
-       <int name="currentVal" val="4"/>
-       <uint name="nbCurves" val="1"/>
+       <int val="4" name="currentVal"/>
+       <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
-          <float name="0" val="0"/>
-          <float name="1" val="4"/>
+          <float val="0" name="0"/>
+          <float val="4" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-4">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="1"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0"/>
-       <uint name="nbCurves" val="1"/>
+       <float val="0" name="currentVal"/>
+       <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
-          <float name="0" val="0"/>
-          <float name="1" val="0"/>
+          <float val="0" name="0"/>
+          <float val="0" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
     </IOData>
     <vector2f name="nodeOutputPos-0-0">
-     <float name="0" val="55"/>
-     <float name="1" val="27.5"/>
+     <float val="55" name="0"/>
+     <float val="27.5" name="1"/>
     </vector2f>
-    <bool name="nodeHasWidget-1" val="1"/>
+    <bool val="1" name="nodeHasWidget-1"/>
     <IOData name="node-1">
      <string name="filename" val="ressources/kitchen.png"/>
      <vector2i name="size">
@@ -257,33 +257,33 @@
      </vector2i>
     </IOData>
     <IOData name="nodeWidget-1">
-     <bool name="keepAspectRatio" val="0"/>
-     <bool name="keepSize" val="0"/>
+     <bool val="0" name="keepAspectRatio"/>
+     <bool val="0" name="keepSize"/>
     </IOData>
     <vector2f name="nodeOutputPos-1-0">
      <float name="0" val="140.8"/>
      <float name="1" val="35.2"/>
     </vector2f>
-    <bool name="nodeHasWidget-2" val="1"/>
+    <bool val="1" name="nodeHasWidget-2"/>
     <IOData name="node-2">
-     <string name="genericGlslVersion" val="420"/>
-     <string name="genericNodeName" val="genericImage"/>
-     <bool name="genericUseVertex" val="0"/>
-     <bool name="genericUseTesselation" val="0"/>
-     <bool name="genericUseGeometry" val="0"/>
-     <bool name="genericUseFragment" val="1"/>
-     <int name="genericOutFilter" val="9729"/>
-     <int name="genericOutWrap" val="33071"/>
-     <bool name="genericUseDepthTest" val="0"/>
-     <bool name="genericUseBlending" val="0"/>
-     <uint name="genericDepthFunc" val="513"/>
-     <uint name="genericBlendSrc" val="1"/>
-     <uint name="genericBlendDst" val="0"/>
+     <string val="420" name="genericGlslVersion"/>
+     <string val="genericImage" name="genericNodeName"/>
+     <bool val="0" name="genericUseVertex"/>
+     <bool val="0" name="genericUseTesselation"/>
+     <bool val="0" name="genericUseGeometry"/>
+     <bool val="1" name="genericUseFragment"/>
+     <int val="9729" name="genericOutFilter"/>
+     <int val="33071" name="genericOutWrap"/>
+     <bool val="0" name="genericUseDepthTest"/>
+     <bool val="0" name="genericUseBlending"/>
+     <uint val="513" name="genericDepthFunc"/>
+     <uint val="1" name="genericBlendSrc"/>
+     <uint val="0" name="genericBlendDst"/>
      <vector4f name="genericBackground">
-      <float name="0" val="0"/>
-      <float name="1" val="0.694118"/>
-      <float name="2" val="0.980392"/>
-      <float name="3" val="0"/>
+      <float val="0" name="0"/>
+      <float val="0.694118" name="1"/>
+      <float val="0.980392" name="2"/>
+      <float val="0" name="3"/>
      </vector4f>
      <string name="genericVertHead" val="#version 420&#xa;&#xa;layout(location = 0) in vec2 vertex;&#xa;layout(location = 1) in vec2 coord;&#xa;uniform sampler2D environnement;&#xa;uniform sampler2D gradientNoise;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;uniform float t;&#xa;"/>
      <string name="genericVertBody" val="out vec2 texcoord;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = vec4(vertex,0,1);&#xa;&#x9;texcoord    = coord;&#xa;}&#xa;"/>
@@ -296,61 +296,61 @@
      <string name="genericGeomHead" val="#version 420&#xa;&#xa;layout(triangles) in;&#xa;uniform sampler2D environnement;&#xa;uniform sampler2D gradientNoise;&#xa;uniform float module;&#xa;uniform float azimut;&#xa;uniform float elevation;&#xa;uniform float xLight;&#xa;uniform float yLight;&#xa;uniform float zLight;&#xa;uniform float t;&#xa;"/>
      <string name="genericGeomBody" val="layout(triangle_strip, max_vertices = 3) out;&#xa;&#xa;void main() {&#xa;&#x9;gl_Position = gl_in[0].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[1].gl_Position; EmitVertex();&#xa;&#x9;gl_Position = gl_in[2].gl_Position; EmitVertex();&#xa;&#x9;EndPrimitive();&#xa;}"/>
      <vector2f name="genericTSize">
-      <float name="0" val="0"/>
-      <float name="1" val="0"/>
+      <float val="0" name="0"/>
+      <float val="0" name="1"/>
      </vector2f>
      <vector2f name="genericTOffset">
-      <float name="0" val="512"/>
-      <float name="1" val="512"/>
+      <float val="512" name="0"/>
+      <float val="512" name="1"/>
      </vector2f>
-     <bool name="genericNeedMouse" val="0"/>
-     <bool name="genericNeedKeyboard" val="0"/>
-     <uint name="genericNbWidgets" val="7"/>
-     <int name="genericWidgetType-0" val="0"/>
-     <int name="genericWidgetView-0" val="1"/>
-     <string name="genericWidgetName-0" val="module"/>
-     <bool name="genericWidgetKeyframed-0" val="0"/>
-     <int name="genericWidgetType-1" val="0"/>
-     <int name="genericWidgetView-1" val="1"/>
-     <string name="genericWidgetName-1" val="azimut"/>
-     <bool name="genericWidgetKeyframed-1" val="0"/>
-     <int name="genericWidgetType-2" val="0"/>
-     <int name="genericWidgetView-2" val="1"/>
-     <string name="genericWidgetName-2" val="elevation"/>
-     <bool name="genericWidgetKeyframed-2" val="0"/>
-     <int name="genericWidgetType-3" val="0"/>
-     <int name="genericWidgetView-3" val="1"/>
-     <string name="genericWidgetName-3" val="xLight"/>
-     <bool name="genericWidgetKeyframed-3" val="0"/>
-     <int name="genericWidgetType-4" val="0"/>
-     <int name="genericWidgetView-4" val="1"/>
-     <string name="genericWidgetName-4" val="yLight"/>
-     <bool name="genericWidgetKeyframed-4" val="0"/>
-     <int name="genericWidgetType-5" val="0"/>
-     <int name="genericWidgetView-5" val="1"/>
-     <string name="genericWidgetName-5" val="zLight"/>
-     <bool name="genericWidgetKeyframed-5" val="0"/>
-     <int name="genericWidgetType-6" val="0"/>
-     <int name="genericWidgetView-6" val="1"/>
-     <string name="genericWidgetName-6" val="t"/>
-     <bool name="genericWidgetKeyframed-6" val="1"/>
+     <bool val="0" name="genericNeedMouse"/>
+     <bool val="0" name="genericNeedKeyboard"/>
+     <uint val="7" name="genericNbWidgets"/>
+     <int val="0" name="genericWidgetType-0"/>
+     <int val="1" name="genericWidgetView-0"/>
+     <string val="module" name="genericWidgetName-0"/>
+     <bool val="0" name="genericWidgetKeyframed-0"/>
+     <int val="0" name="genericWidgetType-1"/>
+     <int val="1" name="genericWidgetView-1"/>
+     <string val="azimut" name="genericWidgetName-1"/>
+     <bool val="0" name="genericWidgetKeyframed-1"/>
+     <int val="0" name="genericWidgetType-2"/>
+     <int val="1" name="genericWidgetView-2"/>
+     <string val="elevation" name="genericWidgetName-2"/>
+     <bool val="0" name="genericWidgetKeyframed-2"/>
+     <int val="0" name="genericWidgetType-3"/>
+     <int val="1" name="genericWidgetView-3"/>
+     <string val="xLight" name="genericWidgetName-3"/>
+     <bool val="0" name="genericWidgetKeyframed-3"/>
+     <int val="0" name="genericWidgetType-4"/>
+     <int val="1" name="genericWidgetView-4"/>
+     <string val="yLight" name="genericWidgetName-4"/>
+     <bool val="0" name="genericWidgetKeyframed-4"/>
+     <int val="0" name="genericWidgetType-5"/>
+     <int val="1" name="genericWidgetView-5"/>
+     <string val="zLight" name="genericWidgetName-5"/>
+     <bool val="0" name="genericWidgetKeyframed-5"/>
+     <int val="0" name="genericWidgetType-6"/>
+     <int val="1" name="genericWidgetView-6"/>
+     <string val="t" name="genericWidgetName-6"/>
+     <bool val="1" name="genericWidgetKeyframed-6"/>
     </IOData>
     <IOData name="nodeWidget-2">
-     <uint name="nbChildren" val="7"/>
+     <uint val="7" name="nbChildren"/>
      <IOData name="childWidget-0">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0.1"/>
-      <float name="floatAttribMaxVal" val="30"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0.1" name="floatAttribMinVal"/>
+      <float val="30" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="3.2096"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="3.2096"/>
@@ -358,22 +358,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-1">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="6.28319"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="6.28319" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="1.39487"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="1.39487"/>
@@ -381,22 +381,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-2">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0.1"/>
-      <float name="floatAttribMaxVal" val="1.4708"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0.1" name="floatAttribMinVal"/>
+      <float val="1.4708" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="0.490678"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="0.490678"/>
@@ -404,22 +404,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-3">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="-10"/>
-      <float name="floatAttribMaxVal" val="10"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="-10" name="floatAttribMinVal"/>
+      <float val="10" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="0"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="0"/>
@@ -427,22 +427,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-4">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="-10"/>
-      <float name="floatAttribMaxVal" val="10"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="-10" name="floatAttribMinVal"/>
+      <float val="10" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="10"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="10"/>
@@ -450,22 +450,22 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-5">
-      <bool name="floatAttribKeyframed" val="0"/>
-      <float name="floatAttribMinVal" val="0.0001"/>
-      <float name="floatAttribMaxVal" val="10"/>
+      <bool val="0" name="floatAttribKeyframed"/>
+      <float val="0.0001" name="floatAttribMinVal"/>
+      <float val="10" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
        <float name="currentVal" val="10"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
           <float name="1" val="10"/>
@@ -473,30 +473,30 @@
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
      <IOData name="childWidget-6">
-      <bool name="floatAttribKeyframed" val="1"/>
-      <float name="floatAttribMinVal" val="0"/>
-      <float name="floatAttribMaxVal" val="50"/>
+      <bool val="1" name="floatAttribKeyframed"/>
+      <float val="0" name="floatAttribMinVal"/>
+      <float val="50" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0.15"/>
-       <uint name="nbCurves" val="1"/>
+       <float val="0.15" name="currentVal"/>
+       <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
-        <int name="interpType" val="0"/>
-        <int name="leftType" val="0"/>
-        <int name="rightType" val="0"/>
+        <int val="0" name="interpType"/>
+        <int val="0" name="leftType"/>
+        <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint name="nbPoints" val="1"/>
-         <uint name="nbTangents" val="0"/>
+         <uint val="1" name="nbPoints"/>
+         <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
-          <float name="0" val="0"/>
-          <float name="1" val="0.15"/>
+          <float val="0" name="0"/>
+          <float val="0.15" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
       </IOData>
-      <uint name="nbChildren" val="0"/>
+      <uint val="0" name="nbChildren"/>
      </IOData>
     </IOData>
     <vector2f name="nodeInputPos-2-0">
@@ -504,12 +504,12 @@
      <float name="1" val="35.2"/>
     </vector2f>
     <vector2f name="nodeInputPos-2-1">
-     <float name="0" val="55"/>
-     <float name="1" val="27.5"/>
+     <float val="55" name="0"/>
+     <float val="27.5" name="1"/>
     </vector2f>
     <vector2f name="nodeOutputPos-2-0">
-     <float name="0" val="56.32"/>
-     <float name="1" val="28.16"/>
+     <float val="56.32" name="0"/>
+     <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
    <float name="scale" val="1.52171"/>
@@ -518,25 +518,25 @@
     <float name="1" val="-48.4456"/>
    </vector2f>
    <IOData name="animation">
-    <uint name="firstFrame" val="0"/>
-    <uint name="lastFrame" val="100"/>
-    <uint name="currentFrame" val="17"/>
-    <uint name="fps" val="24"/>
+    <uint val="0" name="firstFrame"/>
+    <uint val="100" name="lastFrame"/>
+    <uint val="17" name="currentFrame"/>
+    <uint val="24" name="fps"/>
    </IOData>
   </IOData>
   <IOData name="animationWidget">
    <vector2i name="animationWidgetSize">
-    <int name="0" val="1656"/>
-    <int name="1" val="277"/>
+    <int val="1656" name="0"/>
+    <int val="277" name="1"/>
    </vector2i>
    <IOData name="timelineWidget"/>
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float name="scale" val="2.23002"/>
+   <float val="2.23002" name="scale"/>
    <vector2f name="offset">
-    <float name="0" val="242.517"/>
-    <float name="1" val="235.371"/>
+    <float val="242.517" name="0"/>
+    <float val="235.371" name="1"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>

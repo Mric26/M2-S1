@@ -11,3 +11,17 @@ def runTest01(context):
 salome_pluginsmanager.AddFunction('Test 01',
                                   'Petit programme python pour tester si cela fonctionne',
                                   runTest01)
+
+# -------------------------------------------------------------------------#
+#	Test Parseur														   #
+# -------------------------------------------------------------------------#							
+
+def runParseur(context):
+	import salome
+	from Parseur import parsage
+	print "Test du parseur"
+	parsage()
+
+salome_pluginsmanager.AddFunction('Test Parseur',
+                                  'Petit programme python pour tester si le parseur tourne correctement',
+                                  runParseur)

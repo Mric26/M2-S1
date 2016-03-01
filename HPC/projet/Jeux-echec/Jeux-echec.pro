@@ -46,3 +46,4 @@ RESOURCES += \
     ressources.qrc
 
 LIBS += -fopenmp \
+#LIBS += -L/usr/lib/openmpi/ \

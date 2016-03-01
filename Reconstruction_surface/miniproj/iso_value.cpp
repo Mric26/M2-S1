@@ -160,10 +160,10 @@ void SurfaceIsovaleurGrille::surface_isovaleur
 		bool marques[8];
 		for (int m=0; m<8; m++) 
 		{
-			vs[m] = vf[indice1D[m]];
-			marques[m] = vs[m]<v;
+            vs[m] = vf[indice1D[m]];
+            marques[m] = vs[m]<v;
 		}
-		
+
 // 		// la décomposition en cinq tetraedres suivant la parité de i+j+k 
 // 		unsigned int t[5][4];
 // 		bool ijkpair = (i+j)%2==0;
