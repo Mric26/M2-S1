@@ -1,0 +1,407 @@
+precision highp float;
+
+#define PI 3.1415926535897932384626433832795
+
+in vec2 texcoord;
+
+// Parametres de la lumiere
+vec3 posLight = vec3(xLight, yLight, zLight);
+vec3 colorLight = vec3(1, 1, 1);
+
+vec3 backColor = vec3(0.15,0.15,0.15);
+float d_min = 0.0;
+float d_max = 50;
+float epsi = 0.01;
+
+
+//// Strucutre ////
+struct Base3D{
+	vec3 right;
+	vec3 up;
+	vec3 view;
+};
+
+struct Cam{
+	vec3 ro; 			//origine
+	Base3D base;
+	float angle;		//angle d'ouverture
+	float ratio;			//ratio long/larg
+
+};
+Cam camera;
+
+struct Ray{
+	vec3 ro;		//point origine
+	vec3 rd;		//vecteur directionnel
+};
+
+
+//// Objet 3D ////
+struct Plan{
+	vec3 n; 			//normal
+	float d; 			//offset
+	vec3 color; 	//couleur
+};
+
+struct Sphere{
+	vec3 ro; 		//origine
+	float ra; 		//rayon
+	vec3 color;		//couleur
+};
+
+struct Torus{
+	vec3 ro;		//origine
+	float R;		// grand rayon
+	float r;		// petit rayon
+};
+
+struct Capsule{
+	vec3 a;
+	vec3 b;
+	float r;
+};
+
+
+struct Materiau {
+	vec3 colorAmbient;
+	vec3 colorDiffus;
+	vec3 colorSpecular;
+	float c_reflection;
+};
+
+struct Interesct {
+	float dist;
+	int index;
+};
+
+
+//// Implicit Fonction ////
+float implicitPlan( vec3 p, Plan plan ){
+	return dot(p,plan.n) + plan.d;
+}
+
+float implicitSphere( vec3 p, Sphere s ){
+ 	return length(p-s.ro) - s.ra;
+}
+
+float implicitTorus( vec3 p, Torus t ){
+	vec2 q = vec2( length(p.xz - t.ro.xz) - t.R, p.y - t.ro.y );
+	return length(q) - t.r;
+}
+
+float implicitCapsule( vec3 p, Capsule c ){
+	vec3 pa = p - c.a;
+	vec3 ba = c.b - c.a;
+	float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+	return length( pa - ba*h ) - c.r;
+}
+
+
+//// Operateur ////
+float opUnion(float d1, float d2) {
+	return min( d1, d2 );
+}
+
+float opIntersection(float d1, float d2) {
+	return max(d1, d2);
+}
+
+float opSoustraction(float d1, float d2) {
+	return max(d1, -d2);
+}
+
+float opBlend( float d1, float d2, float k ){
+    float res = exp( -k*d1 ) + exp( -k*d2 );
+    return -log( res )/k;
+}
+
+
+//// Fonction de distance de la scene ////
+Interesct distanceField( vec3 pos ) {
+	Plan p = Plan( vec3(0,0,1), 0, vec3(1,0,0) );
+	Sphere s1 = Sphere(vec3(0,0,1), 1, vec3(1,0,1));
+	Sphere s2 = Sphere(vec3(3,0,1), 1, vec3(1,0,1));
+	Sphere s3 = Sphere(vec3(-3,0,1), 1, vec3(1,0,1));
+
+	// Scene initiale, Plan + 2 Spheres
+	int index = 0;
+	float dist = d_max;
+	float distP, distS;
+
+	distP = implicitPlan( pos, p );
+	if (distP < dist) {
+		dist = distP;
+		index = 1;
+	}
+	
+	distS = implicitSphere( pos, s1 );
+	if (distS < dist) {
+		dist = distS;
+		index = 2;
+	}
+
+	distS = implicitSphere( pos, s2 );
+	if (distS < dist) {
+		dist = distS;
+		index = 3;
+	}
+
+	distS = implicitSphere( pos, s3 );
+	if (distS < dist) {
+		dist = distS;
+		index = 4;
+	}
+
+	return Interesct( dist, index );
+}
+
+//// Fonction qui retourne le materiau associé a l'objet index ////
+Materiau getMateriau( int index, vec3 pos ) {
+	// Materiau du Plan
+	if ( index == 1) {
+		//if ( mod( floor( pos.x )  + floor( pos.y ) , 2) == 0 ) {
+		if ( mod( floor( 2*cos(pos.x) + 0.5*sin(pos.y) ) , 2 ) == 0 ) {
+			return Materiau( vec3(0,0,0), 0.3*vec3(1,0,0), vec3(1,1,1), 0.4 );
+		}
+		return Materiau( vec3(0,0,0), vec3(1,0,0), vec3(1,1,1), 0 );
+	}
+	// La pemiere Sphere
+	if ( index == 2) {
+		return Materiau( 0.4*vec3(0,1,1), 0.2*vec3(0,0,1), vec3(0,0,0), 0 );
+	}
+	// La seconde sphere
+	if ( index == 3) {
+		return Materiau( vec3(0.2,0.2,0.2), 0.3*vec3(1,0,1), vec3(1,1,1), 0.1 );
+	}
+	// La troisieme sphere
+	if ( index == 4) {
+		return Materiau( vec3(0,0,0), 0.4*vec3(1,1,1), 0.4*vec3(1,1,1), 0.9 );
+	}
+	// Materiau par defaut
+	return Materiau( vec3(0,0,0), vec3(0,0,0), vec3(0,0,0), 0 );
+}
+
+
+// Recherche d'une intersection de la source du rayon jusqu'a une distance max
+Interesct computeIntersection( Ray ray, float distMax ){
+	float t = 0;
+	
+	while (t < distMax) {
+		vec3 pos = ray.ro + (t * ray.rd);
+		Interesct ft = distanceField( pos );
+		if ( ft.dist < epsi ) {
+			return Interesct(t, ft.index);
+		}
+		t += ft.dist;
+	}
+
+	// On retourne -1 si le champ n'a pas été intersecté
+	return Interesct(-1, 0);
+}
+
+// Calcul du coefficient d'ombre (methode d'iquilezles)
+float softShadow( Ray ray, float distMax, float k ){
+	float t = 0;
+	float res = 1.0;
+
+	while (t < distMax) {
+		vec3 pos = ray.ro + (t * ray.rd);
+		float ft = distanceField( pos ).dist;
+		if ( ft < epsi ) {
+			return 0.0;
+		}
+		res = min( res, k * ft/t );
+		t += ft;
+	}
+
+	// On retourne la distance minimale entre le rayon et le champ scalaire
+	return res;
+}
+
+// Calcul de la normale
+vec3 computeNormale( vec3 pos ){
+	float dx = (distanceField( vec3(pos.x+epsi, pos.y, pos.z) )).dist - (distanceField( vec3(pos.x-epsi, pos.y, pos.z) )).dist;
+	float dy = (distanceField( vec3(pos.x, pos.y+epsi, pos.z) )).dist - (distanceField( vec3(pos.x, pos.y-epsi, pos.z) )).dist;
+	float dz = (distanceField( vec3(pos.x, pos.y, pos.z+epsi) )).dist - (distanceField( vec3(pos.x, pos.y, pos.z-epsi) )).dist;
+	return normalize( vec3(dx, dy, dz) );
+}
+
+
+//// Mapping ////
+vec2 sphericalMapping( vec3 direction ) {
+	float phi = asin( direction.z );
+	float teta = acos( direction.x );
+	if ( direction.y < 0 ) {
+		teta = -teta;
+	}
+	teta = mod(teta, 2*PI);
+	
+	float uCoord = teta / ( 2*PI );
+	float vCoord = ( phi + (PI/2) ) / PI;
+	return vec2( uCoord, vCoord );
+}
+
+
+//// BRDF ////
+vec3 BRDF_Diffus( vec3 l, vec3 v, Materiau mat ) {
+	return mat.colorDiffus / PI;
+}
+
+vec3 BRDF_MicroFacet( vec3 pos, vec3 l, vec3 v, Materiau mat ){
+	vec3 n = computeNormale( pos );
+	vec3 f0 = vec3(1,1,1);
+	vec3 h = normalize( l + v );
+	vec3 m = h / 2;
+	float alpha = 1;
+	//lumière diffuse
+	vec3 diff = mat.colorDiffus / PI;
+	//lumière speculaire
+	vec3 Fresnel = f0 + (1 - f0) * pow( 1 - dot(l, h), 5 );
+	float GImplicit = dot( n, l ) * dot( n, v );
+	float D = ( (alpha + 2) / (2 * PI) ) * pow( dot( n, m ), alpha ) ;
+	vec3 spec = (Fresnel * GImplicit * D) / (4 * GImplicit)  ;
+	//resultat
+	return diff + spec;
+}
+
+vec3 BRDF_Ward( vec3 pos, vec3 l, vec3 v, Materiau mat ) {
+	vec3 n = computeNormale( pos );
+	vec3 tangentDirection;
+
+	vec3 t = cross( n, vec3(1,0,0) );
+	if ( length( t ) > 0) {
+		tangentDirection = t;
+	} else {
+		tangentDirection = cross( n, vec3(0,1,0) );
+	}
+
+	float dist = length( camera.ro - pos );
+	float attenuation = 1.0 / dist;
+
+	vec3 halfVector = normalize( l + v );
+	vec3 binormalDirection = cross( n, tangentDirection );
+	float dotLN = dot( l, n );
+
+	vec3 ambientLighting = mat.colorAmbient;
+	vec3 diffuseReflection = attenuation * colorLight * mat.colorDiffus * max(0.0, dotLN);
+	vec3 specularReflection;
+	if ( dotLN < 0.0 ) {
+		specularReflection = vec3(0,0,0);
+	} else {
+		float dotHN = dot( halfVector, n );
+		float dotVN = dot( v, n );
+		float dotHT = dot( halfVector, tangentDirection );
+		float dotHB = dot( halfVector, binormalDirection );
+
+		float tmp = exp( -2.0 * pow(dotHT, 2) + pow(dotHB, 2) / (1.0 + dotHN));
+		specularReflection = attenuation * mat.colorSpecular * sqrt(max(0.0, dotLN / dotVN)) * tmp;
+	}
+	vec2 coord = sphericalMapping( n );
+	vec3 fractalNoise = texture2D( gradientNoise , coord ).xyz;
+	float k = pow( abs((fractalNoise.x - 0.5) / 2), 0.5);
+
+	return  (k * ambientLighting) + diffuseReflection + specularReflection;
+}
+
+vec3 BRDF_Phong( vec3 pos, vec3 l, vec3 v, Materiau mat ) {
+	vec3 n = computeNormale( pos );
+	vec3 R = reflect( l, n );
+	float dotLN = dot( l, n );
+	float dotVR = dot( v, R );
+	
+	vec3 ambientLighting = mat.colorAmbient;
+	vec3 diffuseReflection = mat.colorDiffus * max(0.0, dotLN);
+	vec3 specularReflection = mat.colorSpecular * pow( abs( dotVR), 50);
+	
+	return  ambientLighting + diffuseReflection + specularReflection;
+}
+
+// Rendu de profondeur
+vec3 renderDepth(  float t  ) {
+	return vec3(t/d_max, t/d_max, t/d_max);
+}
+
+// Rendu des normales
+vec3 renderNormale( vec3 pos ) {
+	return computeNormale( pos );
+}
+
+// Rendu avec illumination direct
+vec3 directIllumination( vec3 pos, Ray ray, int index ){
+	// Si on tappe le ciel
+	if ( index == 0 ) {
+		return texture2D( environnement, sphericalMapping(ray.rd) ).xyz;
+	}
+
+	// Calcul de la BRDF
+	vec3 dirLight = normalize( vec3(posLight - pos) );
+	vec3 view = normalize(camera.ro - pos);
+	vec3 BRDF;
+	if (index == 1) {
+		BRDF = BRDF_MicroFacet( pos, dirLight, view, getMateriau(index, pos) );
+	} else if (index == 2) {
+		BRDF = BRDF_Ward( pos, dirLight, view, getMateriau(index, pos) );
+	} else if (index == 3) {
+		BRDF = BRDF_Phong( pos, dirLight, view, getMateriau(index, pos) );
+	} else if (index == 4) {
+		BRDF = BRDF_MicroFacet( pos, dirLight, view, getMateriau(index, pos) );
+	}
+
+	// Equation de la reflectance
+	vec3 normale = computeNormale( pos );
+	vec3 res = PI * BRDF * max( 0.0, dot(normale, dirLight) );
+
+	// Caclcul du coefficient de l'ombre
+	vec3 shadowDir = normalize( vec3(posLight - pos) );
+	Ray shadowRay = Ray( pos, shadowDir );
+	float shadowCoef = softShadow( shadowRay, length(posLight - pos), 8 );
+
+	return shadowCoef * res;
+}
+
+// Rendu du ray tracing
+vec3 rayTracing( Ray ray ){
+	vec3 accum = vec3(0,0,0);
+	vec3 mask = vec3(1,1,1);
+	for ( int i = 0; i <3; i++) {
+		Interesct inter = computeIntersection( ray, d_max );
+		vec3 pos = ray.ro + ( (inter.dist - epsi) * ray.rd );
+		vec3 color = directIllumination( pos, ray, inter.index );
+		accum = accum + (mask * color);
+		// Si on a frappe un objet
+		if ( inter.index > 0 ) {
+			Materiau mat = getMateriau( inter.index, pos );
+			mask = mat.c_reflection * mask;
+			ray = Ray(pos, reflect(ray.rd, computeNormale(pos) ) );
+		} else {
+			return accum;
+		}
+	}
+
+	return accum;
+}
+
+
+void main() {
+	//// Camera ////
+	float xCam = (1+(5*t))*module * cos(azimut) * cos(elevation);
+	float yCam = (1+(5*t))*module * sin(azimut) * cos(elevation);
+	float zCam = (1+(5*t))*module * sin(elevation);
+	vec3 up = normalize ( vec3(0,0,1) );
+	vec3 view = normalize ( -vec3(xCam,yCam,zCam) );
+	vec3 right = normalize ( cross(view, up) );
+	up = normalize ( cross(right, view) );
+	Base3D b = Base3D(right, up, view);
+	camera = Cam( vec3(xCam, yCam, zCam), b, PI/2, 4.0/4.0);
+	
+	//// Ray tracing ////
+	float D = 1.0 / tan( camera.angle/2.0 );
+	vec2 normalCoord = ( 2.0 * (gl_FragCoord.xy / 512) ) - 1;		// Coordonnees du pixel entre [-1 1]x[-1 1]
+	vec3 dr = normalize( (normalCoord.x * b.right) + ((camera.ratio * normalCoord.y) * b.up) + (D * b.view) );
+	Ray ray =  Ray ( camera.ro, dr );
+	
+	vec3 color = rayTracing( ray );
+	
+	outBuffer0 = vec4(color, 1);
+}
+
