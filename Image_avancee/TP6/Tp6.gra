@@ -92,8 +92,8 @@
     <uint val="5" name="nodeId-5"/>
     <uint val="0" name="nodeGraphId-5"/>
     <vector2f name="nodePos-5">
-     <float val="264.841" name="0"/>
-     <float val="-244.797" name="1"/>
+     <float val="352.639" name="0"/>
+     <float val="-242.888" name="1"/>
     </vector2f>
     <int val="3" name="nodeInputNameSize-5"/>
     <int val="1" name="nodeOutputNameSize-5"/>
@@ -319,7 +319,7 @@
      <bool val="0" name="genericNeedMouse"/>
      <bool val="0" name="genericNeedKeyboard"/>
      <uint val="0" name="genericNbWidgets"/>
-     <int val="10" name="pingPongNumber"/>
+     <int val="1" name="pingPongNumber"/>
      <bool val="0" name="pingPongUpdateOnceChanged"/>
      <bool val="0" name="pingPongUpdateAllChanged"/>
      <bool val="1" name="pingPongReinitWhenChanged"/>
@@ -648,7 +648,7 @@
      <bool val="0" name="genericNeedMouse"/>
      <bool val="0" name="genericNeedKeyboard"/>
      <uint val="0" name="genericNbWidgets"/>
-     <int val="10" name="pingPongNumber"/>
+     <int val="1" name="pingPongNumber"/>
      <bool val="0" name="pingPongUpdateOnceChanged"/>
      <bool val="0" name="pingPongUpdateAllChanged"/>
      <bool val="1" name="pingPongReinitWhenChanged"/>
@@ -1097,10 +1097,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="1.47839" name="scale"/>
+   <float val="1.90865" name="scale"/>
    <vector2f name="offset">
-    <float val="1578.49" name="0"/>
-    <float val="186.602" name="1"/>
+    <float val="1208.33" name="0"/>
+    <float val="179.691" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
