@@ -19,6 +19,7 @@ def tableauFaces(text):
 	return surfaceTab
 
 def indiceSurfacePlane(surfaceTab):
+	#recupère lindice de la surface plane
 	compteur = 0
 	for i in surfaceTab:
 		if i[0] == "1":
@@ -41,7 +42,7 @@ def tableauShapes(text):
 	tshapesTab = tshapes.split("*")
 	i = 0
 	for shape in tshapesTab:
-		tshape = shape.split("\r\n")		######## ATTENTION LE \r SOUS LINUX ET NON WINDOWS ########
+		tshape = shape.split("\n")		######## ATTENTION LE \r SOUS LINUX ET NON WINDOWS ########
 		tshape = tshape[1:]
 		tshapesTab[i] = tshape
 		i = i+1
@@ -54,6 +55,82 @@ def findShell(tshapesTab, nbShapes):
 		for i in tshapesTab:
 			if i[0] == "Sh":
 				return i
+
+def creationListeFaces(shell):
+	#construit la liste des faces
+	lFacesShapes = (shell[len(shell)-2] + shell[len(shell)-1]).split(" 0 ")
+	listF = []
+	for i in lFacesShapes[0:-1]:
+		listF.append( tshapesTab[ 198 - abs(int(i)) ] )
+	return listF
+
+def creationListeWiher(listF):
+	#construit la liste des wihers
+	listW = []
+	for i in listF:
+		i = i[4].split(" 0 ")[0:-1]
+		listt = []
+		for j in i:
+			listt.append( tshapesTab[ 198 - abs(int(j)) ] )
+		listW.append(listt)
+	return listW
+
+def creationListeEdges(listW):
+	#construit la liste des edges sans signes
+	listE = []
+	for i in listW:
+		listt = []
+		for j in i:
+			listt.append( j[3].split(" 0 ")[0:-1 ] )
+		listtt = []
+		for k in listt:
+			for l in k:
+				l = l.replace('-','')
+				l = l.replace('+','')
+				listtt.append( l )
+		listE.append(listtt)
+	return listE
+
+def creationListeEdgesPartage(indicePlane, listE):
+	#construit la liste des arretes partages entre la face plane et les cylindres
+	listEP = []
+	for e in listE[indicePlane]:
+		compteur = 0
+		for i in listE:
+			if compteur != indicePlane:
+				if e in i:
+					listEP.append(e)
+			compteur = compteur + 1
+	return listEP
+
+def trouverCentres(listEP, tshapesTab):
+	#construit la liste des centres des percages
+	#1ere atape : recuperation des edges
+	listV = []
+	for e in listEP:
+		e = tshapesTab[ 198 - int(e) ] 
+		listVt = e[9].split(" 0 ")[0:2]
+		coupleV = []
+		for s in listVt:
+			s = s.replace('-','')
+			s = s.replace('+','')
+			coupleV.append(int(s))
+		coupleV.sort()
+		if not( (coupleV in listV) ):
+			listV.append(coupleV)
+	#2eme atape : construction des milieux	
+	listCentre = []
+	for couple in listV:
+		p1 = tshapesTab[ 198 - couple[0] ][2]
+		p1 = p1.split(" ")
+		p2 = tshapesTab[ 198 - couple[1] ][2]
+		p2 = p2.split(" ")
+		pres = []
+		pres.append( (float(p1[0]) + float(p2[0])) / 2 )
+		pres.append( (float(p1[1]) + float(p2[2])) / 2 )
+		pres.append( (float(p1[2]) + float(p2[2])) / 2 )
+		listCentre.append(pres)
+	return listCentre
 
 def parsage():
 	import salome
@@ -87,6 +164,21 @@ def parsage():
 		
 		#on trouve le shell
 		shell = findShell(tshapesTab, nbShapes)
+		
+		#on cree la Liste des faces
+		listF = creationListeFaces(shell)
+
+		#on cree la Liste des wihers
+		listW = creationListeWiher(listF)
+
+		#on cree la Liste Edges
+		listE = creationListeEdges(listW)
+
+		#on cree la Liste Edges partages
+		listEP = creationListeEdgesPartage(indicePlane, listE)
+		
+		#on cree la Liste des centres
+		listCentre2 = trouverCentres(listEP, tshapesTab)
 		
 		#affichage
 		id_compound = geompy.addToStudy(compound, "Comp")
