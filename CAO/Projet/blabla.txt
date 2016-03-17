@@ -1,0 +1,24 @@
+Le projet concerne le développement d’une fonction d’analyse et/ou de
+modélisation portant sur un modèle géométrique de type CAO qui peut représenter un
+objet volumique, i.e. un solide, ou bien un ensemble de solides, i.e. un assemblage.
+La fonction correspondante est développée à partir d’une bibliothèque logicielle
+OpenCascade et de l’environnement logiciel dans laquelle elle est intégrée : la
+plateforme de liaison CAO-Calcul SALOME (http://salome-platform.org). Afin de se
+concentrer sur des modèles géométriques et des opérations associées à ces modèles,
+seul le module GEOM de SALOME sera utilisé.
+
+Il s’agit d’analyser des propriétés de symétrie d’entités géométriques
+appartenant aux surfaces en contact des deux solides considérés. Typiquement, les
+propriétés de symétrie intéressantes pour des composants mécaniques concernent la
+répartition de trous (voir Figure 1).
+Pour ce faire, il s’agit de considérer comme donnée d’entrée une surface
+pouvant être le lieu de contact entre deux composants d’un produit. On se réduira à des
+configurations fréquentes telles que plan, cylindre, cône, sphère.
+Projet de CAO et logiciels d’application
+1Par la suite, il convient d’analyser cette surface pour identifier des contours
+intérieurs admettant des propriétés de répétition (des contours possédant le même
+nombre de composants géométriques et se déduisant les uns des autres par une
+isométrie). Le cas de perçages est un cas simple fréquent où les contours se réduisent à
+des cercles. A chaque contour de la famille ainsi identifiée sera affecté un point clé
+(centre du cercle) et les propriétés de symétrie des contours pourront être analysées à
+partir de la disposition des points clés dans la face considérée.
