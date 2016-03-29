@@ -1,0 +1,19 @@
+
+Les différentes étapes faites pour la detection de la V-Shape:
+
+	1- Trouver les plans qui forment la partie supérieure de la V-Shape
+Critères de selections sur ces plans :
+	* plans coplanaires entre eux et de normale (0,0,1)
+	* le centre de chaque plan est situé en dessous d'au moins 80% des points du nuage
+	* situés a la meme hauteur (à 1mm près)
+
+	2- Trouver les plan orthogonaux qui forment les côtés de la V-Shape
+Critères de selections sur ces plans :
+	* plan orthogonaux à la direction (0,0,1)
+	* centre du plan situé en dessous des plans formant la partie supérieure
+
+	3- Trouver les plans inclinés à 45°
+Critères de selections sur ces plans :
+	* plan incliné à 45° par rapport à la direction (0,0,1)
+	* centre du plan situé en dessous des plans formant la partie supérieure
+
