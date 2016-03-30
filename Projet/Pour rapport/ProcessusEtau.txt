@@ -1,0 +1,21 @@
+Les différentes étapes faites pour la détection de l'étau
+
+    1- Trouver les plans qui forment la partie supérieure de l'étau
+Critères de selections sur ces plans :
+    * plans coplanaires entre eux et de normale (0,0,1)
+    * le centre de chaque plan est situé en dessous d'au moins 40% des points du nuage
+    * situés à la meme hauteur (à 1mm près)
+
+Ces ensembles sont ensuite fusionnés entre eux lorsque l'écart de hauteur entre deux ensembles de plans est proche de 1,5mm. Ceux forment la partie supérieure de l'étau
+
+    2- Trouver les plan orthogonaux qui forment les côtés de l'étau
+Critères de selections sur ces plans :
+    * plan orthogonaux à la direction (0,0,1)
+    * centre du plan situé en dessous des plans formant la partie supérieure
+
+    3- Trouver les plans inclinés sur les côtés de l'étau
+Critères de selections sur ces plans :
+    * plan incliné à 45° par rapport à la direction (0,0,1)
+    * centre du plan situé en dessous des plans formant la partie supérieure
+
+Cependant, la première condition celle à 45°, est à corriger. En effet elle ne nous satisfait pas complètement dans la mesure où ce critère ne correspond pas réellement à l'appréciation visuelle qui est fait de l'étau au travers des images fournies.
